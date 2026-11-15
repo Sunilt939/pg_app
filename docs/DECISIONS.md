@@ -12,3 +12,4 @@ The AI adds one line per decision it had to make. Never delete lines.
 
 | Date | Decision | Why |
 |---|---|---|
+| 2026-11-15 | Used standard IconData referencing phosphor_flutter font assets in AppIcons | Modern Flutter made IconData a final class, preventing subclassing |
