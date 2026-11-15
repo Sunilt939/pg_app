@@ -21,4 +21,5 @@ env/prod.json
 # Coverage
 coverage/
 
+# Java heap dumps
 *.hprof
