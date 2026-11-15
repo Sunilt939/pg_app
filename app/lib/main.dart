@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/theme/app_theme.dart';
+import 'dev/component_gallery.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +30,11 @@ class MainApp extends StatelessWidget {
       supportedLocales: const [
         Locale('en', ''),
       ],
-      home: const Scaffold(
-        body: SizedBox.expand(),
-      ),
+      home: kDebugMode
+          ? const ComponentGallery()
+          : const Scaffold(
+              body: SizedBox.expand(),
+            ),
     );
   }
 }

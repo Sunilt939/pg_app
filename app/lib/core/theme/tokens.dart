@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
+  static const transparent = Color(0x00000000);
   static const petrol = Color(0xFF1A4D6B); // actions, active tab, links
   static const petrolPressed = Color(0xFF143D55); // pressed state of petrol
   static const petrolTint = Color(0xFFEDF1F3); // selected option background, pressed rows
@@ -38,8 +39,17 @@ abstract final class AppText {
   static const secondary = TextStyle(fontFamily: _f, fontSize: 14, height: 20 / 14, fontWeight: FontWeight.w400, color: AppColors.muted);
   static const label = TextStyle(fontFamily: _f, fontSize: 14, height: 20 / 14, fontWeight: FontWeight.w500, color: AppColors.ink);
   static const caption = TextStyle(fontFamily: _f, fontSize: 12, height: 16 / 12, fontWeight: FontWeight.w500, color: AppColors.muted);
+  static const captionBold = TextStyle(fontFamily: _f, fontSize: 12, height: 16 / 12, fontWeight: FontWeight.w600);
+  static const sectionHeader = TextStyle(fontFamily: _f, fontSize: 14, height: 20 / 14, fontWeight: FontWeight.w600, color: AppColors.muted);
+  static const roomTile = TextStyle(fontFamily: _f, fontSize: 14, height: 20 / 14, fontWeight: FontWeight.w600, color: AppColors.ink);
   static const button = TextStyle(fontFamily: _f, fontSize: 16, height: 24 / 16, fontWeight: FontWeight.w600);
   static const buttonSmall = TextStyle(fontFamily: _f, fontSize: 14, height: 20 / 14, fontWeight: FontWeight.w600);
+
+  /// Scales font size down to 85% for the rupee sign in the Money component.
+  static TextStyle scaleRupeeSymbol(TextStyle style) {
+    final size = style.fontSize ?? 16.0;
+    return style.copyWith(fontSize: size * 0.85);
+  }
 }
 
 abstract final class AppSpace {

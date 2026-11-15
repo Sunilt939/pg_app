@@ -7,7 +7,7 @@ report() { echo "PROBLEM: $1"; echo "$2"; echo; fail=1; }
 out=$(grep -rniE "lorem|dummy|sample|mock|fake|demo|john|test user" lib --include=*.dart | grep -v "^lib/dev/" | grep -v "app_localizations")
 [ -n "$out" ] && report "words that suggest dummy data" "$out"
 
-out=$(grep -rnE "Color\(0x|Colors\.[a-zA-Z]" lib --include=*.dart | grep -v "^lib/core/theme/")
+out=$(grep -rnE "Color\(0x|\bColors\.[a-zA-Z]" lib --include=*.dart | grep -v "^lib/core/theme/")
 [ -n "$out" ] && report "colours outside lib/core/theme" "$out"
 
 out=$(grep -rnE "(Text|SelectableText)\(\s*['\"]" lib --include=*.dart | grep -v "^lib/dev/")
@@ -16,7 +16,7 @@ out=$(grep -rnE "(Text|SelectableText)\(\s*['\"]" lib --include=*.dart | grep -v
 out=$(grep -rnE "fontSize:|FontWeight\." lib --include=*.dart | grep -v "^lib/core/theme/")
 [ -n "$out" ] && report "font sizes or weights outside lib/core/theme" "$out"
 
-out=$(grep -rnE "Card\(|ListTile\(|FloatingActionButton|ElevatedButton|FilledButton|NavigationBar\(|Chip\(|AlertDialog\(" lib --include=*.dart | grep -v "^lib/dev/")
+out=$(grep -rnE "\bCard\(|\bListTile\(|FloatingActionButton|ElevatedButton|FilledButton|\bNavigationBar\(|\bChip\(|AlertDialog\(" lib --include=*.dart | grep -v "^lib/dev/")
 [ -n "$out" ] && report "default Material widgets that the design does not use" "$out"
 
 out=$(grep -rnE "BoxShadow|LinearGradient" lib --include=*.dart | grep -v "^lib/core/widgets/receipt_paper.dart\|^lib/core/widgets/skeleton.dart")
