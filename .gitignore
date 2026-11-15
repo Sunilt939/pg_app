@@ -1,0 +1,12 @@
+# private keys and local settings (never commit these)
+app/env/dev.json
+app/env/prod.json
+
+# Flutter build output
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+*.log
+.DS_Store

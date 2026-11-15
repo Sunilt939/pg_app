@@ -1,0 +1,24 @@
+.DS_Store
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Environment files containing secrets
+env/dev.json
+env/prod.json
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+
+# Coverage
+coverage/
+
+*.hprof

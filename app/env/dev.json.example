@@ -1,0 +1,4 @@
+{
+  "SUPABASE_URL": "paste your DEV project URL here",
+  "SUPABASE_ANON_KEY": "paste your DEV anon (public) key here"
+}
