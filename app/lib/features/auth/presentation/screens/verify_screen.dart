@@ -4,7 +4,9 @@ import '../../../../core/theme/tokens.dart';
 import '../../../../core/widgets/app_top_bar.dart';
 
 class VerifyScreen extends StatelessWidget {
-  const VerifyScreen({super.key});
+  final String? phone;
+
+  const VerifyScreen({super.key, this.phone});
 
   @override
   Widget build(BuildContext context) {
@@ -18,4 +20,3 @@ class VerifyScreen extends StatelessWidget {
     );
   }
 }
-

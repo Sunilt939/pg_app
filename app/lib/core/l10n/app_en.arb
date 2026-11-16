@@ -120,5 +120,65 @@
   "paymentTitle": "Payment",
   "@paymentTitle": {
     "description": "Title for Payment detail screen"
+  },
+  "signInHeadline": "Your PG, in order.",
+  "@signInHeadline": {
+    "description": "Headline on the sign in screen photo area"
+  },
+  "signInSubline": "Rent, receipts and reminders in one place.",
+  "@signInSubline": {
+    "description": "Subline on the sign in screen photo area"
+  },
+  "phoneLabel": "Mobile number",
+  "@phoneLabel": {
+    "description": "Label for mobile number field"
+  },
+  "phoneHint": "10-digit mobile number",
+  "@phoneHint": {
+    "description": "Hint for mobile number field"
+  },
+  "phoneHelper": "We'll send a 6-digit code by SMS.",
+  "@phoneHelper": {
+    "description": "Helper text under mobile number field"
+  },
+  "phoneInvalid": "Enter a valid 10-digit mobile number.",
+  "@phoneInvalid": {
+    "description": "Error text for invalid mobile number"
+  },
+  "sendCode": "Send code",
+  "@sendCode": {
+    "description": "Action button text to send OTP code"
+  },
+  "tooManyAttempts": "Too many attempts. Please wait a few minutes and try again.",
+  "@tooManyAttempts": {
+    "description": "Error text when rate limit is exceeded"
+  },
+  "termsLine": "By continuing you agree to the {terms} and {privacy}.",
+  "@termsLine": {
+    "description": "Terms and conditions line",
+    "placeholders": {
+      "terms": {
+        "type": "String"
+      },
+      "privacy": {
+        "type": "String"
+      }
+    }
+  },
+  "termsLink": "Terms",
+  "@termsLink": {
+    "description": "Terms link text"
+  },
+  "privacyLink": "Privacy Policy",
+  "@privacyLink": {
+    "description": "Privacy policy link text"
+  },
+  "errorNetwork": "No internet connection. Check your connection and try again.",
+  "@errorNetwork": {
+    "description": "Network connection error message"
+  },
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": {
+    "description": "Generic error message"
   }
 }

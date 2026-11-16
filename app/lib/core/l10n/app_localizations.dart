@@ -267,6 +267,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Payment'**
   String get paymentTitle;
+
+  /// Headline on the sign in screen photo area
+  ///
+  /// In en, this message translates to:
+  /// **'Your PG, in order.'**
+  String get signInHeadline;
+
+  /// Subline on the sign in screen photo area
+  ///
+  /// In en, this message translates to:
+  /// **'Rent, receipts and reminders in one place.'**
+  String get signInSubline;
+
+  /// Label for mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get phoneLabel;
+
+  /// Hint for mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'10-digit mobile number'**
+  String get phoneHint;
+
+  /// Helper text under mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ll send a 6-digit code by SMS.'**
+  String get phoneHelper;
+
+  /// Error text for invalid mobile number
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid 10-digit mobile number.'**
+  String get phoneInvalid;
+
+  /// Action button text to send OTP code
+  ///
+  /// In en, this message translates to:
+  /// **'Send code'**
+  String get sendCode;
+
+  /// Error text when rate limit is exceeded
+  ///
+  /// In en, this message translates to:
+  /// **'Too many attempts. Please wait a few minutes and try again.'**
+  String get tooManyAttempts;
+
+  /// Terms and conditions line
+  ///
+  /// In en, this message translates to:
+  /// **'By continuing you agree to the {terms} and {privacy}.'**
+  String termsLine(String terms, String privacy);
+
+  /// Terms link text
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get termsLink;
+
+  /// Privacy policy link text
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyLink;
+
+  /// Network connection error message
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Check your connection and try again.'**
+  String get errorNetwork;
+
+  /// Generic error message
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get errorGeneric;
 }
 
 class _AppLocalizationsDelegate

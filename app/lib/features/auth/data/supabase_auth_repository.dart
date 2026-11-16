@@ -55,6 +55,37 @@ class SupabaseAuthRepository implements AuthRepository {
   }
 
   @override
+  Future<void> sendOtp(String phone) async {
+    final client = _client;
+    if (client == null) {
+      throw const AuthNetworkException();
+    }
+    final formattedPhone = phone.startsWith('+') ? phone : '+91$phone';
+    try {
+      await client.auth.signInWithOtp(
+        phone: formattedPhone,
+      );
+    } on AuthException catch (e) {
+      final msg = e.message.toLowerCase();
+      if (e.statusCode == '429' ||
+          msg.contains('rate') ||
+          msg.contains('too many')) {
+        throw const AuthRateLimitException();
+      }
+      rethrow;
+    } catch (e) {
+      final str = e.toString().toLowerCase();
+      if (str.contains('socket') ||
+          str.contains('network') ||
+          str.contains('connection') ||
+          str.contains('clientexception')) {
+        throw const AuthNetworkException();
+      }
+      rethrow;
+    }
+  }
+
+  @override
   Future<void> signOut() async {
     final client = _client;
     if (client != null) {

@@ -37,6 +37,9 @@ class FakeAuthRepository implements AuthRepository {
   Future<AuthContext> getMyContext() async => _context;
 
   @override
+  Future<void> sendOtp(String phone) async {}
+
+  @override
   Future<void> signOut() async {
     _authenticated = false;
     _context = const AuthContext.empty();

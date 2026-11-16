@@ -103,7 +103,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: RoutePaths.verify,
-        builder: (context, state) => const VerifyScreen(),
+        builder: (context, state) => VerifyScreen(
+          phone: state.extra as String?,
+        ),
       ),
       GoRoute(
         path: RoutePaths.gate,

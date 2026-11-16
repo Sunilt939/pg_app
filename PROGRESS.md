@@ -37,7 +37,7 @@
 ### Part 2. Navigation and sign-in
 
 - [x] **N1. App shell** (AI). All routes from the navigation map, the owner shell (4 tabs: Home, Guests, Payments, More) and the guest shell (3 tabs: Home, History, Profile), and the check at startup. Each tab shows only its title for now (no content yet). The bell icon and every link to an unbuilt page stay hidden. Spec: `docs/UI_GUIDE.md` section 7; `docs/UI_SCREENS_OWNER.md` "Owner shell and roles"; `docs/UI_SCREENS_GUEST.md` "Guest shell".
-- [ ] **A1. Sign-in** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A1. *Test with:* a Supabase test number. Check: an invalid number shows the message, the code is sent, the keyboard never hides the button.
+- [x] **A1. Sign-in** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A1. *Test with:* a Supabase test number. Check: an invalid number shows the message, the code is sent, the keyboard never hides the button.
 - [ ] **A2. Enter code** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A2. *Check:* a wrong code shakes and shows the message, the right code signs you in, the resend countdown works.
 - [ ] **A3. How will you use the app** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A3. *Test with:* a brand-new number. You land here. Both rows and Sign out work.
 - [ ] **A4. Ask your owner to add you** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A4. *Check:* your number is shown, Copy works, "Check again" says you are not added yet.
