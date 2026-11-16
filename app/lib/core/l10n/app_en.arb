@@ -3,6 +3,122 @@
   "appName": "PG App",
   "@appName": {
     "description": "The name of the app"
+  },
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Bottom navigation label for Home tab"
+  },
+  "navGuests": "Guests",
+  "@navGuests": {
+    "description": "Bottom navigation label for Guests tab"
+  },
+  "navPayments": "Payments",
+  "@navPayments": {
+    "description": "Bottom navigation label for Payments tab"
+  },
+  "navMore": "More",
+  "@navMore": {
+    "description": "Bottom navigation label for More tab"
+  },
+  "navHistory": "History",
+  "@navHistory": {
+    "description": "Bottom navigation label for History tab"
+  },
+  "navProfile": "Profile",
+  "@navProfile": {
+    "description": "Bottom navigation label for Profile tab"
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Title for Home screen"
+  },
+  "guestsTitle": "Guests",
+  "@guestsTitle": {
+    "description": "Title for Guests screen"
+  },
+  "paymentsTitle": "Payments",
+  "@paymentsTitle": {
+    "description": "Title for Payments screen"
+  },
+  "moreTitle": "More",
+  "@moreTitle": {
+    "description": "Title for More screen"
+  },
+  "historyTitle": "History",
+  "@historyTitle": {
+    "description": "Title for History screen"
+  },
+  "profileTitle": "Profile",
+  "@profileTitle": {
+    "description": "Title for Profile screen"
+  },
+  "signInTitle": "Enter your mobile number",
+  "@signInTitle": {
+    "description": "Title for Sign In screen"
+  },
+  "verifyTitle": "Enter the 6-digit code",
+  "@verifyTitle": {
+    "description": "Title for Verify OTP screen"
+  },
+  "gateTitle": "How will you use {appName}?",
+  "@gateTitle": {
+    "description": "Title for Role Gate screen",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "guestWaitTitle": "Ask your PG owner to add you",
+  "@guestWaitTitle": {
+    "description": "Title for Gate Guest waiting screen"
+  },
+  "addPgTitle": "Add your PG",
+  "@addPgTitle": {
+    "description": "Title for Add PG screen"
+  },
+  "receiptTitle": "Receipt",
+  "@receiptTitle": {
+    "description": "Title for Receipt screen"
+  },
+  "notificationsTitle": "Notifications",
+  "@notificationsTitle": {
+    "description": "Title for Notifications screen"
+  },
+  "collectionsTitle": "Money received",
+  "@collectionsTitle": {
+    "description": "Title for Collections screen"
+  },
+  "roomsTitle": "Rooms and beds",
+  "@roomsTitle": {
+    "description": "Title for Rooms screen"
+  },
+  "addRoomsTitle": "Add rooms",
+  "@addRoomsTitle": {
+    "description": "Title for Add Rooms screen"
+  },
+  "accountsTitle": "Receiving accounts",
+  "@accountsTitle": {
+    "description": "Title for Receiving Accounts screen"
+  },
+  "remindersTitle": "Reminders",
+  "@remindersTitle": {
+    "description": "Title for Reminders screen"
+  },
+  "pgDetailsTitle": "PG details",
+  "@pgDetailsTitle": {
+    "description": "Title for PG Details screen"
+  },
+  "payTitle": "Pay rent",
+  "@payTitle": {
+    "description": "Title for Pay Rent screen"
+  },
+  "addGuestTitle": "Add guest",
+  "@addGuestTitle": {
+    "description": "Title for Add Guest screen"
+  },
+  "paymentTitle": "Payment",
+  "@paymentTitle": {
+    "description": "Title for Payment detail screen"
   }
 }
-

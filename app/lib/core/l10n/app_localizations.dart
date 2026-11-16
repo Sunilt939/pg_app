@@ -99,6 +99,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'PG App'**
   String get appName;
+
+  /// Bottom navigation label for Home tab
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get navHome;
+
+  /// Bottom navigation label for Guests tab
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get navGuests;
+
+  /// Bottom navigation label for Payments tab
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get navPayments;
+
+  /// Bottom navigation label for More tab
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get navMore;
+
+  /// Bottom navigation label for History tab
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get navHistory;
+
+  /// Bottom navigation label for Profile tab
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
+  /// Title for Home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get homeTitle;
+
+  /// Title for Guests screen
+  ///
+  /// In en, this message translates to:
+  /// **'Guests'**
+  String get guestsTitle;
+
+  /// Title for Payments screen
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get paymentsTitle;
+
+  /// Title for More screen
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get moreTitle;
+
+  /// Title for History screen
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get historyTitle;
+
+  /// Title for Profile screen
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
+
+  /// Title for Sign In screen
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your mobile number'**
+  String get signInTitle;
+
+  /// Title for Verify OTP screen
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the 6-digit code'**
+  String get verifyTitle;
+
+  /// Title for Role Gate screen
+  ///
+  /// In en, this message translates to:
+  /// **'How will you use {appName}?'**
+  String gateTitle(String appName);
+
+  /// Title for Gate Guest waiting screen
+  ///
+  /// In en, this message translates to:
+  /// **'Ask your PG owner to add you'**
+  String get guestWaitTitle;
+
+  /// Title for Add PG screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add your PG'**
+  String get addPgTitle;
+
+  /// Title for Receipt screen
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt'**
+  String get receiptTitle;
+
+  /// Title for Notifications screen
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notificationsTitle;
+
+  /// Title for Collections screen
+  ///
+  /// In en, this message translates to:
+  /// **'Money received'**
+  String get collectionsTitle;
+
+  /// Title for Rooms screen
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms and beds'**
+  String get roomsTitle;
+
+  /// Title for Add Rooms screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add rooms'**
+  String get addRoomsTitle;
+
+  /// Title for Receiving Accounts screen
+  ///
+  /// In en, this message translates to:
+  /// **'Receiving accounts'**
+  String get accountsTitle;
+
+  /// Title for Reminders screen
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get remindersTitle;
+
+  /// Title for PG Details screen
+  ///
+  /// In en, this message translates to:
+  /// **'PG details'**
+  String get pgDetailsTitle;
+
+  /// Title for Pay Rent screen
+  ///
+  /// In en, this message translates to:
+  /// **'Pay rent'**
+  String get payTitle;
+
+  /// Title for Add Guest screen
+  ///
+  /// In en, this message translates to:
+  /// **'Add guest'**
+  String get addGuestTitle;
+
+  /// Title for Payment detail screen
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get paymentTitle;
 }
 
 class _AppLocalizationsDelegate
