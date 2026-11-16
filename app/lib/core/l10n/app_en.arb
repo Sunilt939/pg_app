@@ -180,5 +180,47 @@
   "errorGeneric": "Something went wrong. Please try again.",
   "@errorGeneric": {
     "description": "Generic error message"
+  },
+  "verifySentTo": "Sent to {phone}",
+  "@verifySentTo": {
+    "description": "Phone number OTP was sent to",
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "verifyChangeNumber": "Change number",
+  "@verifyChangeNumber": {
+    "description": "Button to change mobile number"
+  },
+  "verifyAction": "Verify",
+  "@verifyAction": {
+    "description": "Button text to verify OTP"
+  },
+  "resendIn": "Resend code in {time}",
+  "@resendIn": {
+    "description": "Resend countdown message",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "resendAction": "Resend code",
+  "@resendAction": {
+    "description": "Action button text to resend OTP"
+  },
+  "codeSent": "Code sent.",
+  "@codeSent": {
+    "description": "Snackbar message when new code is sent"
+  },
+  "otpInvalid": "That code isn't right. Check the SMS and try again.",
+  "@otpInvalid": {
+    "description": "Error message for invalid OTP"
+  },
+  "otpExpired": "That code has expired. Request a new one.",
+  "@otpExpired": {
+    "description": "Error message for expired OTP"
   }
 }

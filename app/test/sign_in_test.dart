@@ -46,6 +46,9 @@ class MockAuthRepo implements AuthRepository {
   }
 
   @override
+  Future<void> verifyOtp({required String phone, required String token}) async {}
+
+  @override
   Future<void> signOut() async {}
 
   @override
@@ -53,6 +56,12 @@ class MockAuthRepo implements AuthRepository {
 
   @override
   Future<void> setSelectedPgId(String pgId) async {}
+
+  @override
+  Future<String?> getLastView() async => null;
+
+  @override
+  Future<void> setLastView(String view) async {}
 }
 
 Widget createSignInTestWidget({

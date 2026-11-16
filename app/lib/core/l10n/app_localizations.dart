@@ -345,6 +345,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get errorGeneric;
+
+  /// Phone number OTP was sent to
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to {phone}'**
+  String verifySentTo(String phone);
+
+  /// Button to change mobile number
+  ///
+  /// In en, this message translates to:
+  /// **'Change number'**
+  String get verifyChangeNumber;
+
+  /// Button text to verify OTP
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verifyAction;
+
+  /// Resend countdown message
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code in {time}'**
+  String resendIn(String time);
+
+  /// Action button text to resend OTP
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get resendAction;
+
+  /// Snackbar message when new code is sent
+  ///
+  /// In en, this message translates to:
+  /// **'Code sent.'**
+  String get codeSent;
+
+  /// Error message for invalid OTP
+  ///
+  /// In en, this message translates to:
+  /// **'That code isn\'t right. Check the SMS and try again.'**
+  String get otpInvalid;
+
+  /// Error message for expired OTP
+  ///
+  /// In en, this message translates to:
+  /// **'That code has expired. Request a new one.'**
+  String get otpExpired;
 }
 
 class _AppLocalizationsDelegate

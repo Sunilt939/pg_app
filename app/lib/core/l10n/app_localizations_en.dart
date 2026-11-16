@@ -139,4 +139,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'Something went wrong. Please try again.';
+
+  @override
+  String verifySentTo(String phone) {
+    return 'Sent to $phone';
+  }
+
+  @override
+  String get verifyChangeNumber => 'Change number';
+
+  @override
+  String get verifyAction => 'Verify';
+
+  @override
+  String resendIn(String time) {
+    return 'Resend code in $time';
+  }
+
+  @override
+  String get resendAction => 'Resend code';
+
+  @override
+  String get codeSent => 'Code sent.';
+
+  @override
+  String get otpInvalid =>
+      'That code isn\'t right. Check the SMS and try again.';
+
+  @override
+  String get otpExpired => 'That code has expired. Request a new one.';
 }

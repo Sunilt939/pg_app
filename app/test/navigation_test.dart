@@ -40,6 +40,9 @@ class FakeAuthRepository implements AuthRepository {
   Future<void> sendOtp(String phone) async {}
 
   @override
+  Future<void> verifyOtp({required String phone, required String token}) async {}
+
+  @override
   Future<void> signOut() async {
     _authenticated = false;
     _context = const AuthContext.empty();
@@ -53,6 +56,12 @@ class FakeAuthRepository implements AuthRepository {
   Future<void> setSelectedPgId(String pgId) async {
     _selectedPgId = pgId;
   }
+
+  @override
+  Future<String?> getLastView() async => null;
+
+  @override
+  Future<void> setLastView(String view) async {}
 }
 
 Widget createTestApp({required FakeAuthRepository authRepo}) {
