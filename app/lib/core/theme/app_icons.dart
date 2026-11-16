@@ -45,6 +45,7 @@ abstract final class AppIcons {
   static const IconData signOut = IconData(0xe42a, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData settings = IconData(0xe270, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData building = IconData(0xe102, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
+  static const IconData buildingFill = IconData(0xe102, fontFamily: _fill, fontPackage: _package, matchTextDirection: true);
   static const IconData user = IconData(0xe4c2, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData bed = IconData(0xe0cc, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData room = IconData(0xe61c, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);

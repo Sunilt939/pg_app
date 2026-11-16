@@ -110,3 +110,6 @@ abstract final class DateFormat {
   }
 }
 
+String formatDate(DateTime date, {bool convertToIst = false}) =>
+    DateFormat.formatDate(date, convertToIst: convertToIst);
+

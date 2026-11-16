@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:app/core/theme/app_icons.dart';
 import 'package:app/core/widgets/app_button.dart';
@@ -181,12 +181,11 @@ void main() {
   });
 
   testWidgets('ComponentGallery renders smoothly in debug mode', (tester) async {
-    await tester.pumpWidget(const Directionality(
-      textDirection: TextDirection.ltr,
-      child: ComponentGallery(),
+    await tester.pumpWidget(const MaterialApp(
+      home: ComponentGallery(),
     ));
-    await tester.pump();
-    expect(find.text('Component Gallery (Set 1)'), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('Component Gallery'), findsOneWidget);
   });
 }
 

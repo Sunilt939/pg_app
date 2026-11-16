@@ -61,7 +61,9 @@ abstract final class AppRadius {
   static const chip = BorderRadius.all(Radius.circular(4));
   static const tile = BorderRadius.all(Radius.circular(6));
   static const control = BorderRadius.all(Radius.circular(8)); // buttons, inputs, option boxes
+  static const button = control;
   static const dialog = BorderRadius.all(Radius.circular(12));
+  static const sheet = Radius.circular(16);
   static const sheetTop = BorderRadius.vertical(top: Radius.circular(16));
 }
 

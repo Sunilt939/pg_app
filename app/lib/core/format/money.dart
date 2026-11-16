@@ -88,3 +88,6 @@ final class MoneyParts {
   bool get hasPaise => paise != null;
 }
 
+String formatRupeesWithGrouping(int rupees) =>
+    MoneyFormat.formatIndianDigits(rupees);
+

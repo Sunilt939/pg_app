@@ -1,20 +1,37 @@
-import 'package:flutter/material.dart' show Scaffold;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import '../core/theme/app_icons.dart';
 import '../core/theme/tokens.dart';
+import '../core/widgets/app_bottom_nav.dart';
+import '../core/widgets/app_bottom_sheet.dart';
 import '../core/widgets/app_button.dart';
+import '../core/widgets/app_snack.dart';
+import '../core/widgets/app_text_field.dart';
+import '../core/widgets/app_top_bar.dart';
+import '../core/widgets/date_field.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/error_state.dart';
 import '../core/widgets/key_value_row.dart';
 import '../core/widgets/ledger_row.dart';
 import '../core/widgets/ledger_sheet.dart';
 import '../core/widgets/money.dart';
+import '../core/widgets/money_field.dart';
+import '../core/widgets/option_row.dart';
+import '../core/widgets/option_sheet.dart';
+import '../core/widgets/otp_field.dart';
+import '../core/widgets/pg_switcher_title.dart';
+import '../core/widgets/phone_field.dart';
 import '../core/widgets/profile_avatar.dart';
 import '../core/widgets/progress_bar_thin.dart';
+import '../core/widgets/receipt_paper.dart';
 import '../core/widgets/room_tile.dart';
 import '../core/widgets/section_header.dart';
+import '../core/widgets/select_field.dart';
 import '../core/widgets/skeleton.dart';
+import '../core/widgets/stamp.dart';
 import '../core/widgets/status_chip.dart';
+import '../core/widgets/switch_row.dart';
+import '../core/widgets/tick_badge.dart';
+import '../core/widgets/underline_tabs.dart';
 
 class ComponentGallery extends StatefulWidget {
   const ComponentGallery({super.key});
@@ -25,6 +42,15 @@ class ComponentGallery extends StatefulWidget {
 
 class _ComponentGalleryState extends State<ComponentGallery> {
   int _counter = 0;
+  int _tabIndex = 0;
+  int _navIndex = 0;
+  String _selectedOption = '1';
+  String _selectedGridOption = 'A';
+  bool _switchVal1 = true;
+  bool _switchVal2 = false;
+  DateTime? _selectedDate = DateTime(2026, 11, 12);
+  bool _otpError = false;
+  String _selectValue = 'Option 1';
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +64,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSpace.x16),
               child: Text(
-                'Component Gallery (Set 1)',
+                'Component Gallery',
                 style: AppText.display,
               ),
             ),
@@ -245,11 +271,11 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                   statusKind: StatusChipKind.overdue,
                   inlineActions: [
                     AppButton.text(
-                      label: 'Record payment',
+                      label: 'Action 1',
                       onPressed: () {},
                     ),
                     AppButton.text(
-                      label: 'Remind',
+                      label: 'Action 2',
                       onPressed: () {},
                     ),
                   ],
@@ -356,6 +382,424 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                 onRetry: () {},
               ),
             ),
+
+            // 14. AppTopBar and PgSwitcherTitle
+            const SectionHeader(title: 'AppTopBar & PgSwitcherTitle'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const AppTopBar.back(
+                    title: 'Primary text',
+                    actions: [
+                      Icon(AppIcons.search, size: 24, color: AppColors.ink),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpace.x12),
+                  const AppTopBar.close(
+                    title: 'Modal title',
+                  ),
+                  const SizedBox(height: AppSpace.x12),
+                  AppTopBar(
+                    titleWidget: PgSwitcherTitle(
+                      pgName: 'Primary text',
+                      onTap: () {},
+                    ),
+                    actions: const [
+                      Icon(AppIcons.bell, size: 24, color: AppColors.ink),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 15. AppBottomNav
+            const SectionHeader(title: 'AppBottomNav'),
+            LedgerSheet(
+              padding: EdgeInsets.zero,
+              child: AppBottomNav(
+                currentIndex: _navIndex,
+                onTap: (index) => setState(() => _navIndex = index),
+                items: const [
+                  AppBottomNavItem(
+                    icon: AppIcons.home,
+                    activeIcon: AppIcons.homeFill,
+                    label: 'Home',
+                  ),
+                  AppBottomNavItem(
+                    icon: AppIcons.guests,
+                    activeIcon: AppIcons.guestsFill,
+                    label: 'Guests',
+                    badgeCount: 100,
+                  ),
+                  AppBottomNavItem(
+                    icon: AppIcons.payments,
+                    activeIcon: AppIcons.paymentsFill,
+                    label: 'Payments',
+                    badgeCount: 3,
+                  ),
+                  AppBottomNavItem(
+                    icon: AppIcons.more,
+                    activeIcon: AppIcons.moreFill,
+                    label: 'More',
+                  ),
+                ],
+              ),
+            ),
+
+            // 16. UnderlineTabs
+            const SectionHeader(title: 'UnderlineTabs'),
+            LedgerSheet(
+              padding: EdgeInsets.zero,
+              child: UnderlineTabs(
+                selectedIndex: _tabIndex,
+                onTabSelected: (index) => setState(() => _tabIndex = index),
+                tabs: const [
+                  UnderlineTabItem(label: 'All', count: 12),
+                  UnderlineTabItem(label: 'Paid', count: 8),
+                  UnderlineTabItem(label: 'Pending', count: 4),
+                  UnderlineTabItem(label: 'Overdue'),
+                ],
+              ),
+            ),
+
+            // 17. AppTextField
+            const SectionHeader(title: 'AppTextField'),
+            const LedgerSheet(
+              padding: EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AppTextField(
+                    label: 'Label',
+                    hint: 'Primary text',
+                    helperText: 'Secondary text explaining input format.',
+                  ),
+                  SizedBox(height: AppSpace.x16),
+                  AppTextField(
+                    label: 'Label with error',
+                    hint: 'Primary text',
+                    errorText: 'Secondary text explaining the error.',
+                  ),
+                  SizedBox(height: AppSpace.x16),
+                  AppTextField(
+                    label: 'Label (disabled)',
+                    hint: 'Primary text',
+                    enabled: false,
+                  ),
+                  SizedBox(height: AppSpace.x16),
+                  AppTextField(
+                    label: 'Label (notes)',
+                    hint: 'Primary text',
+                    maxLines: 3,
+                  ),
+                ],
+              ),
+            ),
+
+            // 18. PhoneField
+            const SectionHeader(title: 'PhoneField'),
+            const LedgerSheet(
+              padding: EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  PhoneField(
+                    label: 'Phone number',
+                    helperText: 'Enter 10-digit mobile number.',
+                  ),
+                  SizedBox(height: AppSpace.x16),
+                  PhoneField(
+                    label: 'Phone number with error',
+                    errorText: 'Enter a valid 10-digit mobile number.',
+                  ),
+                ],
+              ),
+            ),
+
+            // 19. MoneyField
+            const SectionHeader(title: 'MoneyField'),
+            const LedgerSheet(
+              padding: EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  MoneyField(
+                    label: 'Rent amount',
+                    initialPaise: 650000,
+                    helperText: 'Monthly rent in rupees.',
+                  ),
+                  SizedBox(height: AppSpace.x16),
+                  MoneyField(
+                    label: 'Amount received (Large)',
+                    initialPaise: 12500000,
+                    isLarge: true,
+                  ),
+                ],
+              ),
+            ),
+
+            // 20. SelectField & OptionSheet
+            const SectionHeader(title: 'SelectField & OptionSheet'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: SelectField(
+                label: 'Payment cycle',
+                value: _selectValue,
+                onTap: () async {
+                  final picked = await OptionSheet.show<String>(
+                    context: context,
+                    title: 'Select option',
+                    selectedValue: _selectValue,
+                    showSearch: true,
+                    options: const [
+                      OptionSheetItem(
+                        value: 'Option 1',
+                        title: 'Option 1',
+                        subtitle: 'Secondary text 1',
+                      ),
+                      OptionSheetItem(
+                        value: 'Option 2',
+                        title: 'Option 2',
+                        subtitle: 'Secondary text 2',
+                      ),
+                      OptionSheetItem(
+                        value: 'Option 3',
+                        title: 'Option 3',
+                      ),
+                    ],
+                  );
+                  if (picked != null) {
+                    setState(() => _selectValue = picked);
+                  }
+                },
+              ),
+            ),
+
+            // 21. DateField
+            const SectionHeader(title: 'DateField'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: DateField(
+                label: 'Due date',
+                value: _selectedDate,
+                onChanged: (d) => setState(() => _selectedDate = d),
+              ),
+            ),
+
+            // 22. OtpField
+            const SectionHeader(title: 'OtpField'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  OtpField(
+                    hasError: _otpError,
+                    onCompleted: (code) {},
+                  ),
+                  const SizedBox(height: AppSpace.x16),
+                  AppButton.secondary(
+                    label: _otpError ? 'Clear error' : 'Trigger error shake',
+                    onPressed: () => setState(() => _otpError = !_otpError),
+                  ),
+                ],
+              ),
+            ),
+
+            // 23. OptionRow
+            const SectionHeader(title: 'OptionRow'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  OptionRow<String>(
+                    selectedValue: _selectedOption,
+                    onChanged: (val) => setState(() => _selectedOption = val),
+                    options: const [
+                      OptionRowItem(value: '1', label: 'Option 1'),
+                      OptionRowItem(value: '2', label: 'Option 2'),
+                      OptionRowItem(value: '3', label: 'Option 3'),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpace.x16),
+                  OptionRow<String>(
+                    selectedValue: _selectedGridOption,
+                    onChanged: (val) => setState(() => _selectedGridOption = val),
+                    options: const [
+                      OptionRowItem(value: 'A', label: 'Option A'),
+                      OptionRowItem(value: 'B', label: 'Option B'),
+                      OptionRowItem(value: 'C', label: 'Option C'),
+                      OptionRowItem(value: 'D', label: 'Option D'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
+            // 24. SwitchRow
+            const SectionHeader(title: 'SwitchRow'),
+            LedgerSheet(
+              children: [
+                SwitchRow(
+                  label: 'Primary text',
+                  helper: 'Secondary text explaining toggle effect.',
+                  value: _switchVal1,
+                  onChanged: (v) => setState(() => _switchVal1 = v),
+                ),
+                SwitchRow(
+                  label: 'Primary text',
+                  value: _switchVal2,
+                  showDivider: false,
+                  onChanged: (v) => setState(() => _switchVal2 = v),
+                ),
+              ],
+            ),
+
+            // 25. AppBottomSheet & ConfirmSheet
+            const SectionHeader(title: 'AppBottomSheet & ConfirmSheet'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AppButton.secondary(
+                    label: 'Open AppBottomSheet',
+                    onPressed: () {
+                      AppBottomSheet.show(
+                        context: context,
+                        builder: (ctx) => const AppBottomSheet(
+                          title: 'Primary text',
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: AppSpace.x16),
+                            child: Text(
+                              'Secondary text inside bottom sheet.',
+                              style: AppText.body,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: AppSpace.x12),
+                  AppButton.destructive(
+                    label: 'Open ConfirmSheet (Destructive)',
+                    onPressed: () {
+                      ConfirmSheet.show(
+                        context: context,
+                        title: 'Primary text',
+                        body: 'Secondary text explaining destructive consequences.',
+                        confirmLabel: 'Confirm action',
+                        isDestructive: true,
+                        showReasonField: true,
+                        reasonLabel: 'Reason (optional)',
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            // 26. AppSnack
+            const SectionHeader(title: 'AppSnack'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: AppButton.secondary(
+                      label: 'Simple Snack',
+                      onPressed: () {
+                        AppSnack.show(
+                          context,
+                          message: 'Primary notification text.',
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: AppSpace.x12),
+                  Expanded(
+                    child: AppButton.secondary(
+                      label: 'Action Snack',
+                      onPressed: () {
+                        AppSnack.show(
+                          context,
+                          message: 'Primary notification text.',
+                          actionLabel: 'Action',
+                          onAction: () {},
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 27. TickBadge
+            const SectionHeader(title: 'TickBadge'),
+            const LedgerSheet(
+              padding: EdgeInsets.all(AppSpace.x16),
+              child: Center(
+                child: TickBadge(),
+              ),
+            ),
+
+            // 28. Stamp
+            const SectionHeader(title: 'Stamp'),
+            const LedgerSheet(
+              padding: EdgeInsets.all(AppSpace.x16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Stamp.paid(),
+                  Stamp.pending(),
+                  Stamp.overdue(),
+                ],
+              ),
+            ),
+
+            // 29. ReceiptPaper
+            const SectionHeader(title: 'ReceiptPaper'),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x16),
+              child: ReceiptPaper(
+                header: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Receipt', style: AppText.title),
+                        Stamp.paid(),
+                      ],
+                    ),
+                    SizedBox(height: AppSpace.x8),
+                    Text('12 Nov 2026', style: AppText.secondary),
+                  ],
+                ),
+                body: Column(
+                  children: [
+                    KeyValueRow(
+                      label: 'Guest',
+                      value: 'Primary text',
+                    ),
+                    KeyValueRow(
+                      label: 'Room',
+                      value: '101',
+                    ),
+                    KeyValueRow(
+                      label: 'Amount',
+                      value: '₹6,500',
+                      showDivider: false,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: AppSpace.x32),
           ],
         ),
       ),
@@ -403,4 +847,3 @@ class _ColorSwatch extends StatelessWidget {
     );
   }
 }
-
