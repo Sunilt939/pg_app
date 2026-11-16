@@ -147,9 +147,10 @@ class _AppTextFieldState extends State<AppTextField> {
           const SizedBox(height: 6),
         ],
         Container(
-          constraints: BoxConstraints(
-            minHeight: isMultiLine ? 96 : 52,
-          ),
+          height: isMultiLine ? null : AppSize.field,
+          constraints: isMultiLine
+              ? const BoxConstraints(minHeight: 96)
+              : const BoxConstraints(minHeight: AppSize.field, maxHeight: AppSize.field),
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: AppRadius.button,
@@ -191,7 +192,7 @@ class _AppTextFieldState extends State<AppTextField> {
                   decoration: InputDecoration(
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(
-                      vertical: isMultiLine ? 14 : 15,
+                      vertical: isMultiLine ? 14 : 0,
                     ),
                     border: InputBorder.none,
                     focusedBorder: InputBorder.none,

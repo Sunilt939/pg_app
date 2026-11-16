@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'tokens.dart';
 
 abstract final class AppTheme {
@@ -12,6 +13,15 @@ abstract final class AppTheme {
           surface: AppColors.surface,
           onSurface: AppColors.ink,
           error: AppColors.overdueFg,
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.surface,
+          elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppColors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          ),
         ),
         splashFactory: NoSplash.splashFactory,
         dividerColor: AppColors.hairline,

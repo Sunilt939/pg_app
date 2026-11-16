@@ -57,7 +57,7 @@ class PhoneField extends StatelessWidget {
   const PhoneField({
     super.key,
     this.label,
-    this.hint = '98765 43210',
+    this.hint = '10-digit mobile number',
     this.helperText,
     this.errorText,
     this.controller,

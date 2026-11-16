@@ -62,8 +62,16 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final effectiveColor = isPhotoVariant ? AppColors.surface : AppColors.ink;
     final statusBarOverlay = isPhotoVariant
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark;
+        ? const SystemUiOverlayStyle(
+            statusBarColor: AppColors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+          )
+        : const SystemUiOverlayStyle(
+            statusBarColor: AppColors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.light,
+          );
 
     Widget? leadingWidget;
     if (leading != null) {

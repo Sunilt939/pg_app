@@ -15,6 +15,7 @@ class AppButton extends StatefulWidget {
   final bool loading;
   final IconData? icon;
   final bool expand;
+  final EdgeInsetsGeometry? padding;
   final _AppButtonVariant _variant;
 
   const AppButton.primary({
@@ -24,6 +25,7 @@ class AppButton extends StatefulWidget {
     this.loading = false,
     this.icon,
     this.expand = false,
+    this.padding,
   }) : _variant = _AppButtonVariant.primary;
 
   const AppButton.secondary({
@@ -33,6 +35,7 @@ class AppButton extends StatefulWidget {
     this.loading = false,
     this.icon,
     this.expand = false,
+    this.padding,
   }) : _variant = _AppButtonVariant.secondary;
 
   const AppButton.text({
@@ -42,6 +45,7 @@ class AppButton extends StatefulWidget {
     this.loading = false,
     this.icon,
     this.expand = false,
+    this.padding,
   }) : _variant = _AppButtonVariant.text;
 
   const AppButton.destructive({
@@ -51,6 +55,7 @@ class AppButton extends StatefulWidget {
     this.loading = false,
     this.icon,
     this.expand = false,
+    this.padding,
   }) : _variant = _AppButtonVariant.destructive;
 
   @override
@@ -60,7 +65,8 @@ class AppButton extends StatefulWidget {
 class _AppButtonState extends State<AppButton> {
   bool _isPressed = false;
 
-  bool get _isEnabled => widget.onPressed != null && !widget.loading;
+  bool get _isInteractive => widget.onPressed != null && !widget.loading;
+  bool get _isDisabled => widget.onPressed == null && !widget.loading;
 
   double get _height =>
       widget._variant == _AppButtonVariant.text ? AppSize.tile : AppSize.button;
@@ -69,13 +75,13 @@ class _AppButtonState extends State<AppButton> {
       widget._variant == _AppButtonVariant.text ? AppText.buttonSmall : AppText.button;
 
   Color _bgColor() {
-    if (!_isEnabled) {
+    if (_isDisabled) {
       if (widget._variant == _AppButtonVariant.text) {
         return AppColors.transparent;
       }
       return AppColors.disabledBg;
     }
-    if (_isPressed) {
+    if (_isPressed && _isInteractive) {
       switch (widget._variant) {
         case _AppButtonVariant.primary:
           return AppColors.petrolPressed;
@@ -99,7 +105,7 @@ class _AppButtonState extends State<AppButton> {
   }
 
   Color _fgColor() {
-    if (!_isEnabled) {
+    if (_isDisabled) {
       return AppColors.muted;
     }
     switch (widget._variant) {
@@ -113,7 +119,7 @@ class _AppButtonState extends State<AppButton> {
   }
 
   BoxBorder? _border() {
-    if (widget._variant == _AppButtonVariant.secondary && _isEnabled) {
+    if (widget._variant == _AppButtonVariant.secondary && !_isDisabled) {
       return Border.all(
         color: AppColors.petrol,
         width: AppSize.hairline,
@@ -123,6 +129,9 @@ class _AppButtonState extends State<AppButton> {
   }
 
   EdgeInsetsGeometry _padding() {
+    if (widget.padding != null) {
+      return widget.padding!;
+    }
     if (widget._variant == _AppButtonVariant.text) {
       return const EdgeInsets.symmetric(horizontal: AppSpace.x12);
     }
@@ -184,13 +193,13 @@ class _AppButtonState extends State<AppButton> {
     }
 
     return GestureDetector(
-      onTapDown: _isEnabled ? (_) => setState(() => _isPressed = true) : null,
-      onTapUp: _isEnabled ? (_) => setState(() => _isPressed = false) : null,
-      onTapCancel: _isEnabled ? () => setState(() => _isPressed = false) : null,
-      onTap: _isEnabled ? widget.onPressed : null,
+      onTapDown: _isInteractive ? (_) => setState(() => _isPressed = true) : null,
+      onTapUp: _isInteractive ? (_) => setState(() => _isPressed = false) : null,
+      onTapCancel: _isInteractive ? () => setState(() => _isPressed = false) : null,
+      onTap: _isInteractive ? widget.onPressed : null,
       behavior: HitTestBehavior.opaque,
       child: AnimatedScale(
-        scale: _isPressed ? 0.98 : 1.0,
+        scale: _isPressed && _isInteractive ? 0.98 : 1.0,
         duration: AppMotion.fast,
         curve: AppMotion.curve,
         child: button,

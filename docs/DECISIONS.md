@@ -16,3 +16,4 @@ The AI adds one line per decision it had to make. Never delete lines.
 | 2026-11-16 | ReceiptPaper divider notches drawn via CustomPainter with AppColors.ground | Reusable without needing complex clipped path shaders or image assets |
 | 2026-11-16 | TickBadge check stroke animated with path metrics extraction | Allows single-pass vector check animation without third-party Lottie |
 | 2026-11-16 | OtpField uses transparent overlay TextField with 6 styled containers | Full platform accessibility and paste support while keeping strict passbook design |
+| 2026-11-17 | Added captionBold (12/16, weight 600) to AppText | Used for chips, bottom nav badge counters, and active labels without hardcoding weights |

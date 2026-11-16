@@ -108,7 +108,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
               padding: EdgeInsets.all(AppSpace.x16),
               child: Wrap(
                 spacing: AppSpace.x8,
-                runSpacing: AppSpace.x8,
+                runSpacing: AppSpace.x12,
                 children: [
                   _ColorSwatch(name: 'petrol', color: AppColors.petrol),
                   _ColorSwatch(name: 'petrolPressed', color: AppColors.petrolPressed),
@@ -123,9 +123,14 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                   _ColorSwatch(name: 'pendingFg', color: AppColors.pendingFg),
                   _ColorSwatch(name: 'pendingBg', color: AppColors.pendingBg),
                   _ColorSwatch(name: 'overdueFg', color: AppColors.overdueFg),
+                  _ColorSwatch(name: 'overduePressed', color: AppColors.overduePressed),
                   _ColorSwatch(name: 'overdueBg', color: AppColors.overdueBg),
                   _ColorSwatch(name: 'disabledBg', color: AppColors.disabledBg),
                   _ColorSwatch(name: 'skeletonBase', color: AppColors.skeletonBase),
+                  _ColorSwatch(name: 'snackAction', color: AppColors.snackAction),
+                  _ColorSwatch(name: 'handle', color: AppColors.handle),
+                  _ColorSwatch(name: 'outline', color: AppColors.outline),
+                  _ColorSwatch(name: 'transparent', color: AppColors.transparent, border: true),
                 ],
               ),
             ),
@@ -820,30 +825,38 @@ class _ColorSwatch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 56,
-          height: 36,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: AppRadius.chip,
-            border: border ? Border.all(color: AppColors.hairline) : null,
+    return SizedBox(
+      width: 72,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 72,
+            height: 36,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: AppRadius.chip,
+              border: border ||
+                      color == AppColors.surface ||
+                      color == AppColors.ground ||
+                      color == AppColors.transparent
+                  ? Border.all(color: AppColors.hairline)
+                  : null,
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        SizedBox(
-          width: 56,
-          child: Text(
-            name,
-            style: AppText.caption,
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          const SizedBox(height: 4),
+          SizedBox(
+            height: 32,
+            child: Text(
+              name,
+              style: AppText.caption,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

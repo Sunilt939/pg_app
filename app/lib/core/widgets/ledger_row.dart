@@ -105,13 +105,16 @@ class _LedgerRowState extends State<LedgerRow> {
             const SizedBox(height: AppSpace.x4),
             Padding(
               padding: EdgeInsets.only(left: hasLeading ? (AppSize.tile + AppSpace.x12) : 0),
-              child: Row(
-                children: [
-                  for (int i = 0; i < widget.inlineActions!.length; i++) ...[
-                    if (i > 0) const SizedBox(width: AppSpace.x16),
-                    widget.inlineActions![i],
+              child: Transform.translate(
+                offset: const Offset(-AppSpace.x12, 0),
+                child: Row(
+                  children: [
+                    for (int i = 0; i < widget.inlineActions!.length; i++) ...[
+                      if (i > 0) const SizedBox(width: AppSpace.x16),
+                      widget.inlineActions![i],
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ],

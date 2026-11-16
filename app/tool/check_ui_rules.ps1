@@ -26,6 +26,12 @@ if ($out) { Report "default Material widgets that the design does not use" $out 
 $out = git grep -nE "BoxShadow|LinearGradient" -- "lib/*.dart" ":!lib/core/widgets/receipt_paper.dart" ":!lib/core/widgets/skeleton.dart" 2>$null
 if ($out) { Report "shadows or gradients outside the allowed components" $out }
 
+$out = git grep -nE "₹ ?[0-9]|\+91 ?[0-9]{5}" -- "lib/*.dart" ":!lib/dev/*" ":!lib/core/format/*" 2>$null
+if ($out) { Report "hard-coded money or phone numbers" $out }
+
+$out = git grep -nE "[6-9][0-9]{4}\s*[0-9]{5}|[6-9][0-9]{9}" -- "lib/*.dart" ":!lib/dev/*" ":!lib/core/format/*" 2>$null
+if ($out) { Report "real-looking mobile numbers" $out }
+
 if ($fail -eq 0) {
     Write-Host "UI rules check: clean" -ForegroundColor Green
     exit 0

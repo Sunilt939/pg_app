@@ -25,6 +25,9 @@ out=$(grep -rnE "BoxShadow|LinearGradient" lib --include=*.dart | grep -v "^lib/
 out=$(grep -rnE "₹ ?[0-9]|\+91 ?[0-9]{5}" lib --include=*.dart | grep -v "^lib/dev/\|^lib/core/format/")
 [ -n "$out" ] && report "hard-coded money or phone numbers" "$out"
 
+out=$(grep -rnE "[6-9][0-9]{4}\s*[0-9]{5}|[6-9][0-9]{9}" lib --include=*.dart | grep -v "^lib/dev/\|^lib/core/format/")
+[ -n "$out" ] && report "real-looking mobile numbers" "$out"
+
 out=$(grep -rnE "assets/(images|brand)/" lib --include=*.dart | grep -v "^lib/core/assets/app_assets.dart")
 [ -n "$out" ] && report "asset paths outside AppAssets" "$out"
 
