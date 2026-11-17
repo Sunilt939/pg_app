@@ -222,5 +222,34 @@
   "otpExpired": "That code has expired. Request a new one.",
   "@otpExpired": {
     "description": "Error message for expired OTP"
+  },
+  "gateSignedInAs": "Signed in as {phone}",
+  "@gateSignedInAs": {
+    "description": "Subtitle showing signed-in phone number on role gate",
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "gateOwnerTitle": "I run a PG",
+  "@gateOwnerTitle": {
+    "description": "Option title for owner on role gate"
+  },
+  "gateOwnerBody": "Create your PG and add your guests.",
+  "@gateOwnerBody": {
+    "description": "Option description for owner on role gate"
+  },
+  "gateGuestTitle": "I'm a guest",
+  "@gateGuestTitle": {
+    "description": "Option title for guest on role gate"
+  },
+  "gateGuestBody": "Your PG owner adds you using your mobile number.",
+  "@gateGuestBody": {
+    "description": "Option description for guest on role gate"
+  },
+  "actionSignOut": "Sign out",
+  "@actionSignOut": {
+    "description": "Action button text to sign out"
   }
 }

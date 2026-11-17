@@ -393,6 +393,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That code has expired. Request a new one.'**
   String get otpExpired;
+
+  /// Subtitle showing signed-in phone number on role gate
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {phone}'**
+  String gateSignedInAs(String phone);
+
+  /// Option title for owner on role gate
+  ///
+  /// In en, this message translates to:
+  /// **'I run a PG'**
+  String get gateOwnerTitle;
+
+  /// Option description for owner on role gate
+  ///
+  /// In en, this message translates to:
+  /// **'Create your PG and add your guests.'**
+  String get gateOwnerBody;
+
+  /// Option title for guest on role gate
+  ///
+  /// In en, this message translates to:
+  /// **'I\'m a guest'**
+  String get gateGuestTitle;
+
+  /// Option description for guest on role gate
+  ///
+  /// In en, this message translates to:
+  /// **'Your PG owner adds you using your mobile number.'**
+  String get gateGuestBody;
+
+  /// Action button text to sign out
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get actionSignOut;
 }
 
 class _AppLocalizationsDelegate

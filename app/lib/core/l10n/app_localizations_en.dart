@@ -168,4 +168,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpExpired => 'That code has expired. Request a new one.';
+
+  @override
+  String gateSignedInAs(String phone) {
+    return 'Signed in as $phone';
+  }
+
+  @override
+  String get gateOwnerTitle => 'I run a PG';
+
+  @override
+  String get gateOwnerBody => 'Create your PG and add your guests.';
+
+  @override
+  String get gateGuestTitle => 'I\'m a guest';
+
+  @override
+  String get gateGuestBody =>
+      'Your PG owner adds you using your mobile number.';
+
+  @override
+  String get actionSignOut => 'Sign out';
 }

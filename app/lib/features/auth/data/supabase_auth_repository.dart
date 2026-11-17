@@ -52,7 +52,23 @@ class SupabaseAuthRepository implements AuthRepository {
     if (response == null) {
       return const AuthContext.empty();
     }
-    return AuthContext.fromJson(Map<String, dynamic>.from(response as Map));
+    final map = Map<String, dynamic>.from(response as Map);
+    final currentPhone = client.auth.currentUser?.phone;
+    if (currentPhone != null && currentPhone.isNotEmpty) {
+      if (map['person'] == null) {
+        map['person'] = {
+          'id': client.auth.currentUser!.id,
+          'phone': currentPhone,
+        };
+      } else if (map['person'] is Map) {
+        final personMap = Map<String, dynamic>.from(map['person'] as Map);
+        if (personMap['phone'] == null || (personMap['phone'] as String).isEmpty) {
+          personMap['phone'] = currentPhone;
+          map['person'] = personMap;
+        }
+      }
+    }
+    return AuthContext.fromJson(map);
   }
 
   @override
