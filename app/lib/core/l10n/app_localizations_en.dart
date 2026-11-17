@@ -206,4 +206,73 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get stillNotAdded =>
       'Still not added. Ask your PG owner to check the number.';
+
+  @override
+  String get addPgAbout => 'About your PG';
+
+  @override
+  String get addPgName => 'PG name';
+
+  @override
+  String get addPgWho => 'Who stays here';
+
+  @override
+  String get genderMen => 'Men';
+
+  @override
+  String get genderWomen => 'Women';
+
+  @override
+  String get genderAny => 'Anyone';
+
+  @override
+  String get addPgAddressSection => 'Address';
+
+  @override
+  String get addPgAddress => 'Address';
+
+  @override
+  String get addPgAddressHint => 'Building, street';
+
+  @override
+  String get addPgArea => 'Area (optional)';
+
+  @override
+  String get addPgAreaHint => 'Area or locality';
+
+  @override
+  String get addPgCity => 'City';
+
+  @override
+  String get addPgCityPick => 'Choose a city';
+
+  @override
+  String get addPgPincode => 'Pincode (optional)';
+
+  @override
+  String get addPgContactSection => 'Contact';
+
+  @override
+  String get addPgContact => 'Contact number (optional)';
+
+  @override
+  String get addPgContactHelper => 'Guests see this number to contact you.';
+
+  @override
+  String get addPgCreate => 'Create PG';
+
+  @override
+  String get pgCreated => 'PG created.';
+
+  @override
+  String get errPgName => 'Enter the PG name.';
+
+  @override
+  String get errPgAddress => 'Enter the address.';
+
+  @override
+  String get errPgCity => 'Choose a city.';
+
+  @override
+  String get errPincode => 'Enter a 6-digit pincode.';
 }

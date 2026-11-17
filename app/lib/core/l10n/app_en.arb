@@ -271,5 +271,97 @@
   "stillNotAdded": "Still not added. Ask your PG owner to check the number.",
   "@stillNotAdded": {
     "description": "Error message when still not added to a PG"
+  },
+  "addPgAbout": "About your PG",
+  "@addPgAbout": {
+    "description": "Section header for About your PG"
+  },
+  "addPgName": "PG name",
+  "@addPgName": {
+    "description": "Label for PG name field"
+  },
+  "addPgWho": "Who stays here",
+  "@addPgWho": {
+    "description": "Label for gender policy selection"
+  },
+  "genderMen": "Men",
+  "@genderMen": {
+    "description": "Option for men only PG"
+  },
+  "genderWomen": "Women",
+  "@genderWomen": {
+    "description": "Option for women only PG"
+  },
+  "genderAny": "Anyone",
+  "@genderAny": {
+    "description": "Option for co-ed / anyone PG"
+  },
+  "addPgAddressSection": "Address",
+  "@addPgAddressSection": {
+    "description": "Section header for PG address"
+  },
+  "addPgAddress": "Address",
+  "@addPgAddress": {
+    "description": "Label for address line 1 field"
+  },
+  "addPgAddressHint": "Building, street",
+  "@addPgAddressHint": {
+    "description": "Hint for address field"
+  },
+  "addPgArea": "Area (optional)",
+  "@addPgArea": {
+    "description": "Label for area field"
+  },
+  "addPgAreaHint": "Area or locality",
+  "@addPgAreaHint": {
+    "description": "Hint for area field"
+  },
+  "addPgCity": "City",
+  "@addPgCity": {
+    "description": "Label for city selection field"
+  },
+  "addPgCityPick": "Choose a city",
+  "@addPgCityPick": {
+    "description": "Title and hint for choosing city"
+  },
+  "addPgPincode": "Pincode (optional)",
+  "@addPgPincode": {
+    "description": "Label for pincode field"
+  },
+  "addPgContactSection": "Contact",
+  "@addPgContactSection": {
+    "description": "Section header for contact info"
+  },
+  "addPgContact": "Contact number (optional)",
+  "@addPgContact": {
+    "description": "Label for contact phone field"
+  },
+  "addPgContactHelper": "Guests see this number to contact you.",
+  "@addPgContactHelper": {
+    "description": "Helper text for contact phone"
+  },
+  "addPgCreate": "Create PG",
+  "@addPgCreate": {
+    "description": "Button to create PG"
+  },
+  "pgCreated": "PG created.",
+  "@pgCreated": {
+    "description": "Snackbar when PG is created"
+  },
+  "errPgName": "Enter the PG name.",
+  "@errPgName": {
+    "description": "Validation error for PG name"
+  },
+  "errPgAddress": "Enter the address.",
+  "@errPgAddress": {
+    "description": "Validation error for PG address"
+  },
+  "errPgCity": "Choose a city.",
+  "@errPgCity": {
+    "description": "Validation error for PG city"
+  },
+  "errPincode": "Enter a 6-digit pincode.",
+  "@errPincode": {
+    "description": "Validation error for pincode"
   }
 }

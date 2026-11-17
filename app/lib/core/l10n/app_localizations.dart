@@ -459,6 +459,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Still not added. Ask your PG owner to check the number.'**
   String get stillNotAdded;
+
+  /// Section header for About your PG
+  ///
+  /// In en, this message translates to:
+  /// **'About your PG'**
+  String get addPgAbout;
+
+  /// Label for PG name field
+  ///
+  /// In en, this message translates to:
+  /// **'PG name'**
+  String get addPgName;
+
+  /// Label for gender policy selection
+  ///
+  /// In en, this message translates to:
+  /// **'Who stays here'**
+  String get addPgWho;
+
+  /// Option for men only PG
+  ///
+  /// In en, this message translates to:
+  /// **'Men'**
+  String get genderMen;
+
+  /// Option for women only PG
+  ///
+  /// In en, this message translates to:
+  /// **'Women'**
+  String get genderWomen;
+
+  /// Option for co-ed / anyone PG
+  ///
+  /// In en, this message translates to:
+  /// **'Anyone'**
+  String get genderAny;
+
+  /// Section header for PG address
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get addPgAddressSection;
+
+  /// Label for address line 1 field
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get addPgAddress;
+
+  /// Hint for address field
+  ///
+  /// In en, this message translates to:
+  /// **'Building, street'**
+  String get addPgAddressHint;
+
+  /// Label for area field
+  ///
+  /// In en, this message translates to:
+  /// **'Area (optional)'**
+  String get addPgArea;
+
+  /// Hint for area field
+  ///
+  /// In en, this message translates to:
+  /// **'Area or locality'**
+  String get addPgAreaHint;
+
+  /// Label for city selection field
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get addPgCity;
+
+  /// Title and hint for choosing city
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a city'**
+  String get addPgCityPick;
+
+  /// Label for pincode field
+  ///
+  /// In en, this message translates to:
+  /// **'Pincode (optional)'**
+  String get addPgPincode;
+
+  /// Section header for contact info
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get addPgContactSection;
+
+  /// Label for contact phone field
+  ///
+  /// In en, this message translates to:
+  /// **'Contact number (optional)'**
+  String get addPgContact;
+
+  /// Helper text for contact phone
+  ///
+  /// In en, this message translates to:
+  /// **'Guests see this number to contact you.'**
+  String get addPgContactHelper;
+
+  /// Button to create PG
+  ///
+  /// In en, this message translates to:
+  /// **'Create PG'**
+  String get addPgCreate;
+
+  /// Snackbar when PG is created
+  ///
+  /// In en, this message translates to:
+  /// **'PG created.'**
+  String get pgCreated;
+
+  /// Validation error for PG name
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the PG name.'**
+  String get errPgName;
+
+  /// Validation error for PG address
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the address.'**
+  String get errPgAddress;
+
+  /// Validation error for PG city
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a city.'**
+  String get errPgCity;
+
+  /// Validation error for pincode
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a 6-digit pincode.'**
+  String get errPincode;
 }
 
 class _AppLocalizationsDelegate
