@@ -40,7 +40,7 @@
 - [x] **A1. Sign-in** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A1. *Test with:* a Supabase test number. Check: an invalid number shows the message, the code is sent, the keyboard never hides the button.
 - [x] **A2. Enter code** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A2. *Check:* a wrong code shakes and shows the message, the right code signs you in, the resend countdown works.
 - [x] **A3. How will you use the app** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A3. *Test with:* a brand-new number. You land here. Both rows and Sign out work.
-- [ ] **A4. Ask your owner to add you** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A4. *Check:* your number is shown, Copy works, "Check again" says you are not added yet.
+- [x] **A4. Ask your owner to add you** (AI). Spec: `docs/UI_SCREENS_SHARED.md` A4. *Check:* your number is shown, Copy works, "Check again" says you are not added yet.
 
 ### Part 3. Owner setup
 

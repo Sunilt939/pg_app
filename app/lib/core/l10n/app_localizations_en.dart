@@ -189,4 +189,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionSignOut => 'Sign out';
+
+  @override
+  String get guestWaitBody =>
+      'Your number isn\'t registered yet. Please ask your PG owner to add you.';
+
+  @override
+  String get yourNumber => 'Your number';
+
+  @override
+  String get numberCopied => 'Number copied.';
+
+  @override
+  String get checkAgain => 'Check again';
+
+  @override
+  String get stillNotAdded =>
+      'Still not added. Ask your PG owner to check the number.';
 }

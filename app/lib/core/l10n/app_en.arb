@@ -251,5 +251,25 @@
   "actionSignOut": "Sign out",
   "@actionSignOut": {
     "description": "Action button text to sign out"
+  },
+  "guestWaitBody": "Your number isn't registered yet. Please ask your PG owner to add you.",
+  "@guestWaitBody": {
+    "description": "Description on gate guest waiting screen"
+  },
+  "yourNumber": "Your number",
+  "@yourNumber": {
+    "description": "Label for your number"
+  },
+  "numberCopied": "Number copied.",
+  "@numberCopied": {
+    "description": "Feedback when number is copied"
+  },
+  "checkAgain": "Check again",
+  "@checkAgain": {
+    "description": "Action button to check status again"
+  },
+  "stillNotAdded": "Still not added. Ask your PG owner to check the number.",
+  "@stillNotAdded": {
+    "description": "Error message when still not added to a PG"
   }
 }

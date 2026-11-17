@@ -429,6 +429,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out'**
   String get actionSignOut;
+
+  /// Description on gate guest waiting screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your number isn\'t registered yet. Please ask your PG owner to add you.'**
+  String get guestWaitBody;
+
+  /// Label for your number
+  ///
+  /// In en, this message translates to:
+  /// **'Your number'**
+  String get yourNumber;
+
+  /// Feedback when number is copied
+  ///
+  /// In en, this message translates to:
+  /// **'Number copied.'**
+  String get numberCopied;
+
+  /// Action button to check status again
+  ///
+  /// In en, this message translates to:
+  /// **'Check again'**
+  String get checkAgain;
+
+  /// Error message when still not added to a PG
+  ///
+  /// In en, this message translates to:
+  /// **'Still not added. Ask your PG owner to check the number.'**
+  String get stillNotAdded;
 }
 
 class _AppLocalizationsDelegate
