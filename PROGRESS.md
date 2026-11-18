@@ -45,7 +45,7 @@
 ### Part 3. Owner setup
 
 - [x] **O1. Add your PG** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O1. *Test:* create your real PG. Errors show under the fields. You land on the owner Home tab.
-- [ ] **O3. PG switcher** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O3. *Test:* create a second PG with "Add another PG" and switch between them.
+- [x] **O3. PG switcher** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O3. *Test:* create a second PG with "Add another PG" and switch between them.
 - [ ] **O13. More tab** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O13. Show only the rows whose pages are approved (at first: Add another PG, Sign out, and Switch to guest view if you are also a guest). Each later page adds its own row when approved.
 - [ ] **S2a. Profile, basic parts** (AI). Spec: `docs/UI_SCREENS_SHARED.md` S2, only the header, "Your details" and sign-out parts. No photo, no documents. Then add the Profile row to More.
 - [ ] **O12. Add rooms** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O12. *Test:* add your real rooms in bulk. A clash message appears if a number exists. Then add the row to More.

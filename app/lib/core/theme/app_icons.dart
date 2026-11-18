@@ -29,6 +29,7 @@ abstract final class AppIcons {
   static const IconData chevronDown = IconData(0xe136, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData chevronLeft = IconData(0xe138, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData add = IconData(0xe3d4, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
+  static const IconData plus = add;
   static const IconData check = IconData(0xe182, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData search = IconData(0xe30c, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);
   static const IconData bell = IconData(0xe0ce, fontFamily: _regular, fontPackage: _package, matchTextDirection: true);

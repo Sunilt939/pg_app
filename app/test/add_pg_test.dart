@@ -11,6 +11,7 @@ import 'package:app/features/auth/domain/auth_repository.dart';
 import 'package:app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
+import 'package:app/features/owner/domain/pg_switcher_item.dart';
 import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/add_pg_screen.dart';
 
@@ -20,6 +21,7 @@ class MockOwnerRepo implements OwnerRepository {
     City(id: 2, name: 'Chennai', stateName: 'Tamil Nadu'),
     City(id: 3, name: 'Hyderabad', stateName: 'Telangana'),
   ];
+  List<PgSwitcherItem> ownerPgs = const [];
 
   String? createdName;
   String? createdLine1;
@@ -31,6 +33,9 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<City>> getCities() async => cities;
+
+  @override
+  Future<List<PgSwitcherItem>> getOwnerPgs() async => ownerPgs;
 
   @override
   Future<String> createPg({

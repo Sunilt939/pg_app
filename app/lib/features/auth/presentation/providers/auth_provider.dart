@@ -43,8 +43,44 @@ final authContextProvider =
   AuthContextNotifier.new,
 );
 
-final selectedPgIdProvider = FutureProvider<String?>((ref) async {
-  final repo = ref.watch(authRepositoryProvider);
-  return repo.getSelectedPgId();
+class SelectedPgIdNotifier extends AsyncNotifier<String?> {
+  @override
+  Future<String?> build() async {
+    final repo = ref.watch(authRepositoryProvider);
+    final stored = await repo.getSelectedPgId();
+    final authContext = ref.watch(authContextProvider).valueOrNull;
+    final pgs = authContext?.pgs ?? [];
+    if (pgs.isEmpty) return stored;
+
+    if (stored != null && pgs.any((p) => p.pgId == stored)) {
+      return stored;
+    }
+    final firstId = pgs.first.pgId;
+    await repo.setSelectedPgId(firstId);
+    return firstId;
+  }
+
+  Future<void> setPgId(String pgId) async {
+    final repo = ref.read(authRepositoryProvider);
+    await repo.setSelectedPgId(pgId);
+    state = AsyncData(pgId);
+  }
+}
+
+final selectedPgIdProvider =
+    AsyncNotifierProvider<SelectedPgIdNotifier, String?>(
+  SelectedPgIdNotifier.new,
+);
+
+final activePgProvider = Provider<AuthPg?>((ref) {
+  final authContext = ref.watch(authContextProvider).valueOrNull;
+  final pgs = authContext?.pgs ?? [];
+  if (pgs.isEmpty) return null;
+  final selectedId = ref.watch(selectedPgIdProvider).valueOrNull;
+  if (selectedId == null) return pgs.first;
+  return pgs.firstWhere(
+    (p) => p.pgId == selectedId,
+    orElse: () => pgs.first,
+  );
 });
 

@@ -2,6 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../domain/city.dart';
 import '../domain/owner_repository.dart';
+import '../domain/pg_switcher_item.dart';
 
 class SupabaseOwnerRepository implements OwnerRepository {
   final SupabaseClient? _client;
@@ -22,6 +23,58 @@ class SupabaseOwnerRepository implements OwnerRepository {
       return (response as List<dynamic>)
           .map((json) => City.fromJson(json as Map<String, dynamic>))
           .toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<PgSwitcherItem>> getOwnerPgs() async {
+    final client = _client;
+    if (client == null) return [];
+
+    try {
+      final contextResp = await client.rpc('rpc_my_context');
+      final pgsList = (contextResp?['pgs'] as List<dynamic>?) ?? [];
+      if (pgsList.isEmpty) return [];
+
+      final pgIds = pgsList
+          .map((p) => (p as Map<String, dynamic>)['pg_id'] as String)
+          .toList();
+
+      final pgsDetailsResp = await client
+          .from('pgs')
+          .select('id, name, addresses(area, cities(name))')
+          .inFilter('id', pgIds);
+
+      final detailsMap = <String, Map<String, dynamic>>{};
+      for (final item in (pgsDetailsResp as List<dynamic>)) {
+        final map = item as Map<String, dynamic>;
+        detailsMap[map['id'] as String] = map;
+      }
+
+      final items = <PgSwitcherItem>[];
+      for (final p in pgsList) {
+        final pgMap = p as Map<String, dynamic>;
+        final id = pgMap['pg_id'] as String;
+        final name = pgMap['name'] as String;
+        final role = pgMap['role'] as String;
+
+        final detail = detailsMap[id];
+        final addr = detail?['addresses'] as Map<String, dynamic>?;
+        final area = addr?['area'] as String?;
+        final cityMap = addr?['cities'] as Map<String, dynamic>?;
+        final cityName = cityMap?['name'] as String?;
+
+        items.add(PgSwitcherItem(
+          pgId: id,
+          name: name,
+          role: role,
+          area: area,
+          cityName: cityName,
+        ));
+      }
+      return items;
     } catch (_) {
       return [];
     }

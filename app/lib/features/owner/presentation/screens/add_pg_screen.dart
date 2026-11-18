@@ -227,10 +227,11 @@ class _AddPgScreenState extends ConsumerState<AddPgScreen> {
         genderPolicy: _genderPolicy,
       );
 
+      await ref.read(selectedPgIdProvider.notifier).setPgId(newPgId);
       final authRepo = ref.read(authRepositoryProvider);
-      await authRepo.setSelectedPgId(newPgId);
       await authRepo.setLastView('owner');
       await ref.read(authContextProvider.notifier).refreshContext();
+      ref.invalidate(ownerPgsProvider);
 
       if (mounted) {
         AppSnack.show(context, message: l10n.pgCreated);

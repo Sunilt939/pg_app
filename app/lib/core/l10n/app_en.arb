@@ -363,5 +363,25 @@
   "errPincode": "Enter a 6-digit pincode.",
   "@errPincode": {
     "description": "Validation error for pincode"
+  },
+  "switcherTitle": "Your PGs",
+  "@switcherTitle": {
+    "description": "Title for PG switcher bottom sheet"
+  },
+  "switcherAdd": "Add another PG",
+  "@switcherAdd": {
+    "description": "Action to add another PG"
+  },
+  "roleOwner": "Owner",
+  "@roleOwner": {
+    "description": "Role label for owner"
+  },
+  "roleManager": "Manager",
+  "@roleManager": {
+    "description": "Role label for manager"
+  },
+  "roleCaretaker": "Caretaker",
+  "@roleCaretaker": {
+    "description": "Role label for caretaker"
   }
 }

@@ -275,4 +275,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errPincode => 'Enter a 6-digit pincode.';
+
+  @override
+  String get switcherTitle => 'Your PGs';
+
+  @override
+  String get switcherAdd => 'Add another PG';
+
+  @override
+  String get roleOwner => 'Owner';
+
+  @override
+  String get roleManager => 'Manager';
+
+  @override
+  String get roleCaretaker => 'Caretaker';
 }

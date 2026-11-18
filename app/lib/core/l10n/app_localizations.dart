@@ -597,6 +597,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a 6-digit pincode.'**
   String get errPincode;
+
+  /// Title for PG switcher bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Your PGs'**
+  String get switcherTitle;
+
+  /// Action to add another PG
+  ///
+  /// In en, this message translates to:
+  /// **'Add another PG'**
+  String get switcherAdd;
+
+  /// Role label for owner
+  ///
+  /// In en, this message translates to:
+  /// **'Owner'**
+  String get roleOwner;
+
+  /// Role label for manager
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get roleManager;
+
+  /// Role label for caretaker
+  ///
+  /// In en, this message translates to:
+  /// **'Caretaker'**
+  String get roleCaretaker;
 }
 
 class _AppLocalizationsDelegate
