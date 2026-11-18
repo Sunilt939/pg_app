@@ -383,5 +383,70 @@
   "roleCaretaker": "Caretaker",
   "@roleCaretaker": {
     "description": "Role label for caretaker"
+  },
+  "moreYourPg": "Your PG",
+  "@moreYourPg": {
+    "description": "Section header for Your PG on More screen"
+  },
+  "moreAccount": "Account",
+  "@moreAccount": {
+    "description": "Section header for Account on More screen"
+  },
+  "moreAbout": "About",
+  "@moreAbout": {
+    "description": "Section header for About on More screen"
+  },
+  "moreRooms": "Rooms and beds",
+  "@moreRooms": {
+    "description": "Label for rooms and beds row"
+  },
+  "moreAccounts": "Receiving accounts",
+  "@moreAccounts": {
+    "description": "Label for receiving accounts row"
+  },
+  "moreReminders": "Reminders",
+  "@moreReminders": {
+    "description": "Label for reminders row"
+  },
+  "morePgDetails": "PG details",
+  "@morePgDetails": {
+    "description": "Label for PG details row"
+  },
+  "moreProfile": "Profile",
+  "@moreProfile": {
+    "description": "Label for profile row"
+  },
+  "moreSwitchGuest": "Switch to guest view",
+  "@moreSwitchGuest": {
+    "description": "Label for switch to guest view row"
+  },
+  "moreAddPg": "Add another PG",
+  "@moreAddPg": {
+    "description": "Label for add another PG row"
+  },
+  "moreTerms": "Terms",
+  "@moreTerms": {
+    "description": "Label for terms row"
+  },
+  "morePrivacy": "Privacy Policy",
+  "@morePrivacy": {
+    "description": "Label for privacy policy row"
+  },
+  "signOutTitle": "Sign out of {appName}?",
+  "@signOutTitle": {
+    "description": "Title for sign out confirmation dialog",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "signOutBody": "You will need to sign in again with your phone number to access your account.",
+  "@signOutBody": {
+    "description": "Body message for sign out confirmation dialog"
+  },
+  "actionCancel": "Cancel",
+  "@actionCancel": {
+    "description": "Cancel button label"
   }
 }

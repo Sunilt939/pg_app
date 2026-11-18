@@ -627,6 +627,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Caretaker'**
   String get roleCaretaker;
+
+  /// Section header for Your PG on More screen
+  ///
+  /// In en, this message translates to:
+  /// **'Your PG'**
+  String get moreYourPg;
+
+  /// Section header for Account on More screen
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get moreAccount;
+
+  /// Section header for About on More screen
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get moreAbout;
+
+  /// Label for rooms and beds row
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms and beds'**
+  String get moreRooms;
+
+  /// Label for receiving accounts row
+  ///
+  /// In en, this message translates to:
+  /// **'Receiving accounts'**
+  String get moreAccounts;
+
+  /// Label for reminders row
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get moreReminders;
+
+  /// Label for PG details row
+  ///
+  /// In en, this message translates to:
+  /// **'PG details'**
+  String get morePgDetails;
+
+  /// Label for profile row
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get moreProfile;
+
+  /// Label for switch to guest view row
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to guest view'**
+  String get moreSwitchGuest;
+
+  /// Label for add another PG row
+  ///
+  /// In en, this message translates to:
+  /// **'Add another PG'**
+  String get moreAddPg;
+
+  /// Label for terms row
+  ///
+  /// In en, this message translates to:
+  /// **'Terms'**
+  String get moreTerms;
+
+  /// Label for privacy policy row
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get morePrivacy;
+
+  /// Title for sign out confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out of {appName}?'**
+  String signOutTitle(String appName);
+
+  /// Body message for sign out confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'You will need to sign in again with your phone number to access your account.'**
+  String get signOutBody;
+
+  /// Cancel button label
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get actionCancel;
 }
 
 class _AppLocalizationsDelegate

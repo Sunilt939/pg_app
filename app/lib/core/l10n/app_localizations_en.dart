@@ -290,4 +290,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get roleCaretaker => 'Caretaker';
+
+  @override
+  String get moreYourPg => 'Your PG';
+
+  @override
+  String get moreAccount => 'Account';
+
+  @override
+  String get moreAbout => 'About';
+
+  @override
+  String get moreRooms => 'Rooms and beds';
+
+  @override
+  String get moreAccounts => 'Receiving accounts';
+
+  @override
+  String get moreReminders => 'Reminders';
+
+  @override
+  String get morePgDetails => 'PG details';
+
+  @override
+  String get moreProfile => 'Profile';
+
+  @override
+  String get moreSwitchGuest => 'Switch to guest view';
+
+  @override
+  String get moreAddPg => 'Add another PG';
+
+  @override
+  String get moreTerms => 'Terms';
+
+  @override
+  String get morePrivacy => 'Privacy Policy';
+
+  @override
+  String signOutTitle(String appName) {
+    return 'Sign out of $appName?';
+  }
+
+  @override
+  String get signOutBody =>
+      'You will need to sign in again with your phone number to access your account.';
+
+  @override
+  String get actionCancel => 'Cancel';
 }

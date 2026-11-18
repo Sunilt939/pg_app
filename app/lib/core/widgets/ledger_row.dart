@@ -6,25 +6,37 @@ import 'status_chip.dart';
 class LedgerRow extends StatefulWidget {
   final Widget? leading;
   final String title;
+  final TextStyle? titleStyle;
+  final Color? titleColor;
   final String? subtitle;
   final int? paise;
   final StatusChipKind? statusKind;
   final String? statusLabel;
+  final Widget? trailing;
   final List<Widget>? inlineActions;
   final VoidCallback? onTap;
   final bool showDivider;
+  final double? minHeight;
+  final double? leadingGap;
+  final double? dividerIndent;
 
   const LedgerRow({
     super.key,
     this.leading,
     required this.title,
+    this.titleStyle,
+    this.titleColor,
     this.subtitle,
     this.paise,
     this.statusKind,
     this.statusLabel,
+    this.trailing,
     this.inlineActions,
     this.onTap,
     this.showDivider = true,
+    this.minHeight,
+    this.leadingGap,
+    this.dividerIndent,
   });
 
   @override
@@ -37,7 +49,13 @@ class _LedgerRowState extends State<LedgerRow> {
   @override
   Widget build(BuildContext context) {
     final hasLeading = widget.leading != null;
-    final dividerIndent = hasLeading ? (AppSpace.x16 + AppSize.tile + AppSpace.x12) : AppSpace.x16;
+    final effectiveTitleStyle = (widget.titleStyle ?? AppText.bodyMedium).copyWith(
+      color: widget.titleColor,
+    );
+    final gap = widget.leadingGap ?? AppSpace.x12;
+    final defaultDividerIndent =
+        hasLeading ? (AppSpace.x16 + AppSize.tile + gap) : AppSpace.x16;
+    final dividerIndent = widget.dividerIndent ?? defaultDividerIndent;
 
     final rowContent = Padding(
       padding: const EdgeInsets.symmetric(
@@ -53,7 +71,7 @@ class _LedgerRowState extends State<LedgerRow> {
             children: [
               if (widget.leading != null) ...[
                 widget.leading!,
-                const SizedBox(width: AppSpace.x12),
+                SizedBox(width: gap),
               ],
               Expanded(
                 child: Column(
@@ -62,7 +80,7 @@ class _LedgerRowState extends State<LedgerRow> {
                   children: [
                     Text(
                       widget.title,
-                      style: AppText.bodyMedium,
+                      style: effectiveTitleStyle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -98,13 +116,16 @@ class _LedgerRowState extends State<LedgerRow> {
                     ],
                   ],
                 ),
+              ] else if (widget.trailing != null) ...[
+                const SizedBox(width: AppSpace.x12),
+                widget.trailing!,
               ],
             ],
           ),
           if (widget.inlineActions != null && widget.inlineActions!.isNotEmpty) ...[
             const SizedBox(height: AppSpace.x4),
             Padding(
-              padding: EdgeInsets.only(left: hasLeading ? (AppSize.tile + AppSpace.x12) : 0),
+              padding: EdgeInsets.only(left: hasLeading ? (AppSize.tile + gap) : 0),
               child: Transform.translate(
                 offset: const Offset(-AppSpace.x12, 0),
                 child: Row(
@@ -123,7 +144,7 @@ class _LedgerRowState extends State<LedgerRow> {
     );
 
     Widget container = Container(
-      constraints: const BoxConstraints(minHeight: AppSize.rowMin),
+      constraints: BoxConstraints(minHeight: widget.minHeight ?? AppSize.rowMin),
       color: _isPressed ? AppColors.petrolTint : AppColors.surface,
       child: rowContent,
     );
