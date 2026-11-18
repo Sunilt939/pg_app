@@ -338,4 +338,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionCancel => 'Cancel';
+
+  @override
+  String get profileNoName => 'Add your name';
+
+  @override
+  String get profileDetails => 'Your details';
+
+  @override
+  String get profileName => 'Name';
+
+  @override
+  String get profileEmail => 'Email';
+
+  @override
+  String get profileEmailAdd => 'Add';
+
+  @override
+  String get profileMobile => 'Mobile number';
+
+  @override
+  String get phoneLocked => 'Your mobile number can\'t be changed here.';
+
+  @override
+  String get nameRequired => 'Enter your name.';
+
+  @override
+  String get emailInvalid => 'Enter a valid email address.';
+
+  @override
+  String get actionSave => 'Save';
+
+  @override
+  String get profileNameUpdated => 'Name updated';
+
+  @override
+  String get profileEmailUpdated => 'Email updated';
+
+  @override
+  String get photoTake => 'Take a photo';
+
+  @override
+  String get photoChoose => 'Choose from gallery';
+
+  @override
+  String get photoRemove => 'Remove photo';
+
+  @override
+  String get profilePhotoTitle => 'Profile photo';
+
+  @override
+  String get profileDefaultAvatars => 'Choose a default avatar';
+
+  @override
+  String get profilePhotoUpdated => 'Profile photo updated';
+
+  @override
+  String get profilePhotoRemoved => 'Profile photo removed';
 }

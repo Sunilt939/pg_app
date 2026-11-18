@@ -26,6 +26,14 @@ abstract final class AppColors {
 
   static const skeletonBase = Color(0xFFE7EBEE);
   static const skeletonHighlight = Color(0xFFF5F7F8);
+
+  // Avatar presets
+  static const avatarPetrol = Color(0xFF1A4D6B);
+  static const avatarGreen = Color(0xFF1B5E20);
+  static const avatarOrange = Color(0xFFE65100);
+  static const avatarPurple = Color(0xFF4A148C);
+  static const avatarTeal = Color(0xFF006064);
+  static const avatarRed = Color(0xFFB71C1C);
 }
 
 abstract final class AppText {

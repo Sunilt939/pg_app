@@ -129,6 +129,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.notifications,
         builder: (context, state) => const NotificationsScreen(),
       ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.profile,
+        builder: (context, state) => const ProfileScreen(),
+      ),
       if (kDebugMode)
         GoRoute(
           path: RoutePaths.devGallery,
@@ -294,7 +299,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: RoutePaths.profile,
+                path: RoutePaths.guestProfile,
                 builder: (context, state) => const ProfileScreen(),
               ),
             ],

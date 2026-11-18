@@ -448,5 +448,81 @@
   "actionCancel": "Cancel",
   "@actionCancel": {
     "description": "Cancel button label"
+  },
+  "profileNoName": "Add your name",
+  "@profileNoName": {
+    "description": "Placeholder when person has no name in profile"
+  },
+  "profileDetails": "Your details",
+  "@profileDetails": {
+    "description": "Section header for Your details in profile"
+  },
+  "profileName": "Name",
+  "@profileName": {
+    "description": "Label for name field"
+  },
+  "profileEmail": "Email",
+  "@profileEmail": {
+    "description": "Label for email field"
+  },
+  "profileEmailAdd": "Add",
+  "@profileEmailAdd": {
+    "description": "Label for adding email when missing"
+  },
+  "profileMobile": "Mobile number",
+  "@profileMobile": {
+    "description": "Label for mobile number field"
+  },
+  "phoneLocked": "Your mobile number can't be changed here.",
+  "@phoneLocked": {
+    "description": "Snackbar message when tapping locked phone number"
+  },
+  "nameRequired": "Enter your name.",
+  "@nameRequired": {
+    "description": "Validation error when name is empty"
+  },
+  "emailInvalid": "Enter a valid email address.",
+  "@emailInvalid": {
+    "description": "Validation error when email format is invalid"
+  },
+  "actionSave": "Save",
+  "@actionSave": {
+    "description": "Save button label"
+  },
+  "profileNameUpdated": "Name updated",
+  "@profileNameUpdated": {
+    "description": "Snackbar message when name is successfully updated"
+  },
+  "profileEmailUpdated": "Email updated",
+  "@profileEmailUpdated": {
+    "description": "Snackbar message when email is successfully updated"
+  },
+  "photoTake": "Take a photo",
+  "@photoTake": {
+    "description": "Option to take a profile photo with camera"
+  },
+  "photoChoose": "Choose from gallery",
+  "@photoChoose": {
+    "description": "Option to choose a profile photo from gallery"
+  },
+  "photoRemove": "Remove photo",
+  "@photoRemove": {
+    "description": "Option to remove custom profile photo"
+  },
+  "profilePhotoTitle": "Profile photo",
+  "@profilePhotoTitle": {
+    "description": "Title for profile photo options bottom sheet"
+  },
+  "profileDefaultAvatars": "Choose a default avatar",
+  "@profileDefaultAvatars": {
+    "description": "Header for default avatars in profile photo sheet"
+  },
+  "profilePhotoUpdated": "Profile photo updated",
+  "@profilePhotoUpdated": {
+    "description": "Snackbar message when profile photo or avatar is updated"
+  },
+  "profilePhotoRemoved": "Profile photo removed",
+  "@profilePhotoRemoved": {
+    "description": "Snackbar message when profile photo is removed"
   }
 }

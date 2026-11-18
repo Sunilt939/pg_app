@@ -32,6 +32,7 @@ abstract final class RoutePaths {
   // Guest Shell & Tabs
   static const guestHome = '/guest/home';
   static const guestHistory = '/guest/history';
+  static const guestProfile = '/guest/profile';
 
   // Guest Subroutes
   static const guestPay = '/guest/pay/:stayId';

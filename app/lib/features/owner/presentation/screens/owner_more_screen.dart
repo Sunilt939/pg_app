@@ -67,6 +67,26 @@ class OwnerMoreScreen extends ConsumerWidget {
           SectionHeader(title: l10n.moreAccount),
           LedgerSheet(
             children: [
+              LedgerRow(
+                leading: const Icon(
+                  AppIcons.profile,
+                  size: 24,
+                  color: AppColors.ink,
+                ),
+                leadingGap: AppSpace.x16,
+                title: l10n.moreProfile,
+                titleStyle: AppText.body,
+                trailing: const Icon(
+                  AppIcons.chevronRight,
+                  size: 20,
+                  color: AppColors.muted,
+                ),
+                minHeight: 56,
+                showDivider: true,
+                onTap: () {
+                  context.push(RoutePaths.profile);
+                },
+              ),
               if (isGuest)
                 LedgerRow(
                   leading: const Icon(

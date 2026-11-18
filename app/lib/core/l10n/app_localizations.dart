@@ -717,6 +717,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get actionCancel;
+
+  /// Placeholder when person has no name in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Add your name'**
+  String get profileNoName;
+
+  /// Section header for Your details in profile
+  ///
+  /// In en, this message translates to:
+  /// **'Your details'**
+  String get profileDetails;
+
+  /// Label for name field
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileName;
+
+  /// Label for email field
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get profileEmail;
+
+  /// Label for adding email when missing
+  ///
+  /// In en, this message translates to:
+  /// **'Add'**
+  String get profileEmailAdd;
+
+  /// Label for mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get profileMobile;
+
+  /// Snackbar message when tapping locked phone number
+  ///
+  /// In en, this message translates to:
+  /// **'Your mobile number can\'t be changed here.'**
+  String get phoneLocked;
+
+  /// Validation error when name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name.'**
+  String get nameRequired;
+
+  /// Validation error when email format is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address.'**
+  String get emailInvalid;
+
+  /// Save button label
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get actionSave;
+
+  /// Snackbar message when name is successfully updated
+  ///
+  /// In en, this message translates to:
+  /// **'Name updated'**
+  String get profileNameUpdated;
+
+  /// Snackbar message when email is successfully updated
+  ///
+  /// In en, this message translates to:
+  /// **'Email updated'**
+  String get profileEmailUpdated;
+
+  /// Option to take a profile photo with camera
+  ///
+  /// In en, this message translates to:
+  /// **'Take a photo'**
+  String get photoTake;
+
+  /// Option to choose a profile photo from gallery
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get photoChoose;
+
+  /// Option to remove custom profile photo
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get photoRemove;
+
+  /// Title for profile photo options bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo'**
+  String get profilePhotoTitle;
+
+  /// Header for default avatars in profile photo sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a default avatar'**
+  String get profileDefaultAvatars;
+
+  /// Snackbar message when profile photo or avatar is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated'**
+  String get profilePhotoUpdated;
+
+  /// Snackbar message when profile photo is removed
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo removed'**
+  String get profilePhotoRemoved;
 }
 
 class _AppLocalizationsDelegate

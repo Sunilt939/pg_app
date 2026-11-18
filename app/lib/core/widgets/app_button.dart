@@ -16,6 +16,7 @@ class AppButton extends StatefulWidget {
   final IconData? icon;
   final bool expand;
   final EdgeInsetsGeometry? padding;
+  final Color? textColor;
   final _AppButtonVariant _variant;
 
   const AppButton.primary({
@@ -26,7 +27,8 @@ class AppButton extends StatefulWidget {
     this.icon,
     this.expand = false,
     this.padding,
-  }) : _variant = _AppButtonVariant.primary;
+  })  : textColor = null,
+        _variant = _AppButtonVariant.primary;
 
   const AppButton.secondary({
     super.key,
@@ -36,7 +38,8 @@ class AppButton extends StatefulWidget {
     this.icon,
     this.expand = false,
     this.padding,
-  }) : _variant = _AppButtonVariant.secondary;
+  })  : textColor = null,
+        _variant = _AppButtonVariant.secondary;
 
   const AppButton.text({
     super.key,
@@ -46,6 +49,7 @@ class AppButton extends StatefulWidget {
     this.icon,
     this.expand = false,
     this.padding,
+    this.textColor,
   }) : _variant = _AppButtonVariant.text;
 
   const AppButton.destructive({
@@ -56,7 +60,8 @@ class AppButton extends StatefulWidget {
     this.icon,
     this.expand = false,
     this.padding,
-  }) : _variant = _AppButtonVariant.destructive;
+  })  : textColor = null,
+        _variant = _AppButtonVariant.destructive;
 
   @override
   State<AppButton> createState() => _AppButtonState();
@@ -113,8 +118,9 @@ class _AppButtonState extends State<AppButton> {
       case _AppButtonVariant.destructive:
         return AppColors.surface;
       case _AppButtonVariant.secondary:
-      case _AppButtonVariant.text:
         return AppColors.petrol;
+      case _AppButtonVariant.text:
+        return widget.textColor ?? AppColors.petrol;
     }
   }
 

@@ -126,6 +126,12 @@ Widget _wrapWithRouter({
           body: Text('Sign In Page'),
         ),
       ),
+      GoRoute(
+        path: RoutePaths.profile,
+        builder: (context, state) => const Scaffold(
+          body: Text('Profile Page'),
+        ),
+      ),
       ...extraRoutes,
     ],
   );
@@ -163,6 +169,8 @@ void main() {
 
     // Verify sections and rows
     expect(find.text('Account'), findsOneWidget);
+    expect(find.text('Profile'), findsOneWidget);
+    expect(find.byIcon(AppIcons.profile), findsOneWidget);
     expect(find.text('Add another PG'), findsOneWidget);
     expect(find.byIcon(AppIcons.add), findsOneWidget);
     expect(find.text('Sign out'), findsOneWidget);
