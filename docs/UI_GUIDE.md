@@ -223,7 +223,7 @@ abstract final class AppAssets {
 }
 ```
 
-When `AppFlags.uploadsEnabled` is false, hide the profile photo, ID document photo and payment screenshot controls (S2 and G3). Uploads need the private Storage buckets and their policies, which are security-critical: **ask the big model to write that migration** (`005_storage_policies.sql`) and review it, instead of letting a small model write it.
+When `AppFlags.uploadsEnabled` is false, hide the profile photo, ID document photo and payment screenshot controls (S2 and G3). Uploads need the private Storage buckets and their policies, which are security-critical: **ask the big model to write that migration** (`006_storage_policies.sql`) and review it, instead of letting a small model write it.
 
 ---
 
@@ -306,7 +306,7 @@ Startup  (native splash, then: signed in? yes -> rpc_my_context ; no -> /sign-in
  │    │                  └─ /owner/guests/:stayId/pay (O7) ──> /receipt/:paymentId (S1)
  │    ├─ /owner/payments (O9) ─ /owner/payments/:paymentId (O8) ─ /owner/collections (O10)
  │    └─ /owner/more (O13)
- │         ├─ /owner/rooms (O11) ─ /owner/rooms/:roomId ─ /owner/rooms/new (O12)
+ │         ├─ /owner/rooms (O11) ─ /owner/rooms/:roomId ─ /owner/rooms/new (O12b), /owner/rooms/setup (O12)
  │         ├─ /owner/accounts (O14) ─ /owner/accounts/new, /owner/accounts/:id
  │         ├─ /owner/reminders (O15)
  │         ├─ /owner/settings (O16)
@@ -333,10 +333,11 @@ All are in the migrations and have been tested.
 |---|---|
 | `003_ui_read_views.sql` | `v_guest_list`, `v_payment_feed`, `v_receipt_detail`, `v_pg_overview`, `v_pg_setup_status`, `v_bed_occupancy`, `v_collections_month_total`. Each screen reads one of these |
 | `004_ui_write_functions.sql` | `rpc_add_rooms` (bulk rooms and beds), `rpc_correct_guest_name` |
+| `005_room_layout.sql` | `rpc_add_room_layout` (a whole layout: many floors, many rooms, any beds per room, in one step). Added later than the others; run it once after 004 |
 | `002_core_functions.sql` | `rpc_report_payment` now accepts an optional `p_screenshot_file_id` |
 | `dev_reset.sql` | Dev-only wipe (section 3) |
 
-Still to write when needed (tell the big model): `005_storage_policies.sql`, `rpc_give_notice`, `rpc_send_reminder_now`, and the reminder-sending Edge Function.
+Still to write when needed (tell the big model): `006_storage_policies.sql`, `rpc_give_notice`, `rpc_send_reminder_now`, and the reminder-sending Edge Function.
 
 ---
 
@@ -357,7 +358,7 @@ Each step is one or a few small sessions. Every screen session follows the proje
 | **U4** | **Component gallery** at `/dev/gallery` (design system section 11). **Checkpoint 1:** check every component against the design system on a real phone; confirm the ₹ sign and the figures line up | Design system section 11 | You and the big model agree it matches |
 | **U5** | **Sign-in** (A1, A2), **role gate** (A3, A4) and the startup routing from the navigation map [roadmap 4]. Replace the placeholder backdrop with the real photo first if you have it. **Checkpoint 2** | `docs/UI_SCREENS_SHARED.md` | All four routes work with test numbers |
 | **U6** | **Owner shell** (bottom nav), **O1** Add your PG, **O3** PG switcher, **O13** More, **S2** Profile (owner parts) [roadmap 5] | `UI_SCREENS_OWNER.md`, `UI_SCREENS_SHARED.md` | Two PGs can exist and switching changes what you see |
-| **U7** | **O12** Add rooms, **O11** Rooms and beds, **O14** Receiving accounts [roadmap 6] | `docs/UI_SCREENS_OWNER.md` | Your friend's real rooms and accounts are entered |
+| **U7** | **O12** Set up floors and rooms, **O12b** Add a few rooms, **O11** Rooms and beds, **O14** Receiving accounts [roadmap 6] | `docs/UI_SCREENS_OWNER.md` | Your friend's real rooms and accounts are entered |
 | **U8** | **O4** Guests, **O5** Add guest, **O6** Guest detail, **O17** sheets [roadmap 7]. **Checkpoint 3:** enter the 10 real guests | `docs/UI_SCREENS_OWNER.md` | Real guests show correct balances |
 | **U9** | **O7** Record payment, **S1** Receipt, **O8** Payment detail, **O9** Payments, **O10** Money received [roadmap 8 and 9]. **Checkpoint 4:** your friend records a day's cash | `UI_SCREENS_OWNER.md`, `UI_SCREENS_SHARED.md` | A payment can be recorded, shared as a receipt, and reversed |
 | **U10** | **O2** Owner home (it needs the data from U8 and U9) [roadmap 8] | `docs/UI_SCREENS_OWNER.md` | The work queue shows real overdue and pending items |

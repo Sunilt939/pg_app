@@ -110,6 +110,7 @@ Source of truth: `supabase/migrations/` (`001` tables, `002` write functions, `0
 | `rpc_reverse_payment(payment_id, reason)` | owner, manager | Undoes a confirmed payment that was entered wrongly |
 | `rpc_vacate_stay(stay_id, leave_date)` | owner, manager | Marks the guest as left. Stay is kept as history, bed freed, reminders stop |
 | `rpc_add_rooms(pg_id, first_room_number, room_count, beds_per_room, room_type_code, floor, prefix)` | owner, manager | Adds many rooms with beds A, B, C ... in one all-or-nothing step |
+| `rpc_add_room_layout(pg_id, rooms)` | owner, manager | Adds a whole layout in one all-or-nothing step: a JSON list of rooms, each with a number, a floor and a bed count (1 to 12). Used by the floor setup page |
 | `rpc_correct_guest_name(person_id, full_name)` | owner, manager | Fixes a guest's name until the guest has signed in for the first time |
 | `rpc_generate_monthly_charges(month)` | scheduler only | Creates rent charges. Safe to run repeatedly. Run it daily for the current and the next month |
 
@@ -117,7 +118,7 @@ Errors: functions raise plain-English messages meant for the user. Show the mess
 
 ### Still to write (follow the same pattern, one migration each)
 
-`rpc_give_notice` (guest gives notice), `rpc_send_reminder_now`, `rpc_move_bed`, `rpc_settle_deposit`, `rpc_add_member` (invite a manager), the reminder-sending Edge Function that reads `notifications` and `reminder_rules`, and `005_storage_policies.sql` (private buckets for photos, documents and screenshots; security-critical, so it is written and reviewed by the big model, not by a small one).
+`rpc_give_notice` (guest gives notice), `rpc_send_reminder_now`, `rpc_move_bed`, `rpc_settle_deposit`, `rpc_add_member` (invite a manager), the reminder-sending Edge Function that reads `notifications` and `reminder_rules`, and `006_storage_policies.sql` (private buckets for photos, documents and screenshots; security-critical, so it is written and reviewed by the big model, not by a small one).
 
 ### Direct writes the app may do (everything else is read-only)
 
@@ -216,6 +217,6 @@ All user-visible text goes through localisation files (`core/l10n/*.arb`). Engli
 - Receipt PDFs are generated in the app in version 1. Move to an Edge Function if owners need them from a laptop.
 - No proration for part months in version 1. The first rent charge is the full month on the billing day.
 - Guests who joined before the app: use `billing_starts_on` and `deposit_already_paid` when adding them, so old months are not billed again.
-- Storage bucket policies (`005`) and the reminder Edge Function are not written yet. Keep `AppFlags.uploadsEnabled` and `AppFlags.remindersEnabled` false until they exist.
+- Storage bucket policies (`006`) and the reminder Edge Function are not written yet. Keep `AppFlags.uploadsEnabled` and `AppFlags.remindersEnabled` false until they exist.
 - The app name (`AppConfig.appName`) and the logo files are placeholders. They can be replaced at any time without code changes (`UI_GUIDE.md` section 4).
 - Rent reliability score and consent sharing come after the core app works. They are new tables that point at `persons` and `stays`; the existing tables do not change.

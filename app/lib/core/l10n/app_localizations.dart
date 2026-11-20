@@ -831,6 +831,349 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile photo removed'**
   String get profilePhotoRemoved;
+
+  /// Label for first room number input
+  ///
+  /// In en, this message translates to:
+  /// **'First room number'**
+  String get roomFirstNumber;
+
+  /// Label for number of rooms input
+  ///
+  /// In en, this message translates to:
+  /// **'Number of rooms'**
+  String get roomCount;
+
+  /// Label for beds in each room input
+  ///
+  /// In en, this message translates to:
+  /// **'Beds in each room'**
+  String get roomBeds;
+
+  /// Label for room type selection
+  ///
+  /// In en, this message translates to:
+  /// **'Room type (optional)'**
+  String get roomType;
+
+  /// Label for no room type option
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get roomTypeNone;
+
+  /// Label for floor input
+  ///
+  /// In en, this message translates to:
+  /// **'Floor (optional)'**
+  String get roomFloor;
+
+  /// Label for room number prefix input
+  ///
+  /// In en, this message translates to:
+  /// **'Number prefix (optional)'**
+  String get roomPrefix;
+
+  /// Hint text for room number prefix input
+  ///
+  /// In en, this message translates to:
+  /// **'Letters before the number, if any'**
+  String get roomPrefixHint;
+
+  /// Preview summary line for bulk room creation
+  ///
+  /// In en, this message translates to:
+  /// **'This will add {count} rooms, {first} to {last}, with {beds} beds each ({labels}).'**
+  String roomsPreview(
+      int count, String first, String last, int beds, String labels);
+
+  /// Button text to add rooms
+  ///
+  /// In en, this message translates to:
+  /// **'Add rooms'**
+  String get roomsAddAction;
+
+  /// Snackbar message when rooms are added successfully
+  ///
+  /// In en, this message translates to:
+  /// **'{count} rooms added.'**
+  String roomsAdded(int count);
+
+  /// Error message when first room number is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the first room number.'**
+  String get errRoomNumber;
+
+  /// Error message when room count is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number from 1 to 100.'**
+  String get errRoomCount;
+
+  /// Button text for Done action
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get actionDone;
+
+  /// Title showing room number
+  ///
+  /// In en, this message translates to:
+  /// **'Room {number}'**
+  String roomPageTitle(String number);
+
+  /// Header showing floor number
+  ///
+  /// In en, this message translates to:
+  /// **'Floor {floor}'**
+  String roomsFloor(int floor);
+
+  /// Screen title for room layout setup
+  ///
+  /// In en, this message translates to:
+  /// **'Set up rooms'**
+  String get layoutTitle;
+
+  /// Row label in More tab to open floor setup
+  ///
+  /// In en, this message translates to:
+  /// **'Set up floors and rooms'**
+  String get layoutMoreRow;
+
+  /// Current step in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String layoutStepLabel(int step, int total);
+
+  /// Button to go to the next setup step
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get layoutNext;
+
+  /// Confirm sheet title when leaving setup
+  ///
+  /// In en, this message translates to:
+  /// **'Leave without saving?'**
+  String get layoutLeaveTitle;
+
+  /// Confirm sheet message when leaving setup
+  ///
+  /// In en, this message translates to:
+  /// **'The rooms you entered will not be saved.'**
+  String get layoutLeaveBody;
+
+  /// Destructive button to leave setup
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get layoutLeaveAction;
+
+  /// Title of step 1 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Start with one floor'**
+  String get layoutS1Title;
+
+  /// Description of step 1 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Set up one floor first. You can copy it to the other floors later in this setup.'**
+  String get layoutS1Body;
+
+  /// Input label for initial floor number
+  ///
+  /// In en, this message translates to:
+  /// **'Floor number'**
+  String get layoutFloorNumber;
+
+  /// Helper text for floor number input
+  ///
+  /// In en, this message translates to:
+  /// **'Use 0 for the ground floor.'**
+  String get layoutFloorHelper;
+
+  /// Input label for rooms count on the floor
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms on this floor'**
+  String get layoutRoomCount;
+
+  /// Live preview line for step 1
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Room {first}.} other{Rooms {first} to {last}.}}'**
+  String layoutS1Preview(int count, String first, String last);
+
+  /// Validation error for floor number
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a floor from 0 to 30.'**
+  String get errLayoutFloor;
+
+  /// Validation error for room count on floor
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number from 1 to 99.'**
+  String get errLayoutRooms;
+
+  /// Title of step 2 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Beds in each room'**
+  String get layoutS2Title;
+
+  /// Description of step 2 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Change the beds for any room that is different.'**
+  String get layoutS2Body;
+
+  /// Label for master bed stepper setting all rooms
+  ///
+  /// In en, this message translates to:
+  /// **'All rooms'**
+  String get layoutAllRooms;
+
+  /// Pluralized beds count label
+  ///
+  /// In en, this message translates to:
+  /// **'{beds, plural, =1{1 bed} other{{beds} beds}}'**
+  String layoutBedsCount(int beds);
+
+  /// Summary total for current floor in step 2
+  ///
+  /// In en, this message translates to:
+  /// **'{rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}} on this floor.'**
+  String layoutFloorTotals(int rooms, int beds);
+
+  /// Accessibility tooltip for decrementing beds
+  ///
+  /// In en, this message translates to:
+  /// **'Fewer beds'**
+  String get bedsFewer;
+
+  /// Accessibility tooltip for incrementing beds
+  ///
+  /// In en, this message translates to:
+  /// **'More beds'**
+  String get bedsMore;
+
+  /// Title of step 3 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'How many floors does your PG have?'**
+  String get layoutS3Title;
+
+  /// Description of step 3 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'The other floors will copy the first floor. You can change any room before saving.'**
+  String get layoutS3Body;
+
+  /// Input label for total floors in PG
+  ///
+  /// In en, this message translates to:
+  /// **'Number of floors'**
+  String get layoutFloorCount;
+
+  /// Helper text for total floors input
+  ///
+  /// In en, this message translates to:
+  /// **'Count the floor you just set up.'**
+  String get layoutFloorCountHelper;
+
+  /// Validation error for total floor count
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a number from 1 to 30.'**
+  String get errLayoutFloors;
+
+  /// Overall total floors, rooms, and beds summary
+  ///
+  /// In en, this message translates to:
+  /// **'{floors, plural, =1{1 floor} other{{floors} floors}}, {rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}}'**
+  String layoutTotals(int floors, int rooms, int beds);
+
+  /// Title of step 4 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Check your rooms'**
+  String get layoutS4Title;
+
+  /// Description of step 4 in setup wizard
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a room to change it.'**
+  String get layoutS4Body;
+
+  /// Section header for ground floor (floor 0)
+  ///
+  /// In en, this message translates to:
+  /// **'Ground floor'**
+  String get layoutGroundFloor;
+
+  /// Button to add a room to a floor in step 4
+  ///
+  /// In en, this message translates to:
+  /// **'Add room'**
+  String get layoutAddRoom;
+
+  /// Primary action button to save layout in step 4
+  ///
+  /// In en, this message translates to:
+  /// **'Save rooms'**
+  String get layoutSave;
+
+  /// Sheet title for editing a room in step 4
+  ///
+  /// In en, this message translates to:
+  /// **'Change room'**
+  String get layoutEditTitle;
+
+  /// Sheet title for adding a room in step 4
+  ///
+  /// In en, this message translates to:
+  /// **'Add a room'**
+  String get layoutNewTitle;
+
+  /// Input label for room number in edit/add sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Room number'**
+  String get layoutRoomNumber;
+
+  /// Label for beds stepper in room edit sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Beds'**
+  String get layoutBedsLabel;
+
+  /// Button to delete room from layout
+  ///
+  /// In en, this message translates to:
+  /// **'Remove room'**
+  String get layoutRemoveRoom;
+
+  /// Validation error when room number is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a room number.'**
+  String get errLayoutNumber;
+
+  /// Validation error when room number duplicates another in layout
+  ///
+  /// In en, this message translates to:
+  /// **'This room number is already in the list.'**
+  String get errLayoutDuplicate;
+
+  /// Validation error when total rooms exceeds 500
+  ///
+  /// In en, this message translates to:
+  /// **'You can save up to 500 rooms at a time.'**
+  String get errLayoutTooMany;
 }
 
 class _AppLocalizationsDelegate

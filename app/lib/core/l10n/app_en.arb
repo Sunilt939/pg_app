@@ -524,5 +524,308 @@
   "profilePhotoRemoved": "Profile photo removed",
   "@profilePhotoRemoved": {
     "description": "Snackbar message when profile photo is removed"
+  },
+  "roomFirstNumber": "First room number",
+  "@roomFirstNumber": {
+    "description": "Label for first room number input"
+  },
+  "roomCount": "Number of rooms",
+  "@roomCount": {
+    "description": "Label for number of rooms input"
+  },
+  "roomBeds": "Beds in each room",
+  "@roomBeds": {
+    "description": "Label for beds in each room input"
+  },
+  "roomType": "Room type (optional)",
+  "@roomType": {
+    "description": "Label for room type selection"
+  },
+  "roomTypeNone": "Not set",
+  "@roomTypeNone": {
+    "description": "Label for no room type option"
+  },
+  "roomFloor": "Floor (optional)",
+  "@roomFloor": {
+    "description": "Label for floor input"
+  },
+  "roomPrefix": "Number prefix (optional)",
+  "@roomPrefix": {
+    "description": "Label for room number prefix input"
+  },
+  "roomPrefixHint": "Letters before the number, if any",
+  "@roomPrefixHint": {
+    "description": "Hint text for room number prefix input"
+  },
+  "roomsPreview": "This will add {count} rooms, {first} to {last}, with {beds} beds each ({labels}).",
+  "@roomsPreview": {
+    "description": "Preview summary line for bulk room creation",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      },
+      "beds": {
+        "type": "int"
+      },
+      "labels": {
+        "type": "String"
+      }
+    }
+  },
+  "roomsAddAction": "Add rooms",
+  "@roomsAddAction": {
+    "description": "Button text to add rooms"
+  },
+  "roomsAdded": "{count} rooms added.",
+  "@roomsAdded": {
+    "description": "Snackbar message when rooms are added successfully",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "errRoomNumber": "Enter the first room number.",
+  "@errRoomNumber": {
+    "description": "Error message when first room number is empty"
+  },
+  "errRoomCount": "Enter a number from 1 to 100.",
+  "@errRoomCount": {
+    "description": "Error message when room count is invalid"
+  },
+  "actionDone": "Done",
+  "@actionDone": {
+    "description": "Button text for Done action"
+  },
+  "roomPageTitle": "Room {number}",
+  "@roomPageTitle": {
+    "description": "Title showing room number",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "roomsFloor": "Floor {floor}",
+  "@roomsFloor": {
+    "description": "Header showing floor number",
+    "placeholders": {
+      "floor": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutTitle": "Set up rooms",
+  "@layoutTitle": {
+    "description": "Screen title for room layout setup"
+  },
+  "layoutMoreRow": "Set up floors and rooms",
+  "@layoutMoreRow": {
+    "description": "Row label in More tab to open floor setup"
+  },
+  "layoutStepLabel": "Step {step} of {total}",
+  "@layoutStepLabel": {
+    "description": "Current step in setup wizard",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutNext": "Next",
+  "@layoutNext": {
+    "description": "Button to go to the next setup step"
+  },
+  "layoutLeaveTitle": "Leave without saving?",
+  "@layoutLeaveTitle": {
+    "description": "Confirm sheet title when leaving setup"
+  },
+  "layoutLeaveBody": "The rooms you entered will not be saved.",
+  "@layoutLeaveBody": {
+    "description": "Confirm sheet message when leaving setup"
+  },
+  "layoutLeaveAction": "Leave",
+  "@layoutLeaveAction": {
+    "description": "Destructive button to leave setup"
+  },
+  "layoutS1Title": "Start with one floor",
+  "@layoutS1Title": {
+    "description": "Title of step 1 in setup wizard"
+  },
+  "layoutS1Body": "Set up one floor first. You can copy it to the other floors later in this setup.",
+  "@layoutS1Body": {
+    "description": "Description of step 1 in setup wizard"
+  },
+  "layoutFloorNumber": "Floor number",
+  "@layoutFloorNumber": {
+    "description": "Input label for initial floor number"
+  },
+  "layoutFloorHelper": "Use 0 for the ground floor.",
+  "@layoutFloorHelper": {
+    "description": "Helper text for floor number input"
+  },
+  "layoutRoomCount": "Rooms on this floor",
+  "@layoutRoomCount": {
+    "description": "Input label for rooms count on the floor"
+  },
+  "layoutS1Preview": "{count, plural, =1{Room {first}.} other{Rooms {first} to {last}.}}",
+  "@layoutS1Preview": {
+    "description": "Live preview line for step 1",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "first": {
+        "type": "String"
+      },
+      "last": {
+        "type": "String"
+      }
+    }
+  },
+  "errLayoutFloor": "Enter a floor from 0 to 30.",
+  "@errLayoutFloor": {
+    "description": "Validation error for floor number"
+  },
+  "errLayoutRooms": "Enter a number from 1 to 99.",
+  "@errLayoutRooms": {
+    "description": "Validation error for room count on floor"
+  },
+  "layoutS2Title": "Beds in each room",
+  "@layoutS2Title": {
+    "description": "Title of step 2 in setup wizard"
+  },
+  "layoutS2Body": "Change the beds for any room that is different.",
+  "@layoutS2Body": {
+    "description": "Description of step 2 in setup wizard"
+  },
+  "layoutAllRooms": "All rooms",
+  "@layoutAllRooms": {
+    "description": "Label for master bed stepper setting all rooms"
+  },
+  "layoutBedsCount": "{beds, plural, =1{1 bed} other{{beds} beds}}",
+  "@layoutBedsCount": {
+    "description": "Pluralized beds count label",
+    "placeholders": {
+      "beds": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutFloorTotals": "{rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}} on this floor.",
+  "@layoutFloorTotals": {
+    "description": "Summary total for current floor in step 2",
+    "placeholders": {
+      "rooms": {
+        "type": "int"
+      },
+      "beds": {
+        "type": "int"
+      }
+    }
+  },
+  "bedsFewer": "Fewer beds",
+  "@bedsFewer": {
+    "description": "Accessibility tooltip for decrementing beds"
+  },
+  "bedsMore": "More beds",
+  "@bedsMore": {
+    "description": "Accessibility tooltip for incrementing beds"
+  },
+  "layoutS3Title": "How many floors does your PG have?",
+  "@layoutS3Title": {
+    "description": "Title of step 3 in setup wizard"
+  },
+  "layoutS3Body": "The other floors will copy the first floor. You can change any room before saving.",
+  "@layoutS3Body": {
+    "description": "Description of step 3 in setup wizard"
+  },
+  "layoutFloorCount": "Number of floors",
+  "@layoutFloorCount": {
+    "description": "Input label for total floors in PG"
+  },
+  "layoutFloorCountHelper": "Count the floor you just set up.",
+  "@layoutFloorCountHelper": {
+    "description": "Helper text for total floors input"
+  },
+  "errLayoutFloors": "Enter a number from 1 to 30.",
+  "@errLayoutFloors": {
+    "description": "Validation error for total floor count"
+  },
+  "layoutTotals": "{floors, plural, =1{1 floor} other{{floors} floors}}, {rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}}",
+  "@layoutTotals": {
+    "description": "Overall total floors, rooms, and beds summary",
+    "placeholders": {
+      "floors": {
+        "type": "int"
+      },
+      "rooms": {
+        "type": "int"
+      },
+      "beds": {
+        "type": "int"
+      }
+    }
+  },
+  "layoutS4Title": "Check your rooms",
+  "@layoutS4Title": {
+    "description": "Title of step 4 in setup wizard"
+  },
+  "layoutS4Body": "Tap a room to change it.",
+  "@layoutS4Body": {
+    "description": "Description of step 4 in setup wizard"
+  },
+  "layoutGroundFloor": "Ground floor",
+  "@layoutGroundFloor": {
+    "description": "Section header for ground floor (floor 0)"
+  },
+  "layoutAddRoom": "Add room",
+  "@layoutAddRoom": {
+    "description": "Button to add a room to a floor in step 4"
+  },
+  "layoutSave": "Save rooms",
+  "@layoutSave": {
+    "description": "Primary action button to save layout in step 4"
+  },
+  "layoutEditTitle": "Change room",
+  "@layoutEditTitle": {
+    "description": "Sheet title for editing a room in step 4"
+  },
+  "layoutNewTitle": "Add a room",
+  "@layoutNewTitle": {
+    "description": "Sheet title for adding a room in step 4"
+  },
+  "layoutRoomNumber": "Room number",
+  "@layoutRoomNumber": {
+    "description": "Input label for room number in edit/add sheet"
+  },
+  "layoutBedsLabel": "Beds",
+  "@layoutBedsLabel": {
+    "description": "Label for beds stepper in room edit sheet"
+  },
+  "layoutRemoveRoom": "Remove room",
+  "@layoutRemoveRoom": {
+    "description": "Button to delete room from layout"
+  },
+  "errLayoutNumber": "Enter a room number.",
+  "@errLayoutNumber": {
+    "description": "Validation error when room number is empty"
+  },
+  "errLayoutDuplicate": "This room number is already in the list.",
+  "@errLayoutDuplicate": {
+    "description": "Validation error when room number duplicates another in layout"
+  },
+  "errLayoutTooMany": "You can save up to 500 rooms at a time.",
+  "@errLayoutTooMany": {
+    "description": "Validation error when total rooms exceeds 500"
   }
 }

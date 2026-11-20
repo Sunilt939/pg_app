@@ -107,7 +107,7 @@ Profile photos, ID document photos and payment screenshots are uploaded by users
 | `documents` | `{personId}/{uuid}.jpg` | The person (or staff for a guest who lives there now) | The person, and staff while the person lives there |
 | `payment-screenshots` | `{stayId}/{uuid}.jpg` | The guest of that stay | The guest, and the PG's staff |
 
-Each upload also adds a row to the `files` table; the database already controls who may read those rows. The bucket rules themselves are a security-critical migration (`005_storage_policies.sql`). **Ask the big model to write and review it.** Until it exists, keep `AppFlags.uploadsEnabled` set to false so the upload controls stay hidden.
+Each upload also adds a row to the `files` table; the database already controls who may read those rows. The bucket rules themselves are a security-critical migration (`006_storage_policies.sql`). **Ask the big model to write and review it.** Until it exists, keep `AppFlags.uploadsEnabled` set to false so the upload controls stay hidden.
 
 ---
 

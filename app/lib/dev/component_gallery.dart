@@ -7,6 +7,7 @@ import '../core/widgets/app_button.dart';
 import '../core/widgets/app_snack.dart';
 import '../core/widgets/app_text_field.dart';
 import '../core/widgets/app_top_bar.dart';
+import '../core/widgets/beds_stepper.dart';
 import '../core/widgets/date_field.dart';
 import '../core/widgets/empty_state.dart';
 import '../core/widgets/error_state.dart';
@@ -51,6 +52,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
   DateTime? _selectedDate = DateTime(2026, 11, 12);
   bool _otpError = false;
   String _selectValue = 'Option 1';
+  int _stepperBeds = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -661,6 +663,22 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                   onChanged: (v) => setState(() => _switchVal2 = v),
                 ),
               ],
+            ),
+
+            // 24b. BedsStepper
+            const SectionHeader(title: 'BedsStepper'),
+            LedgerSheet(
+              padding: const EdgeInsets.all(AppSpace.x16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Beds in room', style: AppText.body),
+                  BedsStepper(
+                    value: _stepperBeds,
+                    onChanged: (v) => setState(() => _stepperBeds = v),
+                  ),
+                ],
+              ),
             ),
 
             // 25. AppBottomSheet & ConfirmSheet

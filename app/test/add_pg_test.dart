@@ -12,6 +12,7 @@ import 'package:app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
 import 'package:app/features/owner/domain/pg_switcher_item.dart';
+import 'package:app/features/owner/domain/room_type.dart';
 import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/add_pg_screen.dart';
 
@@ -36,6 +37,28 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<PgSwitcherItem>> getOwnerPgs() async => ownerPgs;
+
+  @override
+  Future<List<RoomType>> getRoomTypes() async => const [];
+
+  @override
+  Future<int> addRooms({
+    required String pgId,
+    required int firstRoomNumber,
+    required int roomCount,
+    required int bedsPerRoom,
+    String? roomTypeCode,
+    int? floor,
+    String? prefix,
+  }) async =>
+      roomCount;
+
+  @override
+  Future<int> addRoomLayout({
+    required String pgId,
+    required List<Map<String, dynamic>> rooms,
+  }) async =>
+      rooms.length;
 
   @override
   Future<String> createPg({

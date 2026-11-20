@@ -63,6 +63,33 @@ class OwnerMoreScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.only(bottom: AppSpace.x32),
         children: [
+          // Section 1: Your PG
+          SectionHeader(title: l10n.moreYourPg),
+          LedgerSheet(
+            children: [
+              LedgerRow(
+                leading: const Icon(
+                  AppIcons.room,
+                  size: 24,
+                  color: AppColors.ink,
+                ),
+                leadingGap: AppSpace.x16,
+                title: l10n.layoutMoreRow,
+                titleStyle: AppText.body,
+                trailing: const Icon(
+                  AppIcons.chevronRight,
+                  size: 20,
+                  color: AppColors.muted,
+                ),
+                minHeight: 56,
+                showDivider: false,
+                onTap: () {
+                  context.push(RoutePaths.ownerRoomsSetup);
+                },
+              ),
+            ],
+          ),
+
           // Section 2: Account
           SectionHeader(title: l10n.moreAccount),
           LedgerSheet(

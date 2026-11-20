@@ -4,9 +4,15 @@ import '../../data/supabase_owner_repository.dart';
 import '../../domain/city.dart';
 import '../../domain/owner_repository.dart';
 import '../../domain/pg_switcher_item.dart';
+import '../../domain/room_type.dart';
 
 final ownerRepositoryProvider = Provider<OwnerRepository>((ref) {
   return SupabaseOwnerRepository();
+});
+
+final roomTypesProvider = FutureProvider<List<RoomType>>((ref) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getRoomTypes();
 });
 
 final citiesProvider = FutureProvider<List<City>>((ref) async {

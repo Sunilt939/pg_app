@@ -8,6 +8,8 @@ The AI adds one line per decision it had to make. Never delete lines.
 |---|---|---|---|
 | 2026-11-14 | F1 | Initial blank screen content | Minimal empty Scaffold with AppColors.ground background |
 | 2026-11-17 | N1 | Bottom nav labels and tab placeholder titles | Added navHome, navGuests, navPayments, navMore, navHistory, navProfile and titles to app_en.arb using exact wording from design system |
+| 2026-11-18 | O12 | More tab row before O11 is approved | Added "Rooms and beds" row under moreYourPg in OwnerMoreScreen routing to /owner/rooms/new until O11 rooms list is approved |
+| 2026-11-20 | O12 | Set up floors and rooms wizard | Natural room sorting per floor; room setup kept in memory until final step calls rpc_add_room_layout; row in More tab opens /owner/rooms/setup |
 
 ## Other decisions
 

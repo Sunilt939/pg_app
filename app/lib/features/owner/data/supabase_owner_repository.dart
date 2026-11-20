@@ -3,6 +3,7 @@ import '../../auth/domain/auth_repository.dart';
 import '../domain/city.dart';
 import '../domain/owner_repository.dart';
 import '../domain/pg_switcher_item.dart';
+import '../domain/room_type.dart';
 
 class SupabaseOwnerRepository implements OwnerRepository {
   final SupabaseClient? _client;
@@ -77,6 +78,79 @@ class SupabaseOwnerRepository implements OwnerRepository {
       return items;
     } catch (_) {
       return [];
+    }
+  }
+
+  @override
+  Future<List<RoomType>> getRoomTypes() async {
+    final client = _client;
+    if (client == null) return [];
+    try {
+      final response = await client
+          .from('room_types')
+          .select('id, code, label')
+          .order('id');
+      return (response as List<dynamic>)
+          .map((json) => RoomType.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<int> addRooms({
+    required String pgId,
+    required int firstRoomNumber,
+    required int roomCount,
+    required int bedsPerRoom,
+    String? roomTypeCode,
+    int? floor,
+    String? prefix,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+    try {
+      final response = await client.rpc(
+        'rpc_add_rooms',
+        params: {
+          'p_pg_id': pgId,
+          'p_first_room_number': firstRoomNumber,
+          'p_room_count': roomCount,
+          'p_beds_per_room': bedsPerRoom,
+          if (roomTypeCode != null) 'p_room_type_code': roomTypeCode,
+          if (floor != null) 'p_floor': floor,
+          'p_prefix': prefix ?? '',
+        },
+      );
+      return (response as num?)?.toInt() ?? roomCount;
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<int> addRoomLayout({
+    required String pgId,
+    required List<Map<String, dynamic>> rooms,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+    try {
+      final response = await client.rpc(
+        'rpc_add_room_layout',
+        params: {
+          'p_pg_id': pgId,
+          'p_rooms': rooms,
+        },
+      );
+      return (response as num?)?.toInt() ?? rooms.length;
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
     }
   }
 

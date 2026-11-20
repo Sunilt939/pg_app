@@ -30,7 +30,7 @@ pg_app/
 │
 ├── docs/                  The planning documents (the AI reads the ones it needs)
 ├── supabase/              The database
-│   ├── migrations/        4 SQL files you run once, in order
+│   ├── migrations/        5 SQL files you run once, in order
 │   ├── _local_tests_FAKE_DATA/   My database checks. Contain FAKE data. Never run. Ignore
 │   └── dev/               One dangerous script for wiping test data
 └── app/                   The mobile app (the AI builds it here)
@@ -71,6 +71,7 @@ pg_app/
 | `002_core_functions.sql` | Creates the actions: add guest, record payment, and so on |
 | `003_ui_read_views.sql` | Creates ready-made lists that the screens read |
 | `004_ui_write_functions.sql` | Adds many rooms at once, and fixes a guest's name |
+| `005_room_layout.sql` | Adds a whole layout of floors and rooms in one step (used by the floor setup page) |
 
 **Other files**
 
@@ -87,7 +88,7 @@ pg_app/
 | Files | What they put in your database | Is it fake data? |
 |---|---|---|
 | `001_core_schema.sql` | **Reference lists only**: roles, payment methods, charge types, room types, amenities, ID document types, relationship types, UPI apps, states and a starter list of cities. The app needs these to work | **No.** It is required data. You can add more cities later |
-| `002`, `003`, `004` (the other SQL files) | Nothing. They only create actions and views | No data |
+| `002`, `003`, `004`, `005` (the other SQL files) | Nothing. They only create actions and views | No data |
 | `dev_reset.sql` | Nothing. It only deletes, and only with your confirmation | No data |
 | `_local_tests_FAKE_DATA/` | FAKE people ("Arjun Kumar"), fake phone numbers and fake PGs, but **only** if someone deliberately runs them | **Yes, but locked.** They refuse to run unless started with a special setting, they cannot run in the Supabase SQL editor, and they are never part of the app |
 | The app code (`app/lib`) | Nothing. The AI is forbidden from adding sample data, and a checker script looks for it before every page is approved | No data |
@@ -112,7 +113,7 @@ Unzip it, then open the whole `pg_app` folder in your editor.
 2. In the project settings, find the **API** page. Copy the **Project URL** and the **anon (public) key**. (Menu names change sometimes. Never copy the `service_role` key anywhere.)
 3. In `app/env/`, copy `dev.json.example` to a new file called `dev.json`. Paste the two values into it.
 4. In Supabase, open **SQL Editor**, then **New query**. Open `supabase/migrations/001_core_schema.sql`, copy everything, paste it, and press **Run**. It should say success.
-5. Do the same for `002`, then `003`, then `004`. **Always in this order.**
+5. Do the same for `002`, then `003`, then `004`, then `005`. **Always in this order.** (Already ran 001 to 004 before 005 existed? Run only `005`. It only adds one action, so your data is safe.)
 6. If any run shows a red error: copy the whole message and send it to me. Do not let the AI "fix" the SQL files.
 7. In Supabase, go to **Authentication**, then **Providers**, then **Phone**, and switch it on. For testing, add a test phone number with a fixed code (the page usually has a "test phone numbers" setting; look in the Supabase help if you cannot find it). Real SMS needs an SMS provider; we do that later.
 

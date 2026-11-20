@@ -14,6 +14,8 @@ import '../../features/guest/presentation/screens/guest_history_screen.dart';
 import '../../features/guest/presentation/screens/guest_home_screen.dart';
 import '../../features/owner/presentation/owner_shell.dart';
 import '../../features/owner/presentation/screens/add_pg_screen.dart';
+import '../../features/owner/presentation/screens/add_rooms_screen.dart';
+import '../../features/owner/presentation/screens/set_up_rooms_screen.dart';
 import '../../features/owner/presentation/screens/owner_guests_screen.dart';
 import '../../features/owner/presentation/screens/owner_home_screen.dart';
 import '../../features/owner/presentation/screens/owner_more_screen.dart';
@@ -226,10 +228,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
+        path: RoutePaths.ownerRoomsSetup,
+        builder: (context, state) => const SetUpRoomsScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerRoomsNew,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.addRoomsTitle,
-        ),
+        builder: (context, state) => const AddRoomsScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

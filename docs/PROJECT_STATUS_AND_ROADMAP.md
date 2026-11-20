@@ -83,6 +83,7 @@ Everything is organised in one project folder. `START_HERE.md` explains each fil
 | `tests_10_scenario.sql` | End-to-end scenario test (21 scenarios) |
 | `003_ui_read_views.sql` | Migration 3: read-only views the screens use |
 | `004_ui_write_functions.sql` | Migration 4: `rpc_add_rooms`, `rpc_correct_guest_name` |
+| `005_room_layout.sql` | Migration 5: `rpc_add_room_layout` (whole floors and rooms in one step) |
 | `tests_20_views.sql`, `tests_30_ui_functions.sql` | Tests for migrations 3 and 4. Run after the scenario test |
 | `dev_reset.sql` | Dev-only wipe of all test data and logins; refuses to run without an explicit confirmation |
 | `UI_GUIDE.md` | UI pack entry point: rules for small-model sessions, zero dummy data, name and logo swap, packages, navigation map, build steps U0 to U13, review checklist |
@@ -139,7 +140,7 @@ The later migrations were tested the same way: `tests_20_views.sql` (each owner 
 - Edge Functions: reminder sender, daily charge job scheduling, receipt/notification helpers.
 - Supabase Storage buckets and their policies.
 - Functions still to write: `rpc_give_notice` (guest), `rpc_send_reminder_now` (owner one-tap reminder), `rpc_move_bed`, `rpc_settle_deposit`, `rpc_add_member` (invite a manager). (The name-correction function and the vacancy view now exist.)
-- `005_storage_policies.sql`: the private buckets for profile photos, ID documents and payment screenshots, with their policies. Security-critical: the big model writes and reviews it. Until then `AppFlags.uploadsEnabled` stays false.
+- `006_storage_policies.sql`: the private buckets for profile photos, ID documents and payment screenshots, with their policies. Security-critical: the big model writes and reviews it. Until then `AppFlags.uploadsEnabled` stays false.
 - Late-fee logic (the settings columns exist; nothing calculates a late fee yet).
 - Receipt image/PDF generation (`receipts.file_id` is unused in version 1; generate on demand in the app from the receipt row).
 - Proration for part months (version 1 bills the full month on the billing day).
@@ -426,7 +427,7 @@ Update this table when a step is finished, and add a line to the change log at t
 **Step 5. PG setup.** Create PG (`rpc_create_pg`), PG switcher in the app bar (selected PG remembered; every query uses the selected PG), PG settings, receiving accounts with nicknames and a default, reminder rules.
 *Done when:* an owner can have two PGs and switching shows only that PG's data.
 
-**Step 6. Rooms and beds.** Add rooms and beds, bulk add ("10 rooms, 2 beds each"), room types and amenities from lookups. Bulk adding uses `rpc_add_rooms`, and the bed list reads `v_bed_occupancy` (both already exist, migrations 003 and 004).
+**Step 6. Rooms and beds.** Add rooms and beds, bulk add ("10 rooms, 2 beds each"), room types and amenities from lookups. Bulk adding uses `rpc_add_rooms`, setting up whole floors uses `rpc_add_room_layout` (migration 005), and the bed list reads `v_bed_occupancy` (all already exist, migrations 003 to 005).
 *Done when:* the real PG's rooms and beds are entered in minutes.
 
 **Step 7. Guests.**

@@ -158,6 +158,7 @@ All screens use icons through `lib/core/theme/app_icons.dart`. Switching the fam
 | `chevronDown` | caretDown | Select fields, PG switcher |
 | `chevronLeft` | caretLeft | Month selector |
 | `add` | plus | Add actions |
+| `minus` | minus | Beds stepper |
 | `check` | check | Selected option, done |
 | `search` | magnifyingGlass | Search field |
 | `bell` | bell | Notifications |
@@ -301,6 +302,13 @@ Six boxes sharing the available width equally with 8 gaps, each 56 high, radius 
 A row of equal-width option boxes with 8 gaps. With more than 3 options, a 2-column grid. Each box 44 high, radius 8, label centred.
 - Unselected: `surface`, 1 dp `outline` border, `label` text.
 - Selected: `petrolTint` background, 2 dp `petrol` border, text `petrol` weight 600.
+
+### BedsStepper
+A small control for a whole number, in one row: a `minus` button, the number, an `add` button. Width 136, height 44. Parameters: `value`, `min` (1), `max` (12), `onChanged`.
+- Each button has a 44 x 44 tap area and a visible 36 x 36 square, radius 8, `surface`, 1 dp `outline` border, icon 20 in `petrol`. Pressed: `petrolTint` background.
+- At a limit that button is disabled: border `hairline`, icon `muted`, taps ignored.
+- The number between the buttons: `heading`, `ink`, centred, 48 wide. It is not typed into.
+- Accessibility: the buttons are named `bedsFewer` and `bedsMore`; the number is read with `layoutBedsCount`. Used first by O12 (`UI_SCREENS_OWNER.md`). Add it to the gallery.
 
 ### UnderlineTabs
 Height 44, `surface`, 1 dp `hairline` bottom border, scrolls horizontally if needed. Each tab: horizontal padding 16, label `buttonSmall`, optional count after it (4 gap, `caption`). Selected: `ink` text, 2 dp `petrol` underline the full width of the tab. Unselected: `muted`.

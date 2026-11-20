@@ -82,3 +82,24 @@ insert into files (bucket, object_path, mime_type, uploaded_by) select 'payment-
 set role authenticated; select set_config('request.jwt.claim.sub', :'tenant', false) \g /dev/null
 select rpc_report_payment(p_stay_id => :'stay_b', p_amount_paise => 100, p_method_code => 'upi', p_screenshot_file_id => :'file_other');
 reset role;
+
+\echo '=== F5. owner A adds a layout with rpc_add_room_layout (005): 2 floors, different beds per room'
+set role authenticated; select set_config('request.jwt.claim.sub', :'owner_a', false) \g /dev/null
+select rpc_add_room_layout(:'pg_a', '[{"number":"L101","floor":1,"beds":2},{"number":"L102","floor":1,"beds":3},{"number":"L201","floor":2,"beds":1},{"number":"L202","floor":2,"beds":4}]'::jsonb) as rooms_created;
+select room_number, floor, string_agg(bed_label, ',' order by bed_label) as beds from v_bed_occupancy where room_number like 'L%' group by 1,2 order by 1;
+\echo '-- expect errors (each creates nothing): clash, same number twice, bad beds, empty list, bad floor, not a list'
+select rpc_add_room_layout(:'pg_a', '[{"number":"L301","beds":2},{"number":"l101","beds":2}]'::jsonb);
+select rpc_add_room_layout(:'pg_a', '[{"number":"L401","beds":2},{"number":"L401","beds":2}]'::jsonb);
+select rpc_add_room_layout(:'pg_a', '[{"number":"L501","beds":13}]'::jsonb);
+select rpc_add_room_layout(:'pg_a', '[]'::jsonb);
+select rpc_add_room_layout(:'pg_a', '[{"number":"L601","floor":"x","beds":2}]'::jsonb);
+select rpc_add_room_layout(:'pg_a', '{"number":"L701"}'::jsonb);
+select count(*) as rooms_still_only_four from rooms where room_number like 'L%';
+reset role;
+\echo '-- owner B and the guest cannot add a layout to PG A (expect 2 errors)'
+set role authenticated; select set_config('request.jwt.claim.sub', :'owner_b', false) \g /dev/null
+select rpc_add_room_layout(:'pg_a', '[{"number":"X1","beds":1}]'::jsonb);
+reset role;
+set role authenticated; select set_config('request.jwt.claim.sub', :'tenant', false) \g /dev/null
+select rpc_add_room_layout(:'pg_a', '[{"number":"X2","beds":1}]'::jsonb);
+reset role;

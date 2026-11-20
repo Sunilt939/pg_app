@@ -21,6 +21,7 @@ abstract final class RoutePaths {
   static const ownerPaymentDetail = '/owner/payments/:paymentId';
   static const ownerCollections = '/owner/collections';
   static const ownerRooms = '/owner/rooms';
+  static const ownerRoomsSetup = '/owner/rooms/setup';
   static const ownerRoomsNew = '/owner/rooms/new';
   static const ownerRoomDetail = '/owner/rooms/:roomId';
   static const ownerAccounts = '/owner/accounts';

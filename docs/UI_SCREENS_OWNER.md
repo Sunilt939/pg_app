@@ -2,7 +2,7 @@
 
 Last updated: 12 Nov 2026
 
-Screens in this file: **O1** Add your PG, **O2** Owner home, **O3** PG switcher, **O4** Guests, **O5** Add guest, **O6** Guest detail, **O7** Record payment, **O8** Payment detail, **O9** Payments, **O10** Money received, **O11** Rooms and beds, **O12** Add rooms, **O13** More, **O14** Receiving accounts, **O15** Reminders, **O16** PG details, **O17** Guest actions (sheets).
+Screens in this file: **O1** Add your PG, **O2** Owner home, **O3** PG switcher, **O4** Guests, **O5** Add guest, **O6** Guest detail, **O7** Record payment, **O8** Payment detail, **O9** Payments, **O10** Money received, **O11** Rooms and beds, **O12** Set up floors and rooms, **O12b** Add a few rooms, **O13** More, **O14** Receiving accounts, **O15** Reminders, **O16** PG details, **O17** Guest actions (sheets).
 
 Load `UI_DESIGN_SYSTEM.md` with this file. The receipt (S1), profile (S2) and notifications (S3) are in `UI_SCREENS_SHARED.md`.
 
@@ -651,11 +651,11 @@ Load `UI_DESIGN_SYSTEM.md` with this file. The receipt (S1), profile (S2) and no
 **Route** `/owner/rooms` and `/owner/rooms/:roomId`. **Reads** `v_bed_occupancy` (this PG).
 
 **List**
-1. Top bar: back, title `roomsTitle`, action `plus` (owner and manager) opening O12.
+1. Top bar: back, title `roomsTitle`, action `plus` (owner and manager) opening O12b.
 2. First a line in `secondary` (padding 16): `roomsSummary` ("{rooms} rooms, {beds} beds, {free} free"). These are counts of rows, not money.
 3. Rooms grouped by `floor` with `SectionHeader`s (`roomsFloor`, "Floor {floor}") when at least one room has a floor; rooms without a floor go under `roomsNoFloor`. Without any floors, one plain list. Ordered by room number (natural order, so 9 comes before 10).
 4. Row: leading `RoomTile(room_number)`; title `room_type_label` or `roomDefaultTitle` ("Room"); subtitle `roomsBedsFree` ("{beds} beds, {free} free"); trailing: `roomsFull` in `muted` when no bed is free, otherwise `roomsFreeCount` ("{free} free") in `petrol`. Tapping opens the room page.
-5. Empty: `EmptyState` with the `room` icon, `roomsEmptyTitle`, `roomsEmptyBody`, button "Add rooms".
+5. Empty: `EmptyState` with the `room` icon, `roomsEmptyTitle`, `roomsEmptyBody`, button "Add rooms" opening O12 (owner and manager).
 
 **Room page**
 1. Top bar: back, title `Room {room_number}`.
@@ -681,9 +681,99 @@ Load `UI_DESIGN_SYSTEM.md` with this file. The receipt (S1), profile (S2) and no
 
 ---
 
-## O12. Add rooms
+## O12. Set up floors and rooms
 
-**Route** `/owner/rooms/new`. **Does** `rpc_add_rooms(p_pg_id, p_first_room_number, p_room_count, p_beds_per_room, p_room_type_code, p_floor, p_prefix)`. **Reads** `room_types`. **Roles** owner and manager.
+**Route** `/owner/rooms/setup`. **Does** `rpc_add_room_layout(p_pg_id, p_rooms)` (migration 005), once, at the end. **Reads** nothing. **Roles** owner and manager. **Opened from** the "Set up your PG" sheet on O2 and the empty state of O11. Until O11 exists, this page adds one row to O13 (More) so it can be reached and tested: `layoutMoreRow`, icon `room`, opening O12. Remove that row when O11 is built (O11 and O2 then open this page). To add a few rooms later, the plus in O11 opens O12b.
+
+One page with four steps and a local draft kept in memory only. Nothing is saved until the last step, and nothing is stored on the phone. Dart only builds the list of rooms (number, floor, beds). The database checks every item again.
+
+**Room numbers (the pattern).** Floor 1 or higher: floor x 100 + position, so floor 1 gives 101, 102 ... and floor 2 gives 201, 202 ... Floor 0 (ground floor): `G1`, `G2` ... Position runs from 1 to the number of rooms on the floor. Numbers are text.
+
+**All steps**
+1. Top bar: back, title `layoutTitle`. Back on step 2, 3 or 4 goes to the step before and keeps what was typed. Back on step 1 (and the phone's back button): if anything was typed, open a `ConfirmSheet` (`layoutLeaveTitle`, `layoutLeaveBody`, destructive button `layoutLeaveAction`, text button `actionCancel`); otherwise just leave.
+2. Under the top bar: padding 16, `layoutStepLabel` (`secondary`), 8 below it a `ProgressBarThin` (step / 4).
+3. A scrolling body, then a sticky bottom action with one primary button.
+
+**Step 1. First floor**
+1. `LedgerSheet`, padding 16: `layoutS1Title` (`heading`), `layoutS1Body` (`secondary`, 4 below).
+2. Fields: `layoutFloorNumber` (digits, 2 at most, starts as `1`, helper `layoutFloorHelper`, valid 0 to 30, error `errLayoutFloor`) and `layoutRoomCount` (digits, 2 at most, starts empty, valid 1 to 99, error `errLayoutRooms`).
+3. Live line under the fields, `secondary`, `layoutS1Preview`, shown only when both are valid.
+4. Button `layoutNext`, disabled until both are valid.
+
+**Step 2. Beds in each room**
+1. Padding 16: `layoutS2Title` (`heading`), `layoutS2Body` (`secondary`).
+2. One `LedgerSheet`. First row: title `layoutAllRooms`, trailing `BedsStepper` (starts at 2). Changing it sets every room to that number. Then one `LedgerRow` per room of this floor: leading `RoomTile(number)`, title `roomPageTitle`, trailing `BedsStepper` (1 to 12, every room starts at 2). Changing one room changes only that room.
+3. Live line under the sheet, `secondary`, `layoutFloorTotals`.
+4. Button `layoutNext`, always enabled.
+5. If the person goes back and changes step 1: rooms that still exist keep their beds, new rooms start at 2, the numbers follow the new floor.
+
+**Step 3. How many floors**
+1. Padding 16: `layoutS3Title` (`heading`), `layoutS3Body` (`secondary`).
+2. Field `layoutFloorCount` (digits, 2 at most, starts as `1`, helper `layoutFloorCountHelper`, valid 1 to 30, error `errLayoutFloors`). The count includes the floor set up in step 1. The floors are the first floor, then each floor above it (first floor 1 and 5 floors gives floors 1 to 5; first floor 0 and 4 floors gives floors 0 to 3).
+3. Live line, `secondary`, `layoutTotals`. If the total is more than 500 rooms, show `errLayoutTooMany` in `overdueFg` instead and disable the button.
+4. Button `layoutNext`. Pressing it builds the full list: every floor gets the same number of rooms and the same beds per room as step 1 and 2, numbered by the pattern above. Going back to step 3 and pressing Next again builds the list again, so changes made in step 4 are lost.
+
+**Step 4. Check and save**
+1. `LedgerSheet`, padding 16: `layoutS4Title` (`heading`), `layoutS4Body` (`secondary`), then `layoutTotals` (`bodyMedium`). Below that, when the database sends an error, its message in `secondary` and `overdueFg`.
+2. For each floor, lowest first: `SectionHeader` (`roomsFloor`, or `layoutGroundFloor` for floor 0) with the trailing small text button `layoutAddRoom`, then a `LedgerSheet` with one `LedgerRow` per room, in natural number order (9 before 10): leading `RoomTile(number)`, title `layoutBedsCount`, trailing `chevronRight`. A floor with no rooms left is not shown.
+3. Tapping a room opens an `AppBottomSheet` titled `layoutEditTitle`: field `layoutRoomNumber` (text, 20 characters at most), the label `layoutBedsLabel` with a `BedsStepper`, a primary button `actionDone`, and a `.text` button `layoutRemoveRoom`. Done checks the number: empty gives `errLayoutNumber`; the same number as another room in the list (any floor, upper or lower case) gives `errLayoutDuplicate`. Remove deletes the room from the list with no question.
+4. `layoutAddRoom` opens the same sheet titled `layoutNewTitle`, with no Remove button. The number starts as the highest numeric room number on that floor plus 1, or empty if there is none. Beds start at 2. Done adds the room to that floor.
+5. Sticky button `layoutSave` (loading while saving). It is disabled when the list is empty or has more than 500 rooms. It calls `rpc_add_room_layout` with a list of `{"number": text, "floor": whole number, "beds": whole number}`, one item per room.
+6. **Success:** snackbar `roomsAdded`, then go back to the page before this one, which refreshes. **Database error** (for example `Room 101 already exists in this PG`): show the message in the error line of item 1, scroll to the top, keep the list, nothing is created. **No internet:** `AppSnack` `errorNetwork`. Anything else: `AppSnack` `errorGeneric`.
+
+**Copy**
+
+| Key | Text |
+|---|---|
+| `layoutTitle` | Set up rooms |
+| `layoutMoreRow` | Set up floors and rooms |
+| `layoutStepLabel` | Step {step} of {total} |
+| `layoutNext` | Next |
+| `layoutLeaveTitle` | Leave without saving? |
+| `layoutLeaveBody` | The rooms you entered will not be saved. |
+| `layoutLeaveAction` | Leave |
+| `layoutS1Title` | Start with one floor |
+| `layoutS1Body` | Set up one floor first. You can copy it to the other floors later in this setup. |
+| `layoutFloorNumber` | Floor number |
+| `layoutFloorHelper` | Use 0 for the ground floor. |
+| `layoutRoomCount` | Rooms on this floor |
+| `layoutS1Preview` | {count, plural, =1{Room {first}.} other{Rooms {first} to {last}.}} |
+| `errLayoutFloor` | Enter a floor from 0 to 30. |
+| `errLayoutRooms` | Enter a number from 1 to 99. |
+| `layoutS2Title` | Beds in each room |
+| `layoutS2Body` | Change the beds for any room that is different. |
+| `layoutAllRooms` | All rooms |
+| `layoutBedsCount` | {beds, plural, =1{1 bed} other{{beds} beds}} |
+| `layoutFloorTotals` | {rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}} on this floor. |
+| `bedsFewer` | Fewer beds |
+| `bedsMore` | More beds |
+| `layoutS3Title` | How many floors does your PG have? |
+| `layoutS3Body` | The other floors will copy the first floor. You can change any room before saving. |
+| `layoutFloorCount` | Number of floors |
+| `layoutFloorCountHelper` | Count the floor you just set up. |
+| `errLayoutFloors` | Enter a number from 1 to 30. |
+| `layoutTotals` | {floors, plural, =1{1 floor} other{{floors} floors}}, {rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}} |
+| `layoutS4Title` | Check your rooms |
+| `layoutS4Body` | Tap a room to change it. |
+| `layoutGroundFloor` | Ground floor |
+| `layoutAddRoom` | Add room |
+| `layoutSave` | Save rooms |
+| `layoutEditTitle` | Change room |
+| `layoutNewTitle` | Add a room |
+| `layoutRoomNumber` | Room number |
+| `layoutBedsLabel` | Beds |
+| `layoutRemoveRoom` | Remove room |
+| `errLayoutNumber` | Enter a room number. |
+| `errLayoutDuplicate` | This room number is already in the list. |
+| `errLayoutTooMany` | You can save up to 500 rooms at a time. |
+
+This page also uses `roomPageTitle` and `roomsFloor` (O11), `roomsAdded` (O12b), and `actionDone`, `actionCancel`, `errorNetwork`, `errorGeneric` (common strings).
+
+---
+
+## O12b. Add a few rooms
+
+**Route** `/owner/rooms/new`. **Opened from** the plus in O11. For a whole PG or whole floors use O12. **Does** `rpc_add_rooms(p_pg_id, p_first_room_number, p_room_count, p_beds_per_room, p_room_type_code, p_floor, p_prefix)`. **Reads** `room_types`. **Roles** owner and manager.
 
 **Build**
 1. Form page, one `LedgerSheet`, fields in this order: "First room number" (digits), "Number of rooms" (digits, 1 to 100, default 1), "Beds in each room" (`SelectField` 1 to 12, default 2), "Room type (optional)" (`SelectField` from `room_types`, first row "Not set"), "Floor (optional)" (digits), "Number prefix (optional)" (text, hint `roomPrefixHint`).

@@ -395,4 +395,238 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profilePhotoRemoved => 'Profile photo removed';
+
+  @override
+  String get roomFirstNumber => 'First room number';
+
+  @override
+  String get roomCount => 'Number of rooms';
+
+  @override
+  String get roomBeds => 'Beds in each room';
+
+  @override
+  String get roomType => 'Room type (optional)';
+
+  @override
+  String get roomTypeNone => 'Not set';
+
+  @override
+  String get roomFloor => 'Floor (optional)';
+
+  @override
+  String get roomPrefix => 'Number prefix (optional)';
+
+  @override
+  String get roomPrefixHint => 'Letters before the number, if any';
+
+  @override
+  String roomsPreview(
+      int count, String first, String last, int beds, String labels) {
+    return 'This will add $count rooms, $first to $last, with $beds beds each ($labels).';
+  }
+
+  @override
+  String get roomsAddAction => 'Add rooms';
+
+  @override
+  String roomsAdded(int count) {
+    return '$count rooms added.';
+  }
+
+  @override
+  String get errRoomNumber => 'Enter the first room number.';
+
+  @override
+  String get errRoomCount => 'Enter a number from 1 to 100.';
+
+  @override
+  String get actionDone => 'Done';
+
+  @override
+  String roomPageTitle(String number) {
+    return 'Room $number';
+  }
+
+  @override
+  String roomsFloor(int floor) {
+    return 'Floor $floor';
+  }
+
+  @override
+  String get layoutTitle => 'Set up rooms';
+
+  @override
+  String get layoutMoreRow => 'Set up floors and rooms';
+
+  @override
+  String layoutStepLabel(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get layoutNext => 'Next';
+
+  @override
+  String get layoutLeaveTitle => 'Leave without saving?';
+
+  @override
+  String get layoutLeaveBody => 'The rooms you entered will not be saved.';
+
+  @override
+  String get layoutLeaveAction => 'Leave';
+
+  @override
+  String get layoutS1Title => 'Start with one floor';
+
+  @override
+  String get layoutS1Body =>
+      'Set up one floor first. You can copy it to the other floors later in this setup.';
+
+  @override
+  String get layoutFloorNumber => 'Floor number';
+
+  @override
+  String get layoutFloorHelper => 'Use 0 for the ground floor.';
+
+  @override
+  String get layoutRoomCount => 'Rooms on this floor';
+
+  @override
+  String layoutS1Preview(int count, String first, String last) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Rooms $first to $last.',
+      one: 'Room $first.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get errLayoutFloor => 'Enter a floor from 0 to 30.';
+
+  @override
+  String get errLayoutRooms => 'Enter a number from 1 to 99.';
+
+  @override
+  String get layoutS2Title => 'Beds in each room';
+
+  @override
+  String get layoutS2Body => 'Change the beds for any room that is different.';
+
+  @override
+  String get layoutAllRooms => 'All rooms';
+
+  @override
+  String layoutBedsCount(int beds) {
+    String _temp0 = intl.Intl.pluralLogic(
+      beds,
+      locale: localeName,
+      other: '$beds beds',
+      one: '1 bed',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String layoutFloorTotals(int rooms, int beds) {
+    String _temp0 = intl.Intl.pluralLogic(
+      rooms,
+      locale: localeName,
+      other: '$rooms rooms',
+      one: '1 room',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      beds,
+      locale: localeName,
+      other: '$beds beds',
+      one: '1 bed',
+    );
+    return '$_temp0, $_temp1 on this floor.';
+  }
+
+  @override
+  String get bedsFewer => 'Fewer beds';
+
+  @override
+  String get bedsMore => 'More beds';
+
+  @override
+  String get layoutS3Title => 'How many floors does your PG have?';
+
+  @override
+  String get layoutS3Body =>
+      'The other floors will copy the first floor. You can change any room before saving.';
+
+  @override
+  String get layoutFloorCount => 'Number of floors';
+
+  @override
+  String get layoutFloorCountHelper => 'Count the floor you just set up.';
+
+  @override
+  String get errLayoutFloors => 'Enter a number from 1 to 30.';
+
+  @override
+  String layoutTotals(int floors, int rooms, int beds) {
+    String _temp0 = intl.Intl.pluralLogic(
+      floors,
+      locale: localeName,
+      other: '$floors floors',
+      one: '1 floor',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      rooms,
+      locale: localeName,
+      other: '$rooms rooms',
+      one: '1 room',
+    );
+    String _temp2 = intl.Intl.pluralLogic(
+      beds,
+      locale: localeName,
+      other: '$beds beds',
+      one: '1 bed',
+    );
+    return '$_temp0, $_temp1, $_temp2';
+  }
+
+  @override
+  String get layoutS4Title => 'Check your rooms';
+
+  @override
+  String get layoutS4Body => 'Tap a room to change it.';
+
+  @override
+  String get layoutGroundFloor => 'Ground floor';
+
+  @override
+  String get layoutAddRoom => 'Add room';
+
+  @override
+  String get layoutSave => 'Save rooms';
+
+  @override
+  String get layoutEditTitle => 'Change room';
+
+  @override
+  String get layoutNewTitle => 'Add a room';
+
+  @override
+  String get layoutRoomNumber => 'Room number';
+
+  @override
+  String get layoutBedsLabel => 'Beds';
+
+  @override
+  String get layoutRemoveRoom => 'Remove room';
+
+  @override
+  String get errLayoutNumber => 'Enter a room number.';
+
+  @override
+  String get errLayoutDuplicate => 'This room number is already in the list.';
+
+  @override
+  String get errLayoutTooMany => 'You can save up to 500 rooms at a time.';
 }
