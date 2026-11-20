@@ -49,7 +49,7 @@
 - [x] **O13. More tab** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O13. Show only the rows whose pages are approved (at first: Add another PG, Sign out, and Switch to guest view if you are also a guest). Each later page adds its own row when approved.
 - [x] **S2a. Profile, basic parts** (AI). Spec: `docs/UI_SCREENS_SHARED.md` S2, only the header, "Your details" and sign-out parts. No photo, no documents. Then add the Profile row to More.
 - [x] **O12. Set up floors and rooms** (AI). First build the new `BedsStepper` component (design system section 5, icon `minus` in section 3) and add it to the gallery. Then the page. Spec: `docs/UI_SCREENS_OWNER.md` O12. *Needs:* `005_room_layout.sql` already run in your Supabase project. *Test:* set up your real first floor with different beds in some rooms, copy it to all floors, change one room in the review step, save. A clash message appears if a number exists. Then add the More row the spec describes.
-- [ ] **O12b. Add a few rooms** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O12b (the old Add rooms form). *Test:* add 2 rooms; a clash message appears if a number exists. It is reached from the plus on O11, so test it after O11 is built.
+- [x] **O12b. Add a few rooms** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O12b (the old Add rooms form). *Test:* add 2 rooms; a clash message appears if a number exists. It is reached from the plus on O11, so test it after O11 is built.
 - [ ] **O11. Rooms and beds** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O11. *Check:* the list and the room pages show your real beds.
 - [ ] **O14. Receiving accounts** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O14. *Test:* add your real UPI ID and a bank account, and set a default.
 

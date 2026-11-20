@@ -82,9 +82,29 @@ class OwnerMoreScreen extends ConsumerWidget {
                   color: AppColors.muted,
                 ),
                 minHeight: 56,
-                showDivider: false,
+                showDivider: true,
                 onTap: () {
                   context.push(RoutePaths.ownerRoomsSetup);
+                },
+              ),
+              LedgerRow(
+                leading: const Icon(
+                  AppIcons.room,
+                  size: 24,
+                  color: AppColors.ink,
+                ),
+                leadingGap: AppSpace.x16,
+                title: l10n.addRoomsTitle,
+                titleStyle: AppText.body,
+                trailing: const Icon(
+                  AppIcons.chevronRight,
+                  size: 20,
+                  color: AppColors.muted,
+                ),
+                minHeight: 56,
+                showDivider: false,
+                onTap: () {
+                  context.push(RoutePaths.ownerRoomsNew);
                 },
               ),
             ],

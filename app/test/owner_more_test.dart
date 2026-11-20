@@ -348,5 +348,33 @@ void main() {
 
     expect(find.text('Set Up Rooms Page'), findsOneWidget);
   });
+
+  testWidgets('Tapping Add rooms navigates to add rooms screen', (tester) async {
+    final mockOwner = MockOwnerRepo();
+    final mockAuth = MockAuthRepo();
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ownerRepositoryProvider.overrideWithValue(mockOwner),
+          authRepositoryProvider.overrideWithValue(mockAuth),
+        ],
+        child: Consumer(
+          builder: (context, ref, _) => _wrapWithRouter(
+            ref: ref,
+            child: const OwnerMoreScreen(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Add rooms'), findsOneWidget);
+    await tester.tap(find.text('Add rooms'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Add Rooms Page'), findsOneWidget);
+  });
 }
 
