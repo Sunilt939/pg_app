@@ -4,6 +4,7 @@ import '../../data/supabase_owner_repository.dart';
 import '../../domain/bed_occupancy.dart';
 import '../../domain/city.dart';
 import '../../domain/owner_repository.dart';
+import '../../domain/payment_account.dart';
 import '../../domain/pg_switcher_item.dart';
 import '../../domain/room_type.dart';
 
@@ -46,4 +47,19 @@ final bedOccupancyProvider = FutureProvider.autoDispose<List<BedOccupancy>>((ref
   final repo = ref.watch(ownerRepositoryProvider);
   return repo.getBedOccupancy(activePg.pgId);
 });
+
+final paymentAccountsProvider =
+    FutureProvider.autoDispose<List<PaymentAccount>>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return [];
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPaymentAccounts(activePg.pgId);
+});
+
+final paymentAccountDetailProvider =
+    FutureProvider.autoDispose.family<PaymentAccount?, String>((ref, id) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPaymentAccount(id);
+});
+
 

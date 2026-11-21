@@ -21,12 +21,13 @@ class SwitchRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final disableAnimations = MediaQuery.maybeOf(context)?.disableAnimations ?? false;
     final animDuration = disableAnimations ? Duration.zero : AppMotion.fast;
+    final isEnabled = onChanged != null;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         InkWell(
-          onTap: onChanged != null ? () => onChanged!(!value) : null,
+          onTap: isEnabled ? () => onChanged!(!value) : null,
           splashColor: AppColors.transparent,
           highlightColor: AppColors.petrolTint,
           child: Container(
@@ -44,7 +45,9 @@ class SwitchRow extends StatelessWidget {
                     children: [
                       Text(
                         label,
-                        style: AppText.body,
+                        style: isEnabled
+                            ? AppText.body
+                            : AppText.body.copyWith(color: AppColors.muted),
                       ),
                       if (helper != null && helper!.isNotEmpty) ...[
                         const SizedBox(height: 2),
@@ -64,7 +67,9 @@ class SwitchRow extends StatelessWidget {
                   height: 24,
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    color: value ? AppColors.petrol : AppColors.outline,
+                    color: !isEnabled
+                        ? AppColors.disabledBg
+                        : (value ? AppColors.petrol : AppColors.outline),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: AnimatedAlign(

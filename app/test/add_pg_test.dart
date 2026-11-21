@@ -12,6 +12,7 @@ import 'package:app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:app/features/owner/domain/bed_occupancy.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
+import 'package:app/features/owner/domain/payment_account.dart';
 import 'package:app/features/owner/domain/pg_switcher_item.dart';
 import 'package:app/features/owner/domain/room_type.dart';
 import 'package:app/features/owner/presentation/providers/owner_provider.dart';
@@ -44,6 +45,18 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<BedOccupancy>> getBedOccupancy(String pgId) async => const [];
+
+  @override
+  Future<List<PaymentAccount>> getPaymentAccounts(String pgId) async => const [];
+
+  @override
+  Future<PaymentAccount?> getPaymentAccount(String id) async => null;
+
+  @override
+  Future<PaymentAccount> createPaymentAccount(PaymentAccount account) async => account;
+
+  @override
+  Future<PaymentAccount> updatePaymentAccount(PaymentAccount account) async => account;
 
   @override
   Future<int> addRooms({

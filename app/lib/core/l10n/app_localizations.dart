@@ -1240,6 +1240,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add guest'**
   String get actionAddGuest;
+
+  /// Empty state title when PG has no receiving accounts
+  ///
+  /// In en, this message translates to:
+  /// **'No receiving accounts yet'**
+  String get accountsEmptyTitle;
+
+  /// Empty state body when PG has no receiving accounts
+  ///
+  /// In en, this message translates to:
+  /// **'Add the UPI ID or bank account where guests send rent.'**
+  String get accountsEmptyBody;
+
+  /// Button to add an account from empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Add account'**
+  String get accountsEmptyAction;
+
+  /// Chip label for default receiving account
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get accountDefault;
+
+  /// Chip label for inactive receiving account
+  ///
+  /// In en, this message translates to:
+  /// **'Off'**
+  String get accountOff;
+
+  /// Subtitle for bank account with last 4 digits
+  ///
+  /// In en, this message translates to:
+  /// **'{bank}, ending {last4}'**
+  String accountBankEnding(String bank, String last4);
+
+  /// Label for account type selection
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get accountType;
+
+  /// UPI account type option
+  ///
+  /// In en, this message translates to:
+  /// **'UPI'**
+  String get accountTypeUpi;
+
+  /// Bank account type option
+  ///
+  /// In en, this message translates to:
+  /// **'Bank'**
+  String get accountTypeBank;
+
+  /// Label for account nickname field
+  ///
+  /// In en, this message translates to:
+  /// **'Nickname'**
+  String get accountNickname;
+
+  /// Label for UPI ID field
+  ///
+  /// In en, this message translates to:
+  /// **'UPI ID'**
+  String get accountUpiId;
+
+  /// Label for UPI account holder name field
+  ///
+  /// In en, this message translates to:
+  /// **'Name on the UPI ID (optional)'**
+  String get accountHolderName;
+
+  /// Helper text for UPI account holder name field
+  ///
+  /// In en, this message translates to:
+  /// **'Shown to guests when they pay.'**
+  String get accountHolderHelper;
+
+  /// Label for bank name field
+  ///
+  /// In en, this message translates to:
+  /// **'Bank name'**
+  String get accountBankName;
+
+  /// Label for last 4 digits of bank account
+  ///
+  /// In en, this message translates to:
+  /// **'Last 4 digits of the account (optional)'**
+  String get accountLast4;
+
+  /// Label for bank account holder name field
+  ///
+  /// In en, this message translates to:
+  /// **'Account holder name (optional)'**
+  String get accountBankHolder;
+
+  /// Label for linked mobile phone field
+  ///
+  /// In en, this message translates to:
+  /// **'Linked mobile number (optional)'**
+  String get accountLinkedPhone;
+
+  /// Switch label to make account default
+  ///
+  /// In en, this message translates to:
+  /// **'Use as default'**
+  String get accountUseDefault;
+
+  /// Switch label to activate/deactivate account in edit mode
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get accountActive;
+
+  /// Button to save receiving account
+  ///
+  /// In en, this message translates to:
+  /// **'Save account'**
+  String get accountSave;
+
+  /// Validation error for duplicate nickname
+  ///
+  /// In en, this message translates to:
+  /// **'You already have an account with this nickname.'**
+  String get errAccountNickname;
+
+  /// Validation error for invalid UPI ID
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid UPI ID, for example name@bank.'**
+  String get errUpiId;
+
+  /// Validation error when bank name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the bank name.'**
+  String get errBankName;
+
+  /// Validation error when nickname is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a nickname.'**
+  String get errNickname;
 }
 
 class _AppLocalizationsDelegate

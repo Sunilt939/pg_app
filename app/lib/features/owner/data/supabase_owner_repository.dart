@@ -3,6 +3,7 @@ import '../../auth/domain/auth_repository.dart';
 import '../domain/bed_occupancy.dart';
 import '../domain/city.dart';
 import '../domain/owner_repository.dart';
+import '../domain/payment_account.dart';
 import '../domain/pg_switcher_item.dart';
 import '../domain/room_type.dart';
 
@@ -170,6 +171,176 @@ class SupabaseOwnerRepository implements OwnerRepository {
       );
       return (response as num?)?.toInt() ?? rooms.length;
     } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<PaymentAccount>> getPaymentAccounts(String pgId) async {
+    final client = _client;
+    if (client == null) return [];
+    try {
+      final response = await client
+          .from('pg_payment_accounts')
+          .select()
+          .eq('pg_id', pgId)
+          .order('created_at', ascending: true);
+      return (response as List<dynamic>)
+          .map((json) => PaymentAccount.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<PaymentAccount?> getPaymentAccount(String id) async {
+    final client = _client;
+    if (client == null) return null;
+    try {
+      final response = await client
+          .from('pg_payment_accounts')
+          .select()
+          .eq('id', id)
+          .maybeSingle();
+      if (response == null) return null;
+      return PaymentAccount.fromJson(response);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<PaymentAccount> createPaymentAccount(PaymentAccount account) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final data = <String, dynamic>{
+      'pg_id': account.pgId,
+      'nickname': account.nickname,
+      'kind': account.kind,
+      'upi_vpa': account.kind == 'upi' ? account.upiVpa : null,
+      'bank_name': account.kind == 'bank' ? account.bankName : null,
+      'account_last4': account.kind == 'bank' &&
+              account.accountLast4 != null &&
+              account.accountLast4!.isNotEmpty
+          ? account.accountLast4
+          : null,
+      'holder_name': account.holderName != null && account.holderName!.isNotEmpty
+          ? account.holderName
+          : null,
+      'linked_phone':
+          account.linkedPhone != null && account.linkedPhone!.isNotEmpty
+              ? account.linkedPhone
+              : null,
+      'is_default': account.isDefault,
+      'is_active': account.isActive,
+    };
+
+    try {
+      if (account.isDefault) {
+        await client
+            .from('pg_payment_accounts')
+            .update({'is_default': false})
+            .eq('pg_id', account.pgId);
+      }
+      final response = await client
+          .from('pg_payment_accounts')
+          .insert(data)
+          .select()
+          .single();
+      return PaymentAccount.fromJson(response);
+    } on PostgrestException catch (e) {
+      if (e.code == '23505') {
+        throw const DuplicateNicknameException();
+      }
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<PaymentAccount> updatePaymentAccount(PaymentAccount account) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    bool wasDefault = false;
+    try {
+      final existing = await client
+          .from('pg_payment_accounts')
+          .select('is_default')
+          .eq('id', account.id)
+          .maybeSingle();
+      if (existing != null) {
+        wasDefault = existing['is_default'] as bool? ?? false;
+      }
+    } catch (_) {}
+
+    final effectiveIsDefault = account.isActive && account.isDefault;
+
+    final data = <String, dynamic>{
+      'nickname': account.nickname,
+      'kind': account.kind,
+      'upi_vpa': account.kind == 'upi' ? account.upiVpa : null,
+      'bank_name': account.kind == 'bank' ? account.bankName : null,
+      'account_last4': account.kind == 'bank' &&
+              account.accountLast4 != null &&
+              account.accountLast4!.isNotEmpty
+          ? account.accountLast4
+          : null,
+      'holder_name': account.holderName != null && account.holderName!.isNotEmpty
+          ? account.holderName
+          : null,
+      'linked_phone':
+          account.linkedPhone != null && account.linkedPhone!.isNotEmpty
+              ? account.linkedPhone
+              : null,
+      'is_default': effectiveIsDefault,
+      'is_active': account.isActive,
+    };
+
+    try {
+      if (effectiveIsDefault) {
+        await client
+            .from('pg_payment_accounts')
+            .update({'is_default': false})
+            .eq('pg_id', account.pgId);
+      }
+      final response = await client
+          .from('pg_payment_accounts')
+          .update(data)
+          .eq('id', account.id)
+          .select()
+          .single();
+
+      if (wasDefault && !effectiveIsDefault) {
+        final otherActive = await client
+            .from('pg_payment_accounts')
+            .select('id')
+            .eq('pg_id', account.pgId)
+            .eq('is_active', true)
+            .neq('id', account.id)
+            .order('created_at', ascending: true)
+            .limit(1);
+        final otherList = otherActive as List<dynamic>? ?? [];
+        if (otherList.isNotEmpty) {
+          final nextDefaultId =
+              (otherList.first as Map<String, dynamic>)['id'] as String;
+          await client
+              .from('pg_payment_accounts')
+              .update({'is_default': true})
+              .eq('id', nextDefaultId);
+        }
+      }
+
+      return PaymentAccount.fromJson(response);
+    } on PostgrestException catch (e) {
+      if (e.code == '23505') {
+        throw const DuplicateNicknameException();
+      }
       throw Exception(e.message);
     } catch (_) {
       rethrow;

@@ -895,5 +895,109 @@
   "actionAddGuest": "Add guest",
   "@actionAddGuest": {
     "description": "Action button to add a guest to a free bed"
+  },
+  "accountsEmptyTitle": "No receiving accounts yet",
+  "@accountsEmptyTitle": {
+    "description": "Empty state title when PG has no receiving accounts"
+  },
+  "accountsEmptyBody": "Add the UPI ID or bank account where guests send rent.",
+  "@accountsEmptyBody": {
+    "description": "Empty state body when PG has no receiving accounts"
+  },
+  "accountsEmptyAction": "Add account",
+  "@accountsEmptyAction": {
+    "description": "Button to add an account from empty state"
+  },
+  "accountDefault": "Default",
+  "@accountDefault": {
+    "description": "Chip label for default receiving account"
+  },
+  "accountOff": "Off",
+  "@accountOff": {
+    "description": "Chip label for inactive receiving account"
+  },
+  "accountBankEnding": "{bank}, ending {last4}",
+  "@accountBankEnding": {
+    "description": "Subtitle for bank account with last 4 digits",
+    "placeholders": {
+      "bank": {
+        "type": "String"
+      },
+      "last4": {
+        "type": "String"
+      }
+    }
+  },
+  "accountType": "Type",
+  "@accountType": {
+    "description": "Label for account type selection"
+  },
+  "accountTypeUpi": "UPI",
+  "@accountTypeUpi": {
+    "description": "UPI account type option"
+  },
+  "accountTypeBank": "Bank",
+  "@accountTypeBank": {
+    "description": "Bank account type option"
+  },
+  "accountNickname": "Nickname",
+  "@accountNickname": {
+    "description": "Label for account nickname field"
+  },
+  "accountUpiId": "UPI ID",
+  "@accountUpiId": {
+    "description": "Label for UPI ID field"
+  },
+  "accountHolderName": "Name on the UPI ID (optional)",
+  "@accountHolderName": {
+    "description": "Label for UPI account holder name field"
+  },
+  "accountHolderHelper": "Shown to guests when they pay.",
+  "@accountHolderHelper": {
+    "description": "Helper text for UPI account holder name field"
+  },
+  "accountBankName": "Bank name",
+  "@accountBankName": {
+    "description": "Label for bank name field"
+  },
+  "accountLast4": "Last 4 digits of the account (optional)",
+  "@accountLast4": {
+    "description": "Label for last 4 digits of bank account"
+  },
+  "accountBankHolder": "Account holder name (optional)",
+  "@accountBankHolder": {
+    "description": "Label for bank account holder name field"
+  },
+  "accountLinkedPhone": "Linked mobile number (optional)",
+  "@accountLinkedPhone": {
+    "description": "Label for linked mobile phone field"
+  },
+  "accountUseDefault": "Use as default",
+  "@accountUseDefault": {
+    "description": "Switch label to make account default"
+  },
+  "accountActive": "Active",
+  "@accountActive": {
+    "description": "Switch label to activate/deactivate account in edit mode"
+  },
+  "accountSave": "Save account",
+  "@accountSave": {
+    "description": "Button to save receiving account"
+  },
+  "errAccountNickname": "You already have an account with this nickname.",
+  "@errAccountNickname": {
+    "description": "Validation error for duplicate nickname"
+  },
+  "errUpiId": "Enter a valid UPI ID, for example name@bank.",
+  "@errUpiId": {
+    "description": "Validation error for invalid UPI ID"
+  },
+  "errBankName": "Enter the bank name.",
+  "@errBankName": {
+    "description": "Validation error when bank name is empty"
+  },
+  "errNickname": "Enter a nickname.",
+  "@errNickname": {
+    "description": "Validation error when nickname is empty"
   }
 }

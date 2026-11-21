@@ -13,6 +13,7 @@ import 'package:app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:app/features/owner/domain/bed_occupancy.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
+import 'package:app/features/owner/domain/payment_account.dart';
 import 'package:app/features/owner/domain/pg_switcher_item.dart';
 import 'package:app/features/owner/domain/room_type.dart';
 import 'package:app/features/owner/presentation/providers/owner_provider.dart';
@@ -38,6 +39,18 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<BedOccupancy>> getBedOccupancy(String pgId) async => const [];
+
+  @override
+  Future<List<PaymentAccount>> getPaymentAccounts(String pgId) async => const [];
+
+  @override
+  Future<PaymentAccount?> getPaymentAccount(String id) async => null;
+
+  @override
+  Future<PaymentAccount> createPaymentAccount(PaymentAccount account) async => account;
+
+  @override
+  Future<PaymentAccount> updatePaymentAccount(PaymentAccount account) async => account;
 
   @override
   Future<int> addRooms({
@@ -175,6 +188,12 @@ Widget _wrapWithRouter({
         path: RoutePaths.ownerRoomsNew,
         builder: (context, state) => const Scaffold(
           body: Text('Add Rooms Page'),
+        ),
+      ),
+      GoRoute(
+        path: RoutePaths.ownerAccounts,
+        builder: (context, state) => const Scaffold(
+          body: Text('Accounts Page'),
         ),
       ),
       ...extraRoutes,
@@ -358,5 +377,71 @@ void main() {
 
     expect(find.text('Rooms Page'), findsOneWidget);
   });
+
+  testWidgets('Receiving accounts appears for owner and navigates to accounts screen',
+      (tester) async {
+    final mockOwner = MockOwnerRepo();
+    final mockAuth = MockAuthRepo(
+      myContext: const AuthContext(
+        person: AuthPerson(id: 'person-1', phone: '+919876543210'),
+        pgs: [AuthPg(pgId: 'pg-1', name: 'Green PG', role: 'owner')],
+      ),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ownerRepositoryProvider.overrideWithValue(mockOwner),
+          authRepositoryProvider.overrideWithValue(mockAuth),
+        ],
+        child: Consumer(
+          builder: (context, ref, _) => _wrapWithRouter(
+            ref: ref,
+            child: const OwnerMoreScreen(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Receiving accounts'), findsOneWidget);
+    expect(find.byIcon(AppIcons.bank), findsOneWidget);
+
+    await tester.tap(find.text('Receiving accounts'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Accounts Page'), findsOneWidget);
+  });
+
+  testWidgets('Receiving accounts does not appear for non-owner', (tester) async {
+    final mockOwner = MockOwnerRepo();
+    final mockAuth = MockAuthRepo(
+      myContext: const AuthContext(
+        person: AuthPerson(id: 'person-1', phone: '+919876543210'),
+        pgs: [AuthPg(pgId: 'pg-1', name: 'Green PG', role: 'manager')],
+      ),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ownerRepositoryProvider.overrideWithValue(mockOwner),
+          authRepositoryProvider.overrideWithValue(mockAuth),
+        ],
+        child: Consumer(
+          builder: (context, ref, _) => _wrapWithRouter(
+            ref: ref,
+            child: const OwnerMoreScreen(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('Receiving accounts'), findsNothing);
+  });
 }
+
 

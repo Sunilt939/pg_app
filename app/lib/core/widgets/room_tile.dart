@@ -4,10 +4,12 @@ import '../theme/tokens.dart';
 
 class RoomTile extends StatelessWidget {
   final String? label;
+  final IconData? icon;
 
   const RoomTile({
     super.key,
     this.label,
+    this.icon,
   });
 
   @override
@@ -26,6 +28,12 @@ class RoomTile extends StatelessWidget {
             maxLines: 1,
           ),
         ),
+      );
+    } else if (icon != null) {
+      content = Icon(
+        icon,
+        size: AppSize.iconSmall,
+        color: AppColors.muted,
       );
     } else {
       content = const Icon(

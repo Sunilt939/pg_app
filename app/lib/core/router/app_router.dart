@@ -15,6 +15,8 @@ import '../../features/guest/presentation/screens/guest_home_screen.dart';
 import '../../features/owner/presentation/owner_shell.dart';
 import '../../features/owner/presentation/screens/add_pg_screen.dart';
 import '../../features/owner/presentation/screens/add_rooms_screen.dart';
+import '../../features/owner/presentation/screens/owner_account_form_screen.dart';
+import '../../features/owner/presentation/screens/owner_accounts_screen.dart';
 import '../../features/owner/presentation/screens/set_up_rooms_screen.dart';
 import '../../features/owner/presentation/screens/owner_guests_screen.dart';
 import '../../features/owner/presentation/screens/owner_home_screen.dart';
@@ -246,22 +248,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerAccounts,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.accountsTitle,
-        ),
+        builder: (context, state) => const OwnerAccountsScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerAccountsNew,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.accountsTitle,
-        ),
+        builder: (context, state) => const OwnerAccountFormScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerAccountDetail,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.accountsTitle,
+        builder: (context, state) => OwnerAccountFormScreen(
+          accountId: state.pathParameters['id'],
         ),
       ),
       GoRoute(

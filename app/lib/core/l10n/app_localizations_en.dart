@@ -687,4 +687,80 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionAddGuest => 'Add guest';
+
+  @override
+  String get accountsEmptyTitle => 'No receiving accounts yet';
+
+  @override
+  String get accountsEmptyBody =>
+      'Add the UPI ID or bank account where guests send rent.';
+
+  @override
+  String get accountsEmptyAction => 'Add account';
+
+  @override
+  String get accountDefault => 'Default';
+
+  @override
+  String get accountOff => 'Off';
+
+  @override
+  String accountBankEnding(String bank, String last4) {
+    return '$bank, ending $last4';
+  }
+
+  @override
+  String get accountType => 'Type';
+
+  @override
+  String get accountTypeUpi => 'UPI';
+
+  @override
+  String get accountTypeBank => 'Bank';
+
+  @override
+  String get accountNickname => 'Nickname';
+
+  @override
+  String get accountUpiId => 'UPI ID';
+
+  @override
+  String get accountHolderName => 'Name on the UPI ID (optional)';
+
+  @override
+  String get accountHolderHelper => 'Shown to guests when they pay.';
+
+  @override
+  String get accountBankName => 'Bank name';
+
+  @override
+  String get accountLast4 => 'Last 4 digits of the account (optional)';
+
+  @override
+  String get accountBankHolder => 'Account holder name (optional)';
+
+  @override
+  String get accountLinkedPhone => 'Linked mobile number (optional)';
+
+  @override
+  String get accountUseDefault => 'Use as default';
+
+  @override
+  String get accountActive => 'Active';
+
+  @override
+  String get accountSave => 'Save account';
+
+  @override
+  String get errAccountNickname =>
+      'You already have an account with this nickname.';
+
+  @override
+  String get errUpiId => 'Enter a valid UPI ID, for example name@bank.';
+
+  @override
+  String get errBankName => 'Enter the bank name.';
+
+  @override
+  String get errNickname => 'Enter a nickname.';
 }
