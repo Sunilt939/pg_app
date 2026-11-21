@@ -827,5 +827,73 @@
   "errLayoutTooMany": "You can save up to 500 rooms at a time.",
   "@errLayoutTooMany": {
     "description": "Validation error when total rooms exceeds 500"
+  },
+  "roomsSummary": "{rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}}, {free} free",
+  "@roomsSummary": {
+    "description": "Summary count of rooms, beds, and free beds in rooms list",
+    "placeholders": {
+      "rooms": {
+        "type": "int"
+      },
+      "beds": {
+        "type": "int"
+      },
+      "free": {
+        "type": "int"
+      }
+    }
+  },
+  "roomsNoFloor": "No floor set",
+  "@roomsNoFloor": {
+    "description": "Section header for rooms without a floor assigned"
+  },
+  "roomDefaultTitle": "Room",
+  "@roomDefaultTitle": {
+    "description": "Default room item title when room type is not set"
+  },
+  "roomsBedsFree": "{beds, plural, =1{1 bed} other{{beds} beds}}, {free} free",
+  "@roomsBedsFree": {
+    "description": "Subtitle showing beds count and free beds count for a room",
+    "placeholders": {
+      "beds": {
+        "type": "int"
+      },
+      "free": {
+        "type": "int"
+      }
+    }
+  },
+  "roomsFull": "Full",
+  "@roomsFull": {
+    "description": "Trailing label when a room has 0 free beds"
+  },
+  "roomsFreeCount": "{free} free",
+  "@roomsFreeCount": {
+    "description": "Trailing label showing free bed count in a room",
+    "placeholders": {
+      "free": {
+        "type": "int"
+      }
+    }
+  },
+  "bedFree": "Free",
+  "@bedFree": {
+    "description": "Title label for an unoccupied bed on the room detail page"
+  },
+  "roomsEmptyTitle": "No rooms yet",
+  "@roomsEmptyTitle": {
+    "description": "Empty state title when PG has no rooms"
+  },
+  "roomsEmptyBody": "Add your rooms and beds so you can give each guest a bed.",
+  "@roomsEmptyBody": {
+    "description": "Empty state body description when PG has no rooms"
+  },
+  "roomsEmptyAction": "Add rooms",
+  "@roomsEmptyAction": {
+    "description": "Button to add rooms from empty state"
+  },
+  "actionAddGuest": "Add guest",
+  "@actionAddGuest": {
+    "description": "Action button to add a guest to a free bed"
   }
 }

@@ -1174,6 +1174,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You can save up to 500 rooms at a time.'**
   String get errLayoutTooMany;
+
+  /// Summary count of rooms, beds, and free beds in rooms list
+  ///
+  /// In en, this message translates to:
+  /// **'{rooms, plural, =1{1 room} other{{rooms} rooms}}, {beds, plural, =1{1 bed} other{{beds} beds}}, {free} free'**
+  String roomsSummary(int rooms, int beds, int free);
+
+  /// Section header for rooms without a floor assigned
+  ///
+  /// In en, this message translates to:
+  /// **'No floor set'**
+  String get roomsNoFloor;
+
+  /// Default room item title when room type is not set
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get roomDefaultTitle;
+
+  /// Subtitle showing beds count and free beds count for a room
+  ///
+  /// In en, this message translates to:
+  /// **'{beds, plural, =1{1 bed} other{{beds} beds}}, {free} free'**
+  String roomsBedsFree(int beds, int free);
+
+  /// Trailing label when a room has 0 free beds
+  ///
+  /// In en, this message translates to:
+  /// **'Full'**
+  String get roomsFull;
+
+  /// Trailing label showing free bed count in a room
+  ///
+  /// In en, this message translates to:
+  /// **'{free} free'**
+  String roomsFreeCount(int free);
+
+  /// Title label for an unoccupied bed on the room detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get bedFree;
+
+  /// Empty state title when PG has no rooms
+  ///
+  /// In en, this message translates to:
+  /// **'No rooms yet'**
+  String get roomsEmptyTitle;
+
+  /// Empty state body description when PG has no rooms
+  ///
+  /// In en, this message translates to:
+  /// **'Add your rooms and beds so you can give each guest a bed.'**
+  String get roomsEmptyBody;
+
+  /// Button to add rooms from empty state
+  ///
+  /// In en, this message translates to:
+  /// **'Add rooms'**
+  String get roomsEmptyAction;
+
+  /// Action button to add a guest to a free bed
+  ///
+  /// In en, this message translates to:
+  /// **'Add guest'**
+  String get actionAddGuest;
 }
 
 class _AppLocalizationsDelegate

@@ -629,4 +629,62 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errLayoutTooMany => 'You can save up to 500 rooms at a time.';
+
+  @override
+  String roomsSummary(int rooms, int beds, int free) {
+    String _temp0 = intl.Intl.pluralLogic(
+      rooms,
+      locale: localeName,
+      other: '$rooms rooms',
+      one: '1 room',
+    );
+    String _temp1 = intl.Intl.pluralLogic(
+      beds,
+      locale: localeName,
+      other: '$beds beds',
+      one: '1 bed',
+    );
+    return '$_temp0, $_temp1, $free free';
+  }
+
+  @override
+  String get roomsNoFloor => 'No floor set';
+
+  @override
+  String get roomDefaultTitle => 'Room';
+
+  @override
+  String roomsBedsFree(int beds, int free) {
+    String _temp0 = intl.Intl.pluralLogic(
+      beds,
+      locale: localeName,
+      other: '$beds beds',
+      one: '1 bed',
+    );
+    return '$_temp0, $free free';
+  }
+
+  @override
+  String get roomsFull => 'Full';
+
+  @override
+  String roomsFreeCount(int free) {
+    return '$free free';
+  }
+
+  @override
+  String get bedFree => 'Free';
+
+  @override
+  String get roomsEmptyTitle => 'No rooms yet';
+
+  @override
+  String get roomsEmptyBody =>
+      'Add your rooms and beds so you can give each guest a bed.';
+
+  @override
+  String get roomsEmptyAction => 'Add rooms';
+
+  @override
+  String get actionAddGuest => 'Add guest';
 }

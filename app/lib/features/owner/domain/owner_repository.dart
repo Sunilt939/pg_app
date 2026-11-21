@@ -1,3 +1,4 @@
+import 'bed_occupancy.dart';
 import 'city.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
@@ -6,6 +7,7 @@ abstract class OwnerRepository {
   Future<List<City>> getCities();
   Future<List<PgSwitcherItem>> getOwnerPgs();
   Future<List<RoomType>> getRoomTypes();
+  Future<List<BedOccupancy>> getBedOccupancy(String pgId);
   Future<int> addRooms({
     required String pgId,
     required int firstRoomNumber,

@@ -10,6 +10,7 @@ import 'package:app/core/widgets/app_button.dart';
 import 'package:app/features/auth/domain/auth_context.dart';
 import 'package:app/features/auth/domain/auth_repository.dart';
 import 'package:app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:app/features/owner/domain/bed_occupancy.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
 import 'package:app/features/owner/domain/pg_switcher_item.dart';
@@ -34,6 +35,9 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<RoomType>> getRoomTypes() async => const [];
+
+  @override
+  Future<List<BedOccupancy>> getBedOccupancy(String pgId) async => const [];
 
   @override
   Future<int> addRooms({
@@ -153,6 +157,12 @@ Widget _wrapWithRouter({
         path: RoutePaths.profile,
         builder: (context, state) => const Scaffold(
           body: Text('Profile Page'),
+        ),
+      ),
+      GoRoute(
+        path: RoutePaths.ownerRooms,
+        builder: (context, state) => const Scaffold(
+          body: Text('Rooms Page'),
         ),
       ),
       GoRoute(
@@ -321,7 +331,7 @@ void main() {
     expect(find.text('Sign In Page'), findsOneWidget);
   });
 
-  testWidgets('Tapping Set up floors and rooms navigates to setup screen', (tester) async {
+  testWidgets('Tapping Rooms and beds navigates to rooms screen', (tester) async {
     final mockOwner = MockOwnerRepo();
     final mockAuth = MockAuthRepo();
 
@@ -342,39 +352,11 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Set up floors and rooms'), findsOneWidget);
-    await tester.tap(find.text('Set up floors and rooms'));
+    expect(find.text('Rooms and beds'), findsOneWidget);
+    await tester.tap(find.text('Rooms and beds'));
     await tester.pumpAndSettle();
 
-    expect(find.text('Set Up Rooms Page'), findsOneWidget);
-  });
-
-  testWidgets('Tapping Add rooms navigates to add rooms screen', (tester) async {
-    final mockOwner = MockOwnerRepo();
-    final mockAuth = MockAuthRepo();
-
-    await tester.pumpWidget(
-      ProviderScope(
-        overrides: [
-          ownerRepositoryProvider.overrideWithValue(mockOwner),
-          authRepositoryProvider.overrideWithValue(mockAuth),
-        ],
-        child: Consumer(
-          builder: (context, ref, _) => _wrapWithRouter(
-            ref: ref,
-            child: const OwnerMoreScreen(),
-          ),
-        ),
-      ),
-    );
-
-    await tester.pumpAndSettle();
-
-    expect(find.text('Add rooms'), findsOneWidget);
-    await tester.tap(find.text('Add rooms'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Add Rooms Page'), findsOneWidget);
+    expect(find.text('Rooms Page'), findsOneWidget);
   });
 }
 

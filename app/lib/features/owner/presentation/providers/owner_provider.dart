@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../data/supabase_owner_repository.dart';
+import '../../domain/bed_occupancy.dart';
 import '../../domain/city.dart';
 import '../../domain/owner_repository.dart';
 import '../../domain/pg_switcher_item.dart';
@@ -37,5 +38,12 @@ final ownerPgsProvider = FutureProvider<List<PgSwitcherItem>>((ref) async {
         ),
       )
       .toList();
+});
+
+final bedOccupancyProvider = FutureProvider.autoDispose<List<BedOccupancy>>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return [];
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getBedOccupancy(activePg.pgId);
 });
 

@@ -10,6 +10,7 @@ import 'package:app/core/widgets/app_button.dart';
 import 'package:app/features/auth/domain/auth_context.dart';
 import 'package:app/features/auth/domain/auth_repository.dart';
 import 'package:app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:app/features/owner/domain/bed_occupancy.dart';
 import 'package:app/features/owner/domain/city.dart';
 import 'package:app/features/owner/domain/owner_repository.dart';
 import 'package:app/features/owner/domain/pg_switcher_item.dart';
@@ -48,6 +49,9 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<List<RoomType>> getRoomTypes() async => roomTypes;
+
+  @override
+  Future<List<BedOccupancy>> getBedOccupancy(String pgId) async => const [];
 
   @override
   Future<int> addRooms({

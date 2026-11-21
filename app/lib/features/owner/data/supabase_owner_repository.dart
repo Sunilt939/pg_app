@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../auth/domain/auth_repository.dart';
+import '../domain/bed_occupancy.dart';
 import '../domain/city.dart';
 import '../domain/owner_repository.dart';
 import '../domain/pg_switcher_item.dart';
@@ -95,6 +96,27 @@ class SupabaseOwnerRepository implements OwnerRepository {
           .toList();
     } catch (_) {
       return [];
+    }
+  }
+
+  @override
+  Future<List<BedOccupancy>> getBedOccupancy(String pgId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+    try {
+      final response = await client
+          .from('v_bed_occupancy')
+          .select()
+          .eq('pg_id', pgId)
+          .order('room_number')
+          .order('bed_label');
+      return (response as List<dynamic>)
+          .map((json) => BedOccupancy.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
     }
   }
 

@@ -11,6 +11,7 @@ The AI adds one line per decision it had to make. Never delete lines.
 | 2026-11-18 | O12 | More tab row before O11 is approved | Added "Rooms and beds" row under moreYourPg in OwnerMoreScreen routing to /owner/rooms/new until O11 rooms list is approved |
 | 2026-11-20 | O12 | Set up floors and rooms wizard | Natural room sorting per floor; room setup kept in memory until final step calls rpc_add_room_layout; row in More tab opens /owner/rooms/setup |
 | 2026-11-20 | O12b | Accessing Add a few rooms before O11 is approved | Added "Add rooms" row under moreYourPg in OwnerMoreScreen routing to /owner/rooms/new until O11 rooms list with plus button is approved |
+| 2026-11-20 | O11 | More tab transition to O11 rooms list | Replaced temporary setup/new rows in More tab with single "Rooms and beds" row opening /owner/rooms; empty state links to O12 and top bar plus links to O12b |
 
 ## Other decisions
 

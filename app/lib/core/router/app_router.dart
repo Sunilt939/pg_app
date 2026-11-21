@@ -20,6 +20,8 @@ import '../../features/owner/presentation/screens/owner_guests_screen.dart';
 import '../../features/owner/presentation/screens/owner_home_screen.dart';
 import '../../features/owner/presentation/screens/owner_more_screen.dart';
 import '../../features/owner/presentation/screens/owner_payments_screen.dart';
+import '../../features/owner/presentation/screens/owner_rooms_screen.dart';
+import '../../features/owner/presentation/screens/owner_room_detail_screen.dart';
 import '../../features/shared/presentation/screens/notifications_screen.dart';
 import '../../features/shared/presentation/screens/placeholder_screen.dart';
 import '../../features/shared/presentation/screens/profile_screen.dart';
@@ -222,9 +224,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerRooms,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.roomsTitle,
-        ),
+        builder: (context, state) => const OwnerRoomsScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
@@ -239,8 +239,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerRoomDetail,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.roomsTitle,
+        builder: (context, state) => OwnerRoomDetailScreen(
+          roomId: state.pathParameters['roomId'] ?? '',
         ),
       ),
       GoRoute(
