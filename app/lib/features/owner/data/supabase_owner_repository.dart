@@ -432,5 +432,44 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<GuestListItem>> getGuests({
+    required String pgId,
+    int limit = 50,
+    int offset = 0,
+  }) async {
+    final client = _client;
+    if (client == null) return [];
+    try {
+      final response = await client
+          .from('v_guest_list')
+          .select()
+          .eq('pg_id', pgId)
+          .range(offset, offset + limit - 1);
+      return (response as List<dynamic>)
+          .map((json) => GuestListItem.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<PgOverview?> getPgOverview(String pgId) async {
+    final client = _client;
+    if (client == null) return null;
+    try {
+      final response = await client
+          .from('v_pg_overview')
+          .select()
+          .eq('pg_id', pgId)
+          .maybeSingle();
+      if (response == null) return null;
+      return PgOverview.fromJson(response);
+    } catch (_) {
+      return null;
+    }
+  }
 }
 

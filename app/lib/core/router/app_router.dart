@@ -165,7 +165,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: RoutePaths.ownerGuests,
-                builder: (context, state) => const OwnerGuestsScreen(),
+                builder: (context, state) {
+                  final tabParam = state.uri.queryParameters['tab'];
+                  int initialTab = 0;
+                  if (tabParam == 'overdue' || tabParam == '1') {
+                    initialTab = 1;
+                  } else if (tabParam == 'due' || tabParam == '2') {
+                    initialTab = 2;
+                  } else if (tabParam == 'paid' || tabParam == '3') {
+                    initialTab = 3;
+                  } else if (tabParam == 'past' || tabParam == '4') {
+                    initialTab = 4;
+                  }
+                  return OwnerGuestsScreen(initialTabIndex: initialTab);
+                },
               ),
             ],
           ),

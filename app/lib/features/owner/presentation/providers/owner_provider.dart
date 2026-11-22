@@ -62,4 +62,67 @@ final paymentAccountDetailProvider =
   return repo.getPaymentAccount(id);
 });
 
+final pgOverviewProvider = FutureProvider.autoDispose<PgOverview?>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return null;
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPgOverview(activePg.pgId);
+});
+
+class GuestListNotifier extends AutoDisposeAsyncNotifier<List<GuestListItem>> {
+  int _offset = 0;
+  bool _hasMore = true;
+  bool _isLoadingMore = false;
+  static const int _pageSize = 50;
+
+  bool get hasMore => _hasMore;
+  bool get isLoadingMore => _isLoadingMore;
+
+  @override
+  Future<List<GuestListItem>> build() async {
+    _offset = 0;
+    _hasMore = true;
+    _isLoadingMore = false;
+    final activePg = ref.watch(activePgProvider);
+    if (activePg == null) return [];
+    final repo = ref.watch(ownerRepositoryProvider);
+    final guests = await repo.getGuests(
+      pgId: activePg.pgId,
+      limit: _pageSize,
+      offset: 0,
+    );
+    _offset = guests.length;
+    _hasMore = guests.length >= _pageSize;
+    return guests;
+  }
+
+  Future<void> loadMore() async {
+    if (!_hasMore || _isLoadingMore || state.isLoading || state.hasError) return;
+    final activePg = ref.read(activePgProvider);
+    if (activePg == null) return;
+    _isLoadingMore = true;
+    try {
+      final repo = ref.read(ownerRepositoryProvider);
+      final nextGuests = await repo.getGuests(
+        pgId: activePg.pgId,
+        limit: _pageSize,
+        offset: _offset,
+      );
+      _offset += nextGuests.length;
+      _hasMore = nextGuests.length >= _pageSize;
+      final current = state.value ?? [];
+      state = AsyncData([...current, ...nextGuests]);
+    } catch (_) {
+      // Don't overwrite existing list on load more failure
+    } finally {
+      _isLoadingMore = false;
+    }
+  }
+}
+
+final guestListProvider =
+    AutoDisposeAsyncNotifierProvider<GuestListNotifier, List<GuestListItem>>(
+  GuestListNotifier.new,
+);
+
 

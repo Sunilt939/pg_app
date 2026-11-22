@@ -145,6 +145,17 @@ class MockOwnerRepo implements OwnerRepository {
     String genderPolicy = 'any',
   }) async =>
       'pg-1';
+
+  @override
+  Future<List<GuestListItem>> getGuests({
+    required String pgId,
+    int limit = 50,
+    int offset = 0,
+  }) async =>
+      const [];
+
+  @override
+  Future<PgOverview?> getPgOverview(String pgId) async => null;
 }
 
 Widget createTestWidget({

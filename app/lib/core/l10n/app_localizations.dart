@@ -1576,6 +1576,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You do not have permission to do this.'**
   String get errorNotAllowed;
+
+  /// Hint for guest search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search name, room or number'**
+  String get guestSearchHint;
+
+  /// Tab label for All guests
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get tabAll;
+
+  /// Tab label for Overdue guests
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get tabOverdue;
+
+  /// Tab label for Due guests
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get tabDue;
+
+  /// Tab label for Paid guests
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get tabPaid;
+
+  /// Tab label for Past guests
+  ///
+  /// In en, this message translates to:
+  /// **'Past'**
+  String get tabPast;
+
+  /// Subtitle part when guest has no assigned bed
+  ///
+  /// In en, this message translates to:
+  /// **'No bed yet'**
+  String get guestNoBed;
+
+  /// Subtitle part showing guest bed
+  ///
+  /// In en, this message translates to:
+  /// **'Bed {bed}'**
+  String guestBedPart(String bed);
+
+  /// Subtitle state part when overdue
+  ///
+  /// In en, this message translates to:
+  /// **'overdue since {date}'**
+  String guestStateOverdue(String date);
+
+  /// Subtitle state part when payment is waiting verification
+  ///
+  /// In en, this message translates to:
+  /// **'payment waiting for you'**
+  String get guestStatePending;
+
+  /// Subtitle state part when rent is due
+  ///
+  /// In en, this message translates to:
+  /// **'due {date}'**
+  String guestStateDue(String date);
+
+  /// Subtitle state part when rent is paid
+  ///
+  /// In en, this message translates to:
+  /// **'paid up'**
+  String get guestStatePaid;
+
+  /// Subtitle state part when rent is paid and has advance/credit
+  ///
+  /// In en, this message translates to:
+  /// **'paid up, advance {amount}'**
+  String guestStatePaidAdvance(String amount);
+
+  /// Subtitle for past guest showing departure date
+  ///
+  /// In en, this message translates to:
+  /// **'Left {date}'**
+  String guestLeft(String date);
+
+  /// Empty state title when PG has no guests
+  ///
+  /// In en, this message translates to:
+  /// **'No guests yet'**
+  String get guestsEmptyTitle;
+
+  /// Empty state body when PG has no guests
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first guest to start tracking rent.'**
+  String get guestsEmptyBody;
+
+  /// Empty state title when no guests match tab filter or search
+  ///
+  /// In en, this message translates to:
+  /// **'No guests here'**
+  String get guestsFilterEmptyTitle;
+
+  /// Empty state body when no guests match tab filter or search
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing matches this filter.'**
+  String get guestsFilterEmptyBody;
 }
 
 class _AppLocalizationsDelegate

@@ -1,8 +1,13 @@
 import 'bed_occupancy.dart';
 import 'city.dart';
+import 'guest_list_item.dart';
 import 'payment_account.dart';
+import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
+
+export 'guest_list_item.dart';
+export 'pg_overview.dart';
 
 class DuplicateNicknameException implements Exception {
   final String message;
@@ -71,5 +76,11 @@ abstract class OwnerRepository {
     DateTime? billingStartsOn,
     bool depositAlreadyPaid = false,
   });
+  Future<List<GuestListItem>> getGuests({
+    required String pgId,
+    int limit = 50,
+    int offset = 0,
+  });
+  Future<PgOverview?> getPgOverview(String pgId);
 }
 

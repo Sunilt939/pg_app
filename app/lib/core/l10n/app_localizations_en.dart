@@ -869,4 +869,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorNotAllowed => 'You do not have permission to do this.';
+
+  @override
+  String get guestSearchHint => 'Search name, room or number';
+
+  @override
+  String get tabAll => 'All';
+
+  @override
+  String get tabOverdue => 'Overdue';
+
+  @override
+  String get tabDue => 'Due';
+
+  @override
+  String get tabPaid => 'Paid';
+
+  @override
+  String get tabPast => 'Past';
+
+  @override
+  String get guestNoBed => 'No bed yet';
+
+  @override
+  String guestBedPart(String bed) {
+    return 'Bed $bed';
+  }
+
+  @override
+  String guestStateOverdue(String date) {
+    return 'overdue since $date';
+  }
+
+  @override
+  String get guestStatePending => 'payment waiting for you';
+
+  @override
+  String guestStateDue(String date) {
+    return 'due $date';
+  }
+
+  @override
+  String get guestStatePaid => 'paid up';
+
+  @override
+  String guestStatePaidAdvance(String amount) {
+    return 'paid up, advance $amount';
+  }
+
+  @override
+  String guestLeft(String date) {
+    return 'Left $date';
+  }
+
+  @override
+  String get guestsEmptyTitle => 'No guests yet';
+
+  @override
+  String get guestsEmptyBody => 'Add your first guest to start tracking rent.';
+
+  @override
+  String get guestsFilterEmptyTitle => 'No guests here';
+
+  @override
+  String get guestsFilterEmptyBody => 'Nothing matches this filter.';
 }

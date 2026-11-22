@@ -17,6 +17,7 @@ The AI adds one line per decision it had to make. Never delete lines.
 | 2026-11-22 | O5 | Navigation after adding guest before O6 is approved | Pop back to previous screen upon closing InviteSheet until O6 (Guest detail) is approved |
 | 2026-11-22 | O5 | Alert on duplicate guest stay error | Show floating snackbar (AppSnack) in addition to field error on DuplicateGuestStayException |
 | 2026-11-22 | O5 | Past joining date notice | Display non-error muted notice under joining date when selected date is in the past |
+| 2026-11-22 | O4 | Guest list detail navigation before O6 is approved | Route tap to /owner/guests/:stayId placeholder until O6 (Guest detail) is approved |
 
 ## Other decisions
 

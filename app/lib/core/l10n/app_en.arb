@@ -1154,5 +1154,102 @@
   "errorNotAllowed": "You do not have permission to do this.",
   "@errorNotAllowed": {
     "description": "Error text when user lacks permission (SQLSTATE 42501)"
+  },
+  "guestSearchHint": "Search name, room or number",
+  "@guestSearchHint": {
+    "description": "Hint for guest search field"
+  },
+  "tabAll": "All",
+  "@tabAll": {
+    "description": "Tab label for All guests"
+  },
+  "tabOverdue": "Overdue",
+  "@tabOverdue": {
+    "description": "Tab label for Overdue guests"
+  },
+  "tabDue": "Due",
+  "@tabDue": {
+    "description": "Tab label for Due guests"
+  },
+  "tabPaid": "Paid",
+  "@tabPaid": {
+    "description": "Tab label for Paid guests"
+  },
+  "tabPast": "Past",
+  "@tabPast": {
+    "description": "Tab label for Past guests"
+  },
+  "guestNoBed": "No bed yet",
+  "@guestNoBed": {
+    "description": "Subtitle part when guest has no assigned bed"
+  },
+  "guestBedPart": "Bed {bed}",
+  "@guestBedPart": {
+    "description": "Subtitle part showing guest bed",
+    "placeholders": {
+      "bed": {
+        "type": "String"
+      }
+    }
+  },
+  "guestStateOverdue": "overdue since {date}",
+  "@guestStateOverdue": {
+    "description": "Subtitle state part when overdue",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "guestStatePending": "payment waiting for you",
+  "@guestStatePending": {
+    "description": "Subtitle state part when payment is waiting verification"
+  },
+  "guestStateDue": "due {date}",
+  "@guestStateDue": {
+    "description": "Subtitle state part when rent is due",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "guestStatePaid": "paid up",
+  "@guestStatePaid": {
+    "description": "Subtitle state part when rent is paid"
+  },
+  "guestStatePaidAdvance": "paid up, advance {amount}",
+  "@guestStatePaidAdvance": {
+    "description": "Subtitle state part when rent is paid and has advance/credit",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "guestLeft": "Left {date}",
+  "@guestLeft": {
+    "description": "Subtitle for past guest showing departure date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "guestsEmptyTitle": "No guests yet",
+  "@guestsEmptyTitle": {
+    "description": "Empty state title when PG has no guests"
+  },
+  "guestsEmptyBody": "Add your first guest to start tracking rent.",
+  "@guestsEmptyBody": {
+    "description": "Empty state body when PG has no guests"
+  },
+  "guestsFilterEmptyTitle": "No guests here",
+  "@guestsFilterEmptyTitle": {
+    "description": "Empty state title when no guests match tab filter or search"
+  },
+  "guestsFilterEmptyBody": "Nothing matches this filter.",
+  "@guestsFilterEmptyBody": {
+    "description": "Empty state body when no guests match tab filter or search"
   }
 }

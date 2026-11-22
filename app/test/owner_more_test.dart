@@ -97,6 +97,17 @@ class MockOwnerRepo implements OwnerRepository {
     bool depositAlreadyPaid = false,
   }) async =>
       'stay-123';
+
+  @override
+  Future<List<GuestListItem>> getGuests({
+    required String pgId,
+    int limit = 50,
+    int offset = 0,
+  }) async =>
+      const [];
+
+  @override
+  Future<PgOverview?> getPgOverview(String pgId) async => null;
 }
 
 class MockAuthRepo implements AuthRepository {
