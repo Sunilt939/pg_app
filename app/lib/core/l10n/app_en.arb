@@ -1465,5 +1465,25 @@
   "errChargeType": "Choose a charge type.",
   "@errChargeType": {
     "description": "Validation error when charge type is not selected"
+  },
+  "chargeCancelTitle": "Cancel this charge?",
+  "@chargeCancelTitle": {
+    "description": "Title for cancelling a charge confirm sheet"
+  },
+  "chargeCancelReason": "Reason",
+  "@chargeCancelReason": {
+    "description": "Label for reason field when cancelling a charge"
+  },
+  "chargeCancelAction": "Cancel charge",
+  "@chargeCancelAction": {
+    "description": "Destructive button label to cancel a charge"
+  },
+  "chargeCancelledToast": "Charge cancelled.",
+  "@chargeCancelledToast": {
+    "description": "Snackbar message when a charge is cancelled"
+  },
+  "errChargeReason": "Enter a reason for cancelling this charge.",
+  "@errChargeReason": {
+    "description": "Validation error when cancellation reason is empty"
   }
 }

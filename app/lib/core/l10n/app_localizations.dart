@@ -1960,6 +1960,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose a charge type.'**
   String get errChargeType;
+
+  /// Title for cancelling a charge confirm sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel this charge?'**
+  String get chargeCancelTitle;
+
+  /// Label for reason field when cancelling a charge
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get chargeCancelReason;
+
+  /// Destructive button label to cancel a charge
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel charge'**
+  String get chargeCancelAction;
+
+  /// Snackbar message when a charge is cancelled
+  ///
+  /// In en, this message translates to:
+  /// **'Charge cancelled.'**
+  String get chargeCancelledToast;
+
+  /// Validation error when cancellation reason is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a reason for cancelling this charge.'**
+  String get errChargeReason;
 }
 
 class _AppLocalizationsDelegate

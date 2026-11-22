@@ -112,5 +112,9 @@ abstract class OwnerRepository {
     String? description,
     DateTime? periodMonth,
   });
+  Future<void> voidCharge({
+    required String chargeId,
+    required String reason,
+  });
 }
 

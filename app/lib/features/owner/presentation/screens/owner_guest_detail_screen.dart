@@ -98,8 +98,10 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
 
   void _openAllChargesSheet(
     BuildContext context,
+    WidgetRef ref,
     AppLocalizations l10n,
     List<ChargeBalance> charges,
+    bool isOwnerOrManager,
   ) {
     AppBottomSheet.show(
       context: context,
@@ -111,7 +113,14 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           itemCount: charges.length,
           itemBuilder: (context, i) {
             final charge = charges[i];
-            return _buildChargeRow(charge, i < charges.length - 1, l10n);
+            return _buildChargeRow(
+              context,
+              ref,
+              l10n,
+              charge,
+              i < charges.length - 1,
+              isOwnerOrManager,
+            );
           },
         ),
       ),
@@ -221,7 +230,13 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
                 _buildHeaderSheet(context, l10n, guest),
                 _buildBalanceSheet(l10n, guest),
                 if (bundle.charges.isNotEmpty)
-                  _buildChargesSection(context, l10n, bundle.charges),
+                  _buildChargesSection(
+                    context,
+                    ref,
+                    l10n,
+                    bundle.charges,
+                    isOwnerOrManager,
+                  ),
                 if (bundle.payments.isNotEmpty)
                   _buildPaymentsSection(context, l10n, bundle.payments),
                 _buildDetailsSection(
@@ -500,8 +515,10 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
 
   Widget _buildChargesSection(
     BuildContext context,
+    WidgetRef ref,
     AppLocalizations l10n,
     List<ChargeBalance> charges,
+    bool isOwnerOrManager,
   ) {
     final chargesToShow = charges.take(6).toList();
 
@@ -512,7 +529,13 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           title: l10n.detailCharges,
           trailing: charges.length > 6
               ? GestureDetector(
-                  onTap: () => _openAllChargesSheet(context, l10n, charges),
+                  onTap: () => _openAllChargesSheet(
+                    context,
+                    ref,
+                    l10n,
+                    charges,
+                    isOwnerOrManager,
+                  ),
                   child: Text(
                     l10n.detailSeeAll,
                     style:
@@ -526,9 +549,12 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           children: [
             for (int i = 0; i < chargesToShow.length; i++)
               _buildChargeRow(
+                context,
+                ref,
+                l10n,
                 chargesToShow[i],
                 i < chargesToShow.length - 1,
-                l10n,
+                isOwnerOrManager,
               ),
           ],
         ),
@@ -537,9 +563,12 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
   }
 
   Widget _buildChargeRow(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
     ChargeBalance charge,
     bool showDivider,
-    AppLocalizations l10n,
+    bool isOwnerOrManager,
   ) {
     final displayPaise = charge.status == 'paid'
         ? charge.amountPaise
@@ -589,6 +618,13 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           ],
         ),
         showDivider: showDivider,
+        onTap: () => _openChargeDetailSheet(
+          context,
+          ref,
+          l10n,
+          charge,
+          isOwnerOrManager,
+        ),
       );
     }
 
@@ -599,7 +635,105 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
       statusKind: statusKind,
       statusLabel: statusLabel,
       showDivider: showDivider,
+      onTap: () => _openChargeDetailSheet(
+        context,
+        ref,
+        l10n,
+        charge,
+        isOwnerOrManager,
+      ),
     );
+  }
+
+  void _openChargeDetailSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    ChargeBalance charge,
+    bool isOwnerOrManager,
+  ) {
+    final canCancel = isOwnerOrManager &&
+        charge.status != 'paid' &&
+        charge.status != 'void';
+
+    AppBottomSheet.show(
+      context: context,
+      builder: (sheetContext) => AppBottomSheet(
+        title: charge.description,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            LedgerSheet(
+              margin: EdgeInsets.zero,
+              children: [
+                KeyValueRow(
+                  label: l10n.chargeAmount,
+                  value: MoneyFormat.format(charge.amountPaise),
+                ),
+                KeyValueRow(
+                  label: l10n.chargeDueDate,
+                  value: _formatDate(charge.dueDate),
+                ),
+                if (charge.paidPaise > 0)
+                  KeyValueRow(
+                    label: l10n.balancePaid,
+                    value: MoneyFormat.format(charge.paidPaise),
+                  ),
+                if (charge.outstandingPaise > 0)
+                  KeyValueRow(
+                    label: l10n.balanceOutstanding,
+                    value: MoneyFormat.format(charge.outstandingPaise),
+                  ),
+              ],
+            ),
+            if (canCancel) ...[
+              const SizedBox(height: AppSpace.x16),
+              AppButton.text(
+                label: l10n.chargeCancelAction,
+                textColor: AppColors.overdueFg,
+                expand: true,
+                onPressed: () {
+                  Navigator.of(sheetContext).pop();
+                  _openCancelChargeConfirmSheet(context, ref, l10n, charge);
+                },
+              ),
+            ],
+            const SizedBox(height: AppSpace.x8),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _openCancelChargeConfirmSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    ChargeBalance charge,
+  ) async {
+    final cancelled = await ConfirmSheet.show(
+      context: context,
+      title: l10n.chargeCancelTitle,
+      body: '',
+      showReasonField: true,
+      isReasonRequired: true,
+      reasonLabel: l10n.chargeCancelReason,
+      reasonError: l10n.errChargeReason,
+      confirmLabel: l10n.chargeCancelAction,
+      isDestructive: true,
+      onConfirm: (reason) async {
+        await ref.read(ownerRepositoryProvider).voidCharge(
+              chargeId: charge.chargeId,
+              reason: reason,
+            );
+      },
+    );
+
+    if (cancelled == true && context.mounted) {
+      AppSnack.show(context, message: l10n.chargeCancelledToast);
+      ref.invalidate(guestDetailBundleProvider(stayId));
+    }
   }
 
   Widget _buildPaymentsSection(

@@ -158,6 +158,18 @@ class MockOwnerRepo implements OwnerRepository {
       'periodMonth': periodMonth,
     };
   }
+  Map<String, dynamic>? lastVoidChargeParams;
+
+  @override
+  Future<void> voidCharge({
+    required String chargeId,
+    required String reason,
+  }) async {
+    lastVoidChargeParams = {
+      'chargeId': chargeId,
+      'reason': reason,
+    };
+  }
 }
 
 class MockAuthRepo implements AuthRepository {
@@ -583,5 +595,82 @@ void main() {
     expect(repo.lastAddChargeParams!['amountPaise'], 150000);
     expect(repo.lastAddChargeParams!['description'], 'October AC bill');
     expect(repo.lastAddChargeParams!['periodMonth'], isNotNull);
+  });
+
+  testWidgets('O17c: tap unpaid charge, validate empty reason, and cancel charge with reason', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'p-1',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        attentionState: 'paid',
+      ),
+      charges: [
+        ChargeBalance(
+          chargeId: 'charge-1',
+          stayId: 'stay-101',
+          description: 'Electricity bill',
+          dueDate: '2026-11-20',
+          amountPaise: 150000,
+          outstandingPaise: 150000,
+          status: 'due',
+        ),
+      ],
+      payments: [],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // 1. Find and tap the charge row
+    final chargeRow = find.text('Electricity bill');
+    expect(chargeRow, findsOneWidget);
+    await tester.tap(chargeRow);
+    await tester.pumpAndSettle();
+
+    // 2. Charge detail sheet opens showing details and "Cancel charge" action
+    expect(find.text('Cancel charge'), findsOneWidget);
+    await tester.tap(find.text('Cancel charge'));
+    await tester.pumpAndSettle();
+
+    // 3. ConfirmSheet opens
+    expect(find.text('Cancel this charge?'), findsOneWidget);
+    expect(find.text('Reason'), findsOneWidget);
+
+    final cancelConfirmBtn = find.widgetWithText(AppButton, 'Cancel charge');
+    expect(cancelConfirmBtn, findsOneWidget);
+
+    // 4. Try submitting with empty reason -> validation error
+    await tester.tap(cancelConfirmBtn);
+    await tester.pumpAndSettle();
+    expect(find.text('Enter a reason for cancelling this charge.'), findsOneWidget);
+
+    // 5. Enter reason
+    final reasonInput = find.descendant(
+      of: find.widgetWithText(AppTextField, 'Reason'),
+      matching: find.byType(EditableText),
+    );
+    await tester.enterText(reasonInput, 'Billed by mistake');
+    await tester.pumpAndSettle();
+
+    // 6. Submit confirmation
+    await tester.tap(cancelConfirmBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Charge cancelled.'), findsOneWidget);
+    expect(repo.lastVoidChargeParams, isNotNull);
+    expect(repo.lastVoidChargeParams!['chargeId'], 'charge-1');
+    expect(repo.lastVoidChargeParams!['reason'], 'Billed by mistake');
   });
 }

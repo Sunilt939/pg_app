@@ -1089,4 +1089,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errChargeType => 'Choose a charge type.';
+
+  @override
+  String get chargeCancelTitle => 'Cancel this charge?';
+
+  @override
+  String get chargeCancelReason => 'Reason';
+
+  @override
+  String get chargeCancelAction => 'Cancel charge';
+
+  @override
+  String get chargeCancelledToast => 'Charge cancelled.';
+
+  @override
+  String get errChargeReason => 'Enter a reason for cancelling this charge.';
 }

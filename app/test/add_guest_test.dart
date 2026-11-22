@@ -179,6 +179,12 @@ class MockOwnerRepo implements OwnerRepository {
     String? description,
     DateTime? periodMonth,
   }) async {}
+
+  @override
+  Future<void> voidCharge({
+    required String chargeId,
+    required String reason,
+  }) async {}
 }
 
 Widget createTestWidget({

@@ -112,8 +112,10 @@ class ConfirmSheet extends StatefulWidget {
   final String cancelLabel;
   final bool isDestructive;
   final bool showReasonField;
+  final bool isReasonRequired;
   final String? reasonLabel;
   final String? reasonHint;
+  final String? reasonError;
   final Future<void> Function(String reason)? onConfirm;
 
   const ConfirmSheet({
@@ -124,8 +126,10 @@ class ConfirmSheet extends StatefulWidget {
     this.cancelLabel = 'Cancel',
     this.isDestructive = false,
     this.showReasonField = false,
+    this.isReasonRequired = false,
     this.reasonLabel,
     this.reasonHint,
+    this.reasonError,
     this.onConfirm,
   });
 
@@ -137,8 +141,10 @@ class ConfirmSheet extends StatefulWidget {
     String cancelLabel = 'Cancel',
     bool isDestructive = false,
     bool showReasonField = false,
+    bool isReasonRequired = false,
     String? reasonLabel,
     String? reasonHint,
+    String? reasonError,
     Future<void> Function(String reason)? onConfirm,
   }) {
     return AppBottomSheet.show<bool>(
@@ -150,8 +156,10 @@ class ConfirmSheet extends StatefulWidget {
         cancelLabel: cancelLabel,
         isDestructive: isDestructive,
         showReasonField: showReasonField,
+        isReasonRequired: isReasonRequired,
         reasonLabel: reasonLabel,
         reasonHint: reasonHint,
+        reasonError: reasonError,
         onConfirm: onConfirm,
       ),
     );
@@ -163,6 +171,7 @@ class ConfirmSheet extends StatefulWidget {
 
 class _ConfirmSheetState extends State<ConfirmSheet> {
   final _reasonController = TextEditingController();
+  String? _reasonErrorText;
   bool _isLoading = false;
 
   @override
@@ -172,10 +181,16 @@ class _ConfirmSheetState extends State<ConfirmSheet> {
   }
 
   Future<void> _handleConfirm() async {
+    final reason = _reasonController.text.trim();
+    if (widget.showReasonField && widget.isReasonRequired && reason.isEmpty) {
+      setState(() => _reasonErrorText = widget.reasonError ?? 'Enter a reason.');
+      return;
+    }
+
     if (widget.onConfirm != null) {
       setState(() => _isLoading = true);
       try {
-        await widget.onConfirm!(_reasonController.text.trim());
+        await widget.onConfirm!(reason);
         if (mounted) {
           Navigator.of(context).pop(true);
         }
@@ -220,17 +235,25 @@ class _ConfirmSheetState extends State<ConfirmSheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.body,
-            style: AppText.body,
-          ),
+          if (widget.body.isNotEmpty) ...[
+            Text(
+              widget.body,
+              style: AppText.body,
+            ),
+          ],
           if (widget.showReasonField) ...[
-            const SizedBox(height: AppSpace.x16),
+            if (widget.body.isNotEmpty) const SizedBox(height: AppSpace.x16),
             AppTextField(
               label: widget.reasonLabel,
               hint: widget.reasonHint,
               controller: _reasonController,
+              errorText: _reasonErrorText,
               maxLines: 3,
+              onChanged: (val) {
+                if (_reasonErrorText != null && val.trim().isNotEmpty) {
+                  setState(() => _reasonErrorText = null);
+                }
+              },
             ),
           ],
           const SizedBox(height: AppSpace.x16),

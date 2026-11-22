@@ -19,6 +19,7 @@ The AI adds one line per decision it had to make. Never delete lines.
 | 2026-11-22 | O5 | Past joining date notice | Display non-error muted notice under joining date when selected date is in the past |
 | 2026-11-22 | O4 | Guest list detail navigation before O6 is approved | Route tap to /owner/guests/:stayId placeholder until O6 (Guest detail) is approved |
 | 2026-11-22 | O17b | Charge form validation messages | Added errChargeAmount ("Enter an amount greater than zero.") and errChargeType ("Choose a charge type.") for field errors |
+| 2026-11-22 | O17c | Cancel charge reason validation | Added errChargeReason ("Enter a reason for cancelling this charge.") when reason field in ConfirmSheet is submitted empty |
 
 ## Other decisions
 
