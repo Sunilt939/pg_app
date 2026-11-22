@@ -39,6 +39,9 @@ class MockOwnerRepo implements OwnerRepository {
   Future<PgOverview?> getPgOverview(String pgId) async => overview;
 
   @override
+  Future<GuestDetailBundle?> getGuestDetailBundle(String stayId) async => null;
+
+  @override
   Future<List<City>> getCities() async => const [];
 
   @override

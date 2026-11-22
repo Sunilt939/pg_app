@@ -125,4 +125,10 @@ final guestListProvider =
   GuestListNotifier.new,
 );
 
+final guestDetailBundleProvider =
+    FutureProvider.autoDispose.family<GuestDetailBundle?, String>((ref, stayId) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getGuestDetailBundle(stayId);
+});
+
 

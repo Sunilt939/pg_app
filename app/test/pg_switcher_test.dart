@@ -116,6 +116,9 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<PgOverview?> getPgOverview(String pgId) async => null;
+
+  @override
+  Future<GuestDetailBundle?> getGuestDetailBundle(String stayId) async => null;
 }
 
 class MockAuthRepo implements AuthRepository {

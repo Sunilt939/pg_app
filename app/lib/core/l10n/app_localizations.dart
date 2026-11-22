@@ -1684,6 +1684,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Nothing matches this filter.'**
   String get guestsFilterEmptyBody;
+
+  /// Stay subtitle for vacated guest with bed and room
+  ///
+  /// In en, this message translates to:
+  /// **'Room {room}, bed {bed}, {from} to {to}'**
+  String guestDetailStayEnded(String room, String bed, String from, String to);
+
+  /// Stay subtitle for open guest with bed and room
+  ///
+  /// In en, this message translates to:
+  /// **'Room {room}, bed {bed}, since {date}'**
+  String guestDetailStay(String room, String bed, String date);
+
+  /// Stay subtitle for open guest without assigned bed
+  ///
+  /// In en, this message translates to:
+  /// **'since {date}'**
+  String guestDetailStayNoBed(String date);
+
+  /// Stay subtitle for vacated guest without assigned bed
+  ///
+  /// In en, this message translates to:
+  /// **'{from} to {to}'**
+  String guestDetailStayNoBedEnded(String from, String to);
+
+  /// Label for outstanding balance in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Outstanding'**
+  String get balanceOutstanding;
+
+  /// Label for total charged amount in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Charged'**
+  String get balanceCharged;
+
+  /// Label for total paid amount in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Paid'**
+  String get balancePaid;
+
+  /// Label for advance/credit balance in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Advance'**
+  String get balanceAdvance;
+
+  /// Notice when pending verification payments exist
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} reported by the guest, waiting for you.'**
+  String balanceWaiting(String amount);
+
+  /// Section header for pending payments waiting verification
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for you'**
+  String get waitingForYou;
+
+  /// Section header for charges list in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Charges'**
+  String get detailCharges;
+
+  /// Section header for payments list in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get detailPayments;
+
+  /// Section header for details sheet in guest detail
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get detailDetails;
+
+  /// Label for guest app status row
+  ///
+  /// In en, this message translates to:
+  /// **'App'**
+  String get detailApp;
+
+  /// Value when guest has signed in
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in'**
+  String get detailAppSignedIn;
+
+  /// Value when guest has not signed in
+  ///
+  /// In en, this message translates to:
+  /// **'Not signed in yet'**
+  String get detailAppNotYet;
+
+  /// Action button to share invite with guest again
+  ///
+  /// In en, this message translates to:
+  /// **'Invite again'**
+  String get detailInviteAgain;
+
+  /// Label for emergency contact row
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contact'**
+  String get detailEmergency;
+
+  /// Label for ID documents row
+  ///
+  /// In en, this message translates to:
+  /// **'ID documents'**
+  String get detailDocuments;
+
+  /// Document count label
+  ///
+  /// In en, this message translates to:
+  /// **'{count} uploaded'**
+  String detailDocumentsCount(int count);
+
+  /// Placeholder when no emergency contact or documents exist
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get detailNone;
+
+  /// Recurring billing day description
+  ///
+  /// In en, this message translates to:
+  /// **'Day {day} of every month'**
+  String profileDueDay(String day);
+
+  /// Due date label for charge row
+  ///
+  /// In en, this message translates to:
+  /// **'due {date}'**
+  String chargeDue(String date);
+
+  /// Status chip label for partially paid charge
+  ///
+  /// In en, this message translates to:
+  /// **'Part-paid'**
+  String get chargePartPaid;
+
+  /// Status chip label for voided charge
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get chargeCancelled;
+
+  /// Status chip label for rejected payment
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get statusRejected;
+
+  /// Status chip label for reversed payment
+  ///
+  /// In en, this message translates to:
+  /// **'Reversed'**
+  String get statusReversed;
+
+  /// Action label to see all charges or payments
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get detailSeeAll;
+
+  /// Screen title for all charges list
+  ///
+  /// In en, this message translates to:
+  /// **'All charges'**
+  String get allChargesTitle;
+
+  /// Screen title for all payments list
+  ///
+  /// In en, this message translates to:
+  /// **'All payments'**
+  String get allPaymentsTitle;
 }
 
 class _AppLocalizationsDelegate

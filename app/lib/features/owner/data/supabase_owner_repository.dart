@@ -471,5 +471,87 @@ class SupabaseOwnerRepository implements OwnerRepository {
       return null;
     }
   }
+
+  @override
+  Future<GuestDetailBundle?> getGuestDetailBundle(String stayId) async {
+    final client = _client;
+    if (client == null) return null;
+    try {
+      final guestResp = await client
+          .from('v_guest_list')
+          .select()
+          .eq('stay_id', stayId)
+          .maybeSingle();
+      if (guestResp == null) return null;
+      final guest = GuestListItem.fromJson(guestResp);
+
+      final chargesFuture = client
+          .from('v_charge_balances')
+          .select()
+          .eq('stay_id', stayId)
+          .order('due_date', ascending: false);
+
+      final paymentsFuture = client
+          .from('v_payment_feed')
+          .select()
+          .eq('stay_id', stayId)
+          .order('paid_on', ascending: false);
+
+      Future<dynamic>? emergencyFuture;
+      Future<dynamic>? docsFuture;
+
+      if (guest.stayStatus != 'vacated') {
+        emergencyFuture = client
+            .from('emergency_contacts')
+            .select('id, person_id, name, phone, is_primary, relationship_types(label)')
+            .eq('person_id', guest.personId)
+            .eq('is_primary', true)
+            .maybeSingle();
+
+        docsFuture = client
+            .from('person_documents')
+            .select('id')
+            .eq('person_id', guest.personId);
+      }
+
+      final results = await Future.wait([
+        chargesFuture,
+        paymentsFuture,
+        if (emergencyFuture != null) emergencyFuture else Future.value(null),
+        if (docsFuture != null) docsFuture else Future.value(null),
+      ]);
+
+      final chargesList = (results[0] as List<dynamic>?)
+              ?.map((json) => ChargeBalance.fromJson(json as Map<String, dynamic>))
+              .toList() ??
+          [];
+
+      final paymentsList = (results[1] as List<dynamic>?)
+              ?.map((json) => PaymentFeedItem.fromJson(json as Map<String, dynamic>))
+              .toList() ??
+          [];
+
+      EmergencyContact? emergencyContact;
+      if (results[2] != null && results[2] is Map<String, dynamic>) {
+        emergencyContact =
+            EmergencyContact.fromJson(results[2] as Map<String, dynamic>);
+      }
+
+      int documentsCount = 0;
+      if (results.length > 3 && results[3] is List<dynamic>) {
+        documentsCount = (results[3] as List<dynamic>).length;
+      }
+
+      return GuestDetailBundle(
+        guest: guest,
+        charges: chargesList,
+        payments: paymentsList,
+        emergencyContact: emergencyContact,
+        documentsCount: documentsCount,
+      );
+    } catch (_) {
+      return null;
+    }
+  }
 }
 

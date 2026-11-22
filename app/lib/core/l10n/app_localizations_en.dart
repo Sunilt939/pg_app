@@ -933,4 +933,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get guestsFilterEmptyBody => 'Nothing matches this filter.';
+
+  @override
+  String guestDetailStayEnded(String room, String bed, String from, String to) {
+    return 'Room $room, bed $bed, $from to $to';
+  }
+
+  @override
+  String guestDetailStay(String room, String bed, String date) {
+    return 'Room $room, bed $bed, since $date';
+  }
+
+  @override
+  String guestDetailStayNoBed(String date) {
+    return 'since $date';
+  }
+
+  @override
+  String guestDetailStayNoBedEnded(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String get balanceOutstanding => 'Outstanding';
+
+  @override
+  String get balanceCharged => 'Charged';
+
+  @override
+  String get balancePaid => 'Paid';
+
+  @override
+  String get balanceAdvance => 'Advance';
+
+  @override
+  String balanceWaiting(String amount) {
+    return '$amount reported by the guest, waiting for you.';
+  }
+
+  @override
+  String get waitingForYou => 'Waiting for you';
+
+  @override
+  String get detailCharges => 'Charges';
+
+  @override
+  String get detailPayments => 'Payments';
+
+  @override
+  String get detailDetails => 'Details';
+
+  @override
+  String get detailApp => 'App';
+
+  @override
+  String get detailAppSignedIn => 'Signed in';
+
+  @override
+  String get detailAppNotYet => 'Not signed in yet';
+
+  @override
+  String get detailInviteAgain => 'Invite again';
+
+  @override
+  String get detailEmergency => 'Emergency contact';
+
+  @override
+  String get detailDocuments => 'ID documents';
+
+  @override
+  String detailDocumentsCount(int count) {
+    return '$count uploaded';
+  }
+
+  @override
+  String get detailNone => 'None';
+
+  @override
+  String profileDueDay(String day) {
+    return 'Day $day of every month';
+  }
+
+  @override
+  String chargeDue(String date) {
+    return 'due $date';
+  }
+
+  @override
+  String get chargePartPaid => 'Part-paid';
+
+  @override
+  String get chargeCancelled => 'Cancelled';
+
+  @override
+  String get statusRejected => 'Rejected';
+
+  @override
+  String get statusReversed => 'Reversed';
+
+  @override
+  String get detailSeeAll => 'See all';
+
+  @override
+  String get allChargesTitle => 'All charges';
+
+  @override
+  String get allPaymentsTitle => 'All payments';
 }

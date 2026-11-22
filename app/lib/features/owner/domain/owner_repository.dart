@@ -1,12 +1,17 @@
 import 'bed_occupancy.dart';
 import 'city.dart';
+import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
 import 'payment_account.dart';
 import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
 
+export 'charge_balance.dart';
+export 'emergency_contact.dart';
+export 'guest_detail_bundle.dart';
 export 'guest_list_item.dart';
+export 'payment_feed_item.dart';
 export 'pg_overview.dart';
 
 class DuplicateNicknameException implements Exception {
@@ -82,5 +87,6 @@ abstract class OwnerRepository {
     int offset = 0,
   });
   Future<PgOverview?> getPgOverview(String pgId);
+  Future<GuestDetailBundle?> getGuestDetailBundle(String stayId);
 }
 

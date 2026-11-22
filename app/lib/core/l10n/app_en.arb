@@ -1251,5 +1251,155 @@
   "guestsFilterEmptyBody": "Nothing matches this filter.",
   "@guestsFilterEmptyBody": {
     "description": "Empty state body when no guests match tab filter or search"
+  },
+  "guestDetailStayEnded": "Room {room}, bed {bed}, {from} to {to}",
+  "@guestDetailStayEnded": {
+    "description": "Stay subtitle for vacated guest with bed and room",
+    "placeholders": {
+      "room": { "type": "String" },
+      "bed": { "type": "String" },
+      "from": { "type": "String" },
+      "to": { "type": "String" }
+    }
+  },
+  "guestDetailStay": "Room {room}, bed {bed}, since {date}",
+  "@guestDetailStay": {
+    "description": "Stay subtitle for open guest with bed and room",
+    "placeholders": {
+      "room": { "type": "String" },
+      "bed": { "type": "String" },
+      "date": { "type": "String" }
+    }
+  },
+  "guestDetailStayNoBed": "since {date}",
+  "@guestDetailStayNoBed": {
+    "description": "Stay subtitle for open guest without assigned bed",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "guestDetailStayNoBedEnded": "{from} to {to}",
+  "@guestDetailStayNoBedEnded": {
+    "description": "Stay subtitle for vacated guest without assigned bed",
+    "placeholders": {
+      "from": { "type": "String" },
+      "to": { "type": "String" }
+    }
+  },
+  "balanceOutstanding": "Outstanding",
+  "@balanceOutstanding": {
+    "description": "Label for outstanding balance in guest detail"
+  },
+  "balanceCharged": "Charged",
+  "@balanceCharged": {
+    "description": "Label for total charged amount in guest detail"
+  },
+  "balancePaid": "Paid",
+  "@balancePaid": {
+    "description": "Label for total paid amount in guest detail"
+  },
+  "balanceAdvance": "Advance",
+  "@balanceAdvance": {
+    "description": "Label for advance/credit balance in guest detail"
+  },
+  "balanceWaiting": "{amount} reported by the guest, waiting for you.",
+  "@balanceWaiting": {
+    "description": "Notice when pending verification payments exist",
+    "placeholders": {
+      "amount": { "type": "String" }
+    }
+  },
+  "waitingForYou": "Waiting for you",
+  "@waitingForYou": {
+    "description": "Section header for pending payments waiting verification"
+  },
+  "detailCharges": "Charges",
+  "@detailCharges": {
+    "description": "Section header for charges list in guest detail"
+  },
+  "detailPayments": "Payments",
+  "@detailPayments": {
+    "description": "Section header for payments list in guest detail"
+  },
+  "detailDetails": "Details",
+  "@detailDetails": {
+    "description": "Section header for details sheet in guest detail"
+  },
+  "detailApp": "App",
+  "@detailApp": {
+    "description": "Label for guest app status row"
+  },
+  "detailAppSignedIn": "Signed in",
+  "@detailAppSignedIn": {
+    "description": "Value when guest has signed in"
+  },
+  "detailAppNotYet": "Not signed in yet",
+  "@detailAppNotYet": {
+    "description": "Value when guest has not signed in"
+  },
+  "detailInviteAgain": "Invite again",
+  "@detailInviteAgain": {
+    "description": "Action button to share invite with guest again"
+  },
+  "detailEmergency": "Emergency contact",
+  "@detailEmergency": {
+    "description": "Label for emergency contact row"
+  },
+  "detailDocuments": "ID documents",
+  "@detailDocuments": {
+    "description": "Label for ID documents row"
+  },
+  "detailDocumentsCount": "{count} uploaded",
+  "@detailDocumentsCount": {
+    "description": "Document count label",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "detailNone": "None",
+  "@detailNone": {
+    "description": "Placeholder when no emergency contact or documents exist"
+  },
+  "profileDueDay": "Day {day} of every month",
+  "@profileDueDay": {
+    "description": "Recurring billing day description",
+    "placeholders": {
+      "day": { "type": "String" }
+    }
+  },
+  "chargeDue": "due {date}",
+  "@chargeDue": {
+    "description": "Due date label for charge row",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "chargePartPaid": "Part-paid",
+  "@chargePartPaid": {
+    "description": "Status chip label for partially paid charge"
+  },
+  "chargeCancelled": "Cancelled",
+  "@chargeCancelled": {
+    "description": "Status chip label for voided charge"
+  },
+  "statusRejected": "Rejected",
+  "@statusRejected": {
+    "description": "Status chip label for rejected payment"
+  },
+  "statusReversed": "Reversed",
+  "@statusReversed": {
+    "description": "Status chip label for reversed payment"
+  },
+  "detailSeeAll": "See all",
+  "@detailSeeAll": {
+    "description": "Action label to see all charges or payments"
+  },
+  "allChargesTitle": "All charges",
+  "@allChargesTitle": {
+    "description": "Screen title for all charges list"
+  },
+  "allPaymentsTitle": "All payments",
+  "@allPaymentsTitle": {
+    "description": "Screen title for all payments list"
   }
 }
