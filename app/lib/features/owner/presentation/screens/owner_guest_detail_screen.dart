@@ -12,20 +12,22 @@ import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/tokens.dart';
 import '../../../../core/widgets/app_bottom_sheet.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_snack.dart';
 import '../../../../core/widgets/app_top_bar.dart';
+import '../../../../core/widgets/date_field.dart';
 import '../../../../core/widgets/error_state.dart';
 import '../../../../core/widgets/key_value_row.dart';
 import '../../../../core/widgets/ledger_row.dart';
 import '../../../../core/widgets/ledger_sheet.dart';
 import '../../../../core/widgets/money.dart';
+import '../../../../core/widgets/money_field.dart';
 import '../../../../core/widgets/room_tile.dart';
 import '../../../../core/widgets/section_header.dart';
 import '../../../../core/widgets/skeleton.dart';
 import '../../../../core/widgets/status_chip.dart';
-import '../../domain/charge_balance.dart';
-import '../../domain/emergency_contact.dart';
-import '../../domain/guest_list_item.dart';
-import '../../domain/payment_feed_item.dart';
+import '../../../auth/presentation/providers/auth_provider.dart';
+import '../../domain/owner_repository.dart';
 import '../providers/owner_provider.dart';
 
 class OwnerGuestDetailScreen extends ConsumerWidget {
@@ -183,11 +185,27 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
             ? guest.fullName!.trim()
             : guest.phone;
 
+        final activePg = ref.watch(activePgProvider);
+        final isOwnerOrManager =
+            activePg?.role == 'owner' || activePg?.role == 'manager';
+        final isOpenStay = guest.stayStatus != 'vacated';
+
         return Scaffold(
           backgroundColor: AppColors.ground,
           appBar: AppTopBar.back(
             title: guestTitle,
             onLeadingPressed: () => context.pop(),
+            actions: [
+              if (isOwnerOrManager && isOpenStay)
+                IconButton(
+                  icon: const Icon(
+                    AppIcons.more,
+                    size: 24,
+                    color: AppColors.ink,
+                  ),
+                  onPressed: () => _openActionsSheet(context, ref, l10n, guest),
+                ),
+            ],
           ),
           body: RefreshIndicator(
             color: AppColors.petrol,
@@ -750,6 +768,158 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           ],
         ),
       ],
+    );
+  }
+
+  void _openActionsSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) {
+    AppBottomSheet.show(
+      context: context,
+      builder: (sheetContext) => AppBottomSheet(
+        child: LedgerSheet(
+          margin: EdgeInsets.zero,
+          children: [
+            LedgerRow(
+              title: l10n.actionChangeRent,
+              titleStyle: AppText.body,
+              minHeight: 56,
+              showDivider: false,
+              onTap: () {
+                Navigator.of(sheetContext).pop();
+                _openChangeRentSheet(context, ref, l10n, guest);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _openChangeRentSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) {
+    AppBottomSheet.show(
+      context: context,
+      builder: (context) => _ChangeRentSheet(guest: guest),
+    );
+  }
+}
+
+class _ChangeRentSheet extends ConsumerStatefulWidget {
+  final GuestListItem guest;
+
+  const _ChangeRentSheet({required this.guest});
+
+  @override
+  ConsumerState<_ChangeRentSheet> createState() => _ChangeRentSheetState();
+}
+
+class _ChangeRentSheetState extends ConsumerState<_ChangeRentSheet> {
+  late int _rentPaise;
+  late DateTime _effectiveFrom;
+  String? _rentError;
+  String? _dateError;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _rentPaise = widget.guest.monthlyRentPaise ?? 0;
+    _effectiveFrom = DateTime.now();
+  }
+
+  Future<void> _submit(AppLocalizations l10n) async {
+    if (_rentPaise <= 0) {
+      setState(() => _rentError = l10n.errRent);
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _rentError = null;
+      _dateError = null;
+    });
+
+    try {
+      await ref.read(ownerRepositoryProvider).setStayRent(
+            stayId: widget.guest.stayId,
+            monthlyRentPaise: _rentPaise,
+            effectiveFrom: _effectiveFrom,
+          );
+      if (mounted) {
+        Navigator.of(context).pop();
+        AppSnack.show(context, message: l10n.rentChanged);
+        ref.invalidate(guestDetailBundleProvider(widget.guest.stayId));
+      }
+    } on DuplicateRentDateException {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _dateError = l10n.errRentDate;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        AppSnack.show(
+          context,
+          message: e.toString().replaceFirst('Exception: ', ''),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return AppBottomSheet(
+      title: l10n.actionChangeRent,
+      bottomAction: AppButton.primary(
+        label: l10n.rentChangeAction,
+        loading: _isLoading,
+        expand: true,
+        onPressed: () => _submit(l10n),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSpace.x8),
+          MoneyField(
+            label: l10n.rentNew,
+            initialPaise: _rentPaise,
+            errorText: _rentError,
+            onChanged: (val) {
+              _rentPaise = val;
+              if (_rentError != null && val > 0) {
+                setState(() => _rentError = null);
+              }
+            },
+          ),
+          const SizedBox(height: AppSpace.x16),
+          DateField(
+            label: l10n.rentFrom,
+            value: _effectiveFrom,
+            helperText: _dateError == null ? l10n.rentChangeHelper : null,
+            errorText: _dateError,
+            onChanged: (newDate) {
+              setState(() {
+                _effectiveFrom = newDate;
+                _dateError = null;
+              });
+            },
+          ),
+          const SizedBox(height: AppSpace.x24),
+        ],
+      ),
     );
   }
 }

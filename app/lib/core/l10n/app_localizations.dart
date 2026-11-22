@@ -1864,6 +1864,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All payments'**
   String get allPaymentsTitle;
+
+  /// Action row and sheet title for changing stay rent
+  ///
+  /// In en, this message translates to:
+  /// **'Change rent'**
+  String get actionChangeRent;
+
+  /// Label for new monthly rent field
+  ///
+  /// In en, this message translates to:
+  /// **'New monthly rent'**
+  String get rentNew;
+
+  /// Label for starting date field when changing rent
+  ///
+  /// In en, this message translates to:
+  /// **'Starting from'**
+  String get rentFrom;
+
+  /// Helper text explaining rent change effect on existing charges
+  ///
+  /// In en, this message translates to:
+  /// **'Charges that already exist keep the old rent.'**
+  String get rentChangeHelper;
+
+  /// Primary action button label to submit rent change
+  ///
+  /// In en, this message translates to:
+  /// **'Change rent'**
+  String get rentChangeAction;
+
+  /// Snackbar message when rent change succeeds
+  ///
+  /// In en, this message translates to:
+  /// **'Rent changed.'**
+  String get rentChanged;
+
+  /// Error message when a rent term already exists on the selected date
+  ///
+  /// In en, this message translates to:
+  /// **'A rent change already exists from that date. Pick another date.'**
+  String get errRentDate;
 }
 
 class _AppLocalizationsDelegate

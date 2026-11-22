@@ -1039,4 +1039,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get allPaymentsTitle => 'All payments';
+
+  @override
+  String get actionChangeRent => 'Change rent';
+
+  @override
+  String get rentNew => 'New monthly rent';
+
+  @override
+  String get rentFrom => 'Starting from';
+
+  @override
+  String get rentChangeHelper =>
+      'Charges that already exist keep the old rent.';
+
+  @override
+  String get rentChangeAction => 'Change rent';
+
+  @override
+  String get rentChanged => 'Rent changed.';
+
+  @override
+  String get errRentDate =>
+      'A rent change already exists from that date. Pick another date.';
 }

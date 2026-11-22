@@ -124,6 +124,13 @@ class MockOwnerRepo implements OwnerRepository {
 
   @override
   Future<GuestDetailBundle?> getGuestDetailBundle(String stayId) async => null;
+
+  @override
+  Future<void> setStayRent({
+    required String stayId,
+    required int monthlyRentPaise,
+    required DateTime effectiveFrom,
+  }) async {}
 }
 
 class MockAuthRepo implements AuthRepository {

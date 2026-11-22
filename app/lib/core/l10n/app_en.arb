@@ -1401,5 +1401,33 @@
   "allPaymentsTitle": "All payments",
   "@allPaymentsTitle": {
     "description": "Screen title for all payments list"
+  },
+  "actionChangeRent": "Change rent",
+  "@actionChangeRent": {
+    "description": "Action row and sheet title for changing stay rent"
+  },
+  "rentNew": "New monthly rent",
+  "@rentNew": {
+    "description": "Label for new monthly rent field"
+  },
+  "rentFrom": "Starting from",
+  "@rentFrom": {
+    "description": "Label for starting date field when changing rent"
+  },
+  "rentChangeHelper": "Charges that already exist keep the old rent.",
+  "@rentChangeHelper": {
+    "description": "Helper text explaining rent change effect on existing charges"
+  },
+  "rentChangeAction": "Change rent",
+  "@rentChangeAction": {
+    "description": "Primary action button label to submit rent change"
+  },
+  "rentChanged": "Rent changed.",
+  "@rentChanged": {
+    "description": "Snackbar message when rent change succeeds"
+  },
+  "errRentDate": "A rent change already exists from that date. Pick another date.",
+  "@errRentDate": {
+    "description": "Error message when a rent term already exists on the selected date"
   }
 }

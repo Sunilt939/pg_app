@@ -553,5 +553,35 @@ class SupabaseOwnerRepository implements OwnerRepository {
       return null;
     }
   }
+
+  @override
+  Future<void> setStayRent({
+    required String stayId,
+    required int monthlyRentPaise,
+    required DateTime effectiveFrom,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      final formattedEffectiveFrom =
+          '${effectiveFrom.year.toString().padLeft(4, '0')}-${effectiveFrom.month.toString().padLeft(2, '0')}-${effectiveFrom.day.toString().padLeft(2, '0')}';
+      await client.rpc(
+        'rpc_set_stay_rent',
+        params: {
+          'p_stay_id': stayId,
+          'p_monthly_rent_paise': monthlyRentPaise,
+          'p_effective_from': formattedEffectiveFrom,
+        },
+      );
+    } on PostgrestException catch (e) {
+      if (e.code == '23505') {
+        throw const DuplicateRentDateException();
+      }
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

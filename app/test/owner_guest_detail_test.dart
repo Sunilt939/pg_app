@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:app/core/l10n/app_localizations.dart';
+import 'package:app/core/theme/app_icons.dart';
 import 'package:app/core/theme/app_theme.dart';
+import 'package:app/core/widgets/app_button.dart';
 import 'package:app/core/widgets/status_chip.dart';
 import 'package:app/features/auth/domain/auth_context.dart';
 import 'package:app/features/auth/domain/auth_repository.dart';
@@ -106,6 +108,23 @@ class MockOwnerRepo implements OwnerRepository {
     bool depositAlreadyPaid = false,
   }) async =>
       'stay-123';
+
+  int? lastSetRentPaise;
+  DateTime? lastEffectiveFrom;
+  bool throwDuplicateDate = false;
+
+  @override
+  Future<void> setStayRent({
+    required String stayId,
+    required int monthlyRentPaise,
+    required DateTime effectiveFrom,
+  }) async {
+    if (throwDuplicateDate) {
+      throw const DuplicateRentDateException();
+    }
+    lastSetRentPaise = monthlyRentPaise;
+    lastEffectiveFrom = effectiveFrom;
+  }
 }
 
 class MockAuthRepo implements AuthRepository {
@@ -379,5 +398,71 @@ void main() {
 
     expect(find.text('Part-paid'), findsOneWidget);
     expect(find.text('Cancelled'), findsOneWidget);
+  });
+
+  testWidgets('O17a: Changing rent shows action, validates input, handles duplicate date, and updates rent', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'p-1',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        attentionState: 'paid',
+      ),
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // 1. Verify more button exists and tap it
+    final moreBtn = find.byIcon(AppIcons.more);
+    expect(moreBtn, findsOneWidget);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    // 2. Actions sheet shows "Change rent"
+    final changeRentRow = find.text('Change rent');
+    expect(changeRentRow, findsOneWidget);
+    await tester.tap(changeRentRow);
+    await tester.pumpAndSettle();
+
+    // 3. Change rent sheet opened
+    expect(find.text('New monthly rent'), findsOneWidget);
+    expect(find.text('Starting from'), findsOneWidget);
+    expect(find.text('Charges that already exist keep the old rent.'), findsOneWidget);
+
+    final changeRentBtn = find.widgetWithText(AppButton, 'Change rent');
+    expect(changeRentBtn, findsOneWidget);
+
+    // 4. Test validation: clear input to 0
+    final moneyInput = find.byType(EditableText).first;
+    await tester.enterText(moneyInput, '');
+    await tester.tap(changeRentBtn);
+    await tester.pumpAndSettle();
+    expect(find.text('Enter the monthly rent.'), findsOneWidget);
+
+    // 5. Test duplicate date error
+    repo.throwDuplicateDate = true;
+    await tester.enterText(moneyInput, '12000');
+    await tester.tap(changeRentBtn);
+    await tester.pumpAndSettle();
+    expect(find.text('A rent change already exists from that date. Pick another date.'), findsOneWidget);
+
+    // 6. Test successful submit
+    repo.throwDuplicateDate = false;
+    await tester.tap(changeRentBtn);
+    await tester.pumpAndSettle();
+
+    expect(repo.lastSetRentPaise, 1200000);
+    expect(find.text('Rent changed.'), findsOneWidget);
   });
 }

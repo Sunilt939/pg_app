@@ -38,6 +38,14 @@ class BedAlreadyTakenException implements Exception {
   String toString() => message;
 }
 
+class DuplicateRentDateException implements Exception {
+  final String message;
+  const DuplicateRentDateException([this.message = 'A rent change already exists from that date. Pick another date.']);
+
+  @override
+  String toString() => message;
+}
+
 abstract class OwnerRepository {
   Future<List<City>> getCities();
   Future<List<PgSwitcherItem>> getOwnerPgs();
@@ -88,5 +96,10 @@ abstract class OwnerRepository {
   });
   Future<PgOverview?> getPgOverview(String pgId);
   Future<GuestDetailBundle?> getGuestDetailBundle(String stayId);
+  Future<void> setStayRent({
+    required String stayId,
+    required int monthlyRentPaise,
+    required DateTime effectiveFrom,
+  });
 }
 
