@@ -183,6 +183,19 @@ class MockOwnerRepo implements OwnerRepository {
       'fullName': fullName,
     };
   }
+
+  Map<String, dynamic>? lastVacateStayParams;
+
+  @override
+  Future<void> vacateStay({
+    required String stayId,
+    DateTime? leaveDate,
+  }) async {
+    lastVacateStayParams = {
+      'stayId': stayId,
+      'leaveDate': leaveDate,
+    };
+  }
 }
 
 class MockAuthRepo implements AuthRepository {
@@ -233,6 +246,10 @@ Widget _wrapScreen({
   final router = GoRouter(
     initialLocation: '/owner/guests/$stayId',
     routes: [
+      GoRoute(
+        path: '/owner/guests',
+        builder: (context, state) => const Scaffold(body: Placeholder()),
+      ),
       GoRoute(
         path: '/owner/guests/:stayId',
         builder: (context, state) => OwnerGuestDetailScreen(
@@ -794,5 +811,102 @@ void main() {
     expect(find.text('Change rent'), findsOneWidget);
     expect(find.text('Add a charge'), findsOneWidget);
     expect(find.text('Correct name'), findsNothing);
+  });
+
+  testWidgets('O17e: Mark as vacated opens sheet with zero-balance body and vacates stay', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 0,
+        attentionState: 'paid',
+      ),
+      charges: [],
+      payments: [],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    final moreBtn = find.byIcon(AppIcons.more);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    final vacateRow = find.text('Mark as vacated');
+    expect(vacateRow, findsOneWidget);
+    await tester.tap(vacateRow);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Mark Kiran Kumar as vacated?'), findsOneWidget);
+    expect(find.text('Leaving date'), findsOneWidget);
+    expect(
+      find.text('Their records stay in your history. They will stop getting reminders.'),
+      findsOneWidget,
+    );
+
+    final vacateBtn = find.widgetWithText(AppButton, 'Mark as vacated');
+    expect(vacateBtn, findsOneWidget);
+    await tester.tap(vacateBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Kiran Kumar marked as vacated.'), findsOneWidget);
+    expect(repo.lastVacateStayParams, isNotNull);
+    expect(repo.lastVacateStayParams!['stayId'], 'stay-101');
+    expect(repo.lastVacateStayParams!['leaveDate'], isNotNull);
+  });
+
+  testWidgets('O17e: Mark as vacated with outstanding balance shows owes body', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    final moreBtn = find.byIcon(AppIcons.more);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    final vacateRow = find.text('Mark as vacated');
+    await tester.tap(vacateRow);
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('Kiran Kumar still owes ₹1,500. You can keep recording payments after they leave.'),
+      findsOneWidget,
+    );
   });
 }

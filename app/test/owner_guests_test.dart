@@ -74,6 +74,12 @@ class MockOwnerRepo implements OwnerRepository {
   }) async {}
 
   @override
+  Future<void> vacateStay({
+    required String stayId,
+    DateTime? leaveDate,
+  }) async {}
+
+  @override
   Future<List<City>> getCities() async => const [];
 
   @override

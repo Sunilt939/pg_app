@@ -690,5 +690,30 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> vacateStay({
+    required String stayId,
+    DateTime? leaveDate,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      await client.rpc(
+        'rpc_vacate_stay',
+        params: {
+          'p_stay_id': stayId,
+          if (leaveDate != null)
+            'p_leave_date':
+                '${leaveDate.year}-${leaveDate.month.toString().padLeft(2, '0')}-${leaveDate.day.toString().padLeft(2, '0')}',
+        },
+      );
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

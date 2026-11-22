@@ -2002,6 +2002,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Name saved.'**
   String get nameCorrected;
+
+  /// Action label to mark a guest stay as vacated
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as vacated'**
+  String get actionVacate;
+
+  /// Title for vacating a guest confirmation sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Mark {name} as vacated?'**
+  String vacateTitle(String name);
+
+  /// Label for leaving date field in vacate sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Leaving date'**
+  String get vacateLeaving;
+
+  /// Explanation text when vacating a guest with zero balance
+  ///
+  /// In en, this message translates to:
+  /// **'Their records stay in your history. They will stop getting reminders.'**
+  String get vacateBody;
+
+  /// Explanation text when vacating a guest who owes money
+  ///
+  /// In en, this message translates to:
+  /// **'{name} still owes {amount}. You can keep recording payments after they leave.'**
+  String vacateBodyOwes(String name, String amount);
+
+  /// Snackbar message when a guest is marked as vacated
+  ///
+  /// In en, this message translates to:
+  /// **'{name} marked as vacated.'**
+  String vacatedToast(String name);
 }
 
 class _AppLocalizationsDelegate

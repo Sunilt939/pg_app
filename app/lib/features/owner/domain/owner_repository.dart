@@ -120,5 +120,9 @@ abstract class OwnerRepository {
     required String personId,
     required String fullName,
   });
+  Future<void> vacateStay({
+    required String stayId,
+    DateTime? leaveDate,
+  });
 }
 

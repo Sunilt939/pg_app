@@ -1110,4 +1110,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nameCorrected => 'Name saved.';
+
+  @override
+  String get actionVacate => 'Mark as vacated';
+
+  @override
+  String vacateTitle(String name) {
+    return 'Mark $name as vacated?';
+  }
+
+  @override
+  String get vacateLeaving => 'Leaving date';
+
+  @override
+  String get vacateBody =>
+      'Their records stay in your history. They will stop getting reminders.';
+
+  @override
+  String vacateBodyOwes(String name, String amount) {
+    return '$name still owes $amount. You can keep recording payments after they leave.';
+  }
+
+  @override
+  String vacatedToast(String name) {
+    return '$name marked as vacated.';
+  }
 }

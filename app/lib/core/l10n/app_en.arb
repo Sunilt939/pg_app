@@ -1493,5 +1493,47 @@
   "nameCorrected": "Name saved.",
   "@nameCorrected": {
     "description": "Snackbar message when guest name is corrected"
+  },
+  "actionVacate": "Mark as vacated",
+  "@actionVacate": {
+    "description": "Action label to mark a guest stay as vacated"
+  },
+  "vacateTitle": "Mark {name} as vacated?",
+  "@vacateTitle": {
+    "description": "Title for vacating a guest confirmation sheet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vacateLeaving": "Leaving date",
+  "@vacateLeaving": {
+    "description": "Label for leaving date field in vacate sheet"
+  },
+  "vacateBody": "Their records stay in your history. They will stop getting reminders.",
+  "@vacateBody": {
+    "description": "Explanation text when vacating a guest with zero balance"
+  },
+  "vacateBodyOwes": "{name} still owes {amount}. You can keep recording payments after they leave.",
+  "@vacateBodyOwes": {
+    "description": "Explanation text when vacating a guest who owes money",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "vacatedToast": "{name} marked as vacated.",
+  "@vacatedToast": {
+    "description": "Snackbar message when a guest is marked as vacated",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }

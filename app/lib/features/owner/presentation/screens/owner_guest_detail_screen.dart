@@ -937,7 +937,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
               title: l10n.actionAddCharge,
               titleStyle: AppText.body,
               minHeight: 56,
-              showDivider: canCorrectName,
+              showDivider: isOpenStay,
               onTap: () {
                 Navigator.of(sheetContext).pop();
                 _openAddChargeSheet(context, ref, l10n, guest);
@@ -948,10 +948,21 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
                 title: l10n.actionCorrectName,
                 titleStyle: AppText.body,
                 minHeight: 56,
-                showDivider: false,
+                showDivider: true,
                 onTap: () {
                   Navigator.of(sheetContext).pop();
                   _openCorrectNameSheet(context, ref, l10n, guest);
+                },
+              ),
+            if (isOpenStay)
+              LedgerRow(
+                title: l10n.actionVacate,
+                titleStyle: AppText.body.copyWith(color: AppColors.overdueFg),
+                minHeight: 56,
+                showDivider: false,
+                onTap: () {
+                  Navigator.of(sheetContext).pop();
+                  _openVacateSheet(context, ref, l10n, guest);
                 },
               ),
           ],
@@ -994,6 +1005,26 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
       context: context,
       builder: (context) => _CorrectNameSheet(guest: guest),
     );
+  }
+
+  Future<void> _openVacateSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) async {
+    final vacated = await AppBottomSheet.show<bool>(
+      context: context,
+      builder: (sheetContext) => _VacateSheet(guest: guest),
+    );
+
+    if (vacated == true && context.mounted) {
+      AppSnack.show(
+        context,
+        message: l10n.vacatedToast(guest.fullName ?? ''),
+      );
+      context.pop();
+    }
   }
 }
 
@@ -1364,6 +1395,97 @@ class _CorrectNameSheetState extends ConsumerState<_CorrectNameSheet> {
             },
           ),
           const SizedBox(height: AppSpace.x24),
+        ],
+      ),
+    );
+  }
+}
+
+class _VacateSheet extends ConsumerStatefulWidget {
+  final GuestListItem guest;
+
+  const _VacateSheet({required this.guest});
+
+  @override
+  ConsumerState<_VacateSheet> createState() => _VacateSheetState();
+}
+
+class _VacateSheetState extends ConsumerState<_VacateSheet> {
+  late DateTime _leaveDate;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _leaveDate = DateTime.now();
+  }
+
+  Future<void> _submit(AppLocalizations l10n) async {
+    setState(() => _isLoading = true);
+
+    try {
+      await ref.read(ownerRepositoryProvider).vacateStay(
+            stayId: widget.guest.stayId,
+            leaveDate: _leaveDate,
+          );
+      if (mounted) {
+        Navigator.of(context).pop(true);
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        AppSnack.show(
+          context,
+          message: e.toString().replaceFirst('Exception: ', ''),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final guestName = widget.guest.fullName ?? '';
+    final bodyText = widget.guest.outstandingPaise > 0
+        ? l10n.vacateBodyOwes(
+            guestName,
+            MoneyFormat.format(widget.guest.outstandingPaise),
+          )
+        : l10n.vacateBody;
+
+    return AppBottomSheet(
+      title: l10n.vacateTitle(guestName),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSpace.x8),
+          DateField(
+            label: l10n.vacateLeaving,
+            value: _leaveDate,
+            onChanged: (newDate) {
+              setState(() => _leaveDate = newDate);
+            },
+          ),
+          const SizedBox(height: AppSpace.x16),
+          Text(
+            bodyText,
+            style: AppText.body,
+          ),
+          const SizedBox(height: AppSpace.x24),
+          AppButton.destructive(
+            label: l10n.actionVacate,
+            loading: _isLoading,
+            expand: true,
+            onPressed: () => _submit(l10n),
+          ),
+          const SizedBox(height: AppSpace.x12),
+          AppButton.secondary(
+            label: l10n.actionCancel,
+            expand: true,
+            onPressed: _isLoading ? null : () => Navigator.of(context).pop(),
+          ),
+          const SizedBox(height: AppSpace.x8),
         ],
       ),
     );

@@ -149,6 +149,12 @@ class MockOwnerRepo implements OwnerRepository {
     required String personId,
     required String fullName,
   }) async {}
+
+  @override
+  Future<void> vacateStay({
+    required String stayId,
+    DateTime? leaveDate,
+  }) async {}
 }
 
 class MockAuthRepo implements AuthRepository {
