@@ -379,5 +379,58 @@ class SupabaseOwnerRepository implements OwnerRepository {
       throw const AuthNetworkException();
     }
   }
+
+  @override
+  Future<String> createStay({
+    required String pgId,
+    required String phone,
+    required String fullName,
+    String? bedId,
+    required DateTime joinDate,
+    required int monthlyRentPaise,
+    int depositPaise = 0,
+    int? billingDay,
+    DateTime? billingStartsOn,
+    bool depositAlreadyPaid = false,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+    try {
+      final formattedJoinDate =
+          '${joinDate.year.toString().padLeft(4, '0')}-${joinDate.month.toString().padLeft(2, '0')}-${joinDate.day.toString().padLeft(2, '0')}';
+      final formattedBillingStartsOn = billingStartsOn != null
+          ? '${billingStartsOn.year.toString().padLeft(4, '0')}-${billingStartsOn.month.toString().padLeft(2, '0')}-${billingStartsOn.day.toString().padLeft(2, '0')}'
+          : null;
+
+      final response = await client.rpc(
+        'rpc_create_stay',
+        params: {
+          'p_pg_id': pgId,
+          'p_phone': phone,
+          'p_full_name': fullName,
+          'p_bed_id': bedId,
+          'p_join_date': formattedJoinDate,
+          'p_monthly_rent_paise': monthlyRentPaise,
+          'p_deposit_paise': depositPaise,
+          'p_billing_day': billingDay,
+          'p_billing_starts_on': formattedBillingStartsOn,
+          'p_deposit_already_paid': depositAlreadyPaid,
+        },
+      );
+      return response.toString();
+    } on PostgrestException catch (e) {
+      if (e.code == '23505') {
+        final fullMsg = '${e.message} ${e.details ?? ''}'.toLowerCase();
+        if (fullMsg.contains('bed_has_one_current_occupant') || fullMsg.contains('bed')) {
+          throw const BedAlreadyTakenException();
+        } else {
+          throw const DuplicateGuestStayException();
+        }
+      }
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

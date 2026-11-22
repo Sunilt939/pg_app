@@ -12,6 +12,22 @@ class DuplicateNicknameException implements Exception {
   String toString() => message;
 }
 
+class DuplicateGuestStayException implements Exception {
+  final String message;
+  const DuplicateGuestStayException([this.message = 'This guest is already staying in this PG.']);
+
+  @override
+  String toString() => message;
+}
+
+class BedAlreadyTakenException implements Exception {
+  final String message;
+  const BedAlreadyTakenException([this.message = 'That bed was just taken. Choose another.']);
+
+  @override
+  String toString() => message;
+}
+
 abstract class OwnerRepository {
   Future<List<City>> getCities();
   Future<List<PgSwitcherItem>> getOwnerPgs();
@@ -42,6 +58,18 @@ abstract class OwnerRepository {
     String? area,
     String? contactPhone,
     String genderPolicy = 'any',
+  });
+  Future<String> createStay({
+    required String pgId,
+    required String phone,
+    required String fullName,
+    String? bedId,
+    required DateTime joinDate,
+    required int monthlyRentPaise,
+    int depositPaise = 0,
+    int? billingDay,
+    DateTime? billingStartsOn,
+    bool depositAlreadyPaid = false,
   });
 }
 

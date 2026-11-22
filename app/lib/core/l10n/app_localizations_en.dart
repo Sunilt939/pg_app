@@ -763,4 +763,110 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errNickname => 'Enter a nickname.';
+
+  @override
+  String get addGuestSection => 'Guest';
+
+  @override
+  String get addGuestStaySection => 'Stay';
+
+  @override
+  String get addGuestMoneySection => 'Rent and deposit';
+
+  @override
+  String get guestMobile => 'Mobile number';
+
+  @override
+  String get guestMobileHelper =>
+      'This number will be used to sign in as a guest.';
+
+  @override
+  String get guestName => 'Full name';
+
+  @override
+  String get guestBed => 'Bed (optional)';
+
+  @override
+  String get guestBedPick => 'Choose a bed';
+
+  @override
+  String get guestBedNone => 'No bed yet';
+
+  @override
+  String guestBedOption(String room, String bed) {
+    return 'Room $room, bed $bed';
+  }
+
+  @override
+  String get guestJoinDate => 'Joining date';
+
+  @override
+  String get guestJoinDatePastNotice =>
+      'Joining date is in the past. Turn on Already staying here below if needed.';
+
+  @override
+  String get guestRent => 'Monthly rent';
+
+  @override
+  String get guestDeposit => 'Security deposit (optional)';
+
+  @override
+  String get guestBillingDay => 'Rent is due on day';
+
+  @override
+  String get billingDayHelper => 'Due every month on this day.';
+
+  @override
+  String get alreadyStaying => 'Already staying here';
+
+  @override
+  String get alreadyStayingHelper =>
+      'Turn on for guests who joined before you started using the app.';
+
+  @override
+  String get billingStartsFrom => 'Start billing from';
+
+  @override
+  String get billingStartHelper =>
+      'Rent due before this date won\'t be billed.';
+
+  @override
+  String get depositReceived => 'Deposit already received';
+
+  @override
+  String get depositReceivedHelper => 'The deposit will not show as due.';
+
+  @override
+  String get addGuestAction => 'Add guest';
+
+  @override
+  String get inviteTitle => 'Guest added';
+
+  @override
+  String inviteBody(String name, String phone) {
+    return 'Ask $name to sign in with $phone.';
+  }
+
+  @override
+  String get inviteAction => 'Invite on WhatsApp';
+
+  @override
+  String inviteMessage(String name, String pg, String appName) {
+    return 'Hi $name, I\'ve added you to $pg on $appName. Download the app and sign in with this mobile number.';
+  }
+
+  @override
+  String get errGuestExists => 'This guest is already staying in this PG.';
+
+  @override
+  String get errBedTaken => 'That bed was just taken. Choose another.';
+
+  @override
+  String get errGuestName => 'Enter the guest\'s name.';
+
+  @override
+  String get errRent => 'Enter the monthly rent.';
+
+  @override
+  String get errorNotAllowed => 'You do not have permission to do this.';
 }

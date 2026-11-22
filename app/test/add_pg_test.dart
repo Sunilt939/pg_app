@@ -96,6 +96,20 @@ class MockOwnerRepo implements OwnerRepository {
     createdGenderPolicy = genderPolicy;
     return 'pg-new-123';
   }
+
+  @override
+  Future<String> createStay({
+    required String pgId,
+    required String phone,
+    required String fullName,
+    String? bedId,
+    required DateTime joinDate,
+    required int monthlyRentPaise,
+    int depositPaise = 0,
+    int? billingDay,
+    DateTime? billingStartsOn,
+    bool depositAlreadyPaid = false,
+  }) async => 'stay-123';
 }
 
 class MockAuthRepo implements AuthRepository {

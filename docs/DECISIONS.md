@@ -14,6 +14,9 @@ The AI adds one line per decision it had to make. Never delete lines.
 | 2026-11-20 | O11 | More tab transition to O11 rooms list | Replaced temporary setup/new rows in More tab with single "Rooms and beds" row opening /owner/rooms; empty state links to O12 and top bar plus links to O12b |
 | 2026-11-22 | O14 | Empty last 4 digits in bank account subtitle | Display bank name alone when account_last4 is null or empty, omitting ", ending " |
 | 2026-11-22 | O14 | Deactivating default receiving account | Automatically unsets default, disables "Use as default" switch when inactive, and reassigns default to the oldest active account of the PG (or none if only one account) |
+| 2026-11-22 | O5 | Navigation after adding guest before O6 is approved | Pop back to previous screen upon closing InviteSheet until O6 (Guest detail) is approved |
+| 2026-11-22 | O5 | Alert on duplicate guest stay error | Show floating snackbar (AppSnack) in addition to field error on DuplicateGuestStayException |
+| 2026-11-22 | O5 | Past joining date notice | Display non-error muted notice under joining date when selected date is in the past |
 
 ## Other decisions
 

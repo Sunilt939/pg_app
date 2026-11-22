@@ -55,7 +55,7 @@
 
 ### Part 4. Guests
 
-- [ ] **O5. Add guest** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O5. *Test:* add a real guest, and one with "Already staying here" switched on. The invite message opens.
+- [x] **O5. Add guest** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O5. *Test:* add a real guest, and one with "Already staying here" switched on. The invite message opens.
 - [ ] **O4. Guests list** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O4. *Check:* search, the five tabs and their counts, and the empty states.
 - [ ] **O6. Guest detail** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O6. Leave out the "Waiting for you" section for now (it comes in O6b). *Check:* balance numbers match what you expect.
 - [ ] **O17a. Change rent** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17.

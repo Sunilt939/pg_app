@@ -1384,6 +1384,198 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a nickname.'**
   String get errNickname;
+
+  /// Section header for guest details in Add Guest
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get addGuestSection;
+
+  /// Section header for stay details in Add Guest
+  ///
+  /// In en, this message translates to:
+  /// **'Stay'**
+  String get addGuestStaySection;
+
+  /// Section header for rent and deposit in Add Guest
+  ///
+  /// In en, this message translates to:
+  /// **'Rent and deposit'**
+  String get addGuestMoneySection;
+
+  /// Label for mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get guestMobile;
+
+  /// Helper text under mobile number field
+  ///
+  /// In en, this message translates to:
+  /// **'This number will be used to sign in as a guest.'**
+  String get guestMobileHelper;
+
+  /// Label for full name field
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get guestName;
+
+  /// Label for bed selection field
+  ///
+  /// In en, this message translates to:
+  /// **'Bed (optional)'**
+  String get guestBed;
+
+  /// Hint text for picking a bed
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a bed'**
+  String get guestBedPick;
+
+  /// Option when no bed is assigned yet
+  ///
+  /// In en, this message translates to:
+  /// **'No bed yet'**
+  String get guestBedNone;
+
+  /// Bed option display
+  ///
+  /// In en, this message translates to:
+  /// **'Room {room}, bed {bed}'**
+  String guestBedOption(String room, String bed);
+
+  /// Label for joining date field
+  ///
+  /// In en, this message translates to:
+  /// **'Joining date'**
+  String get guestJoinDate;
+
+  /// Helper notice under joining date when selected date is in the past
+  ///
+  /// In en, this message translates to:
+  /// **'Joining date is in the past. Turn on Already staying here below if needed.'**
+  String get guestJoinDatePastNotice;
+
+  /// Label for monthly rent field
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly rent'**
+  String get guestRent;
+
+  /// Label for security deposit field
+  ///
+  /// In en, this message translates to:
+  /// **'Security deposit (optional)'**
+  String get guestDeposit;
+
+  /// Label for rent due day field
+  ///
+  /// In en, this message translates to:
+  /// **'Rent is due on day'**
+  String get guestBillingDay;
+
+  /// Helper text under billing day field
+  ///
+  /// In en, this message translates to:
+  /// **'Due every month on this day.'**
+  String get billingDayHelper;
+
+  /// Switch label for guests who joined earlier
+  ///
+  /// In en, this message translates to:
+  /// **'Already staying here'**
+  String get alreadyStaying;
+
+  /// Helper text for already staying switch
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on for guests who joined before you started using the app.'**
+  String get alreadyStayingHelper;
+
+  /// Label for start billing date field
+  ///
+  /// In en, this message translates to:
+  /// **'Start billing from'**
+  String get billingStartsFrom;
+
+  /// Helper text under billing start date field
+  ///
+  /// In en, this message translates to:
+  /// **'Rent due before this date won\'t be billed.'**
+  String get billingStartHelper;
+
+  /// Switch label for deposit already received
+  ///
+  /// In en, this message translates to:
+  /// **'Deposit already received'**
+  String get depositReceived;
+
+  /// Helper text under deposit received switch
+  ///
+  /// In en, this message translates to:
+  /// **'The deposit will not show as due.'**
+  String get depositReceivedHelper;
+
+  /// Submit button label for adding a guest
+  ///
+  /// In en, this message translates to:
+  /// **'Add guest'**
+  String get addGuestAction;
+
+  /// Title for invite bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Guest added'**
+  String get inviteTitle;
+
+  /// Body message for invite bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Ask {name} to sign in with {phone}.'**
+  String inviteBody(String name, String phone);
+
+  /// Action button to share invite on WhatsApp
+  ///
+  /// In en, this message translates to:
+  /// **'Invite on WhatsApp'**
+  String get inviteAction;
+
+  /// WhatsApp invitation message
+  ///
+  /// In en, this message translates to:
+  /// **'Hi {name}, I\'ve added you to {pg} on {appName}. Download the app and sign in with this mobile number.'**
+  String inviteMessage(String name, String pg, String appName);
+
+  /// Error when guest already has an active stay in this PG
+  ///
+  /// In en, this message translates to:
+  /// **'This guest is already staying in this PG.'**
+  String get errGuestExists;
+
+  /// Error when bed has just been occupied
+  ///
+  /// In en, this message translates to:
+  /// **'That bed was just taken. Choose another.'**
+  String get errBedTaken;
+
+  /// Validation error when full name is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the guest\'s name.'**
+  String get errGuestName;
+
+  /// Validation error when monthly rent is missing or zero
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the monthly rent.'**
+  String get errRent;
+
+  /// Error text when user lacks permission (SQLSTATE 42501)
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to do this.'**
+  String get errorNotAllowed;
 }
 
 class _AppLocalizationsDelegate

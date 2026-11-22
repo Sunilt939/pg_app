@@ -999,5 +999,160 @@
   "errNickname": "Enter a nickname.",
   "@errNickname": {
     "description": "Validation error when nickname is empty"
+  },
+  "addGuestSection": "Guest",
+  "@addGuestSection": {
+    "description": "Section header for guest details in Add Guest"
+  },
+  "addGuestStaySection": "Stay",
+  "@addGuestStaySection": {
+    "description": "Section header for stay details in Add Guest"
+  },
+  "addGuestMoneySection": "Rent and deposit",
+  "@addGuestMoneySection": {
+    "description": "Section header for rent and deposit in Add Guest"
+  },
+  "guestMobile": "Mobile number",
+  "@guestMobile": {
+    "description": "Label for mobile number field"
+  },
+  "guestMobileHelper": "This number will be used to sign in as a guest.",
+  "@guestMobileHelper": {
+    "description": "Helper text under mobile number field"
+  },
+  "guestName": "Full name",
+  "@guestName": {
+    "description": "Label for full name field"
+  },
+  "guestBed": "Bed (optional)",
+  "@guestBed": {
+    "description": "Label for bed selection field"
+  },
+  "guestBedPick": "Choose a bed",
+  "@guestBedPick": {
+    "description": "Hint text for picking a bed"
+  },
+  "guestBedNone": "No bed yet",
+  "@guestBedNone": {
+    "description": "Option when no bed is assigned yet"
+  },
+  "guestBedOption": "Room {room}, bed {bed}",
+  "@guestBedOption": {
+    "description": "Bed option display",
+    "placeholders": {
+      "room": {
+        "type": "String"
+      },
+      "bed": {
+        "type": "String"
+      }
+    }
+  },
+  "guestJoinDate": "Joining date",
+  "@guestJoinDate": {
+    "description": "Label for joining date field"
+  },
+  "guestJoinDatePastNotice": "Joining date is in the past. Turn on Already staying here below if needed.",
+  "@guestJoinDatePastNotice": {
+    "description": "Helper notice under joining date when selected date is in the past"
+  },
+  "guestRent": "Monthly rent",
+  "@guestRent": {
+    "description": "Label for monthly rent field"
+  },
+  "guestDeposit": "Security deposit (optional)",
+  "@guestDeposit": {
+    "description": "Label for security deposit field"
+  },
+  "guestBillingDay": "Rent is due on day",
+  "@guestBillingDay": {
+    "description": "Label for rent due day field"
+  },
+  "billingDayHelper": "Due every month on this day.",
+  "@billingDayHelper": {
+    "description": "Helper text under billing day field"
+  },
+  "alreadyStaying": "Already staying here",
+  "@alreadyStaying": {
+    "description": "Switch label for guests who joined earlier"
+  },
+  "alreadyStayingHelper": "Turn on for guests who joined before you started using the app.",
+  "@alreadyStayingHelper": {
+    "description": "Helper text for already staying switch"
+  },
+  "billingStartsFrom": "Start billing from",
+  "@billingStartsFrom": {
+    "description": "Label for start billing date field"
+  },
+  "billingStartHelper": "Rent due before this date won't be billed.",
+  "@billingStartHelper": {
+    "description": "Helper text under billing start date field"
+  },
+  "depositReceived": "Deposit already received",
+  "@depositReceived": {
+    "description": "Switch label for deposit already received"
+  },
+  "depositReceivedHelper": "The deposit will not show as due.",
+  "@depositReceivedHelper": {
+    "description": "Helper text under deposit received switch"
+  },
+  "addGuestAction": "Add guest",
+  "@addGuestAction": {
+    "description": "Submit button label for adding a guest"
+  },
+  "inviteTitle": "Guest added",
+  "@inviteTitle": {
+    "description": "Title for invite bottom sheet"
+  },
+  "inviteBody": "Ask {name} to sign in with {phone}.",
+  "@inviteBody": {
+    "description": "Body message for invite bottom sheet",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "inviteAction": "Invite on WhatsApp",
+  "@inviteAction": {
+    "description": "Action button to share invite on WhatsApp"
+  },
+  "inviteMessage": "Hi {name}, I've added you to {pg} on {appName}. Download the app and sign in with this mobile number.",
+  "@inviteMessage": {
+    "description": "WhatsApp invitation message",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "pg": {
+        "type": "String"
+      },
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "errGuestExists": "This guest is already staying in this PG.",
+  "@errGuestExists": {
+    "description": "Error when guest already has an active stay in this PG"
+  },
+  "errBedTaken": "That bed was just taken. Choose another.",
+  "@errBedTaken": {
+    "description": "Error when bed has just been occupied"
+  },
+  "errGuestName": "Enter the guest's name.",
+  "@errGuestName": {
+    "description": "Validation error when full name is empty"
+  },
+  "errRent": "Enter the monthly rent.",
+  "@errRent": {
+    "description": "Validation error when monthly rent is missing or zero"
+  },
+  "errorNotAllowed": "You do not have permission to do this.",
+  "@errorNotAllowed": {
+    "description": "Error text when user lacks permission (SQLSTATE 42501)"
   }
 }
