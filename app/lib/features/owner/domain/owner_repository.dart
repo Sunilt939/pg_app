@@ -116,5 +116,9 @@ abstract class OwnerRepository {
     required String chargeId,
     required String reason,
   });
+  Future<void> correctGuestName({
+    required String personId,
+    required String fullName,
+  });
 }
 

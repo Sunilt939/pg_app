@@ -914,6 +914,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
     GuestListItem guest,
   ) {
     final isOpenStay = guest.stayStatus != 'vacated';
+    final canCorrectName = !guest.hasSignedIn && isOpenStay;
 
     AppBottomSheet.show(
       context: context,
@@ -936,12 +937,23 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
               title: l10n.actionAddCharge,
               titleStyle: AppText.body,
               minHeight: 56,
-              showDivider: false,
+              showDivider: canCorrectName,
               onTap: () {
                 Navigator.of(sheetContext).pop();
                 _openAddChargeSheet(context, ref, l10n, guest);
               },
             ),
+            if (canCorrectName)
+              LedgerRow(
+                title: l10n.actionCorrectName,
+                titleStyle: AppText.body,
+                minHeight: 56,
+                showDivider: false,
+                onTap: () {
+                  Navigator.of(sheetContext).pop();
+                  _openCorrectNameSheet(context, ref, l10n, guest);
+                },
+              ),
           ],
         ),
       ),
@@ -969,6 +981,18 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
     AppBottomSheet.show(
       context: context,
       builder: (context) => _AddChargeSheet(guest: guest),
+    );
+  }
+
+  void _openCorrectNameSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) {
+    AppBottomSheet.show(
+      context: context,
+      builder: (context) => _CorrectNameSheet(guest: guest),
     );
   }
 }
@@ -1245,6 +1269,99 @@ class _AddChargeSheetState extends ConsumerState<_AddChargeSheet> {
           AppTextField(
             label: l10n.chargeNote,
             controller: _noteController,
+          ),
+          const SizedBox(height: AppSpace.x24),
+        ],
+      ),
+    );
+  }
+}
+
+class _CorrectNameSheet extends ConsumerStatefulWidget {
+  final GuestListItem guest;
+
+  const _CorrectNameSheet({required this.guest});
+
+  @override
+  ConsumerState<_CorrectNameSheet> createState() => _CorrectNameSheetState();
+}
+
+class _CorrectNameSheetState extends ConsumerState<_CorrectNameSheet> {
+  late final TextEditingController _nameController;
+  String? _nameError;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.guest.fullName ?? '');
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit(AppLocalizations l10n) async {
+    final name = _nameController.text.trim();
+    if (name.isEmpty) {
+      setState(() => _nameError = l10n.errGuestName);
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _nameError = null;
+    });
+
+    try {
+      await ref.read(ownerRepositoryProvider).correctGuestName(
+            personId: widget.guest.personId,
+            fullName: name,
+          );
+      if (mounted) {
+        Navigator.of(context).pop();
+        AppSnack.show(context, message: l10n.nameCorrected);
+        ref.invalidate(guestDetailBundleProvider(widget.guest.stayId));
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        AppSnack.show(
+          context,
+          message: e.toString().replaceFirst('Exception: ', ''),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return AppBottomSheet(
+      title: l10n.actionCorrectName,
+      bottomAction: AppButton.primary(
+        label: l10n.actionSave,
+        loading: _isLoading,
+        expand: true,
+        onPressed: () => _submit(l10n),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSpace.x8),
+          AppTextField(
+            label: l10n.guestName,
+            controller: _nameController,
+            errorText: _nameError,
+            onChanged: (val) {
+              if (_nameError != null && val.trim().isNotEmpty) {
+                setState(() => _nameError = null);
+              }
+            },
           ),
           const SizedBox(height: AppSpace.x24),
         ],

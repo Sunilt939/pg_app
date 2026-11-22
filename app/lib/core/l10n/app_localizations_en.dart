@@ -1104,4 +1104,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errChargeReason => 'Enter a reason for cancelling this charge.';
+
+  @override
+  String get actionCorrectName => 'Correct name';
+
+  @override
+  String get nameCorrected => 'Name saved.';
 }

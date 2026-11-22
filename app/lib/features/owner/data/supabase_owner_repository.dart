@@ -667,5 +667,28 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> correctGuestName({
+    required String personId,
+    required String fullName,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      await client.rpc(
+        'rpc_correct_guest_name',
+        params: {
+          'p_person_id': personId,
+          'p_full_name': fullName,
+        },
+      );
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

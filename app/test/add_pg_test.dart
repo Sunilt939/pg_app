@@ -150,6 +150,12 @@ class MockOwnerRepo implements OwnerRepository {
     required String chargeId,
     required String reason,
   }) async {}
+
+  @override
+  Future<void> correctGuestName({
+    required String personId,
+    required String fullName,
+  }) async {}
 }
 
 class MockAuthRepo implements AuthRepository {

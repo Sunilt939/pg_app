@@ -1485,5 +1485,13 @@
   "errChargeReason": "Enter a reason for cancelling this charge.",
   "@errChargeReason": {
     "description": "Validation error when cancellation reason is empty"
+  },
+  "actionCorrectName": "Correct name",
+  "@actionCorrectName": {
+    "description": "Action label to correct a guest's name"
+  },
+  "nameCorrected": "Name saved.",
+  "@nameCorrected": {
+    "description": "Snackbar message when guest name is corrected"
   }
 }

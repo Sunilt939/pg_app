@@ -170,6 +170,19 @@ class MockOwnerRepo implements OwnerRepository {
       'reason': reason,
     };
   }
+
+  Map<String, dynamic>? lastCorrectGuestNameParams;
+
+  @override
+  Future<void> correctGuestName({
+    required String personId,
+    required String fullName,
+  }) async {
+    lastCorrectGuestNameParams = {
+      'personId': personId,
+      'fullName': fullName,
+    };
+  }
 }
 
 class MockAuthRepo implements AuthRepository {
@@ -672,5 +685,114 @@ void main() {
     expect(repo.lastVoidChargeParams, isNotNull);
     expect(repo.lastVoidChargeParams!['chargeId'], 'charge-1');
     expect(repo.lastVoidChargeParams!['reason'], 'Billed by mistake');
+  });
+
+  testWidgets('O17d: Correct name visible for unsigned-in guest, validates empty name, and saves', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        attentionState: 'paid',
+      ),
+      charges: [],
+      payments: [],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // 1. Open actions sheet
+    final moreBtn = find.byIcon(AppIcons.more);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    // 2. "Correct name" is visible
+    final correctNameRow = find.text('Correct name');
+    expect(correctNameRow, findsOneWidget);
+    await tester.tap(correctNameRow);
+    await tester.pumpAndSettle();
+
+    // 3. Sheet is open with pre-filled name and Save button
+    expect(find.text('Full name'), findsOneWidget);
+    expect(
+      find.descendant(
+        of: find.widgetWithText(AppTextField, 'Full name'),
+        matching: find.text('Kiran Kumar'),
+      ),
+      findsOneWidget,
+    );
+    final saveBtn = find.widgetWithText(AppButton, 'Save');
+    expect(saveBtn, findsOneWidget);
+
+    // 4. Test validation on empty name
+    final nameInput = find.descendant(
+      of: find.widgetWithText(AppTextField, 'Full name'),
+      matching: find.byType(EditableText),
+    );
+    await tester.enterText(nameInput, '');
+    await tester.pumpAndSettle();
+    await tester.tap(saveBtn);
+    await tester.pumpAndSettle();
+    expect(find.text("Enter the guest's name."), findsOneWidget);
+
+    // 5. Enter corrected name and submit
+    await tester.enterText(nameInput, 'Kiran K.');
+    await tester.pumpAndSettle();
+    await tester.tap(saveBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Name saved.'), findsOneWidget);
+    expect(repo.lastCorrectGuestNameParams, isNotNull);
+    expect(repo.lastCorrectGuestNameParams!['personId'], 'person-101');
+    expect(repo.lastCorrectGuestNameParams!['fullName'], 'Kiran K.');
+  });
+
+  testWidgets('O17d: Correct name is NOT visible when guest has signed in', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: true,
+        attentionState: 'paid',
+      ),
+      charges: [],
+      payments: [],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    final moreBtn = find.byIcon(AppIcons.more);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Change rent'), findsOneWidget);
+    expect(find.text('Add a charge'), findsOneWidget);
+    expect(find.text('Correct name'), findsNothing);
   });
 }

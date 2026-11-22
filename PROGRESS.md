@@ -61,7 +61,7 @@
 - [x] **O17a. Change rent** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17.
 - [x] **O17b. Add a charge** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17.
 - [x] **O17c. Cancel a charge** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17.
-- [ ] **O17d. Correct a guest's name** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17. *Test:* works for a guest who has not signed in; refused after they have.
+- [x] **O17d. Correct a guest's name** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17. *Test:* works for a guest who has not signed in; refused after they have.
 - [ ] **O17e. Mark as vacated** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O17. *Test with a test guest.* The bed becomes free and the guest moves to the Past tab.
 
 ### Part 5. The owner records money

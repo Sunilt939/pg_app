@@ -1990,6 +1990,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a reason for cancelling this charge.'**
   String get errChargeReason;
+
+  /// Action label to correct a guest's name
+  ///
+  /// In en, this message translates to:
+  /// **'Correct name'**
+  String get actionCorrectName;
+
+  /// Snackbar message when guest name is corrected
+  ///
+  /// In en, this message translates to:
+  /// **'Name saved.'**
+  String get nameCorrected;
 }
 
 class _AppLocalizationsDelegate

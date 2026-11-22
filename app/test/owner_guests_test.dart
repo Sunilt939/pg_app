@@ -68,6 +68,12 @@ class MockOwnerRepo implements OwnerRepository {
   }) async {}
 
   @override
+  Future<void> correctGuestName({
+    required String personId,
+    required String fullName,
+  }) async {}
+
+  @override
   Future<List<City>> getCities() async => const [];
 
   @override
