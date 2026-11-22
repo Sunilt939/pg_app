@@ -583,5 +583,66 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<ChargeType>> getChargeTypes() async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      final response = await client
+          .from('charge_types')
+          .select('id, code, label, is_refundable, is_recurring, is_active')
+          .eq('is_active', true)
+          .neq('code', 'rent')
+          .order('id');
+
+      final list = response as List<dynamic>;
+      return list
+          .map((json) => ChargeType.fromJson(json as Map<String, dynamic>))
+          .toList();
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      throw const AuthNetworkException();
+    }
+  }
+
+  @override
+  Future<void> addCharge({
+    required String stayId,
+    required String chargeTypeCode,
+    required int amountPaise,
+    required DateTime dueDate,
+    String? description,
+    DateTime? periodMonth,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      final formattedDueDate =
+          '${dueDate.year.toString().padLeft(4, '0')}-${dueDate.month.toString().padLeft(2, '0')}-${dueDate.day.toString().padLeft(2, '0')}';
+      final formattedPeriodMonth = periodMonth != null
+          ? '${periodMonth.year.toString().padLeft(4, '0')}-${periodMonth.month.toString().padLeft(2, '0')}-${periodMonth.day.toString().padLeft(2, '0')}'
+          : null;
+
+      await client.rpc(
+        'rpc_add_charge',
+        params: {
+          'p_stay_id': stayId,
+          'p_charge_type_code': chargeTypeCode,
+          'p_amount_paise': amountPaise,
+          'p_due_date': formattedDueDate,
+          'p_description': description,
+          'p_period_month': formattedPeriodMonth,
+        },
+      );
+    } on PostgrestException catch (e) {
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

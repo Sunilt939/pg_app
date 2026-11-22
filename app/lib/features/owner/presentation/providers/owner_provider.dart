@@ -131,4 +131,11 @@ final guestDetailBundleProvider =
   return repo.getGuestDetailBundle(stayId);
 });
 
+final chargeTypesProvider =
+    FutureProvider.autoDispose<List<ChargeType>>((ref) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getChargeTypes();
+});
+
+
 

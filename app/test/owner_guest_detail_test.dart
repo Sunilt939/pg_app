@@ -7,6 +7,9 @@ import 'package:app/core/l10n/app_localizations.dart';
 import 'package:app/core/theme/app_icons.dart';
 import 'package:app/core/theme/app_theme.dart';
 import 'package:app/core/widgets/app_button.dart';
+import 'package:app/core/widgets/app_text_field.dart';
+import 'package:app/core/widgets/money_field.dart';
+import 'package:app/core/widgets/select_field.dart';
 import 'package:app/core/widgets/status_chip.dart';
 import 'package:app/features/auth/domain/auth_context.dart';
 import 'package:app/features/auth/domain/auth_repository.dart';
@@ -124,6 +127,36 @@ class MockOwnerRepo implements OwnerRepository {
     }
     lastSetRentPaise = monthlyRentPaise;
     lastEffectiveFrom = effectiveFrom;
+  }
+
+  List<ChargeType> chargeTypes = const [
+    ChargeType(id: 2, code: 'security_deposit', label: 'Security deposit'),
+    ChargeType(id: 3, code: 'electricity', label: 'Electricity'),
+    ChargeType(id: 4, code: 'maintenance', label: 'Maintenance'),
+  ];
+
+  @override
+  Future<List<ChargeType>> getChargeTypes() async => chargeTypes;
+
+  Map<String, dynamic>? lastAddChargeParams;
+
+  @override
+  Future<void> addCharge({
+    required String stayId,
+    required String chargeTypeCode,
+    required int amountPaise,
+    required DateTime dueDate,
+    String? description,
+    DateTime? periodMonth,
+  }) async {
+    lastAddChargeParams = {
+      'stayId': stayId,
+      'chargeTypeCode': chargeTypeCode,
+      'amountPaise': amountPaise,
+      'dueDate': dueDate,
+      'description': description,
+      'periodMonth': periodMonth,
+    };
   }
 }
 
@@ -464,5 +497,91 @@ void main() {
 
     expect(repo.lastSetRentPaise, 1200000);
     expect(find.text('Rent changed.'), findsOneWidget);
+  });
+
+  testWidgets('O17b: Adding a charge shows action, validates input, and submits charge', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'p-1',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        attentionState: 'paid',
+      ),
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // 1. Tap more button
+    final moreBtn = find.byIcon(AppIcons.more);
+    await tester.tap(moreBtn);
+    await tester.pumpAndSettle();
+
+    // 2. Both Change rent and Add a charge appear
+    expect(find.text('Change rent'), findsOneWidget);
+    final addChargeRow = find.text('Add a charge');
+    expect(addChargeRow, findsOneWidget);
+
+    // 3. Tap Add a charge
+    await tester.tap(addChargeRow);
+    await tester.pumpAndSettle();
+
+    // 4. Verify fields
+    expect(find.text('Type'), findsWidgets);
+    expect(find.text('Amount'), findsOneWidget);
+    expect(find.text('Due date'), findsOneWidget);
+    expect(find.text('Note (optional)'), findsOneWidget);
+
+    final addChargeBtn = find.widgetWithText(AppButton, 'Add charge');
+    expect(addChargeBtn, findsOneWidget);
+
+    // 5. Test validation without choosing type or amount
+    await tester.tap(addChargeBtn);
+    await tester.pumpAndSettle();
+    expect(find.text('Choose a charge type.'), findsOneWidget);
+    expect(find.text('Enter an amount greater than zero.'), findsOneWidget);
+
+    // 6. Choose charge type: Electricity
+    await tester.tap(find.byType(SelectField));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Electricity'), findsOneWidget);
+    await tester.tap(find.text('Electricity'));
+    await tester.pumpAndSettle();
+
+    // 7. Enter amount and note
+    final moneyInput = find.descendant(
+      of: find.byType(MoneyField),
+      matching: find.byType(EditableText),
+    );
+    await tester.enterText(moneyInput, '1500');
+
+    final noteInput = find.descendant(
+      of: find.widgetWithText(AppTextField, 'Note (optional)'),
+      matching: find.byType(EditableText),
+    );
+    await tester.enterText(noteInput, 'October AC bill');
+
+    // 8. Submit
+    await tester.tap(addChargeBtn);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Charge added.'), findsOneWidget);
+    expect(repo.lastAddChargeParams, isNotNull);
+    expect(repo.lastAddChargeParams!['stayId'], 'stay-101');
+    expect(repo.lastAddChargeParams!['chargeTypeCode'], 'electricity');
+    expect(repo.lastAddChargeParams!['amountPaise'], 150000);
+    expect(repo.lastAddChargeParams!['description'], 'October AC bill');
+    expect(repo.lastAddChargeParams!['periodMonth'], isNotNull);
   });
 }

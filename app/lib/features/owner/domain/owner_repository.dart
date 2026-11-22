@@ -1,4 +1,5 @@
 import 'bed_occupancy.dart';
+import 'charge_type.dart';
 import 'city.dart';
 import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
@@ -8,6 +9,7 @@ import 'pg_switcher_item.dart';
 import 'room_type.dart';
 
 export 'charge_balance.dart';
+export 'charge_type.dart';
 export 'emergency_contact.dart';
 export 'guest_detail_bundle.dart';
 export 'guest_list_item.dart';
@@ -96,10 +98,19 @@ abstract class OwnerRepository {
   });
   Future<PgOverview?> getPgOverview(String pgId);
   Future<GuestDetailBundle?> getGuestDetailBundle(String stayId);
+  Future<List<ChargeType>> getChargeTypes();
   Future<void> setStayRent({
     required String stayId,
     required int monthlyRentPaise,
     required DateTime effectiveFrom,
+  });
+  Future<void> addCharge({
+    required String stayId,
+    required String chargeTypeCode,
+    required int amountPaise,
+    required DateTime dueDate,
+    String? description,
+    DateTime? periodMonth,
   });
 }
 

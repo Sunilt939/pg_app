@@ -1906,6 +1906,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A rent change already exists from that date. Pick another date.'**
   String get errRentDate;
+
+  /// Action row and sheet title for adding a charge
+  ///
+  /// In en, this message translates to:
+  /// **'Add a charge'**
+  String get actionAddCharge;
+
+  /// Label for charge type selection field
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get chargeType;
+
+  /// Label for charge amount field
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get chargeAmount;
+
+  /// Label for charge due date field
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get chargeDueDate;
+
+  /// Label for optional charge note field
+  ///
+  /// In en, this message translates to:
+  /// **'Note (optional)'**
+  String get chargeNote;
+
+  /// Primary action button label to submit new charge
+  ///
+  /// In en, this message translates to:
+  /// **'Add charge'**
+  String get chargeAddAction;
+
+  /// Snackbar message when a charge is successfully added
+  ///
+  /// In en, this message translates to:
+  /// **'Charge added.'**
+  String get chargeAdded;
+
+  /// Validation error when charge amount is missing or zero
+  ///
+  /// In en, this message translates to:
+  /// **'Enter an amount greater than zero.'**
+  String get errChargeAmount;
+
+  /// Validation error when charge type is not selected
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a charge type.'**
+  String get errChargeType;
 }
 
 class _AppLocalizationsDelegate

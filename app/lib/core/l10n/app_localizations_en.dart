@@ -1062,4 +1062,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errRentDate =>
       'A rent change already exists from that date. Pick another date.';
+
+  @override
+  String get actionAddCharge => 'Add a charge';
+
+  @override
+  String get chargeType => 'Type';
+
+  @override
+  String get chargeAmount => 'Amount';
+
+  @override
+  String get chargeDueDate => 'Due date';
+
+  @override
+  String get chargeNote => 'Note (optional)';
+
+  @override
+  String get chargeAddAction => 'Add charge';
+
+  @override
+  String get chargeAdded => 'Charge added.';
+
+  @override
+  String get errChargeAmount => 'Enter an amount greater than zero.';
+
+  @override
+  String get errChargeType => 'Choose a charge type.';
 }

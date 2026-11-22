@@ -1429,5 +1429,41 @@
   "errRentDate": "A rent change already exists from that date. Pick another date.",
   "@errRentDate": {
     "description": "Error message when a rent term already exists on the selected date"
+  },
+  "actionAddCharge": "Add a charge",
+  "@actionAddCharge": {
+    "description": "Action row and sheet title for adding a charge"
+  },
+  "chargeType": "Type",
+  "@chargeType": {
+    "description": "Label for charge type selection field"
+  },
+  "chargeAmount": "Amount",
+  "@chargeAmount": {
+    "description": "Label for charge amount field"
+  },
+  "chargeDueDate": "Due date",
+  "@chargeDueDate": {
+    "description": "Label for charge due date field"
+  },
+  "chargeNote": "Note (optional)",
+  "@chargeNote": {
+    "description": "Label for optional charge note field"
+  },
+  "chargeAddAction": "Add charge",
+  "@chargeAddAction": {
+    "description": "Primary action button label to submit new charge"
+  },
+  "chargeAdded": "Charge added.",
+  "@chargeAdded": {
+    "description": "Snackbar message when a charge is successfully added"
+  },
+  "errChargeAmount": "Enter an amount greater than zero.",
+  "@errChargeAmount": {
+    "description": "Validation error when charge amount is missing or zero"
+  },
+  "errChargeType": "Choose a charge type.",
+  "@errChargeType": {
+    "description": "Validation error when charge type is not selected"
   }
 }

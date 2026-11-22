@@ -14,6 +14,7 @@ import '../../../../core/theme/tokens.dart';
 import '../../../../core/widgets/app_bottom_sheet.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_snack.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../../../../core/widgets/app_top_bar.dart';
 import '../../../../core/widgets/date_field.dart';
 import '../../../../core/widgets/error_state.dart';
@@ -22,8 +23,10 @@ import '../../../../core/widgets/ledger_row.dart';
 import '../../../../core/widgets/ledger_sheet.dart';
 import '../../../../core/widgets/money.dart';
 import '../../../../core/widgets/money_field.dart';
+import '../../../../core/widgets/option_sheet.dart';
 import '../../../../core/widgets/room_tile.dart';
 import '../../../../core/widgets/section_header.dart';
+import '../../../../core/widgets/select_field.dart';
 import '../../../../core/widgets/skeleton.dart';
 import '../../../../core/widgets/status_chip.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
@@ -188,7 +191,6 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
         final activePg = ref.watch(activePgProvider);
         final isOwnerOrManager =
             activePg?.role == 'owner' || activePg?.role == 'manager';
-        final isOpenStay = guest.stayStatus != 'vacated';
 
         return Scaffold(
           backgroundColor: AppColors.ground,
@@ -196,7 +198,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
             title: guestTitle,
             onLeadingPressed: () => context.pop(),
             actions: [
-              if (isOwnerOrManager && isOpenStay)
+              if (isOwnerOrManager)
                 IconButton(
                   icon: const Icon(
                     AppIcons.more,
@@ -777,20 +779,33 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
     AppLocalizations l10n,
     GuestListItem guest,
   ) {
+    final isOpenStay = guest.stayStatus != 'vacated';
+
     AppBottomSheet.show(
       context: context,
       builder: (sheetContext) => AppBottomSheet(
         child: LedgerSheet(
           margin: EdgeInsets.zero,
           children: [
+            if (isOpenStay)
+              LedgerRow(
+                title: l10n.actionChangeRent,
+                titleStyle: AppText.body,
+                minHeight: 56,
+                showDivider: true,
+                onTap: () {
+                  Navigator.of(sheetContext).pop();
+                  _openChangeRentSheet(context, ref, l10n, guest);
+                },
+              ),
             LedgerRow(
-              title: l10n.actionChangeRent,
+              title: l10n.actionAddCharge,
               titleStyle: AppText.body,
               minHeight: 56,
               showDivider: false,
               onTap: () {
                 Navigator.of(sheetContext).pop();
-                _openChangeRentSheet(context, ref, l10n, guest);
+                _openAddChargeSheet(context, ref, l10n, guest);
               },
             ),
           ],
@@ -808,6 +823,18 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
     AppBottomSheet.show(
       context: context,
       builder: (context) => _ChangeRentSheet(guest: guest),
+    );
+  }
+
+  void _openAddChargeSheet(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) {
+    AppBottomSheet.show(
+      context: context,
+      builder: (context) => _AddChargeSheet(guest: guest),
     );
   }
 }
@@ -916,6 +943,174 @@ class _ChangeRentSheetState extends ConsumerState<_ChangeRentSheet> {
                 _dateError = null;
               });
             },
+          ),
+          const SizedBox(height: AppSpace.x24),
+        ],
+      ),
+    );
+  }
+}
+
+class _AddChargeSheet extends ConsumerStatefulWidget {
+  final GuestListItem guest;
+
+  const _AddChargeSheet({required this.guest});
+
+  @override
+  ConsumerState<_AddChargeSheet> createState() => _AddChargeSheetState();
+}
+
+class _AddChargeSheetState extends ConsumerState<_AddChargeSheet> {
+  ChargeType? _selectedChargeType;
+  int _amountPaise = 0;
+  late DateTime _dueDate;
+  final TextEditingController _noteController = TextEditingController();
+  String? _typeError;
+  String? _amountError;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _dueDate = DateTime.now();
+  }
+
+  @override
+  void dispose() {
+    _noteController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickChargeType(
+    BuildContext context,
+    AppLocalizations l10n,
+    List<ChargeType> chargeTypes,
+  ) async {
+    final chosen = await OptionSheet.show<ChargeType>(
+      context: context,
+      title: l10n.chargeType,
+      options: [
+        for (final ct in chargeTypes)
+          OptionSheetItem(
+            value: ct,
+            title: ct.label,
+          ),
+      ],
+      selectedValue: _selectedChargeType,
+    );
+
+    if (chosen != null) {
+      setState(() {
+        _selectedChargeType = chosen;
+        _typeError = null;
+      });
+    }
+  }
+
+  Future<void> _submit(AppLocalizations l10n) async {
+    bool hasError = false;
+
+    if (_selectedChargeType == null) {
+      setState(() => _typeError = l10n.errChargeType);
+      hasError = true;
+    }
+    if (_amountPaise <= 0) {
+      setState(() => _amountError = l10n.errChargeAmount);
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    setState(() {
+      _isLoading = true;
+      _typeError = null;
+      _amountError = null;
+    });
+
+    try {
+      final chargeType = _selectedChargeType!;
+      DateTime? periodMonth;
+      if (chargeType.code != 'security_deposit') {
+        periodMonth = DateTime(_dueDate.year, _dueDate.month, 1);
+      }
+
+      final note = _noteController.text.trim();
+      final description = note.isNotEmpty ? note : chargeType.label;
+
+      await ref.read(ownerRepositoryProvider).addCharge(
+            stayId: widget.guest.stayId,
+            chargeTypeCode: chargeType.code,
+            amountPaise: _amountPaise,
+            dueDate: _dueDate,
+            description: description,
+            periodMonth: periodMonth,
+          );
+
+      if (mounted) {
+        Navigator.of(context).pop();
+        AppSnack.show(context, message: l10n.chargeAdded);
+        ref.invalidate(guestDetailBundleProvider(widget.guest.stayId));
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        AppSnack.show(
+          context,
+          message: e.toString().replaceFirst('Exception: ', ''),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final chargeTypesAsync = ref.watch(chargeTypesProvider);
+    final chargeTypes = chargeTypesAsync.valueOrNull ?? [];
+
+    return AppBottomSheet(
+      title: l10n.actionAddCharge,
+      bottomAction: AppButton.primary(
+        label: l10n.chargeAddAction,
+        loading: _isLoading,
+        expand: true,
+        onPressed: () => _submit(l10n),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const SizedBox(height: AppSpace.x8),
+          SelectField(
+            label: l10n.chargeType,
+            value: _selectedChargeType?.label ?? '',
+            hint: l10n.chargeType,
+            errorText: _typeError,
+            onTap: () => _pickChargeType(context, l10n, chargeTypes),
+          ),
+          const SizedBox(height: AppSpace.x16),
+          MoneyField(
+            label: l10n.chargeAmount,
+            errorText: _amountError,
+            onChanged: (val) {
+              _amountPaise = val;
+              if (_amountError != null && val > 0) {
+                setState(() => _amountError = null);
+              }
+            },
+          ),
+          const SizedBox(height: AppSpace.x16),
+          DateField(
+            label: l10n.chargeDueDate,
+            value: _dueDate,
+            onChanged: (newDate) {
+              setState(() => _dueDate = newDate);
+            },
+          ),
+          const SizedBox(height: AppSpace.x16),
+          AppTextField(
+            label: l10n.chargeNote,
+            controller: _noteController,
           ),
           const SizedBox(height: AppSpace.x24),
         ],
