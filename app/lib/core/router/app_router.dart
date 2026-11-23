@@ -21,6 +21,7 @@ import '../../features/owner/presentation/screens/owner_accounts_screen.dart';
 import '../../features/owner/presentation/screens/set_up_rooms_screen.dart';
 import '../../features/owner/presentation/screens/owner_guests_screen.dart';
 import '../../features/owner/presentation/screens/owner_guest_detail_screen.dart';
+import '../../features/owner/presentation/screens/owner_record_payment_screen.dart';
 import '../../features/owner/presentation/screens/owner_home_screen.dart';
 import '../../features/owner/presentation/screens/owner_more_screen.dart';
 import '../../features/owner/presentation/screens/owner_payments_screen.dart';
@@ -129,9 +130,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: RoutePaths.receipt,
-        builder: (context, state) => ReceiptScreen(
-          paymentId: state.pathParameters['paymentId'],
-        ),
+        builder: (context, state) {
+          final extra = state.extra;
+          final isNew =
+              (extra is Map<String, dynamic> && extra['isNew'] == true) ||
+                  extra == true;
+          return ReceiptScreen(
+            paymentId: state.pathParameters['paymentId'],
+            isNew: isNew,
+          );
+        },
       ),
       GoRoute(
         path: RoutePaths.notifications,
@@ -220,8 +228,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerGuestPay,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.payTitle,
+        builder: (context, state) => OwnerRecordPaymentScreen(
+          stayId: state.pathParameters['stayId'] ?? '',
         ),
       ),
       GoRoute(

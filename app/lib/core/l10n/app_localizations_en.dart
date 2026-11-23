@@ -1135,4 +1135,131 @@ class AppLocalizationsEn extends AppLocalizations {
   String vacatedToast(String name) {
     return '$name marked as vacated.';
   }
+
+  @override
+  String get recordTitle => 'Record payment';
+
+  @override
+  String get recordAmount => 'Amount';
+
+  @override
+  String payDueNow(String amount) {
+    return 'Due now $amount';
+  }
+
+  @override
+  String payAllUnpaid(String amount) {
+    return 'All unpaid $amount';
+  }
+
+  @override
+  String get payAdvanceNote =>
+      'Anything above what is unpaid is kept as advance.';
+
+  @override
+  String get recordMethod => 'Payment method';
+
+  @override
+  String get recordPaidOn => 'Paid on';
+
+  @override
+  String get recordReceivedIn => 'Received in';
+
+  @override
+  String get noAccountsHint =>
+      'Add a receiving account in More to track where money arrives.';
+
+  @override
+  String get recordPaidUsing => 'Paid using (optional)';
+
+  @override
+  String get recordPaidUsingPick => 'Choose an app';
+
+  @override
+  String get recordUtr => 'UTR (optional)';
+
+  @override
+  String get recordNote => 'Note (optional)';
+
+  @override
+  String get recordAction => 'Record payment';
+
+  @override
+  String get errAmount => 'Enter the amount.';
+
+  @override
+  String get errUtr => 'Enter 6 to 22 letters or digits.';
+
+  @override
+  String get accountNotSure => 'Not sure';
+
+  @override
+  String get utrHelper =>
+      'The reference number in the UPI app or your bank message.';
+
+  @override
+  String receiptNo(String number) {
+    return 'No. $number';
+  }
+
+  @override
+  String get receiptAmountLabel => 'Amount received';
+
+  @override
+  String get receiptFrom => 'From';
+
+  @override
+  String get receiptRoom => 'Room';
+
+  @override
+  String get receiptReference => 'Reference';
+
+  @override
+  String get receiptDate => 'Date';
+
+  @override
+  String get receiptPaidTowards => 'Paid towards';
+
+  @override
+  String get receiptAdvance => 'Advance credit';
+
+  @override
+  String get receiptTotal => 'Total';
+
+  @override
+  String get receiptStampReceived => 'Received';
+
+  @override
+  String get receiptStampReversed => 'Reversed';
+
+  @override
+  String receiptReversedReason(String reason) {
+    return 'Reversed: $reason';
+  }
+
+  @override
+  String receiptFooter(String appName) {
+    return 'Issued through $appName';
+  }
+
+  @override
+  String get receiptShare => 'Share receipt';
+
+  @override
+  String receiptShareText(String number, String pg) {
+    return 'Receipt $number from $pg';
+  }
+
+  @override
+  String get receiptUnavailableTitle => 'This receipt isn\'t available';
+
+  @override
+  String get receiptUnavailableBody =>
+      'It may not be confirmed yet, or you may not have access to it.';
+
+  @override
+  String get receiptRecorded => 'Payment recorded';
+
+  @override
+  String get receiptConfirmed => 'Payment confirmed';
 }

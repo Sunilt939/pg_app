@@ -196,6 +196,24 @@ class MockOwnerRepo implements OwnerRepository {
       'leaveDate': leaveDate,
     };
   }
+
+  @override
+  Future<List<PaymentMethod>> getPaymentMethods() async => [];
+
+  @override
+  Future<List<UpiApp>> getUpiApps() async => [];
+
+  @override
+  Future<String> recordPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? note,
+    String? payerAppCode,
+    String? utr,
+  }) async => 'pay-123';
 }
 
 class MockAuthRepo implements AuthRepository {

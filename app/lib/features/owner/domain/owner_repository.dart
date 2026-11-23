@@ -4,9 +4,11 @@ import 'city.dart';
 import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
 import 'payment_account.dart';
+import 'payment_method.dart';
 import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
+import 'upi_app.dart';
 
 export 'charge_balance.dart';
 export 'charge_type.dart';
@@ -14,7 +16,9 @@ export 'emergency_contact.dart';
 export 'guest_detail_bundle.dart';
 export 'guest_list_item.dart';
 export 'payment_feed_item.dart';
+export 'payment_method.dart';
 export 'pg_overview.dart';
+export 'upi_app.dart';
 
 class DuplicateNicknameException implements Exception {
   final String message;
@@ -43,6 +47,14 @@ class BedAlreadyTakenException implements Exception {
 class DuplicateRentDateException implements Exception {
   final String message;
   const DuplicateRentDateException([this.message = 'A rent change already exists from that date. Pick another date.']);
+
+  @override
+  String toString() => message;
+}
+
+class DuplicateUtrException implements Exception {
+  final String message;
+  const DuplicateUtrException([this.message = 'This UTR is already recorded for another payment']);
 
   @override
   String toString() => message;
@@ -123,6 +135,18 @@ abstract class OwnerRepository {
   Future<void> vacateStay({
     required String stayId,
     DateTime? leaveDate,
+  });
+  Future<List<PaymentMethod>> getPaymentMethods();
+  Future<List<UpiApp>> getUpiApps();
+  Future<String> recordPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? note,
+    String? payerAppCode,
+    String? utr,
   });
 }
 

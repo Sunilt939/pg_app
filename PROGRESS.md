@@ -66,7 +66,7 @@
 
 ### Part 5. The owner records money
 
-- [ ] **O7 + S1. Record payment and Receipt** (AI). These two are built and tested **together as one unit** (the only pair allowed). Spec: `docs/UI_SCREENS_OWNER.md` O7 and `docs/UI_SCREENS_SHARED.md` S1. *Test:* record a real cash payment, see the tick and the receipt, share the receipt image to WhatsApp, and check that the guest's balance changed.
+- [x] **O7 + S1. Record payment and Receipt** (AI). These two are built and tested **together as one unit** (the only pair allowed). Spec: `docs/UI_SCREENS_OWNER.md` O7 and `docs/UI_SCREENS_SHARED.md` S1. *Test:* record a real cash payment, see the tick and the receipt, share the receipt image to WhatsApp, and check that the guest's balance changed.
 
 ### Part 6. The guest app
 

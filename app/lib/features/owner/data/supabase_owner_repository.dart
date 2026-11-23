@@ -715,5 +715,78 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<PaymentMethod>> getPaymentMethods() async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final response = await client
+        .from('payment_methods')
+        .select()
+        .eq('is_active', true)
+        .order('id');
+
+    return (response as List)
+        .map((e) => PaymentMethod.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<List<UpiApp>> getUpiApps() async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final response =
+        await client.from('upi_apps').select().order('id');
+
+    return (response as List)
+        .map((e) => UpiApp.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<String> recordPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? note,
+    String? payerAppCode,
+    String? utr,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      final formattedPaidOn = paidOn != null
+          ? '${paidOn.year.toString().padLeft(4, '0')}-${paidOn.month.toString().padLeft(2, '0')}-${paidOn.day.toString().padLeft(2, '0')}'
+          : null;
+
+      final res = await client.rpc(
+        'rpc_record_payment',
+        params: {
+          'p_stay_id': stayId,
+          'p_amount_paise': amountPaise,
+          'p_method_code': methodCode,
+          if (formattedPaidOn != null) 'p_paid_on': formattedPaidOn,
+          if (accountId != null) 'p_account_id': accountId,
+          if (note != null && note.trim().isNotEmpty) 'p_note': note.trim(),
+          if (payerAppCode != null && payerAppCode.isNotEmpty)
+            'p_payer_app_code': payerAppCode,
+          if (utr != null && utr.trim().isNotEmpty) 'p_utr': utr.trim(),
+        },
+      );
+      return res as String;
+    } on PostgrestException catch (e) {
+      if (e.code == '23505' || e.message.contains('UTR is already recorded')) {
+        throw DuplicateUtrException(e.message);
+      }
+      throw Exception(e.message);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }
 

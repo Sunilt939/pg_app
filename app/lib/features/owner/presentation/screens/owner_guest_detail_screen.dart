@@ -229,6 +229,21 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
               children: [
                 _buildHeaderSheet(context, l10n, guest),
                 _buildBalanceSheet(l10n, guest),
+                if (guest.stayStatus != 'vacated' || guest.outstandingPaise > 0)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpace.x16,
+                      vertical: AppSpace.x12,
+                    ),
+                    child: AppButton.primary(
+                      label: l10n.recordTitle,
+                      expand: true,
+                      onPressed: () async {
+                        await context.push('/owner/guests/$stayId/pay');
+                        ref.invalidate(guestDetailBundleProvider(stayId));
+                      },
+                    ),
+                  ),
                 if (bundle.charges.isNotEmpty)
                   _buildChargesSection(
                     context,
@@ -1023,7 +1038,11 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
         context,
         message: l10n.vacatedToast(guest.fullName ?? ''),
       );
-      context.pop();
+      if (context.canPop()) {
+        context.pop();
+      } else {
+        context.go('/owner/guests');
+      }
     }
   }
 }

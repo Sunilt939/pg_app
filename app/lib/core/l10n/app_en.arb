@@ -1535,5 +1535,186 @@
         "type": "String"
       }
     }
+  },
+  "recordTitle": "Record payment",
+  "@recordTitle": {
+    "description": "Title of record payment screen"
+  },
+  "recordAmount": "Amount",
+  "@recordAmount": {
+    "description": "Label for amount input field in record payment screen"
+  },
+  "payDueNow": "Due now {amount}",
+  "@payDueNow": {
+    "description": "Quick select button for due now amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payAllUnpaid": "All unpaid {amount}",
+  "@payAllUnpaid": {
+    "description": "Quick select button for all unpaid amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payAdvanceNote": "Anything above what is unpaid is kept as advance.",
+  "@payAdvanceNote": {
+    "description": "Notice shown when entered amount exceeds outstanding balance"
+  },
+  "recordMethod": "Payment method",
+  "@recordMethod": {
+    "description": "Label for payment method selector"
+  },
+  "recordPaidOn": "Paid on",
+  "@recordPaidOn": {
+    "description": "Label for paid on date field"
+  },
+  "recordReceivedIn": "Received in",
+  "@recordReceivedIn": {
+    "description": "Label for receiving account selector"
+  },
+  "noAccountsHint": "Add a receiving account in More to track where money arrives.",
+  "@noAccountsHint": {
+    "description": "Hint shown when PG has no receiving accounts set up"
+  },
+  "recordPaidUsing": "Paid using (optional)",
+  "@recordPaidUsing": {
+    "description": "Label for UPI payer app selector"
+  },
+  "recordPaidUsingPick": "Choose an app",
+  "@recordPaidUsingPick": {
+    "description": "Placeholder for choosing a UPI payer app"
+  },
+  "recordUtr": "UTR (optional)",
+  "@recordUtr": {
+    "description": "Label for UTR input field"
+  },
+  "recordNote": "Note (optional)",
+  "@recordNote": {
+    "description": "Label for note input field"
+  },
+  "recordAction": "Record payment",
+  "@recordAction": {
+    "description": "Button to record payment"
+  },
+  "errAmount": "Enter the amount.",
+  "@errAmount": {
+    "description": "Validation error when payment amount is missing or invalid"
+  },
+  "errUtr": "Enter 6 to 22 letters or digits.",
+  "@errUtr": {
+    "description": "Validation error for invalid UTR"
+  },
+  "accountNotSure": "Not sure",
+  "@accountNotSure": {
+    "description": "Option for when receiving account is not specified"
+  },
+  "utrHelper": "The reference number in the UPI app or your bank message.",
+  "@utrHelper": {
+    "description": "Helper text for UTR field"
+  },
+  "receiptNo": "No. {number}",
+  "@receiptNo": {
+    "description": "Receipt number header",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptAmountLabel": "Amount received",
+  "@receiptAmountLabel": {
+    "description": "Label above amount on receipt"
+  },
+  "receiptFrom": "From",
+  "@receiptFrom": {
+    "description": "Label for guest name on receipt"
+  },
+  "receiptRoom": "Room",
+  "@receiptRoom": {
+    "description": "Label for room information on receipt"
+  },
+  "receiptReference": "Reference",
+  "@receiptReference": {
+    "description": "Label for reference/UTR on receipt"
+  },
+  "receiptDate": "Date",
+  "@receiptDate": {
+    "description": "Label for receipt issue date"
+  },
+  "receiptPaidTowards": "Paid towards",
+  "@receiptPaidTowards": {
+    "description": "Header for allocations list on receipt"
+  },
+  "receiptAdvance": "Advance credit",
+  "@receiptAdvance": {
+    "description": "Label for unallocated amount on receipt"
+  },
+  "receiptTotal": "Total",
+  "@receiptTotal": {
+    "description": "Label for total amount on receipt"
+  },
+  "receiptStampReceived": "Received",
+  "@receiptStampReceived": {
+    "description": "Stamp text for confirmed receipt"
+  },
+  "receiptStampReversed": "Reversed",
+  "@receiptStampReversed": {
+    "description": "Stamp text for reversed receipt"
+  },
+  "receiptReversedReason": "Reversed: {reason}",
+  "@receiptReversedReason": {
+    "description": "Reason text shown under reversed stamp on receipt",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptFooter": "Issued through {appName}",
+  "@receiptFooter": {
+    "description": "Receipt footer line with app name",
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptShare": "Share receipt",
+  "@receiptShare": {
+    "description": "Action button to share receipt"
+  },
+  "receiptShareText": "Receipt {number} from {pg}",
+  "@receiptShareText": {
+    "description": "Text caption when sharing receipt",
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "pg": {
+        "type": "String"
+      }
+    }
+  },
+  "receiptUnavailableTitle": "This receipt isn't available",
+  "@receiptUnavailableTitle": {
+    "description": "Empty state title when receipt is unavailable"
+  },
+  "receiptUnavailableBody": "It may not be confirmed yet, or you may not have access to it.",
+  "@receiptUnavailableBody": {
+    "description": "Empty state body when receipt is unavailable"
+  },
+  "receiptRecorded": "Payment recorded",
+  "@receiptRecorded": {
+    "description": "Arrival title when opened straight after recording payment"
+  },
+  "receiptConfirmed": "Payment confirmed",
+  "@receiptConfirmed": {
+    "description": "Arrival title when opened straight after confirming payment"
   }
 }

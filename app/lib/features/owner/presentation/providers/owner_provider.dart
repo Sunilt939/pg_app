@@ -137,5 +137,17 @@ final chargeTypesProvider =
   return repo.getChargeTypes();
 });
 
+final paymentMethodsProvider =
+    FutureProvider.autoDispose<List<PaymentMethod>>((ref) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPaymentMethods();
+});
+
+final upiAppsProvider =
+    FutureProvider.autoDispose<List<UpiApp>>((ref) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getUpiApps();
+});
+
 
 

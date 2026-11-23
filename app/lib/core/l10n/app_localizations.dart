@@ -2038,6 +2038,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{name} marked as vacated.'**
   String vacatedToast(String name);
+
+  /// Title of record payment screen
+  ///
+  /// In en, this message translates to:
+  /// **'Record payment'**
+  String get recordTitle;
+
+  /// Label for amount input field in record payment screen
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get recordAmount;
+
+  /// Quick select button for due now amount
+  ///
+  /// In en, this message translates to:
+  /// **'Due now {amount}'**
+  String payDueNow(String amount);
+
+  /// Quick select button for all unpaid amount
+  ///
+  /// In en, this message translates to:
+  /// **'All unpaid {amount}'**
+  String payAllUnpaid(String amount);
+
+  /// Notice shown when entered amount exceeds outstanding balance
+  ///
+  /// In en, this message translates to:
+  /// **'Anything above what is unpaid is kept as advance.'**
+  String get payAdvanceNote;
+
+  /// Label for payment method selector
+  ///
+  /// In en, this message translates to:
+  /// **'Payment method'**
+  String get recordMethod;
+
+  /// Label for paid on date field
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on'**
+  String get recordPaidOn;
+
+  /// Label for receiving account selector
+  ///
+  /// In en, this message translates to:
+  /// **'Received in'**
+  String get recordReceivedIn;
+
+  /// Hint shown when PG has no receiving accounts set up
+  ///
+  /// In en, this message translates to:
+  /// **'Add a receiving account in More to track where money arrives.'**
+  String get noAccountsHint;
+
+  /// Label for UPI payer app selector
+  ///
+  /// In en, this message translates to:
+  /// **'Paid using (optional)'**
+  String get recordPaidUsing;
+
+  /// Placeholder for choosing a UPI payer app
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an app'**
+  String get recordPaidUsingPick;
+
+  /// Label for UTR input field
+  ///
+  /// In en, this message translates to:
+  /// **'UTR (optional)'**
+  String get recordUtr;
+
+  /// Label for note input field
+  ///
+  /// In en, this message translates to:
+  /// **'Note (optional)'**
+  String get recordNote;
+
+  /// Button to record payment
+  ///
+  /// In en, this message translates to:
+  /// **'Record payment'**
+  String get recordAction;
+
+  /// Validation error when payment amount is missing or invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount.'**
+  String get errAmount;
+
+  /// Validation error for invalid UTR
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 6 to 22 letters or digits.'**
+  String get errUtr;
+
+  /// Option for when receiving account is not specified
+  ///
+  /// In en, this message translates to:
+  /// **'Not sure'**
+  String get accountNotSure;
+
+  /// Helper text for UTR field
+  ///
+  /// In en, this message translates to:
+  /// **'The reference number in the UPI app or your bank message.'**
+  String get utrHelper;
+
+  /// Receipt number header
+  ///
+  /// In en, this message translates to:
+  /// **'No. {number}'**
+  String receiptNo(String number);
+
+  /// Label above amount on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Amount received'**
+  String get receiptAmountLabel;
+
+  /// Label for guest name on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get receiptFrom;
+
+  /// Label for room information on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get receiptRoom;
+
+  /// Label for reference/UTR on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Reference'**
+  String get receiptReference;
+
+  /// Label for receipt issue date
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get receiptDate;
+
+  /// Header for allocations list on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Paid towards'**
+  String get receiptPaidTowards;
+
+  /// Label for unallocated amount on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Advance credit'**
+  String get receiptAdvance;
+
+  /// Label for total amount on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get receiptTotal;
+
+  /// Stamp text for confirmed receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Received'**
+  String get receiptStampReceived;
+
+  /// Stamp text for reversed receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Reversed'**
+  String get receiptStampReversed;
+
+  /// Reason text shown under reversed stamp on receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Reversed: {reason}'**
+  String receiptReversedReason(String reason);
+
+  /// Receipt footer line with app name
+  ///
+  /// In en, this message translates to:
+  /// **'Issued through {appName}'**
+  String receiptFooter(String appName);
+
+  /// Action button to share receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Share receipt'**
+  String get receiptShare;
+
+  /// Text caption when sharing receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt {number} from {pg}'**
+  String receiptShareText(String number, String pg);
+
+  /// Empty state title when receipt is unavailable
+  ///
+  /// In en, this message translates to:
+  /// **'This receipt isn\'t available'**
+  String get receiptUnavailableTitle;
+
+  /// Empty state body when receipt is unavailable
+  ///
+  /// In en, this message translates to:
+  /// **'It may not be confirmed yet, or you may not have access to it.'**
+  String get receiptUnavailableBody;
+
+  /// Arrival title when opened straight after recording payment
+  ///
+  /// In en, this message translates to:
+  /// **'Payment recorded'**
+  String get receiptRecorded;
+
+  /// Arrival title when opened straight after confirming payment
+  ///
+  /// In en, this message translates to:
+  /// **'Payment confirmed'**
+  String get receiptConfirmed;
 }
 
 class _AppLocalizationsDelegate
