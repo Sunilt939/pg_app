@@ -2446,6 +2446,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied.'**
   String get copied;
+
+  /// Title of report payment sheet variant A
+  ///
+  /// In en, this message translates to:
+  /// **'Did the payment go through?'**
+  String get reportTitleA;
+
+  /// Subtitle showing amount and receiving account in variant A
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} to {account}'**
+  String reportSummaryA(String amount, String account);
+
+  /// Header for expandable details in payment report
+  ///
+  /// In en, this message translates to:
+  /// **'Add details (optional)'**
+  String get reportDetails;
+
+  /// Label for UPI app selector
+  ///
+  /// In en, this message translates to:
+  /// **'Paid using'**
+  String get reportPaidUsing;
+
+  /// Label for UTR / transaction reference number
+  ///
+  /// In en, this message translates to:
+  /// **'UTR or reference'**
+  String get reportUtr;
+
+  /// Label for phone number used to make payment
+  ///
+  /// In en, this message translates to:
+  /// **'Paid from number'**
+  String get reportFromNumber;
+
+  /// Label for payment screenshot attachment
+  ///
+  /// In en, this message translates to:
+  /// **'Screenshot'**
+  String get reportScreenshot;
+
+  /// Button to pick payment screenshot
+  ///
+  /// In en, this message translates to:
+  /// **'Add screenshot'**
+  String get reportScreenshotAdd;
+
+  /// Confirm button in variant A
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, I\'ve paid'**
+  String get reportYes;
+
+  /// Dismiss button in variant A
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get reportNotYet;
+
+  /// Title of report payment sheet variant B
+  ///
+  /// In en, this message translates to:
+  /// **'Tell your owner you\'ve paid'**
+  String get reportTitleB;
+
+  /// Label for payment method selector in variant B
+  ///
+  /// In en, this message translates to:
+  /// **'How did you pay?'**
+  String get reportHow;
+
+  /// Label for receiving account selector in variant B
+  ///
+  /// In en, this message translates to:
+  /// **'Paid to'**
+  String get reportPaidTo;
+
+  /// Submit button in variant B
+  ///
+  /// In en, this message translates to:
+  /// **'Send to owner'**
+  String get reportSend;
+
+  /// Snackbar confirming payment reported
+  ///
+  /// In en, this message translates to:
+  /// **'Sent to your owner. You\'ll get a receipt once they confirm.'**
+  String get reportSent;
+
+  /// Notice when screenshot upload fails
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t upload the screenshot. You can send without it.'**
+  String get reportScreenshotFailed;
 }
 
 class _AppLocalizationsDelegate

@@ -12,6 +12,8 @@ import 'package:app/features/owner/domain/charge_balance.dart';
 import 'package:app/features/owner/domain/guest_list_item.dart';
 import 'package:app/features/owner/domain/payment_account.dart';
 import 'package:app/features/owner/domain/payment_feed_item.dart';
+import 'package:app/features/owner/domain/payment_method.dart';
+import 'package:app/features/owner/domain/upi_app.dart';
 
 class MockGuestRepo implements GuestRepository {
   GuestHomeBundle bundle;
@@ -28,6 +30,31 @@ class MockGuestRepo implements GuestRepository {
   @override
   Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async =>
       const [];
+
+  @override
+  Future<List<PaymentAccount>> getActiveBankAccounts(String pgId) async =>
+      const [];
+
+  @override
+  Future<List<PaymentMethod>> getPaymentMethods() async => const [];
+
+  @override
+  Future<List<UpiApp>> getUpiApps() async => const [];
+
+  @override
+  Future<String> reportPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? payerAppCode,
+    String? payerPhone,
+    String? utr,
+    String? note,
+    String? screenshotFileId,
+  }) async =>
+      'pay-reported';
 }
 
 Widget _wrapGuestHomeScreen({

@@ -4,6 +4,8 @@ import '../../owner/domain/charge_balance.dart';
 import '../../owner/domain/guest_list_item.dart';
 import '../../owner/domain/payment_account.dart';
 import '../../owner/domain/payment_feed_item.dart';
+import '../../owner/domain/payment_method.dart';
+import '../../owner/domain/upi_app.dart';
 import '../domain/guest_home_bundle.dart';
 import '../domain/guest_repository.dart';
 
@@ -104,6 +106,88 @@ class SupabaseGuestRepository implements GuestRepository {
     return (resp as List)
         .map((e) => PaymentAccount.fromJson(e as Map<String, dynamic>))
         .toList();
+  }
+
+  @override
+  Future<List<PaymentAccount>> getActiveBankAccounts(String pgId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final resp = await client
+        .from('pg_payment_accounts')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('kind', 'bank')
+        .eq('is_active', true)
+        .order('is_default', ascending: false);
+
+    return (resp as List)
+        .map((e) => PaymentAccount.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<List<PaymentMethod>> getPaymentMethods() async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final resp = await client
+        .from('payment_methods')
+        .select()
+        .eq('is_active', true)
+        .order('id');
+
+    return (resp as List)
+        .map((e) => PaymentMethod.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<List<UpiApp>> getUpiApps() async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final resp = await client.from('upi_apps').select().order('id');
+
+    return (resp as List)
+        .map((e) => UpiApp.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<String> reportPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? payerAppCode,
+    String? payerPhone,
+    String? utr,
+    String? note,
+    String? screenshotFileId,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final dateStr = paidOn != null
+        ? '${paidOn.year.toString().padLeft(4, '0')}-${paidOn.month.toString().padLeft(2, '0')}-${paidOn.day.toString().padLeft(2, '0')}'
+        : null;
+
+    final response = await client.rpc('rpc_report_payment', params: {
+      'p_stay_id': stayId,
+      'p_amount_paise': amountPaise,
+      'p_method_code': methodCode,
+      if (dateStr != null) 'p_paid_on': dateStr,
+      if (accountId != null) 'p_account_id': accountId,
+      if (payerAppCode != null) 'p_payer_app_code': payerAppCode,
+      if (payerPhone != null) 'p_payer_phone': payerPhone,
+      if (utr != null && utr.isNotEmpty) 'p_utr': utr,
+      if (note != null && note.isNotEmpty) 'p_note': note,
+      if (screenshotFileId != null) 'p_screenshot_file_id': screenshotFileId,
+    });
+
+    return response as String;
   }
 }
 

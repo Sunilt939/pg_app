@@ -25,6 +25,7 @@ import '../../../owner/domain/charge_balance.dart';
 import '../../../owner/domain/guest_list_item.dart';
 import '../../../owner/domain/payment_feed_item.dart';
 import '../providers/guest_provider.dart';
+import '../widgets/guest_report_payment_sheet.dart';
 
 sealed class _ActivityItem {
   DateTime get date;
@@ -246,6 +247,20 @@ class GuestHomeScreen extends ConsumerWidget {
               onPressed: () {
                 context.push('/guest/pay/${stay.stayId}', extra: payAmount);
               },
+            ),
+            const SizedBox(height: AppSpace.x8),
+            Center(
+              child: AppButton.text(
+                label: l10n.alreadyPaid,
+                onPressed: () {
+                  GuestReportPaymentSheet.showVariantB(
+                    context: context,
+                    stayId: stay.stayId,
+                    pgId: stay.pgId,
+                    defaultAmountPaise: payAmount,
+                  );
+                },
+              ),
             ),
           ],
         ],

@@ -1893,5 +1893,77 @@
   "copied": "Copied.",
   "@copied": {
     "description": "Generic copy confirmation feedback"
+  },
+  "reportTitleA": "Did the payment go through?",
+  "@reportTitleA": {
+    "description": "Title of report payment sheet variant A"
+  },
+  "reportSummaryA": "{amount} to {account}",
+  "@reportSummaryA": {
+    "description": "Subtitle showing amount and receiving account in variant A",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "account": {
+        "type": "String"
+      }
+    }
+  },
+  "reportDetails": "Add details (optional)",
+  "@reportDetails": {
+    "description": "Header for expandable details in payment report"
+  },
+  "reportPaidUsing": "Paid using",
+  "@reportPaidUsing": {
+    "description": "Label for UPI app selector"
+  },
+  "reportUtr": "UTR or reference",
+  "@reportUtr": {
+    "description": "Label for UTR / transaction reference number"
+  },
+  "reportFromNumber": "Paid from number",
+  "@reportFromNumber": {
+    "description": "Label for phone number used to make payment"
+  },
+  "reportScreenshot": "Screenshot",
+  "@reportScreenshot": {
+    "description": "Label for payment screenshot attachment"
+  },
+  "reportScreenshotAdd": "Add screenshot",
+  "@reportScreenshotAdd": {
+    "description": "Button to pick payment screenshot"
+  },
+  "reportYes": "Yes, I've paid",
+  "@reportYes": {
+    "description": "Confirm button in variant A"
+  },
+  "reportNotYet": "Not yet",
+  "@reportNotYet": {
+    "description": "Dismiss button in variant A"
+  },
+  "reportTitleB": "Tell your owner you've paid",
+  "@reportTitleB": {
+    "description": "Title of report payment sheet variant B"
+  },
+  "reportHow": "How did you pay?",
+  "@reportHow": {
+    "description": "Label for payment method selector in variant B"
+  },
+  "reportPaidTo": "Paid to",
+  "@reportPaidTo": {
+    "description": "Label for receiving account selector in variant B"
+  },
+  "reportSend": "Send to owner",
+  "@reportSend": {
+    "description": "Submit button in variant B"
+  },
+  "reportSent": "Sent to your owner. You'll get a receipt once they confirm.",
+  "@reportSent": {
+    "description": "Snackbar confirming payment reported"
+  },
+  "reportScreenshotFailed": "Couldn't upload the screenshot. You can send without it.",
+  "@reportScreenshotFailed": {
+    "description": "Notice when screenshot upload fails"
   }
 }

@@ -14,6 +14,8 @@ import 'package:app/features/guest/presentation/screens/guest_home_screen.dart';
 import 'package:app/features/guest/presentation/screens/guest_pay_rent_screen.dart';
 import 'package:app/features/owner/domain/guest_list_item.dart';
 import 'package:app/features/owner/domain/payment_account.dart';
+import 'package:app/features/owner/domain/payment_method.dart';
+import 'package:app/features/owner/domain/upi_app.dart';
 
 class MockGuestPayRepo implements GuestRepository {
   GuestListItem? stay;
@@ -35,6 +37,31 @@ class MockGuestPayRepo implements GuestRepository {
   @override
   Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async =>
       upiAccounts;
+
+  @override
+  Future<List<PaymentAccount>> getActiveBankAccounts(String pgId) async =>
+      const [];
+
+  @override
+  Future<List<PaymentMethod>> getPaymentMethods() async => const [];
+
+  @override
+  Future<List<UpiApp>> getUpiApps() async => const [];
+
+  @override
+  Future<String> reportPayment({
+    required String stayId,
+    required int amountPaise,
+    required String methodCode,
+    DateTime? paidOn,
+    String? accountId,
+    String? payerAppCode,
+    String? payerPhone,
+    String? utr,
+    String? note,
+    String? screenshotFileId,
+  }) async =>
+      'pay-reported';
 }
 
 GuestListItem _createTestStay({

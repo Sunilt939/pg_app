@@ -20,6 +20,7 @@ import '../../../../core/widgets/skeleton.dart';
 import '../../../owner/domain/guest_list_item.dart';
 import '../../../owner/domain/payment_account.dart';
 import '../providers/guest_provider.dart';
+import '../widgets/guest_report_payment_sheet.dart';
 
 class GuestPayRentScreen extends ConsumerStatefulWidget {
   final String stayId;
@@ -69,7 +70,28 @@ class _GuestPayRentScreenState extends ConsumerState<GuestPayRentScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed && _upiPaymentInitiated) {
       _upiPaymentInitiated = false;
-      // When G3 is approved, open G3 variant A here.
+      _openVariantAOnReturn();
+    }
+  }
+
+  Future<void> _openVariantAOnReturn() async {
+    final stay = ref.read(guestStayProvider(widget.stayId)).value;
+    if (stay == null || !mounted) return;
+
+    final accounts =
+        ref.read(guestUpiAccountsProvider(stay.pgId)).value ?? const [];
+    final chosenAccount = _resolveSelectedAccount(accounts);
+    if (chosenAccount == null) return;
+
+    final success = await GuestReportPaymentSheet.showVariantA(
+      context: context,
+      stayId: stay.stayId,
+      pgId: stay.pgId,
+      amountPaise: _amountPaise,
+      upiAccount: chosenAccount,
+    );
+    if (success == true && mounted) {
+      Navigator.of(context).pop();
     }
   }
 
@@ -432,6 +454,25 @@ class _GuestPayRentScreenState extends ConsumerState<GuestPayRentScreen>
                         onPressed: isPayEnabled
                             ? () => _payWithUpi(context, stay, chosenAccount)
                             : null,
+                      ),
+                      const SizedBox(height: AppSpace.x8),
+                      Center(
+                        child: AppButton.text(
+                          label: l10n.payOtherWay,
+                          onPressed: () async {
+                            final success =
+                                await GuestReportPaymentSheet.showVariantB(
+                              context: context,
+                              stayId: stay.stayId,
+                              pgId: stay.pgId,
+                              defaultAmountPaise: _amountPaise,
+                              defaultUpiAccount: chosenAccount,
+                            );
+                            if (success == true && context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
                       ),
                     ],
                   ),

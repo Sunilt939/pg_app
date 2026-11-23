@@ -1379,4 +1379,56 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copied => 'Copied.';
+
+  @override
+  String get reportTitleA => 'Did the payment go through?';
+
+  @override
+  String reportSummaryA(String amount, String account) {
+    return '$amount to $account';
+  }
+
+  @override
+  String get reportDetails => 'Add details (optional)';
+
+  @override
+  String get reportPaidUsing => 'Paid using';
+
+  @override
+  String get reportUtr => 'UTR or reference';
+
+  @override
+  String get reportFromNumber => 'Paid from number';
+
+  @override
+  String get reportScreenshot => 'Screenshot';
+
+  @override
+  String get reportScreenshotAdd => 'Add screenshot';
+
+  @override
+  String get reportYes => 'Yes, I\'ve paid';
+
+  @override
+  String get reportNotYet => 'Not yet';
+
+  @override
+  String get reportTitleB => 'Tell your owner you\'ve paid';
+
+  @override
+  String get reportHow => 'How did you pay?';
+
+  @override
+  String get reportPaidTo => 'Paid to';
+
+  @override
+  String get reportSend => 'Send to owner';
+
+  @override
+  String get reportSent =>
+      'Sent to your owner. You\'ll get a receipt once they confirm.';
+
+  @override
+  String get reportScreenshotFailed =>
+      'Couldn\'t upload the screenshot. You can send without it.';
 }
