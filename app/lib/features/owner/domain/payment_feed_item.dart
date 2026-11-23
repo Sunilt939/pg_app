@@ -21,6 +21,8 @@ class PaymentFeedItem {
   final String? payerAppCode;
   final String? payerAppLabel;
   final String? createdAt;
+  final String? receiptId;
+  final int? receiptNo;
 
   const PaymentFeedItem({
     required this.paymentId,
@@ -42,6 +44,8 @@ class PaymentFeedItem {
     this.payerAppCode,
     this.payerAppLabel,
     this.createdAt,
+    this.receiptId,
+    this.receiptNo,
   });
 
   factory PaymentFeedItem.fromJson(Map<String, dynamic> json) {
@@ -65,6 +69,8 @@ class PaymentFeedItem {
       payerAppCode: json['payer_app_code'] as String?,
       payerAppLabel: json['payer_app_label'] as String?,
       createdAt: json['created_at'] as String?,
+      receiptId: json['receipt_id'] as String?,
+      receiptNo: (json['receipt_no'] as num?)?.toInt(),
     );
   }
 }

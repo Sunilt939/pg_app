@@ -1716,5 +1716,128 @@
   "receiptConfirmed": "Payment confirmed",
   "@receiptConfirmed": {
     "description": "Arrival title when opened straight after confirming payment"
+  },
+  "rentOverdueSince": "Overdue since {date}",
+  "@rentOverdueSince": {
+    "description": "Label for overdue rent with date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "rentDueNow": "Due now",
+  "@rentDueNow": {
+    "description": "Label for rent due now"
+  },
+  "rentNextDue": "Next rent due {date}",
+  "@rentNextDue": {
+    "description": "Label for next rent due with date",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "rentPaidUp": "You're all paid up",
+  "@rentPaidUp": {
+    "description": "Title when guest has no pending or upcoming dues"
+  },
+  "rentPaidUpBody": "Your next rent will show here before it's due.",
+  "@rentPaidUpBody": {
+    "description": "Subtitle when guest is all paid up"
+  },
+  "rentWaiting": "{amount} reported. Waiting for your owner to confirm.",
+  "@rentWaiting": {
+    "description": "Pending verification banner on guest home",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payAction": "Pay {amount}",
+  "@payAction": {
+    "description": "Primary action button to pay rent",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "alreadyPaid": "I've already paid",
+  "@alreadyPaid": {
+    "description": "Action button to report payment already made"
+  },
+  "homeYourStay": "Your stay",
+  "@homeYourStay": {
+    "description": "Section header for stay details"
+  },
+  "homeAdvanceBalance": "Advance balance",
+  "@homeAdvanceBalance": {
+    "description": "Label for advance balance in your stay sheet"
+  },
+  "homeRecent": "Recent activity",
+  "@homeRecent": {
+    "description": "Section header for recent charges and payments"
+  },
+  "homeNoActivity": "Nothing here yet.",
+  "@homeNoActivity": {
+    "description": "Empty state text when there are no recent activity items"
+  },
+  "activityPayment": "Payment, {method}",
+  "@activityPayment": {
+    "description": "Title for payment in recent activity",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "homeYourPg": "Your PG",
+  "@homeYourPg": {
+    "description": "Section header for PG contact info"
+  },
+  "callPg": "Call {pg}",
+  "@callPg": {
+    "description": "Title to call PG owner/manager",
+    "placeholders": {
+      "pg": {
+        "type": "String"
+      }
+    }
+  },
+  "noStayTitle": "No current stay",
+  "@noStayTitle": {
+    "description": "Title when guest has no active stay"
+  },
+  "noStayBody": "You've left {pg}. Your past payments are in History.",
+  "@noStayBody": {
+    "description": "Body message when guest has no active stay",
+    "placeholders": {
+      "pg": {
+        "type": "String"
+      }
+    }
+  },
+  "noStayOwes": "{pg} shows {amount} unpaid. Please contact them.",
+  "@noStayOwes": {
+    "description": "Notice when vacated guest has unpaid balance",
+    "placeholders": {
+      "pg": {
+        "type": "String"
+      },
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "noStayAction": "See history",
+  "@noStayAction": {
+    "description": "Action button to open history when guest has no active stay"
+  },
+  "profileDueLabel": "Rent due on",
+  "@profileDueLabel": {
+    "description": "Label for rent due on row"
   }
 }

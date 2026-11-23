@@ -2260,6 +2260,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Payment confirmed'**
   String get receiptConfirmed;
+
+  /// Label for overdue rent with date
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue since {date}'**
+  String rentOverdueSince(String date);
+
+  /// Label for rent due now
+  ///
+  /// In en, this message translates to:
+  /// **'Due now'**
+  String get rentDueNow;
+
+  /// Label for next rent due with date
+  ///
+  /// In en, this message translates to:
+  /// **'Next rent due {date}'**
+  String rentNextDue(String date);
+
+  /// Title when guest has no pending or upcoming dues
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all paid up'**
+  String get rentPaidUp;
+
+  /// Subtitle when guest is all paid up
+  ///
+  /// In en, this message translates to:
+  /// **'Your next rent will show here before it\'s due.'**
+  String get rentPaidUpBody;
+
+  /// Pending verification banner on guest home
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} reported. Waiting for your owner to confirm.'**
+  String rentWaiting(String amount);
+
+  /// Primary action button to pay rent
+  ///
+  /// In en, this message translates to:
+  /// **'Pay {amount}'**
+  String payAction(String amount);
+
+  /// Action button to report payment already made
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ve already paid'**
+  String get alreadyPaid;
+
+  /// Section header for stay details
+  ///
+  /// In en, this message translates to:
+  /// **'Your stay'**
+  String get homeYourStay;
+
+  /// Label for advance balance in your stay sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Advance balance'**
+  String get homeAdvanceBalance;
+
+  /// Section header for recent charges and payments
+  ///
+  /// In en, this message translates to:
+  /// **'Recent activity'**
+  String get homeRecent;
+
+  /// Empty state text when there are no recent activity items
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet.'**
+  String get homeNoActivity;
+
+  /// Title for payment in recent activity
+  ///
+  /// In en, this message translates to:
+  /// **'Payment, {method}'**
+  String activityPayment(String method);
+
+  /// Section header for PG contact info
+  ///
+  /// In en, this message translates to:
+  /// **'Your PG'**
+  String get homeYourPg;
+
+  /// Title to call PG owner/manager
+  ///
+  /// In en, this message translates to:
+  /// **'Call {pg}'**
+  String callPg(String pg);
+
+  /// Title when guest has no active stay
+  ///
+  /// In en, this message translates to:
+  /// **'No current stay'**
+  String get noStayTitle;
+
+  /// Body message when guest has no active stay
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve left {pg}. Your past payments are in History.'**
+  String noStayBody(String pg);
+
+  /// Notice when vacated guest has unpaid balance
+  ///
+  /// In en, this message translates to:
+  /// **'{pg} shows {amount} unpaid. Please contact them.'**
+  String noStayOwes(String pg, String amount);
+
+  /// Action button to open history when guest has no active stay
+  ///
+  /// In en, this message translates to:
+  /// **'See history'**
+  String get noStayAction;
+
+  /// Label for rent due on row
+  ///
+  /// In en, this message translates to:
+  /// **'Rent due on'**
+  String get profileDueLabel;
 }
 
 class _AppLocalizationsDelegate

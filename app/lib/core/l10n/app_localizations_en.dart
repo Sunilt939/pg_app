@@ -1262,4 +1262,81 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get receiptConfirmed => 'Payment confirmed';
+
+  @override
+  String rentOverdueSince(String date) {
+    return 'Overdue since $date';
+  }
+
+  @override
+  String get rentDueNow => 'Due now';
+
+  @override
+  String rentNextDue(String date) {
+    return 'Next rent due $date';
+  }
+
+  @override
+  String get rentPaidUp => 'You\'re all paid up';
+
+  @override
+  String get rentPaidUpBody =>
+      'Your next rent will show here before it\'s due.';
+
+  @override
+  String rentWaiting(String amount) {
+    return '$amount reported. Waiting for your owner to confirm.';
+  }
+
+  @override
+  String payAction(String amount) {
+    return 'Pay $amount';
+  }
+
+  @override
+  String get alreadyPaid => 'I\'ve already paid';
+
+  @override
+  String get homeYourStay => 'Your stay';
+
+  @override
+  String get homeAdvanceBalance => 'Advance balance';
+
+  @override
+  String get homeRecent => 'Recent activity';
+
+  @override
+  String get homeNoActivity => 'Nothing here yet.';
+
+  @override
+  String activityPayment(String method) {
+    return 'Payment, $method';
+  }
+
+  @override
+  String get homeYourPg => 'Your PG';
+
+  @override
+  String callPg(String pg) {
+    return 'Call $pg';
+  }
+
+  @override
+  String get noStayTitle => 'No current stay';
+
+  @override
+  String noStayBody(String pg) {
+    return 'You\'ve left $pg. Your past payments are in History.';
+  }
+
+  @override
+  String noStayOwes(String pg, String amount) {
+    return '$pg shows $amount unpaid. Please contact them.';
+  }
+
+  @override
+  String get noStayAction => 'See history';
+
+  @override
+  String get profileDueLabel => 'Rent due on';
 }
