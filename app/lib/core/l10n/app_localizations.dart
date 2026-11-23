@@ -2380,6 +2380,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rent due on'**
   String get profileDueLabel;
+
+  /// Label for pay amount field
+  ///
+  /// In en, this message translates to:
+  /// **'Amount'**
+  String get payAmount;
+
+  /// Quick-fill button for due now amount
+  ///
+  /// In en, this message translates to:
+  /// **'Due now {amount}'**
+  String payQuickDueNow(String amount);
+
+  /// Quick-fill button for next rent amount
+  ///
+  /// In en, this message translates to:
+  /// **'Next rent {amount}'**
+  String payQuickNext(String amount);
+
+  /// Section header for payment destination account
+  ///
+  /// In en, this message translates to:
+  /// **'Pay to'**
+  String get payTo;
+
+  /// Action to choose a different receiving UPI account
+  ///
+  /// In en, this message translates to:
+  /// **'Pay to a different account'**
+  String get payOtherAccount;
+
+  /// Title when no receiving payment account exists
+  ///
+  /// In en, this message translates to:
+  /// **'Your PG owner hasn\'t added a payment account yet'**
+  String get payNoAccountTitle;
+
+  /// Body when no receiving payment account exists
+  ///
+  /// In en, this message translates to:
+  /// **'Ask them to add one, or pay in cash or by bank transfer and tell them here.'**
+  String get payNoAccountBody;
+
+  /// Button to trigger UPI intent
+  ///
+  /// In en, this message translates to:
+  /// **'Pay with UPI app'**
+  String get payUpiAction;
+
+  /// Link to report an alternate payment
+  ///
+  /// In en, this message translates to:
+  /// **'I paid another way'**
+  String get payOtherWay;
+
+  /// Error snackbar when no UPI app is available
+  ///
+  /// In en, this message translates to:
+  /// **'No UPI app found. Copy the UPI ID and pay from any UPI app.'**
+  String get payNoUpiApp;
+
+  /// Generic copy confirmation feedback
+  ///
+  /// In en, this message translates to:
+  /// **'Copied.'**
+  String get copied;
 }
 
 class _AppLocalizationsDelegate

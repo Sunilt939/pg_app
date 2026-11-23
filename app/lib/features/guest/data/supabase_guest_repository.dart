@@ -2,6 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../owner/domain/charge_balance.dart';
 import '../../owner/domain/guest_list_item.dart';
+import '../../owner/domain/payment_account.dart';
 import '../../owner/domain/payment_feed_item.dart';
 import '../domain/guest_home_bundle.dart';
 import '../domain/guest_repository.dart';
@@ -70,6 +71,39 @@ class SupabaseGuestRepository implements GuestRepository {
       charges: charges,
       payments: payments,
     );
+  }
+
+  @override
+  Future<GuestListItem?> getStay(String stayId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final resp = await client
+        .from('v_guest_list')
+        .select()
+        .eq('stay_id', stayId)
+        .maybeSingle();
+
+    if (resp == null) return null;
+    return GuestListItem.fromJson(resp);
+  }
+
+  @override
+  Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final resp = await client
+        .from('pg_payment_accounts')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('kind', 'upi')
+        .eq('is_active', true)
+        .order('is_default', ascending: false);
+
+    return (resp as List)
+        .map((e) => PaymentAccount.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }
 

@@ -10,6 +10,7 @@ import '../../../../core/format/phone.dart';
 import '../../../../core/l10n/app_localizations.dart';
 import '../../../../core/theme/app_icons.dart';
 import '../../../../core/theme/tokens.dart';
+import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/empty_state.dart';
 import '../../../../core/widgets/error_state.dart';
 import '../../../../core/widgets/key_value_row.dart';
@@ -110,6 +111,12 @@ class GuestHomeScreen extends ConsumerWidget {
     final dueNowPaise = stay.dueNowPaise ?? 0;
     final nextDuePaise = stay.nextDuePaise ?? 0;
     final pendingPaise = stay.pendingVerificationPaise;
+
+    final payAmount = overduePaise > 0
+        ? (dueNowPaise > 0 ? dueNowPaise : overduePaise)
+        : (dueNowPaise > 0
+            ? dueNowPaise
+            : (nextDuePaise > 0 ? nextDuePaise : 0));
 
     Widget stateContent;
 
@@ -229,6 +236,16 @@ class GuestHomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+          if (payAmount > 0) ...[
+            const SizedBox(height: AppSpace.x12),
+            AppButton.primary(
+              label: l10n.payAction(MoneyFormat.format(payAmount)),
+              expand: true,
+              onPressed: () {
+                context.push('/guest/pay/${stay.stayId}', extra: payAmount);
+              },
             ),
           ],
         ],

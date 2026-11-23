@@ -12,6 +12,7 @@ import '../../features/auth/presentation/screens/verify_screen.dart';
 import '../../features/guest/presentation/guest_shell.dart';
 import '../../features/guest/presentation/screens/guest_history_screen.dart';
 import '../../features/guest/presentation/screens/guest_home_screen.dart';
+import '../../features/guest/presentation/screens/guest_pay_rent_screen.dart';
 import '../../features/owner/presentation/owner_shell.dart';
 import '../../features/owner/presentation/screens/add_pg_screen.dart';
 import '../../features/owner/presentation/screens/add_guest_screen.dart';
@@ -337,8 +338,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.guestPay,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.payTitle,
+        builder: (context, state) => GuestPayRentScreen(
+          stayId: state.pathParameters['stayId'] ?? '',
+          initialAmountPaise: state.extra as int?,
         ),
       ),
       GoRoute(

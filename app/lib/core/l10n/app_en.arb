@@ -1839,5 +1839,59 @@
   "profileDueLabel": "Rent due on",
   "@profileDueLabel": {
     "description": "Label for rent due on row"
+  },
+  "payAmount": "Amount",
+  "@payAmount": {
+    "description": "Label for pay amount field"
+  },
+  "payQuickDueNow": "Due now {amount}",
+  "@payQuickDueNow": {
+    "description": "Quick-fill button for due now amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payQuickNext": "Next rent {amount}",
+  "@payQuickNext": {
+    "description": "Quick-fill button for next rent amount",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "payTo": "Pay to",
+  "@payTo": {
+    "description": "Section header for payment destination account"
+  },
+  "payOtherAccount": "Pay to a different account",
+  "@payOtherAccount": {
+    "description": "Action to choose a different receiving UPI account"
+  },
+  "payNoAccountTitle": "Your PG owner hasn't added a payment account yet",
+  "@payNoAccountTitle": {
+    "description": "Title when no receiving payment account exists"
+  },
+  "payNoAccountBody": "Ask them to add one, or pay in cash or by bank transfer and tell them here.",
+  "@payNoAccountBody": {
+    "description": "Body when no receiving payment account exists"
+  },
+  "payUpiAction": "Pay with UPI app",
+  "@payUpiAction": {
+    "description": "Button to trigger UPI intent"
+  },
+  "payOtherWay": "I paid another way",
+  "@payOtherWay": {
+    "description": "Link to report an alternate payment"
+  },
+  "payNoUpiApp": "No UPI app found. Copy the UPI ID and pay from any UPI app.",
+  "@payNoUpiApp": {
+    "description": "Error snackbar when no UPI app is available"
+  },
+  "copied": "Copied.",
+  "@copied": {
+    "description": "Generic copy confirmation feedback"
   }
 }

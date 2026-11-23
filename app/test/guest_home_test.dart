@@ -10,6 +10,7 @@ import 'package:app/features/guest/presentation/providers/guest_provider.dart';
 import 'package:app/features/guest/presentation/screens/guest_home_screen.dart';
 import 'package:app/features/owner/domain/charge_balance.dart';
 import 'package:app/features/owner/domain/guest_list_item.dart';
+import 'package:app/features/owner/domain/payment_account.dart';
 import 'package:app/features/owner/domain/payment_feed_item.dart';
 
 class MockGuestRepo implements GuestRepository {
@@ -19,6 +20,14 @@ class MockGuestRepo implements GuestRepository {
 
   @override
   Future<GuestHomeBundle> getGuestHomeData() async => bundle;
+
+  @override
+  Future<GuestListItem?> getStay(String stayId) async =>
+      bundle.currentStay ?? bundle.latestPastStay;
+
+  @override
+  Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async =>
+      const [];
 }
 
 Widget _wrapGuestHomeScreen({
@@ -104,6 +113,9 @@ GuestListItem _createTestStay({
 
 void main() {
   testWidgets('G1 displays overdue state when overduePaise > 0', (tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    addTearDown(tester.view.resetPhysicalSize);
+
     final stay = _createTestStay(
       overduePaise: 650000,
       dueNowPaise: 650000,
@@ -199,6 +211,9 @@ void main() {
   });
 
   testWidgets('G1 displays recent activity merged and navigates to receipt on tap', (tester) async {
+    tester.view.physicalSize = const Size(1080, 2400);
+    addTearDown(tester.view.resetPhysicalSize);
+
     final stay = _createTestStay(dueNowPaise: 650000);
     final charges = [
       const ChargeBalance(

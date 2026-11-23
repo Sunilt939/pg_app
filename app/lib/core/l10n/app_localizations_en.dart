@@ -1339,4 +1339,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileDueLabel => 'Rent due on';
+
+  @override
+  String get payAmount => 'Amount';
+
+  @override
+  String payQuickDueNow(String amount) {
+    return 'Due now $amount';
+  }
+
+  @override
+  String payQuickNext(String amount) {
+    return 'Next rent $amount';
+  }
+
+  @override
+  String get payTo => 'Pay to';
+
+  @override
+  String get payOtherAccount => 'Pay to a different account';
+
+  @override
+  String get payNoAccountTitle =>
+      'Your PG owner hasn\'t added a payment account yet';
+
+  @override
+  String get payNoAccountBody =>
+      'Ask them to add one, or pay in cash or by bank transfer and tell them here.';
+
+  @override
+  String get payUpiAction => 'Pay with UPI app';
+
+  @override
+  String get payOtherWay => 'I paid another way';
+
+  @override
+  String get payNoUpiApp =>
+      'No UPI app found. Copy the UPI ID and pay from any UPI app.';
+
+  @override
+  String get copied => 'Copied.';
 }
