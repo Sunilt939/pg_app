@@ -1578,6 +1578,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionMarkReceived => 'Mark as received';
 
   @override
+  String get actionConfirm => 'Confirm';
+
+  @override
+  String rowReported(String amount, String method, String date) {
+    return 'Reported $amount by $method, $date';
+  }
+
+  @override
   String get actionReject => 'Reject';
 
   @override

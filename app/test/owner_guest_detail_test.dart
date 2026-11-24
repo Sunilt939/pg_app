@@ -28,6 +28,24 @@ class MockOwnerRepo implements OwnerRepository {
   dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 
   GuestDetailBundle? bundle;
+  String? confirmedPaymentId;
+  String? rejectedPaymentId;
+
+  @override
+  Future<void> confirmPayment({
+    required String paymentId,
+    String? accountId,
+  }) async {
+    confirmedPaymentId = paymentId;
+  }
+
+  @override
+  Future<void> rejectPayment({
+    required String paymentId,
+    required String reason,
+  }) async {
+    rejectedPaymentId = paymentId;
+  }
 
   @override
   Future<GuestDetailBundle?> getGuestDetailBundle(String stayId) async => bundle;
@@ -275,6 +293,18 @@ Widget _wrapScreen({
         path: '/owner/guests/:stayId',
         builder: (context, state) => OwnerGuestDetailScreen(
           stayId: state.pathParameters['stayId'] ?? '',
+        ),
+      ),
+      GoRoute(
+        path: '/owner/payments/:paymentId',
+        builder: (context, state) => Scaffold(
+          body: Text('Payment detail for ${state.pathParameters['paymentId']}'),
+        ),
+      ),
+      GoRoute(
+        path: '/receipt/:paymentId',
+        builder: (context, state) => Scaffold(
+          body: Text('Receipt for ${state.pathParameters['paymentId']}'),
         ),
       ),
     ],
@@ -929,5 +959,257 @@ void main() {
       find.text('Kiran Kumar still owes ₹1,500. You can keep recording payments after they leave.'),
       findsOneWidget,
     );
+  });
+
+  testWidgets('O6b: Waiting for you section renders when pending payments exist with inline actions', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [
+        PaymentFeedItem(
+          paymentId: 'pay-pending-1',
+          stayId: 'stay-101',
+          amountPaise: 850000,
+          paidOn: '2026-11-20',
+          status: 'pending',
+          methodCode: 'upi',
+          methodLabel: 'UPI',
+        ),
+      ],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // Section header "Waiting for you"
+    expect(find.text('Waiting for you'), findsOneWidget);
+
+    // Row reported subtitle: "Reported ₹8,500 by UPI, 20 Nov 2026"
+    expect(find.text('Reported ₹8,500 by UPI, 20 Nov 2026'), findsOneWidget);
+
+    // Inline actions: Reject and Confirm
+    expect(find.widgetWithText(AppButton, 'Reject'), findsOneWidget);
+    expect(find.widgetWithText(AppButton, 'Confirm'), findsOneWidget);
+
+    // Status chip pending
+    expect(find.byType(StatusChip), findsWidgets);
+  });
+
+  testWidgets('O6b: Tapping pending payment row body opens O8 payment detail', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [
+        PaymentFeedItem(
+          paymentId: 'pay-pending-1',
+          stayId: 'stay-101',
+          amountPaise: 850000,
+          paidOn: '2026-11-20',
+          status: 'pending',
+          methodCode: 'upi',
+          methodLabel: 'UPI',
+        ),
+      ],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    // Tap the row body (the reported text)
+    await tester.tap(find.text('Reported ₹8,500 by UPI, 20 Nov 2026'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Payment detail for pay-pending-1'), findsOneWidget);
+  });
+
+  testWidgets('O6b: Inline confirm action confirms payment via sheet', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [
+        PaymentFeedItem(
+          paymentId: 'pay-pending-1',
+          stayId: 'stay-101',
+          amountPaise: 850000,
+          paidOn: '2026-11-20',
+          status: 'pending',
+          methodCode: 'upi',
+          methodLabel: 'UPI',
+        ),
+      ],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    final confirmBtn = find.widgetWithText(AppButton, 'Confirm');
+    await tester.tap(confirmBtn);
+    await tester.pumpAndSettle();
+
+    // Confirm sheet opens
+    expect(find.text('Mark as received'), findsWidgets);
+
+    // Tap confirm inside sheet
+    final markReceivedBtn = find.descendant(
+      of: find.byType(BottomSheet),
+      matching: find.byType(AppButton),
+    );
+    await tester.tap(markReceivedBtn);
+    await tester.pumpAndSettle();
+
+    expect(repo.confirmedPaymentId, 'pay-pending-1');
+  });
+
+  testWidgets('O6b: Inline reject action rejects payment via sheet', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [
+        PaymentFeedItem(
+          paymentId: 'pay-pending-1',
+          stayId: 'stay-101',
+          amountPaise: 850000,
+          paidOn: '2026-11-20',
+          status: 'pending',
+          methodCode: 'upi',
+          methodLabel: 'UPI',
+        ),
+      ],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    final rejectBtn = find.widgetWithText(AppButton, 'Reject');
+    await tester.tap(rejectBtn);
+    await tester.pumpAndSettle();
+
+    // Reject sheet opens
+    expect(find.text('Reject this payment?'), findsOneWidget);
+
+    await tester.enterText(find.byType(AppTextField), 'Wrong reference number');
+    await tester.pumpAndSettle();
+
+    final rejectSubmitBtn = find.descendant(
+      of: find.byType(BottomSheet),
+      matching: find.byType(AppButton),
+    );
+    await tester.tap(rejectSubmitBtn);
+    await tester.pumpAndSettle();
+
+    expect(repo.rejectedPaymentId, 'pay-pending-1');
+  });
+
+  testWidgets('O6b: Waiting for you section is hidden when no pending payments exist', (tester) async {
+    final repo = MockOwnerRepo();
+    repo.bundle = const GuestDetailBundle(
+      guest: GuestListItem(
+        stayId: 'stay-101',
+        pgId: 'pg-1',
+        pgName: 'Sunrise PG',
+        personId: 'person-101',
+        fullName: 'Kiran Kumar',
+        phone: '+919876543210',
+        stayStatus: 'active',
+        joinDate: '2026-06-03',
+        monthlyRentPaise: 1000000,
+        billingDay: 12,
+        roomNumber: '101',
+        bedLabel: 'A',
+        hasSignedIn: false,
+        outstandingPaise: 150000,
+        attentionState: 'due',
+      ),
+      charges: [],
+      payments: [
+        PaymentFeedItem(
+          paymentId: 'pay-confirmed-1',
+          stayId: 'stay-101',
+          amountPaise: 850000,
+          paidOn: '2026-11-20',
+          status: 'confirmed',
+          methodCode: 'upi',
+          methodLabel: 'UPI',
+        ),
+      ],
+      documentsCount: 0,
+    );
+
+    await tester.pumpWidget(_wrapScreen(repo: repo));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Waiting for you'), findsNothing);
   });
 }

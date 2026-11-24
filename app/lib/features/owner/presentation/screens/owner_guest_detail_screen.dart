@@ -32,6 +32,8 @@ import '../../../../core/widgets/status_chip.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../domain/owner_repository.dart';
 import '../providers/owner_provider.dart';
+import '../widgets/confirm_payment_sheet.dart';
+import '../widgets/reject_payment_sheet.dart';
 
 class OwnerGuestDetailScreen extends ConsumerWidget {
   final String stayId;
@@ -142,7 +144,12 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           itemCount: payments.length,
           itemBuilder: (context, i) {
             final payment = payments[i];
-            return _buildPaymentRow(payment, i < payments.length - 1, l10n);
+            return _buildPaymentRow(
+              context,
+              payment,
+              i < payments.length - 1,
+              l10n,
+            );
           },
         ),
       ),
@@ -243,6 +250,14 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
                         ref.invalidate(guestDetailBundleProvider(stayId));
                       },
                     ),
+                  ),
+                if (bundle.payments.any((p) => p.status == 'pending'))
+                  _buildWaitingForYouSection(
+                    context,
+                    ref,
+                    l10n,
+                    bundle.payments.where((p) => p.status == 'pending').toList(),
+                    guest,
                   ),
                 if (bundle.charges.isNotEmpty)
                   _buildChargesSection(
@@ -751,6 +766,100 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
     }
   }
 
+  Widget _buildWaitingForYouSection(
+    BuildContext context,
+    WidgetRef ref,
+    AppLocalizations l10n,
+    List<PaymentFeedItem> pendingPayments,
+    GuestListItem guest,
+  ) {
+    final sorted = [...pendingPayments]..sort((a, b) {
+        final aDate = a.createdAt ?? a.paidOn;
+        final bDate = b.createdAt ?? b.paidOn;
+        return aDate.compareTo(bDate);
+      });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SectionHeader(
+          title: l10n.waitingForYou,
+        ),
+        LedgerSheet(
+          margin: const EdgeInsets.only(bottom: AppSpace.x12),
+          children: [
+            for (int i = 0; i < sorted.length; i++)
+              _buildPendingPaymentRow(
+                context,
+                ref,
+                sorted[i],
+                i < sorted.length - 1,
+                l10n,
+                guest,
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPendingPaymentRow(
+    BuildContext context,
+    WidgetRef ref,
+    PaymentFeedItem payment,
+    bool showDivider,
+    AppLocalizations l10n,
+    GuestListItem guest,
+  ) {
+    final title = (guest.fullName != null && guest.fullName!.trim().isNotEmpty)
+        ? guest.fullName!.trim()
+        : guest.phone;
+
+    return LedgerRow(
+      title: title,
+      subtitle: l10n.rowReported(
+        MoneyFormat.format(payment.amountPaise),
+        payment.methodLabel,
+        _formatDate(payment.paidOn),
+      ),
+      paise: payment.amountPaise,
+      statusKind: StatusChipKind.pending,
+      showDivider: showDivider,
+      onTap: () async {
+        await context.push('/owner/payments/${payment.paymentId}');
+        ref.invalidate(guestDetailBundleProvider(stayId));
+      },
+      inlineActions: [
+        AppButton.text(
+          label: l10n.actionReject,
+          textColor: AppColors.overdueFg,
+          onPressed: () async {
+            final res = await RejectPaymentSheet.show(
+              context,
+              payment: payment,
+            );
+            if (res == true) {
+              ref.invalidate(guestDetailBundleProvider(stayId));
+            }
+          },
+        ),
+        AppButton.text(
+          label: l10n.actionConfirm,
+          textColor: AppColors.petrol,
+          onPressed: () async {
+            final res = await ConfirmPaymentSheet.show(
+              context,
+              payment: payment,
+            );
+            if (res == true) {
+              ref.invalidate(guestDetailBundleProvider(stayId));
+            }
+          },
+        ),
+      ],
+    );
+  }
+
   Widget _buildPaymentsSection(
     BuildContext context,
     AppLocalizations l10n,
@@ -779,6 +888,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
           children: [
             for (int i = 0; i < paymentsToShow.length; i++)
               _buildPaymentRow(
+                context,
                 paymentsToShow[i],
                 i < paymentsToShow.length - 1,
                 l10n,
@@ -790,6 +900,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
   }
 
   Widget _buildPaymentRow(
+    BuildContext context,
     PaymentFeedItem payment,
     bool showDivider,
     AppLocalizations l10n,
@@ -820,6 +931,7 @@ class OwnerGuestDetailScreen extends ConsumerWidget {
       statusKind: statusKind,
       statusLabel: statusLabel,
       showDivider: showDivider,
+      onTap: () => context.push('/owner/payments/${payment.paymentId}'),
     );
   }
 

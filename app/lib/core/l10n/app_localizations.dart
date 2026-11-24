@@ -2819,6 +2819,18 @@ abstract class AppLocalizations {
   /// **'Mark as received'**
   String get actionMarkReceived;
 
+  /// Button to confirm
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get actionConfirm;
+
+  /// Subtitle for reported payment in waiting rows
+  ///
+  /// In en, this message translates to:
+  /// **'Reported {amount} by {method}, {date}'**
+  String rowReported(String amount, String method, String date);
+
   /// Button to reject
   ///
   /// In en, this message translates to:

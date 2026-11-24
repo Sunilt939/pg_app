@@ -2168,6 +2168,19 @@
   "@actionMarkReceived": {
     "description": "Button to mark payment as received"
   },
+  "actionConfirm": "Confirm",
+  "@actionConfirm": {
+    "description": "Button to confirm"
+  },
+  "rowReported": "Reported {amount} by {method}, {date}",
+  "@rowReported": {
+    "description": "Subtitle for reported payment in waiting rows",
+    "placeholders": {
+      "amount": { "type": "String" },
+      "method": { "type": "String" },
+      "date": { "type": "String" }
+    }
+  },
   "actionReject": "Reject",
   "@actionReject": {
     "description": "Button to reject"
