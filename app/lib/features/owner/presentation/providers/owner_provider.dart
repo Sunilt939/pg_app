@@ -193,6 +193,14 @@ final reminderRulesProvider =
   return repo.getReminderRules(activePg.pgId);
 });
 
+final pgDetailsProvider =
+    FutureProvider.autoDispose<PgDetails?>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return null;
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPgDetails(activePg.pgId);
+});
+
 
 
 

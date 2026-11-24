@@ -1089,5 +1089,98 @@ class SupabaseOwnerRepository implements OwnerRepository {
 
     await client.from('reminder_rules').delete().eq('id', id);
   }
+
+  @override
+  Future<PgDetails?> getPgDetails(String pgId) async {
+    final client = _client;
+    if (client == null) return null;
+
+    final response = await client
+        .from('pgs')
+        .select('id, name, gender_policy, contact_phone, address_id, addresses(id, line1, area, city_id, pincode, cities(id, name, states(name)))')
+        .eq('id', pgId)
+        .maybeSingle();
+
+    if (response == null) return null;
+    return PgDetails.fromJson(response);
+  }
+
+  @override
+  Future<void> updatePgName({
+    required String pgId,
+    required String name,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.from('pgs').update({
+      'name': name.trim(),
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
+    }).eq('id', pgId);
+  }
+
+  @override
+  Future<void> updatePgGenderPolicy({
+    required String pgId,
+    required String genderPolicy,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.from('pgs').update({
+      'gender_policy': genderPolicy,
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
+    }).eq('id', pgId);
+  }
+
+  @override
+  Future<void> updatePgContactPhone({
+    required String pgId,
+    String? contactPhone,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.from('pgs').update({
+      'contact_phone': contactPhone != null && contactPhone.trim().isNotEmpty
+          ? contactPhone.trim()
+          : null,
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
+    }).eq('id', pgId);
+  }
+
+  @override
+  Future<void> updatePgAddress({
+    required String pgId,
+    required String addressId,
+    required String line1,
+    String? area,
+    required int cityId,
+    String? pincode,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    if (addressId.trim().isNotEmpty) {
+      await client.from('addresses').update({
+        'line1': line1.trim(),
+        'area': area != null && area.trim().isNotEmpty ? area.trim() : null,
+        'city_id': cityId,
+        'pincode': pincode != null && pincode.trim().isNotEmpty ? pincode.trim() : null,
+      }).eq('id', addressId);
+    } else {
+      final res = await client.from('addresses').insert({
+        'line1': line1.trim(),
+        'area': area != null && area.trim().isNotEmpty ? area.trim() : null,
+        'city_id': cityId,
+        'pincode': pincode != null && pincode.trim().isNotEmpty ? pincode.trim() : null,
+      }).select('id').single();
+      final newAddressId = res['id'] as String;
+      await client.from('pgs').update({
+        'address_id': newAddressId,
+        'updated_at': DateTime.now().toUtc().toIso8601String(),
+      }).eq('id', pgId);
+    }
+  }
 }
 

@@ -171,6 +171,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pgDetailsTitle => 'PG details';
 
   @override
+  String get pgDetailsSaved => 'Saved.';
+
+  @override
   String get payTitle => 'Pay rent';
 
   @override

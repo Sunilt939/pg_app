@@ -12,6 +12,7 @@ import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
 import 'reminder_rule.dart';
+import 'pg_details.dart';
 import 'upi_app.dart';
 
 export 'charge_balance.dart';
@@ -23,6 +24,7 @@ export 'month_collections.dart';
 export 'owner_home_bundle.dart';
 export 'payment_feed_item.dart';
 export 'payment_method.dart';
+export 'pg_details.dart';
 export 'pg_monthly_summary.dart';
 export 'pg_overview.dart';
 export 'pg_setup_status.dart';
@@ -200,5 +202,26 @@ abstract class OwnerRepository {
     required bool isActive,
   });
   Future<void> deleteReminderRule(String id);
+  Future<PgDetails?> getPgDetails(String pgId);
+  Future<void> updatePgName({
+    required String pgId,
+    required String name,
+  });
+  Future<void> updatePgGenderPolicy({
+    required String pgId,
+    required String genderPolicy,
+  });
+  Future<void> updatePgContactPhone({
+    required String pgId,
+    String? contactPhone,
+  });
+  Future<void> updatePgAddress({
+    required String pgId,
+    required String addressId,
+    required String line1,
+    String? area,
+    required int cityId,
+    String? pincode,
+  });
 }
 

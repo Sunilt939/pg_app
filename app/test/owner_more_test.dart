@@ -284,6 +284,18 @@ Widget _wrapWithRouter({
           body: Text('Accounts Page'),
         ),
       ),
+      GoRoute(
+        path: RoutePaths.ownerReminders,
+        builder: (context, state) => const Scaffold(
+          body: Text('Reminders Page'),
+        ),
+      ),
+      GoRoute(
+        path: RoutePaths.ownerSettings,
+        builder: (context, state) => const Scaffold(
+          body: Text('Settings Page'),
+        ),
+      ),
       ...extraRoutes,
     ],
   );
@@ -529,6 +541,71 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Receiving accounts'), findsNothing);
+  });
+
+  testWidgets('PG details appears for owner and navigates to settings screen',
+      (tester) async {
+    final mockOwner = MockOwnerRepo();
+    final mockAuth = MockAuthRepo(
+      myContext: const AuthContext(
+        person: AuthPerson(id: 'person-1', phone: '+919876543210'),
+        pgs: [AuthPg(pgId: 'pg-1', name: 'Green PG', role: 'owner')],
+      ),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ownerRepositoryProvider.overrideWithValue(mockOwner),
+          authRepositoryProvider.overrideWithValue(mockAuth),
+        ],
+        child: Consumer(
+          builder: (context, ref, _) => _wrapWithRouter(
+            ref: ref,
+            child: const OwnerMoreScreen(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('PG details'), findsOneWidget);
+    expect(find.byIcon(AppIcons.settings), findsOneWidget);
+
+    await tester.tap(find.text('PG details'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Settings Page'), findsOneWidget);
+  });
+
+  testWidgets('PG details does not appear for non-owner', (tester) async {
+    final mockOwner = MockOwnerRepo();
+    final mockAuth = MockAuthRepo(
+      myContext: const AuthContext(
+        person: AuthPerson(id: 'person-1', phone: '+919876543210'),
+        pgs: [AuthPg(pgId: 'pg-1', name: 'Green PG', role: 'manager')],
+      ),
+    );
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          ownerRepositoryProvider.overrideWithValue(mockOwner),
+          authRepositoryProvider.overrideWithValue(mockAuth),
+        ],
+        child: Consumer(
+          builder: (context, ref, _) => _wrapWithRouter(
+            ref: ref,
+            child: const OwnerMoreScreen(),
+          ),
+        ),
+      ),
+    );
+
+    await tester.pumpAndSettle();
+
+    expect(find.text('PG details'), findsNothing);
   });
 }
 

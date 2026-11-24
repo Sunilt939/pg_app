@@ -203,6 +203,10 @@
   "@pgDetailsTitle": {
     "description": "Title for PG Details screen"
   },
+  "pgDetailsSaved": "Saved.",
+  "@pgDetailsSaved": {
+    "description": "Toast when PG details are saved"
+  },
   "payTitle": "Pay rent",
   "@payTitle": {
     "description": "Title for Pay Rent screen"

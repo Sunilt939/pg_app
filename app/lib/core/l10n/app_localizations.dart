@@ -376,6 +376,12 @@ abstract class AppLocalizations {
   /// **'PG details'**
   String get pgDetailsTitle;
 
+  /// Toast when PG details are saved
+  ///
+  /// In en, this message translates to:
+  /// **'Saved.'**
+  String get pgDetailsSaved;
+
   /// Title for Pay Rent screen
   ///
   /// In en, this message translates to:
