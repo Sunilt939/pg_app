@@ -1965,5 +1965,79 @@
   "reportScreenshotFailed": "Couldn't upload the screenshot. You can send without it.",
   "@reportScreenshotFailed": {
     "description": "Notice when screenshot upload fails"
+  },
+  "tabPayments": "Payments",
+  "@tabPayments": {
+    "description": "Tab label for payments in history"
+  },
+  "tabCharges": "Charges",
+  "@tabCharges": {
+    "description": "Tab label for charges in history"
+  },
+  "historyPrevious": "Previous stays",
+  "@historyPrevious": {
+    "description": "Section header for previous stays in history"
+  },
+  "historyStayDates": "{from} to {to}",
+  "@historyStayDates": {
+    "description": "Stay date range from join date to leave date",
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "historyPastNotice": "This is your stay at {pg}, which has ended.",
+  "@historyPastNotice": {
+    "description": "Notice shown at top of history when viewing past stay",
+    "placeholders": {
+      "pg": {
+        "type": "String"
+      }
+    }
+  },
+  "statusSheetPending": "Waiting for your owner to confirm.",
+  "@statusSheetPending": {
+    "description": "Message in payment status sheet when payment is pending"
+  },
+  "statusSheetRejected": "Your owner said: {reason}",
+  "@statusSheetRejected": {
+    "description": "Message in payment status sheet when payment was rejected",
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "statusSheetPayAgain": "Report it again",
+  "@statusSheetPayAgain": {
+    "description": "Button to report payment again when rejected"
+  },
+  "historyEmptyPaymentsTitle": "No payments yet",
+  "@historyEmptyPaymentsTitle": {
+    "description": "Title when guest has no payments"
+  },
+  "historyEmptyPaymentsBody": "Payments you make or report will show here.",
+  "@historyEmptyPaymentsBody": {
+    "description": "Body when guest has no payments"
+  },
+  "historyEmptyChargesTitle": "No charges yet",
+  "@historyEmptyChargesTitle": {
+    "description": "Title when guest has no charges"
+  },
+  "statusSheetMethod": "Method",
+  "@statusSheetMethod": {
+    "description": "Label for payment method in status sheet"
+  },
+  "statusSheetPaidOn": "Paid on",
+  "@statusSheetPaidOn": {
+    "description": "Label for paid on date in status sheet"
+  },
+  "statusSheetReportedOn": "Reported on",
+  "@statusSheetReportedOn": {
+    "description": "Label for reported on date in status sheet"
   }
 }

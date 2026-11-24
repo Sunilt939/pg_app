@@ -75,7 +75,7 @@
 - [x] **G1. Guest home** (AI). Spec: `docs/UI_SCREENS_GUEST.md` G1. *Check:* due, overdue and paid-up states.
 - [x] **G2. Pay rent** (AI). Spec: `docs/UI_SCREENS_GUEST.md` G2. *Test:* your UPI app opens with the right account and amount.
 - [x] **G3. "Tell your owner you've paid" sheet** (AI). Both versions. Spec: `docs/UI_SCREENS_GUEST.md` G3. The screenshot control stays hidden (uploads are off). *Test:* report a payment; the home page shows the "waiting" message.
-- [ ] **G4. History** (AI). Spec: `docs/UI_SCREENS_GUEST.md` G4.
+- [x] **G4. History** (AI). Spec: `docs/UI_SCREENS_GUEST.md` G4.
 - [ ] **G5. Past stay** (AI). Spec: `docs/UI_SCREENS_GUEST.md` G5. *Test:* needs a guest whose stay has ended.
 - [ ] **S2b. Profile, guest parts** (AI). Spec: `docs/UI_SCREENS_SHARED.md` S2: emergency contacts, "Your stay" and the view switch. Photo and ID document controls stay hidden.
 

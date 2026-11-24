@@ -2542,6 +2542,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t upload the screenshot. You can send without it.'**
   String get reportScreenshotFailed;
+
+  /// Tab label for payments in history
+  ///
+  /// In en, this message translates to:
+  /// **'Payments'**
+  String get tabPayments;
+
+  /// Tab label for charges in history
+  ///
+  /// In en, this message translates to:
+  /// **'Charges'**
+  String get tabCharges;
+
+  /// Section header for previous stays in history
+  ///
+  /// In en, this message translates to:
+  /// **'Previous stays'**
+  String get historyPrevious;
+
+  /// Stay date range from join date to leave date
+  ///
+  /// In en, this message translates to:
+  /// **'{from} to {to}'**
+  String historyStayDates(String from, String to);
+
+  /// Notice shown at top of history when viewing past stay
+  ///
+  /// In en, this message translates to:
+  /// **'This is your stay at {pg}, which has ended.'**
+  String historyPastNotice(String pg);
+
+  /// Message in payment status sheet when payment is pending
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for your owner to confirm.'**
+  String get statusSheetPending;
+
+  /// Message in payment status sheet when payment was rejected
+  ///
+  /// In en, this message translates to:
+  /// **'Your owner said: {reason}'**
+  String statusSheetRejected(String reason);
+
+  /// Button to report payment again when rejected
+  ///
+  /// In en, this message translates to:
+  /// **'Report it again'**
+  String get statusSheetPayAgain;
+
+  /// Title when guest has no payments
+  ///
+  /// In en, this message translates to:
+  /// **'No payments yet'**
+  String get historyEmptyPaymentsTitle;
+
+  /// Body when guest has no payments
+  ///
+  /// In en, this message translates to:
+  /// **'Payments you make or report will show here.'**
+  String get historyEmptyPaymentsBody;
+
+  /// Title when guest has no charges
+  ///
+  /// In en, this message translates to:
+  /// **'No charges yet'**
+  String get historyEmptyChargesTitle;
+
+  /// Label for payment method in status sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get statusSheetMethod;
+
+  /// Label for paid on date in status sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on'**
+  String get statusSheetPaidOn;
+
+  /// Label for reported on date in status sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Reported on'**
+  String get statusSheetReportedOn;
 }
 
 class _AppLocalizationsDelegate

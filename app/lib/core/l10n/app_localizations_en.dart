@@ -1431,4 +1431,53 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get reportScreenshotFailed =>
       'Couldn\'t upload the screenshot. You can send without it.';
+
+  @override
+  String get tabPayments => 'Payments';
+
+  @override
+  String get tabCharges => 'Charges';
+
+  @override
+  String get historyPrevious => 'Previous stays';
+
+  @override
+  String historyStayDates(String from, String to) {
+    return '$from to $to';
+  }
+
+  @override
+  String historyPastNotice(String pg) {
+    return 'This is your stay at $pg, which has ended.';
+  }
+
+  @override
+  String get statusSheetPending => 'Waiting for your owner to confirm.';
+
+  @override
+  String statusSheetRejected(String reason) {
+    return 'Your owner said: $reason';
+  }
+
+  @override
+  String get statusSheetPayAgain => 'Report it again';
+
+  @override
+  String get historyEmptyPaymentsTitle => 'No payments yet';
+
+  @override
+  String get historyEmptyPaymentsBody =>
+      'Payments you make or report will show here.';
+
+  @override
+  String get historyEmptyChargesTitle => 'No charges yet';
+
+  @override
+  String get statusSheetMethod => 'Method';
+
+  @override
+  String get statusSheetPaidOn => 'Paid on';
+
+  @override
+  String get statusSheetReportedOn => 'Reported on';
 }

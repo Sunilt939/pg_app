@@ -67,9 +67,14 @@ class SupabaseGuestRepository implements GuestRepository {
         .map((e) => PaymentFeedItem.fromJson(e as Map<String, dynamic>))
         .toList();
 
+    final previousStays = allStays
+        .where((s) => s.stayId != targetStay.stayId)
+        .toList();
+
     return GuestHomeBundle(
       currentStay: currentStay,
       latestPastStay: latestPastStay,
+      previousStays: previousStays,
       charges: charges,
       payments: payments,
     );
