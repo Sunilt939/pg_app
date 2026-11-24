@@ -805,6 +805,23 @@ class SupabaseOwnerRepository implements OwnerRepository {
   }
 
   @override
+  Future<List<PaymentFeedItem>> getPgPayments(String pgId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final response = await client
+        .from('v_payment_feed')
+        .select()
+        .eq('pg_id', pgId)
+        .order('paid_on', ascending: false)
+        .order('created_at', ascending: false);
+
+    return (response as List<dynamic>)
+        .map((row) => PaymentFeedItem.fromJson(row as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
   Future<void> confirmPayment({
     required String paymentId,
     String? accountId,

@@ -1633,4 +1633,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errReasonRequired => 'Enter a reason.';
+
+  @override
+  String get tabWaiting => 'Waiting';
+
+  @override
+  String get tabRecent => 'Recent';
+
+  @override
+  String get dayToday => 'Today';
+
+  @override
+  String get dayYesterday => 'Yesterday';
+
+  @override
+  String get waitingEmptyTitle => 'Nothing is waiting';
+
+  @override
+  String get waitingEmptyBody =>
+      'Payments your guests report will appear here for you to confirm.';
+
+  @override
+  String get paymentsEmptyTitle => 'No payments yet';
+
+  @override
+  String get paymentsEmptyBody =>
+      'Recorded and confirmed payments will appear here.';
+
+  @override
+  String get collectionsLink => 'Where was the money received?';
 }

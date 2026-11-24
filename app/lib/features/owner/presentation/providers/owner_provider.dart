@@ -69,6 +69,14 @@ final pgOverviewProvider = FutureProvider.autoDispose<PgOverview?>((ref) async {
   return repo.getPgOverview(activePg.pgId);
 });
 
+final pgPaymentsProvider =
+    FutureProvider.autoDispose<List<PaymentFeedItem>>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return [];
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPgPayments(activePg.pgId);
+});
+
 class GuestListNotifier extends AutoDisposeAsyncNotifier<List<GuestListItem>> {
   int _offset = 0;
   bool _hasMore = true;

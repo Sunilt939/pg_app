@@ -2248,5 +2248,41 @@
   "errReasonRequired": "Enter a reason.",
   "@errReasonRequired": {
     "description": "Validation error when reason is empty"
+  },
+  "tabWaiting": "Waiting",
+  "@tabWaiting": {
+    "description": "Waiting tab label on payments screen"
+  },
+  "tabRecent": "Recent",
+  "@tabRecent": {
+    "description": "Recent tab label on payments screen"
+  },
+  "dayToday": "Today",
+  "@dayToday": {
+    "description": "Day grouping header for today"
+  },
+  "dayYesterday": "Yesterday",
+  "@dayYesterday": {
+    "description": "Day grouping header for yesterday"
+  },
+  "waitingEmptyTitle": "Nothing is waiting",
+  "@waitingEmptyTitle": {
+    "description": "Empty state title on waiting tab"
+  },
+  "waitingEmptyBody": "Payments your guests report will appear here for you to confirm.",
+  "@waitingEmptyBody": {
+    "description": "Empty state body on waiting tab"
+  },
+  "paymentsEmptyTitle": "No payments yet",
+  "@paymentsEmptyTitle": {
+    "description": "Empty state title on recent payments tab"
+  },
+  "paymentsEmptyBody": "Recorded and confirmed payments will appear here.",
+  "@paymentsEmptyBody": {
+    "description": "Empty state body on recent payments tab"
+  },
+  "collectionsLink": "Where was the money received?",
+  "@collectionsLink": {
+    "description": "Row link opening money received screen"
   }
 }

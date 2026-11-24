@@ -2920,6 +2920,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Enter a reason.'**
   String get errReasonRequired;
+
+  /// Waiting tab label on payments screen
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting'**
+  String get tabWaiting;
+
+  /// Recent tab label on payments screen
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get tabRecent;
+
+  /// Day grouping header for today
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get dayToday;
+
+  /// Day grouping header for yesterday
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get dayYesterday;
+
+  /// Empty state title on waiting tab
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is waiting'**
+  String get waitingEmptyTitle;
+
+  /// Empty state body on waiting tab
+  ///
+  /// In en, this message translates to:
+  /// **'Payments your guests report will appear here for you to confirm.'**
+  String get waitingEmptyBody;
+
+  /// Empty state title on recent payments tab
+  ///
+  /// In en, this message translates to:
+  /// **'No payments yet'**
+  String get paymentsEmptyTitle;
+
+  /// Empty state body on recent payments tab
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded and confirmed payments will appear here.'**
+  String get paymentsEmptyBody;
+
+  /// Row link opening money received screen
+  ///
+  /// In en, this message translates to:
+  /// **'Where was the money received?'**
+  String get collectionsLink;
 }
 
 class _AppLocalizationsDelegate

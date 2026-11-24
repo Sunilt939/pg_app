@@ -150,6 +150,7 @@ abstract class OwnerRepository {
     String? utr,
   });
   Future<PaymentFeedItem?> getPaymentDetail(String paymentId);
+  Future<List<PaymentFeedItem>> getPgPayments(String pgId);
   Future<void> confirmPayment({
     required String paymentId,
     String? accountId,
