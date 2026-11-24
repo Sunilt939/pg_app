@@ -185,6 +185,15 @@ final signedFileUrlProvider =
   return repo.getSignedFileUrl(fileId);
 });
 
+final reminderRulesProvider =
+    FutureProvider.autoDispose<List<ReminderRule>>((ref) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return [];
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getReminderRules(activePg.pgId);
+});
+
+
 
 
 

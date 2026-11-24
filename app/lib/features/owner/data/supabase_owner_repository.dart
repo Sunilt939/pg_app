@@ -1018,5 +1018,76 @@ class SupabaseOwnerRepository implements OwnerRepository {
           .toList(),
     );
   }
+
+  @override
+  Future<List<ReminderRule>> getReminderRules(String pgId) async {
+    final client = _client;
+    if (client == null) return const [];
+
+    final response = await client
+        .from('reminder_rules')
+        .select()
+        .eq('pg_id', pgId)
+        .order('days_from_due');
+
+    return (response as List<dynamic>)
+        .map((row) => ReminderRule.fromJson(row as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Future<void> saveReminderRule({
+    String? id,
+    required String pgId,
+    required int daysFromDue,
+    required String channel,
+  }) async {
+    final client = _client;
+    if (client == null) return;
+
+    try {
+      if (id == null) {
+        await client.from('reminder_rules').insert({
+          'pg_id': pgId,
+          'days_from_due': daysFromDue,
+          'channel': channel,
+          'is_active': true,
+        });
+      } else {
+        await client.from('reminder_rules').update({
+          'days_from_due': daysFromDue,
+          'channel': channel,
+          'updated_at': DateTime.now().toUtc().toIso8601String(),
+        }).eq('id', id);
+      }
+    } on PostgrestException catch (e) {
+      if (e.code == '23505') {
+        throw const DuplicateReminderRuleException();
+      }
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> toggleReminderRule({
+    required String id,
+    required bool isActive,
+  }) async {
+    final client = _client;
+    if (client == null) return;
+
+    await client.from('reminder_rules').update({
+      'is_active': isActive,
+      'updated_at': DateTime.now().toUtc().toIso8601String(),
+    }).eq('id', id);
+  }
+
+  @override
+  Future<void> deleteReminderRule(String id) async {
+    final client = _client;
+    if (client == null) return;
+
+    await client.from('reminder_rules').delete().eq('id', id);
+  }
 }
 

@@ -4,10 +4,14 @@ import '../theme/tokens.dart';
 class OptionRowItem<T> {
   final T value;
   final String label;
+  final bool isEnabled;
+  final String? subtitle;
 
   const OptionRowItem({
     required this.value,
     required this.label,
+    this.isEnabled = true,
+    this.subtitle,
   });
 }
 
@@ -25,30 +29,57 @@ class OptionRow<T> extends StatelessWidget {
 
   Widget _buildItem(OptionRowItem<T> item) {
     final isSelected = item.value == selectedValue;
+    final isEnabled = item.isEnabled;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => onChanged?.call(item.value),
+      onTap: isEnabled ? () => onChanged?.call(item.value) : null,
       child: Container(
-        height: 44,
+        height: item.subtitle != null ? 52 : 44,
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.petrolTint : AppColors.surface,
+          color: !isEnabled
+              ? AppColors.disabledBg
+              : isSelected
+                  ? AppColors.petrolTint
+                  : AppColors.surface,
           borderRadius: AppRadius.button,
           border: Border.all(
-            color: isSelected ? AppColors.petrol : AppColors.outline,
+            color: !isEnabled
+                ? AppColors.hairline
+                : isSelected
+                    ? AppColors.petrol
+                    : AppColors.outline,
             width: isSelected ? 2.0 : 1.0,
           ),
         ),
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: AppSpace.x12),
-        child: Text(
-          item.label,
-          style: isSelected
-              ? AppText.buttonSmall.copyWith(color: AppColors.petrol)
-              : AppText.label,
-          textAlign: TextAlign.center,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        padding: const EdgeInsets.symmetric(horizontal: AppSpace.x8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              item.label,
+              style: !isEnabled
+                  ? AppText.label.copyWith(color: AppColors.muted)
+                  : isSelected
+                      ? AppText.buttonSmall.copyWith(color: AppColors.petrol)
+                      : AppText.label,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            if (item.subtitle != null) ...[
+              const SizedBox(height: 2),
+              Text(
+                item.subtitle!,
+                style: AppText.caption,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ],
         ),
       ),
     );

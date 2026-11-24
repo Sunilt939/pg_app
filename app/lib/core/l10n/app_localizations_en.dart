@@ -93,6 +93,81 @@ class AppLocalizationsEn extends AppLocalizations {
   String get remindersTitle => 'Reminders';
 
   @override
+  String get remindersSoon =>
+      'Reminders will start sending soon. You can set the timing now.';
+
+  @override
+  String remindBefore(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days before the due date',
+      one: '1 day before the due date',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get remindOn => 'On the due date';
+
+  @override
+  String remindAfter(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '$days days after the due date',
+      one: '1 day after the due date',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get channelPush => 'Push notification';
+
+  @override
+  String get channelSms => 'SMS';
+
+  @override
+  String get channelWhatsapp => 'WhatsApp';
+
+  @override
+  String get comingLater => 'Coming later';
+
+  @override
+  String get remindWhen => 'When';
+
+  @override
+  String get remindDays => 'Days';
+
+  @override
+  String get remindHow => 'How';
+
+  @override
+  String get remindWhenBefore => 'Before the due date';
+
+  @override
+  String get remindWhenOn => 'On the due date';
+
+  @override
+  String get remindWhenAfter => 'After the due date';
+
+  @override
+  String get remindRemove => 'Remove reminder';
+
+  @override
+  String get errReminderExists => 'You already have this reminder.';
+
+  @override
+  String get remindersEmptyTitle => 'No reminders';
+
+  @override
+  String get remindersEmptyBody =>
+      'Add reminders so guests are nudged before and after the due date.';
+
+  @override
+  String get remindersEmptyAction => 'Add reminder';
+
+  @override
   String get pgDetailsTitle => 'PG details';
 
   @override

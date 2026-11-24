@@ -50,7 +50,7 @@ class OwnerMoreScreen extends ConsumerWidget {
     final l10n = AppLocalizations.of(context)!;
     final activePg = ref.watch(activePgProvider);
     final pgTitle = activePg?.name ?? AppConfig.appName;
-    final isPgOwner = activePg?.role == 'owner';
+    final isPgOwner = activePg?.role.toLowerCase() == 'owner';
     final authContext = ref.watch(authContextProvider).valueOrNull;
     final isGuest = authContext?.isGuest ?? false;
 
@@ -92,7 +92,7 @@ class OwnerMoreScreen extends ConsumerWidget {
                   context.push(RoutePaths.ownerRooms);
                 },
               ),
-              if (isPgOwner)
+              if (isPgOwner) ...[
                 LedgerRow(
                   leading: const Icon(
                     AppIcons.bank,
@@ -108,11 +108,32 @@ class OwnerMoreScreen extends ConsumerWidget {
                     color: AppColors.muted,
                   ),
                   minHeight: 56,
-                  showDivider: false,
+                  showDivider: true,
                   onTap: () {
                     context.push(RoutePaths.ownerAccounts);
                   },
                 ),
+                LedgerRow(
+                  leading: const Icon(
+                    AppIcons.bell,
+                    size: 24,
+                    color: AppColors.ink,
+                  ),
+                  leadingGap: AppSpace.x16,
+                  title: l10n.remindersTitle,
+                  titleStyle: AppText.body,
+                  trailing: const Icon(
+                    AppIcons.chevronRight,
+                    size: 20,
+                    color: AppColors.muted,
+                  ),
+                  minHeight: 56,
+                  showDivider: false,
+                  onTap: () {
+                    context.push(RoutePaths.ownerReminders);
+                  },
+                ),
+              ],
             ],
           ),
 

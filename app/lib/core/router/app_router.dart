@@ -31,6 +31,7 @@ import '../../features/owner/presentation/screens/owner_payments_screen.dart';
 import '../../features/owner/presentation/screens/owner_collections_screen.dart';
 import '../../features/owner/presentation/screens/owner_rooms_screen.dart';
 import '../../features/owner/presentation/screens/owner_room_detail_screen.dart';
+import '../../features/owner/presentation/screens/owner_reminders_screen.dart';
 import '../../features/shared/presentation/screens/notifications_screen.dart';
 import '../../features/shared/presentation/screens/placeholder_screen.dart';
 import '../../features/shared/presentation/screens/profile_screen.dart';
@@ -293,9 +294,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerReminders,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.remindersTitle,
-        ),
+        builder: (context, state) => const OwnerRemindersScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

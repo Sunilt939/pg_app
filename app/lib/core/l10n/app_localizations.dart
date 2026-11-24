@@ -256,6 +256,120 @@ abstract class AppLocalizations {
   /// **'Reminders'**
   String get remindersTitle;
 
+  /// Notice when reminders sending is disabled
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders will start sending soon. You can set the timing now.'**
+  String get remindersSoon;
+
+  /// Reminder timing before due date
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{1 day before the due date} other{{days} days before the due date}}'**
+  String remindBefore(int days);
+
+  /// Reminder timing on due date
+  ///
+  /// In en, this message translates to:
+  /// **'On the due date'**
+  String get remindOn;
+
+  /// Reminder timing after due date
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{1 day after the due date} other{{days} days after the due date}}'**
+  String remindAfter(int days);
+
+  /// Push notification channel
+  ///
+  /// In en, this message translates to:
+  /// **'Push notification'**
+  String get channelPush;
+
+  /// SMS channel
+  ///
+  /// In en, this message translates to:
+  /// **'SMS'**
+  String get channelSms;
+
+  /// WhatsApp channel
+  ///
+  /// In en, this message translates to:
+  /// **'WhatsApp'**
+  String get channelWhatsapp;
+
+  /// Coming later badge
+  ///
+  /// In en, this message translates to:
+  /// **'Coming later'**
+  String get comingLater;
+
+  /// When label in reminder sheet
+  ///
+  /// In en, this message translates to:
+  /// **'When'**
+  String get remindWhen;
+
+  /// Days label in reminder sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Days'**
+  String get remindDays;
+
+  /// How label in reminder sheet
+  ///
+  /// In en, this message translates to:
+  /// **'How'**
+  String get remindHow;
+
+  /// Option before due date
+  ///
+  /// In en, this message translates to:
+  /// **'Before the due date'**
+  String get remindWhenBefore;
+
+  /// Option on due date
+  ///
+  /// In en, this message translates to:
+  /// **'On the due date'**
+  String get remindWhenOn;
+
+  /// Option after due date
+  ///
+  /// In en, this message translates to:
+  /// **'After the due date'**
+  String get remindWhenAfter;
+
+  /// Button to remove reminder
+  ///
+  /// In en, this message translates to:
+  /// **'Remove reminder'**
+  String get remindRemove;
+
+  /// Duplicate reminder error
+  ///
+  /// In en, this message translates to:
+  /// **'You already have this reminder.'**
+  String get errReminderExists;
+
+  /// Empty reminders title
+  ///
+  /// In en, this message translates to:
+  /// **'No reminders'**
+  String get remindersEmptyTitle;
+
+  /// Empty reminders body
+  ///
+  /// In en, this message translates to:
+  /// **'Add reminders so guests are nudged before and after the due date.'**
+  String get remindersEmptyBody;
+
+  /// Action to add reminder
+  ///
+  /// In en, this message translates to:
+  /// **'Add reminder'**
+  String get remindersEmptyAction;
+
   /// Title for PG Details screen
   ///
   /// In en, this message translates to:

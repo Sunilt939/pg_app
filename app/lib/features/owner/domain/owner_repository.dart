@@ -11,6 +11,7 @@ import 'payment_method.dart';
 import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
 import 'room_type.dart';
+import 'reminder_rule.dart';
 import 'upi_app.dart';
 
 export 'charge_balance.dart';
@@ -25,7 +26,16 @@ export 'payment_method.dart';
 export 'pg_monthly_summary.dart';
 export 'pg_overview.dart';
 export 'pg_setup_status.dart';
+export 'reminder_rule.dart';
 export 'upi_app.dart';
+
+class DuplicateReminderRuleException implements Exception {
+  final String message;
+  const DuplicateReminderRuleException([this.message = 'You already have this reminder.']);
+
+  @override
+  String toString() => message;
+}
 
 class DuplicateNicknameException implements Exception {
   final String message;
@@ -178,5 +188,17 @@ abstract class OwnerRepository {
     required String pgId,
     required String month,
   });
+  Future<List<ReminderRule>> getReminderRules(String pgId);
+  Future<void> saveReminderRule({
+    String? id,
+    required String pgId,
+    required int daysFromDue,
+    required String channel,
+  });
+  Future<void> toggleReminderRule({
+    required String id,
+    required bool isActive,
+  });
+  Future<void> deleteReminderRule(String id);
 }
 

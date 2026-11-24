@@ -113,6 +113,92 @@
   "@remindersTitle": {
     "description": "Title for Reminders screen"
   },
+  "remindersSoon": "Reminders will start sending soon. You can set the timing now.",
+  "@remindersSoon": {
+    "description": "Notice when reminders sending is disabled"
+  },
+  "remindBefore": "{days, plural, =1{1 day before the due date} other{{days} days before the due date}}",
+  "@remindBefore": {
+    "description": "Reminder timing before due date",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "remindOn": "On the due date",
+  "@remindOn": {
+    "description": "Reminder timing on due date"
+  },
+  "remindAfter": "{days, plural, =1{1 day after the due date} other{{days} days after the due date}}",
+  "@remindAfter": {
+    "description": "Reminder timing after due date",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "channelPush": "Push notification",
+  "@channelPush": {
+    "description": "Push notification channel"
+  },
+  "channelSms": "SMS",
+  "@channelSms": {
+    "description": "SMS channel"
+  },
+  "channelWhatsapp": "WhatsApp",
+  "@channelWhatsapp": {
+    "description": "WhatsApp channel"
+  },
+  "comingLater": "Coming later",
+  "@comingLater": {
+    "description": "Coming later badge"
+  },
+  "remindWhen": "When",
+  "@remindWhen": {
+    "description": "When label in reminder sheet"
+  },
+  "remindDays": "Days",
+  "@remindDays": {
+    "description": "Days label in reminder sheet"
+  },
+  "remindHow": "How",
+  "@remindHow": {
+    "description": "How label in reminder sheet"
+  },
+  "remindWhenBefore": "Before the due date",
+  "@remindWhenBefore": {
+    "description": "Option before due date"
+  },
+  "remindWhenOn": "On the due date",
+  "@remindWhenOn": {
+    "description": "Option on due date"
+  },
+  "remindWhenAfter": "After the due date",
+  "@remindWhenAfter": {
+    "description": "Option after due date"
+  },
+  "remindRemove": "Remove reminder",
+  "@remindRemove": {
+    "description": "Button to remove reminder"
+  },
+  "errReminderExists": "You already have this reminder.",
+  "@errReminderExists": {
+    "description": "Duplicate reminder error"
+  },
+  "remindersEmptyTitle": "No reminders",
+  "@remindersEmptyTitle": {
+    "description": "Empty reminders title"
+  },
+  "remindersEmptyBody": "Add reminders so guests are nudged before and after the due date.",
+  "@remindersEmptyBody": {
+    "description": "Empty reminders body"
+  },
+  "remindersEmptyAction": "Add reminder",
+  "@remindersEmptyAction": {
+    "description": "Action to add reminder"
+  },
   "pgDetailsTitle": "PG details",
   "@pgDetailsTitle": {
     "description": "Title for PG Details screen"
