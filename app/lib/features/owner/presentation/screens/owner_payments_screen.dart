@@ -22,6 +22,7 @@ import '../../../../core/widgets/status_chip.dart';
 import '../../../../core/widgets/underline_tabs.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
 import '../../domain/owner_repository.dart';
+import '../../../shared/presentation/widgets/notification_bell_button.dart';
 import '../providers/owner_provider.dart';
 import '../widgets/confirm_payment_sheet.dart';
 import '../widgets/pg_switcher_sheet.dart';
@@ -99,6 +100,9 @@ class _OwnerPaymentsScreenState extends ConsumerState<OwnerPaymentsScreen> {
           pgName: pgTitle,
           onTap: () => PgSwitcherSheet.show(context),
         ),
+        actions: const [
+          NotificationBellButton(),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

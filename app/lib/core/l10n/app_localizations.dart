@@ -214,6 +214,18 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notificationsTitle;
 
+  /// Title for empty notifications
+  ///
+  /// In en, this message translates to:
+  /// **'No notifications yet'**
+  String get notificationsEmptyTitle;
+
+  /// Body for empty notifications
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders and payment updates show up here.'**
+  String get notificationsEmptyBody;
+
   /// Title for Collections screen
   ///
   /// In en, this message translates to:

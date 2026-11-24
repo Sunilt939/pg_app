@@ -137,8 +137,8 @@ void main() {
       expect(find.text('Payments'), findsOneWidget);
       expect(find.text('More'), findsOneWidget);
 
-      // Bell icon stays hidden
-      expect(find.byIcon(AppIcons.bell), findsNothing);
+      // Bell icon is shown after S3 approval
+      expect(find.byIcon(AppIcons.bell), findsWidgets);
 
       // Tap Guests tab
       await tester.tap(find.text('Guests'));
@@ -186,8 +186,8 @@ void main() {
       expect(find.text('History'), findsOneWidget);
       expect(find.text('Profile'), findsOneWidget);
 
-      // Bell icon stays hidden
-      expect(find.byIcon(AppIcons.bell), findsNothing);
+      // Bell icon is shown after S3 approval
+      expect(find.byIcon(AppIcons.bell), findsWidgets);
 
       // Tap History tab
       await tester.tap(find.text('History'));

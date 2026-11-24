@@ -71,6 +71,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notificationsTitle => 'Notifications';
 
   @override
+  String get notificationsEmptyTitle => 'No notifications yet';
+
+  @override
+  String get notificationsEmptyBody =>
+      'Reminders and payment updates show up here.';
+
+  @override
   String get collectionsTitle => 'Money received';
 
   @override

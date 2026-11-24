@@ -85,6 +85,14 @@
   "@notificationsTitle": {
     "description": "Title for Notifications screen"
   },
+  "notificationsEmptyTitle": "No notifications yet",
+  "@notificationsEmptyTitle": {
+    "description": "Title for empty notifications"
+  },
+  "notificationsEmptyBody": "Reminders and payment updates show up here.",
+  "@notificationsEmptyBody": {
+    "description": "Body for empty notifications"
+  },
   "collectionsTitle": "Money received",
   "@collectionsTitle": {
     "description": "Title for Collections screen"

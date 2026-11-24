@@ -22,6 +22,7 @@ import '../../../../core/widgets/section_header.dart';
 import '../../../../core/widgets/skeleton.dart';
 import '../../../../core/widgets/status_chip.dart';
 import '../../../owner/domain/charge_balance.dart';
+import '../../../shared/presentation/widgets/notification_bell_button.dart';
 import '../../../owner/domain/guest_list_item.dart';
 import '../../../owner/domain/payment_feed_item.dart';
 import '../providers/guest_provider.dart';
@@ -498,30 +499,19 @@ class GuestHomeScreen extends ConsumerWidget {
       backgroundColor: AppColors.ground,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: bundleAsync.when(
-          loading: () => AppBar(
-            backgroundColor: AppColors.ground,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            title: const Text(AppConfig.appName, style: AppText.title),
+        child: AppBar(
+          backgroundColor: AppColors.ground,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          title: Text(
+            bundleAsync.valueOrNull?.currentStay?.pgName ??
+                bundleAsync.valueOrNull?.latestPastStay?.pgName ??
+                AppConfig.appName,
+            style: AppText.title,
           ),
-          error: (_, __) => AppBar(
-            backgroundColor: AppColors.ground,
-            elevation: 0,
-            scrolledUnderElevation: 0,
-            title: const Text(AppConfig.appName, style: AppText.title),
-          ),
-          data: (bundle) {
-            final title = bundle.currentStay?.pgName ??
-                bundle.latestPastStay?.pgName ??
-                AppConfig.appName;
-            return AppBar(
-              backgroundColor: AppColors.ground,
-              elevation: 0,
-              scrolledUnderElevation: 0,
-              title: Text(title, style: AppText.title),
-            );
-          },
+          actions: const [
+            NotificationBellButton(),
+          ],
         ),
       ),
       body: bundleAsync.when(

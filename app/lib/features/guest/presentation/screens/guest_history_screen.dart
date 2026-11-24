@@ -20,6 +20,7 @@ import '../../../owner/domain/charge_balance.dart';
 import '../../../owner/domain/guest_list_item.dart';
 import '../../../owner/domain/payment_feed_item.dart';
 import '../../domain/guest_home_bundle.dart';
+import '../../../shared/presentation/widgets/notification_bell_button.dart';
 import '../providers/guest_provider.dart';
 import '../widgets/guest_payment_status_sheet.dart';
 
@@ -351,6 +352,9 @@ class _GuestHistoryScreenState extends ConsumerState<GuestHistoryScreen> {
       backgroundColor: AppColors.ground,
       appBar: AppTopBar(
         title: l10n.historyTitle,
+        actions: const [
+          NotificationBellButton(),
+        ],
       ),
       body: bundleAsync.when(
         loading: _buildLoadingSkeleton,

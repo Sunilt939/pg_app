@@ -15,6 +15,7 @@ import '../../../../core/widgets/ledger_sheet.dart';
 import '../../../../core/widgets/pg_switcher_title.dart';
 import '../../../../core/widgets/section_header.dart';
 import '../../../auth/presentation/providers/auth_provider.dart';
+import '../../../shared/presentation/widgets/notification_bell_button.dart';
 import '../widgets/pg_switcher_sheet.dart';
 
 class OwnerMoreScreen extends ConsumerWidget {
@@ -60,6 +61,9 @@ class OwnerMoreScreen extends ConsumerWidget {
           pgName: pgTitle,
           onTap: () => PgSwitcherSheet.show(context),
         ),
+        actions: const [
+          NotificationBellButton(),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: AppSpace.x32),

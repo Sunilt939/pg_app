@@ -18,6 +18,7 @@ import '../../../../core/widgets/option_sheet.dart';
 import '../../../../core/widgets/pg_switcher_title.dart';
 import '../../../../core/widgets/progress_bar_thin.dart';
 import '../../../../core/widgets/room_tile.dart';
+import '../../../shared/presentation/widgets/notification_bell_button.dart';
 import '../../../../core/widgets/section_header.dart';
 import '../../../../core/widgets/skeleton.dart';
 import '../../../../core/widgets/status_chip.dart';
@@ -126,6 +127,9 @@ class _OwnerHomeScreenState extends ConsumerState<OwnerHomeScreen> {
           pgName: pgTitle,
           onTap: () => PgSwitcherSheet.show(context),
         ),
+        actions: const [
+          NotificationBellButton(),
+        ],
       ),
       body: RefreshIndicator(
         color: AppColors.petrol,

@@ -89,7 +89,7 @@
 
 ### Part 8. Extras
 
-- [ ] **S3. Notifications** (AI). Spec: `docs/UI_SCREENS_SHARED.md` S3. After approval, show the bell icon in the top bars.
+- [x] **S3. Notifications** (AI). Spec: `docs/UI_SCREENS_SHARED.md` S3. After approval, show the bell icon in the top bars.
 - [ ] **O15. Reminders** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O15. Keep the "reminders will start sending soon" notice, because sending is not built yet.
 - [ ] **O16. PG details** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O16.
 
