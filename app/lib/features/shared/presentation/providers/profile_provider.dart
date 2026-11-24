@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../owner/domain/guest_list_item.dart';
 import '../../data/supabase_profile_repository.dart';
+import '../../domain/emergency_contact.dart';
 import '../../domain/profile_repository.dart';
 
 final profileRepositoryProvider = Provider<ProfileRepository>((ref) {
@@ -52,4 +54,22 @@ class ProfilePhotoNotifier extends AsyncNotifier<ProfilePhotoState> {
 final profilePhotoProvider =
     AsyncNotifierProvider<ProfilePhotoNotifier, ProfilePhotoState>(() {
   return ProfilePhotoNotifier();
+});
+
+final emergencyContactsProvider =
+    FutureProvider.autoDispose<List<EmergencyContact>>((ref) async {
+  final repo = ref.watch(profileRepositoryProvider);
+  return repo.getEmergencyContacts();
+});
+
+final relationshipTypesProvider =
+    FutureProvider.autoDispose<List<RelationshipType>>((ref) async {
+  final repo = ref.watch(profileRepositoryProvider);
+  return repo.getRelationshipTypes();
+});
+
+final guestOpenStayProvider =
+    FutureProvider.autoDispose<GuestListItem?>((ref) async {
+  final repo = ref.watch(profileRepositoryProvider);
+  return repo.getGuestOpenStay();
 });

@@ -1480,4 +1480,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get statusSheetReportedOn => 'Reported on';
+
+  @override
+  String get emergencyContacts => 'Emergency contacts';
+
+  @override
+  String get emergencyAdd => 'Add a contact';
+
+  @override
+  String get emergencyName => 'Name';
+
+  @override
+  String get emergencyRelationship => 'Relationship';
+
+  @override
+  String get emergencyMobile => 'Mobile number';
+
+  @override
+  String get emergencyPrimary => 'Primary contact';
+
+  @override
+  String get emergencyRemove => 'Remove contact';
+
+  @override
+  String get profileStay => 'Your stay';
+
+  @override
+  String get profileRoom => 'Room';
+
+  @override
+  String get profileRent => 'Monthly rent';
+
+  @override
+  String get profileJoined => 'Joined';
+
+  @override
+  String get readOnlyHelper => 'Set by your PG owner.';
+
+  @override
+  String get switchToOwner => 'Switch to owner view';
+
+  @override
+  String get switchToGuest => 'Switch to guest view';
 }

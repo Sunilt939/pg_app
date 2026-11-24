@@ -2039,5 +2039,61 @@
   "statusSheetReportedOn": "Reported on",
   "@statusSheetReportedOn": {
     "description": "Label for reported on date in status sheet"
+  },
+  "emergencyContacts": "Emergency contacts",
+  "@emergencyContacts": {
+    "description": "Section header for emergency contacts"
+  },
+  "emergencyAdd": "Add a contact",
+  "@emergencyAdd": {
+    "description": "Button to add an emergency contact"
+  },
+  "emergencyName": "Name",
+  "@emergencyName": {
+    "description": "Field label for emergency contact name"
+  },
+  "emergencyRelationship": "Relationship",
+  "@emergencyRelationship": {
+    "description": "Field label for emergency contact relationship"
+  },
+  "emergencyMobile": "Mobile number",
+  "@emergencyMobile": {
+    "description": "Field label for emergency contact mobile number"
+  },
+  "emergencyPrimary": "Primary contact",
+  "@emergencyPrimary": {
+    "description": "Switch label for primary emergency contact"
+  },
+  "emergencyRemove": "Remove contact",
+  "@emergencyRemove": {
+    "description": "Button to remove an emergency contact"
+  },
+  "profileStay": "Your stay",
+  "@profileStay": {
+    "description": "Section header for stay details on profile"
+  },
+  "profileRoom": "Room",
+  "@profileRoom": {
+    "description": "Label for room row on profile stay sheet"
+  },
+  "profileRent": "Monthly rent",
+  "@profileRent": {
+    "description": "Label for monthly rent row on profile stay sheet"
+  },
+  "profileJoined": "Joined",
+  "@profileJoined": {
+    "description": "Label for joined date row on profile stay sheet"
+  },
+  "readOnlyHelper": "Set by your PG owner.",
+  "@readOnlyHelper": {
+    "description": "Helper note under your stay sheet"
+  },
+  "switchToOwner": "Switch to owner view",
+  "@switchToOwner": {
+    "description": "Button to switch to owner view"
+  },
+  "switchToGuest": "Switch to guest view",
+  "@switchToGuest": {
+    "description": "Button to switch to guest view"
   }
 }

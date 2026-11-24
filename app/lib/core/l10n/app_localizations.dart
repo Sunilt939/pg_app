@@ -2626,6 +2626,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reported on'**
   String get statusSheetReportedOn;
+
+  /// Section header for emergency contacts
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency contacts'**
+  String get emergencyContacts;
+
+  /// Button to add an emergency contact
+  ///
+  /// In en, this message translates to:
+  /// **'Add a contact'**
+  String get emergencyAdd;
+
+  /// Field label for emergency contact name
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get emergencyName;
+
+  /// Field label for emergency contact relationship
+  ///
+  /// In en, this message translates to:
+  /// **'Relationship'**
+  String get emergencyRelationship;
+
+  /// Field label for emergency contact mobile number
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile number'**
+  String get emergencyMobile;
+
+  /// Switch label for primary emergency contact
+  ///
+  /// In en, this message translates to:
+  /// **'Primary contact'**
+  String get emergencyPrimary;
+
+  /// Button to remove an emergency contact
+  ///
+  /// In en, this message translates to:
+  /// **'Remove contact'**
+  String get emergencyRemove;
+
+  /// Section header for stay details on profile
+  ///
+  /// In en, this message translates to:
+  /// **'Your stay'**
+  String get profileStay;
+
+  /// Label for room row on profile stay sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get profileRoom;
+
+  /// Label for monthly rent row on profile stay sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly rent'**
+  String get profileRent;
+
+  /// Label for joined date row on profile stay sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Joined'**
+  String get profileJoined;
+
+  /// Helper note under your stay sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Set by your PG owner.'**
+  String get readOnlyHelper;
+
+  /// Button to switch to owner view
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to owner view'**
+  String get switchToOwner;
+
+  /// Button to switch to guest view
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to guest view'**
+  String get switchToGuest;
 }
 
 class _AppLocalizationsDelegate

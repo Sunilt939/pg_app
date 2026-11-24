@@ -10,6 +10,8 @@ import 'package:app/core/widgets/profile_avatar.dart';
 import 'package:app/features/auth/domain/auth_context.dart';
 import 'package:app/features/auth/domain/auth_repository.dart';
 import 'package:app/features/auth/presentation/providers/auth_provider.dart';
+import 'package:app/features/owner/domain/guest_list_item.dart';
+import 'package:app/features/shared/domain/emergency_contact.dart';
 import 'package:app/features/shared/domain/profile_repository.dart';
 import 'package:app/features/shared/presentation/providers/profile_provider.dart';
 import 'package:app/features/shared/presentation/screens/profile_screen.dart';
@@ -83,6 +85,63 @@ class MockProfileRepo implements ProfileRepository {
     photoPath = null;
     presetId = null;
   }
+
+  List<EmergencyContact> emergencyContacts = [];
+  List<RelationshipType> relationshipTypes = [];
+  GuestListItem? guestOpenStay;
+
+  @override
+  Future<List<EmergencyContact>> getEmergencyContacts() async => emergencyContacts;
+
+  @override
+  Future<List<RelationshipType>> getRelationshipTypes() async =>
+      relationshipTypes;
+
+  @override
+  Future<void> addEmergencyContact({
+    required String name,
+    required String phone,
+    int? relationshipTypeId,
+    bool isPrimary = false,
+  }) async {
+    emergencyContacts.add(EmergencyContact(
+      id: 'contact-${emergencyContacts.length + 1}',
+      personId: 'person-1',
+      name: name,
+      phone: phone,
+      relationshipTypeId: relationshipTypeId,
+      isPrimary: isPrimary,
+    ));
+  }
+
+  @override
+  Future<void> updateEmergencyContact({
+    required String id,
+    required String name,
+    required String phone,
+    int? relationshipTypeId,
+    bool isPrimary = false,
+  }) async {
+    final idx = emergencyContacts.indexWhere((c) => c.id == id);
+    if (idx != -1) {
+      emergencyContacts[idx] = EmergencyContact(
+        id: id,
+        personId: emergencyContacts[idx].personId,
+        name: name,
+        phone: phone,
+        relationshipTypeId: relationshipTypeId,
+        isPrimary: isPrimary,
+      );
+    }
+  }
+
+  @override
+  Future<void> deleteEmergencyContact(String id) async {
+    emergencyContacts.removeWhere((c) => c.id == id);
+  }
+
+  @override
+  Future<GuestListItem?> getGuestOpenStay() async => guestOpenStay;
 }
 
 class MockAuthRepo implements AuthRepository {
