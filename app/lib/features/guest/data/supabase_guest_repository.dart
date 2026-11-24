@@ -8,6 +8,7 @@ import '../../owner/domain/payment_method.dart';
 import '../../owner/domain/upi_app.dart';
 import '../domain/guest_home_bundle.dart';
 import '../domain/guest_repository.dart';
+import '../domain/guest_stay_bundle.dart';
 
 class SupabaseGuestRepository implements GuestRepository {
   final SupabaseClient? _client;
@@ -93,6 +94,43 @@ class SupabaseGuestRepository implements GuestRepository {
 
     if (resp == null) return null;
     return GuestListItem.fromJson(resp);
+  }
+
+  @override
+  Future<GuestStayBundle> getStayDetails(String stayId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final stay = await getStay(stayId);
+    if (stay == null) {
+      return const GuestStayBundle();
+    }
+
+    final chargesResp = await client
+        .from('v_charge_balances')
+        .select()
+        .eq('stay_id', stayId)
+        .order('due_date', ascending: false);
+
+    final charges = (chargesResp as List)
+        .map((e) => ChargeBalance.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    final paymentsResp = await client
+        .from('v_payment_feed')
+        .select()
+        .eq('stay_id', stayId)
+        .order('paid_on', ascending: false);
+
+    final payments = (paymentsResp as List)
+        .map((e) => PaymentFeedItem.fromJson(e as Map<String, dynamic>))
+        .toList();
+
+    return GuestStayBundle(
+      stay: stay,
+      charges: charges,
+      payments: payments,
+    );
   }
 
   @override

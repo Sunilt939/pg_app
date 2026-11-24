@@ -9,6 +9,7 @@ import 'package:app/core/theme/app_icons.dart';
 import 'package:app/core/widgets/app_button.dart';
 import 'package:app/features/guest/domain/guest_home_bundle.dart';
 import 'package:app/features/guest/domain/guest_repository.dart';
+import 'package:app/features/guest/domain/guest_stay_bundle.dart';
 import 'package:app/features/guest/presentation/providers/guest_provider.dart';
 import 'package:app/features/guest/presentation/screens/guest_home_screen.dart';
 import 'package:app/features/guest/presentation/screens/guest_pay_rent_screen.dart';
@@ -33,6 +34,10 @@ class MockGuestPayRepo implements GuestRepository {
 
   @override
   Future<GuestListItem?> getStay(String stayId) async => stay;
+
+  @override
+  Future<GuestStayBundle> getStayDetails(String stayId) async =>
+      const GuestStayBundle();
 
   @override
   Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async =>

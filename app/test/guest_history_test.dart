@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:app/core/l10n/app_localizations.dart';
 import 'package:app/features/guest/domain/guest_home_bundle.dart';
 import 'package:app/features/guest/domain/guest_repository.dart';
+import 'package:app/features/guest/domain/guest_stay_bundle.dart';
 import 'package:app/features/guest/presentation/providers/guest_provider.dart';
 import 'package:app/features/guest/presentation/screens/guest_history_screen.dart';
 import 'package:app/features/owner/domain/charge_balance.dart';
@@ -27,6 +28,10 @@ class MockGuestHistoryRepo implements GuestRepository {
 
   @override
   Future<GuestListItem?> getStay(String stayId) async => bundle.currentStay;
+
+  @override
+  Future<GuestStayBundle> getStayDetails(String stayId) async =>
+      const GuestStayBundle();
 
   @override
   Future<List<PaymentAccount>> getActiveUpiAccounts(String pgId) async => [];

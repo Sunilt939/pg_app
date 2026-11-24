@@ -6,6 +6,7 @@ import '../../../owner/domain/upi_app.dart';
 import '../../data/supabase_guest_repository.dart';
 import '../../domain/guest_home_bundle.dart';
 import '../../domain/guest_repository.dart';
+import '../../domain/guest_stay_bundle.dart';
 
 final guestRepositoryProvider = Provider<GuestRepository>((ref) {
   return SupabaseGuestRepository();
@@ -21,6 +22,12 @@ final guestStayProvider =
     FutureProvider.autoDispose.family<GuestListItem?, String>((ref, stayId) async {
   final repo = ref.watch(guestRepositoryProvider);
   return repo.getStay(stayId);
+});
+
+final guestStayDetailsProvider =
+    FutureProvider.autoDispose.family<GuestStayBundle, String>((ref, stayId) async {
+  final repo = ref.watch(guestRepositoryProvider);
+  return repo.getStayDetails(stayId);
 });
 
 final guestUpiAccountsProvider =

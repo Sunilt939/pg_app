@@ -15,23 +15,27 @@ import 'guest_report_payment_sheet.dart';
 class GuestPaymentStatusSheet extends StatelessWidget {
   final PaymentFeedItem payment;
   final GuestListItem? stay;
+  final bool allowReporting;
 
   const GuestPaymentStatusSheet({
     super.key,
     required this.payment,
     this.stay,
+    this.allowReporting = true,
   });
 
   static Future<void> show({
     required BuildContext context,
     required PaymentFeedItem payment,
     GuestListItem? stay,
+    bool allowReporting = true,
   }) {
     return AppBottomSheet.show<void>(
       context: context,
       builder: (context) => GuestPaymentStatusSheet(
         payment: payment,
         stay: stay,
+        allowReporting: allowReporting,
       ),
     );
   }
@@ -115,22 +119,24 @@ class GuestPaymentStatusSheet extends StatelessWidget {
               l10n.statusSheetRejected(payment.statusReason ?? ''),
               style: AppText.secondary,
             ),
-            const SizedBox(height: AppSpace.x16),
-            Center(
-              child: AppButton.text(
-                label: l10n.statusSheetPayAgain,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  final targetPgId = stay?.pgId ?? payment.pgId ?? '';
-                  GuestReportPaymentSheet.showVariantB(
-                    context: context,
-                    stayId: payment.stayId,
-                    pgId: targetPgId,
-                    defaultAmountPaise: payment.amountPaise,
-                  );
-                },
+            if (allowReporting) ...[
+              const SizedBox(height: AppSpace.x16),
+              Center(
+                child: AppButton.text(
+                  label: l10n.statusSheetPayAgain,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    final targetPgId = stay?.pgId ?? payment.pgId ?? '';
+                    GuestReportPaymentSheet.showVariantB(
+                      context: context,
+                      stayId: payment.stayId,
+                      pgId: targetPgId,
+                      defaultAmountPaise: payment.amountPaise,
+                    );
+                  },
+                ),
               ),
-            ),
+            ],
           ] else if (payment.status == 'reversed') ...[
             if (payment.statusReason != null &&
                 payment.statusReason!.isNotEmpty) ...[
