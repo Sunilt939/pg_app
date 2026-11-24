@@ -1688,4 +1688,75 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get collectionsEmptyBody =>
       'Money you record or confirm for this month will be listed by account.';
+
+  @override
+  String get setupTitle => 'Set up your PG';
+
+  @override
+  String get setupBody =>
+      'Three quick steps and you can start collecting rent.';
+
+  @override
+  String get setupRooms => 'Add rooms and beds';
+
+  @override
+  String get setupAccount => 'Add a receiving account';
+
+  @override
+  String get setupGuest => 'Add your first guest';
+
+  @override
+  String get monthToCollect => 'To collect this month';
+
+  @override
+  String monthToCollectIn(String month) {
+    return 'To collect in $month';
+  }
+
+  @override
+  String monthCollected(String collected, String expected) {
+    return '$collected of $expected collected';
+  }
+
+  @override
+  String monthNoCharges(String month) {
+    return 'No rent charged for $month yet.';
+  }
+
+  @override
+  String get overdueLabel => 'Overdue';
+
+  @override
+  String get overdueNone => 'None';
+
+  @override
+  String get pickGuestTitle => 'Who paid?';
+
+  @override
+  String get pickGuestSearch => 'Search guests';
+
+  @override
+  String get needsAttention => 'Needs attention';
+
+  @override
+  String get needsAttentionEmptyTitle => 'Nothing needs attention';
+
+  @override
+  String get needsAttentionEmptyBody => 'Everyone is up to date.';
+
+  @override
+  String rowOverdueSince(String date) {
+    return 'Overdue since $date';
+  }
+
+  @override
+  String seeAllOverdue(int count) {
+    return 'See all overdue ($count)';
+  }
+
+  @override
+  String get actionRemind => 'Remind';
+
+  @override
+  String get actionRecordPayment => 'Record payment';
 }

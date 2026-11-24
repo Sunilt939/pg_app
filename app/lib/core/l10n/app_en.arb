@@ -2310,5 +2310,101 @@
   "collectionsEmptyBody": "Money you record or confirm for this month will be listed by account.",
   "@collectionsEmptyBody": {
     "description": "Empty state body on collections screen"
+  },
+  "setupTitle": "Set up your PG",
+  "@setupTitle": {
+    "description": "Title for PG setup checklist card"
+  },
+  "setupBody": "Three quick steps and you can start collecting rent.",
+  "@setupBody": {
+    "description": "Subtitle for PG setup checklist card"
+  },
+  "setupRooms": "Add rooms and beds",
+  "@setupRooms": {
+    "description": "Checklist step 1 label"
+  },
+  "setupAccount": "Add a receiving account",
+  "@setupAccount": {
+    "description": "Checklist step 2 label"
+  },
+  "setupGuest": "Add your first guest",
+  "@setupGuest": {
+    "description": "Checklist step 3 label"
+  },
+  "monthToCollect": "To collect this month",
+  "@monthToCollect": {
+    "description": "Label for current month pending collection"
+  },
+  "monthToCollectIn": "To collect in {month}",
+  "@monthToCollectIn": {
+    "description": "Label for past month pending collection",
+    "placeholders": {
+      "month": { "type": "String" }
+    }
+  },
+  "monthCollected": "{collected} of {expected} collected",
+  "@monthCollected": {
+    "description": "Summary progress text for month collection",
+    "placeholders": {
+      "collected": { "type": "String" },
+      "expected": { "type": "String" }
+    }
+  },
+  "monthNoCharges": "No rent charged for {month} yet.",
+  "@monthNoCharges": {
+    "description": "Message when no summary row exists for month",
+    "placeholders": {
+      "month": { "type": "String" }
+    }
+  },
+  "overdueLabel": "Overdue",
+  "@overdueLabel": {
+    "description": "Label for overdue summary row"
+  },
+  "overdueNone": "None",
+  "@overdueNone": {
+    "description": "Value when overdue total is zero"
+  },
+  "pickGuestTitle": "Who paid?",
+  "@pickGuestTitle": {
+    "description": "Title for pick guest option sheet"
+  },
+  "pickGuestSearch": "Search guests",
+  "@pickGuestSearch": {
+    "description": "Search hint for pick guest option sheet"
+  },
+  "needsAttention": "Needs attention",
+  "@needsAttention": {
+    "description": "Section header for needs attention"
+  },
+  "needsAttentionEmptyTitle": "Nothing needs attention",
+  "@needsAttentionEmptyTitle": {
+    "description": "Title when needs attention is empty"
+  },
+  "needsAttentionEmptyBody": "Everyone is up to date.",
+  "@needsAttentionEmptyBody": {
+    "description": "Body when needs attention is empty"
+  },
+  "rowOverdueSince": "Overdue since {date}",
+  "@rowOverdueSince": {
+    "description": "Subtitle for overdue guest row in needs attention",
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "seeAllOverdue": "See all overdue ({count})",
+  "@seeAllOverdue": {
+    "description": "Row to see all overdue guests",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "actionRemind": "Remind",
+  "@actionRemind": {
+    "description": "Button to remind overdue guest"
+  },
+  "actionRecordPayment": "Record payment",
+  "@actionRecordPayment": {
+    "description": "Button to record payment on home screen"
   }
 }

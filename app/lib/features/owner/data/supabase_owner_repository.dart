@@ -931,5 +931,92 @@ class SupabaseOwnerRepository implements OwnerRepository {
       byAccount: byAccount,
     );
   }
+
+  @override
+  Future<OwnerHomeBundle> getOwnerHomeBundle({
+    required String pgId,
+    required String month,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final setupFuture = client
+        .from('v_pg_setup_status')
+        .select()
+        .eq('pg_id', pgId)
+        .maybeSingle();
+
+    final overviewFuture = client
+        .from('v_pg_overview')
+        .select()
+        .eq('pg_id', pgId)
+        .maybeSingle();
+
+    final summaryFuture = client
+        .from('v_pg_monthly_summary')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('period_month', month)
+        .maybeSingle();
+
+    final pendingPaymentsFuture = client
+        .from('v_payment_feed')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('status', 'pending')
+        .order('paid_on', ascending: true)
+        .order('created_at', ascending: true);
+
+    final overdueGuestsFuture = client
+        .from('v_guest_list')
+        .select()
+        .eq('pg_id', pgId)
+        .gt('overdue_paise', 0)
+        .neq('stay_status', 'vacated')
+        .order('oldest_unpaid_due_date', ascending: true);
+
+    final openGuestsFuture = client
+        .from('v_guest_list')
+        .select()
+        .eq('pg_id', pgId)
+        .neq('stay_status', 'vacated')
+        .order('full_name', ascending: true);
+
+    final results = await Future.wait([
+      setupFuture,
+      overviewFuture,
+      summaryFuture,
+      pendingPaymentsFuture,
+      overdueGuestsFuture,
+      openGuestsFuture,
+    ]);
+
+    final setupMap = results[0] as Map<String, dynamic>?;
+    final overviewMap = results[1] as Map<String, dynamic>?;
+    final summaryMap = results[2] as Map<String, dynamic>?;
+    final pendingList = results[3] as List<dynamic>;
+    final overdueList = results[4] as List<dynamic>;
+    final openList = results[5] as List<dynamic>;
+
+    return OwnerHomeBundle(
+      setupStatus: setupMap != null
+          ? PgSetupStatus.fromJson(setupMap)
+          : PgSetupStatus(pgId: pgId),
+      overview:
+          overviewMap != null ? PgOverview.fromJson(overviewMap) : null,
+      monthlySummary: summaryMap != null
+          ? PgMonthlySummary.fromJson(summaryMap)
+          : null,
+      pendingPayments: pendingList
+          .map((r) => PaymentFeedItem.fromJson(r as Map<String, dynamic>))
+          .toList(),
+      overdueGuests: overdueList
+          .map((r) => GuestListItem.fromJson(r as Map<String, dynamic>))
+          .toList(),
+      openGuests: openList
+          .map((r) => GuestListItem.fromJson(r as Map<String, dynamic>))
+          .toList(),
+    );
+  }
 }
 

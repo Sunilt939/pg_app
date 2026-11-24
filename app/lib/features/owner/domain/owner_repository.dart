@@ -4,6 +4,7 @@ import 'city.dart';
 import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
 import 'month_collections.dart';
+import 'owner_home_bundle.dart';
 import 'payment_account.dart';
 import 'payment_feed_item.dart';
 import 'payment_method.dart';
@@ -18,9 +19,12 @@ export 'emergency_contact.dart';
 export 'guest_detail_bundle.dart';
 export 'guest_list_item.dart';
 export 'month_collections.dart';
+export 'owner_home_bundle.dart';
 export 'payment_feed_item.dart';
 export 'payment_method.dart';
+export 'pg_monthly_summary.dart';
 export 'pg_overview.dart';
+export 'pg_setup_status.dart';
 export 'upi_app.dart';
 
 class DuplicateNicknameException implements Exception {
@@ -167,6 +171,10 @@ abstract class OwnerRepository {
   });
   Future<String?> getSignedFileUrl(String fileId);
   Future<MonthCollections> getMonthCollections({
+    required String pgId,
+    required String month,
+  });
+  Future<OwnerHomeBundle> getOwnerHomeBundle({
     required String pgId,
     required String month,
   });

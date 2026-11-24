@@ -3004,6 +3004,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Money you record or confirm for this month will be listed by account.'**
   String get collectionsEmptyBody;
+
+  /// Title for PG setup checklist card
+  ///
+  /// In en, this message translates to:
+  /// **'Set up your PG'**
+  String get setupTitle;
+
+  /// Subtitle for PG setup checklist card
+  ///
+  /// In en, this message translates to:
+  /// **'Three quick steps and you can start collecting rent.'**
+  String get setupBody;
+
+  /// Checklist step 1 label
+  ///
+  /// In en, this message translates to:
+  /// **'Add rooms and beds'**
+  String get setupRooms;
+
+  /// Checklist step 2 label
+  ///
+  /// In en, this message translates to:
+  /// **'Add a receiving account'**
+  String get setupAccount;
+
+  /// Checklist step 3 label
+  ///
+  /// In en, this message translates to:
+  /// **'Add your first guest'**
+  String get setupGuest;
+
+  /// Label for current month pending collection
+  ///
+  /// In en, this message translates to:
+  /// **'To collect this month'**
+  String get monthToCollect;
+
+  /// Label for past month pending collection
+  ///
+  /// In en, this message translates to:
+  /// **'To collect in {month}'**
+  String monthToCollectIn(String month);
+
+  /// Summary progress text for month collection
+  ///
+  /// In en, this message translates to:
+  /// **'{collected} of {expected} collected'**
+  String monthCollected(String collected, String expected);
+
+  /// Message when no summary row exists for month
+  ///
+  /// In en, this message translates to:
+  /// **'No rent charged for {month} yet.'**
+  String monthNoCharges(String month);
+
+  /// Label for overdue summary row
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue'**
+  String get overdueLabel;
+
+  /// Value when overdue total is zero
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get overdueNone;
+
+  /// Title for pick guest option sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Who paid?'**
+  String get pickGuestTitle;
+
+  /// Search hint for pick guest option sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Search guests'**
+  String get pickGuestSearch;
+
+  /// Section header for needs attention
+  ///
+  /// In en, this message translates to:
+  /// **'Needs attention'**
+  String get needsAttention;
+
+  /// Title when needs attention is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing needs attention'**
+  String get needsAttentionEmptyTitle;
+
+  /// Body when needs attention is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Everyone is up to date.'**
+  String get needsAttentionEmptyBody;
+
+  /// Subtitle for overdue guest row in needs attention
+  ///
+  /// In en, this message translates to:
+  /// **'Overdue since {date}'**
+  String rowOverdueSince(String date);
+
+  /// Row to see all overdue guests
+  ///
+  /// In en, this message translates to:
+  /// **'See all overdue ({count})'**
+  String seeAllOverdue(int count);
+
+  /// Button to remind overdue guest
+  ///
+  /// In en, this message translates to:
+  /// **'Remind'**
+  String get actionRemind;
+
+  /// Button to record payment on home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Record payment'**
+  String get actionRecordPayment;
 }
 
 class _AppLocalizationsDelegate

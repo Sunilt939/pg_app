@@ -85,7 +85,7 @@
 - [x] **O6b. "Waiting for you" on guest detail** (AI). Add the section that was left out of O6. Spec: `docs/UI_SCREENS_OWNER.md` O6.
 - [x] **O9. Payments tab** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O9.
 - [x] **O10. Money received** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O10.
-- [ ] **O2. Owner home** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O2. *Check:* the summary, the "Needs attention" list with real overdue and pending items, and the setup checklist on a brand-new PG.
+- [x] **O2. Owner home** (AI). Spec: `docs/UI_SCREENS_OWNER.md` O2. *Check:* the summary, the "Needs attention" list with real overdue and pending items, and the setup checklist on a brand-new PG.
 
 ### Part 8. Extras
 

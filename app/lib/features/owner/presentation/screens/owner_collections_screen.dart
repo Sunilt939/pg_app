@@ -197,10 +197,7 @@ class _OwnerCollectionsScreenState
           children: [
             Text(
               monthName,
-              style: AppText.label.copyWith(
-                fontWeight: FontWeight.w600,
-                color: AppColors.ink,
-              ),
+              style: AppText.roomTile,
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
