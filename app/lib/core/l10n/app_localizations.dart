@@ -2974,6 +2974,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Where was the money received?'**
   String get collectionsLink;
+
+  /// Label above received amount for the month
+  ///
+  /// In en, this message translates to:
+  /// **'Received in {month}'**
+  String collectionsReceivedIn(String month);
+
+  /// Payment count string in collections
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 payment} other{{count} payments}}'**
+  String collectionsPayments(int count);
+
+  /// Message in total sheet when no money was received in month
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing received this month.'**
+  String get collectionsNone;
+
+  /// Empty state title on collections screen
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing received'**
+  String get collectionsEmptyTitle;
+
+  /// Empty state body on collections screen
+  ///
+  /// In en, this message translates to:
+  /// **'Money you record or confirm for this month will be listed by account.'**
+  String get collectionsEmptyBody;
 }
 
 class _AppLocalizationsDelegate

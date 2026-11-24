@@ -1662,4 +1662,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get collectionsLink => 'Where was the money received?';
+
+  @override
+  String collectionsReceivedIn(String month) {
+    return 'Received in $month';
+  }
+
+  @override
+  String collectionsPayments(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count payments',
+      one: '1 payment',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get collectionsNone => 'Nothing received this month.';
+
+  @override
+  String get collectionsEmptyTitle => 'Nothing received';
+
+  @override
+  String get collectionsEmptyBody =>
+      'Money you record or confirm for this month will be listed by account.';
 }

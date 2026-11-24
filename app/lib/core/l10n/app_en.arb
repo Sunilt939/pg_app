@@ -2284,5 +2284,31 @@
   "collectionsLink": "Where was the money received?",
   "@collectionsLink": {
     "description": "Row link opening money received screen"
+  },
+  "collectionsReceivedIn": "Received in {month}",
+  "@collectionsReceivedIn": {
+    "description": "Label above received amount for the month",
+    "placeholders": {
+      "month": { "type": "String" }
+    }
+  },
+  "collectionsPayments": "{count, plural, =1{1 payment} other{{count} payments}}",
+  "@collectionsPayments": {
+    "description": "Payment count string in collections",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "collectionsNone": "Nothing received this month.",
+  "@collectionsNone": {
+    "description": "Message in total sheet when no money was received in month"
+  },
+  "collectionsEmptyTitle": "Nothing received",
+  "@collectionsEmptyTitle": {
+    "description": "Empty state title on collections screen"
+  },
+  "collectionsEmptyBody": "Money you record or confirm for this month will be listed by account.",
+  "@collectionsEmptyBody": {
+    "description": "Empty state body on collections screen"
   }
 }

@@ -77,6 +77,14 @@ final pgPaymentsProvider =
   return repo.getPgPayments(activePg.pgId);
 });
 
+final monthCollectionsProvider =
+    FutureProvider.autoDispose.family<MonthCollections, String>((ref, month) async {
+  final activePg = ref.watch(activePgProvider);
+  if (activePg == null) return MonthCollections.empty('', month);
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getMonthCollections(pgId: activePg.pgId, month: month);
+});
+
 class GuestListNotifier extends AutoDisposeAsyncNotifier<List<GuestListItem>> {
   int _offset = 0;
   bool _hasMore = true;

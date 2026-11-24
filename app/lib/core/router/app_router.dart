@@ -28,6 +28,7 @@ import '../../features/owner/presentation/screens/owner_payment_detail_screen.da
 import '../../features/owner/presentation/screens/owner_home_screen.dart';
 import '../../features/owner/presentation/screens/owner_more_screen.dart';
 import '../../features/owner/presentation/screens/owner_payments_screen.dart';
+import '../../features/owner/presentation/screens/owner_collections_screen.dart';
 import '../../features/owner/presentation/screens/owner_rooms_screen.dart';
 import '../../features/owner/presentation/screens/owner_room_detail_screen.dart';
 import '../../features/shared/presentation/screens/notifications_screen.dart';
@@ -248,9 +249,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,
         path: RoutePaths.ownerCollections,
-        builder: (context, state) => PlaceholderScreen(
-          title: AppLocalizations.of(context)!.collectionsTitle,
-        ),
+        builder: (context, state) => const OwnerCollectionsScreen(),
       ),
       GoRoute(
         parentNavigatorKey: rootNavigatorKey,

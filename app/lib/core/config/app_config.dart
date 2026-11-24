@@ -12,6 +12,6 @@ abstract final class AppFlags {
   static const remindersEnabled = false;
   static const uploadsEnabled = false;
   static const giveNoticeEnabled = false;
-  static bool isPageApproved(String pageId) => false;
+  static bool isPageApproved(String pageId) => pageId == 'O10';
 }
 

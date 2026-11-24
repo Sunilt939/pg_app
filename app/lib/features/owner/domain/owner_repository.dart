@@ -3,6 +3,7 @@ import 'charge_type.dart';
 import 'city.dart';
 import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
+import 'month_collections.dart';
 import 'payment_account.dart';
 import 'payment_feed_item.dart';
 import 'payment_method.dart';
@@ -16,6 +17,7 @@ export 'charge_type.dart';
 export 'emergency_contact.dart';
 export 'guest_detail_bundle.dart';
 export 'guest_list_item.dart';
+export 'month_collections.dart';
 export 'payment_feed_item.dart';
 export 'payment_method.dart';
 export 'pg_overview.dart';
@@ -164,5 +166,9 @@ abstract class OwnerRepository {
     required String reason,
   });
   Future<String?> getSignedFileUrl(String fileId);
+  Future<MonthCollections> getMonthCollections({
+    required String pgId,
+    required String month,
+  });
 }
 

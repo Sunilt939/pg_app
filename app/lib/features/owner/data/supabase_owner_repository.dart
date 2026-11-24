@@ -896,5 +896,40 @@ class SupabaseOwnerRepository implements OwnerRepository {
       return null;
     }
   }
+
+  @override
+  Future<MonthCollections> getMonthCollections({
+    required String pgId,
+    required String month,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final totalResp = await client
+        .from('v_collections_month_total')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('month', month)
+        .maybeSingle();
+
+    final accountsResp = await client
+        .from('v_collections_by_account')
+        .select()
+        .eq('pg_id', pgId)
+        .eq('month', month)
+        .order('total_paise', ascending: false);
+
+    final byAccount = (accountsResp as List<dynamic>)
+        .map((row) => AccountCollection.fromJson(row as Map<String, dynamic>))
+        .toList();
+
+    return MonthCollections(
+      pgId: pgId,
+      month: month,
+      totalPaise: (totalResp?['total_paise'] as num?)?.toInt() ?? 0,
+      paymentCount: (totalResp?['payment_count'] as num?)?.toInt() ?? 0,
+      byAccount: byAccount,
+    );
+  }
 }
 
