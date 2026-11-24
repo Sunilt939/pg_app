@@ -21,6 +21,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<BedOccupancy> beds = [
     const BedOccupancy(
       bedId: 'bed-1',

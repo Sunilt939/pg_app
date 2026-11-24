@@ -2095,5 +2095,145 @@
   "switchToGuest": "Switch to guest view",
   "@switchToGuest": {
     "description": "Button to switch to guest view"
+  },
+  "statusConfirmed": "Confirmed",
+  "@statusConfirmed": {
+    "description": "Status label for confirmed payment"
+  },
+  "detailGuest": "Guest",
+  "@detailGuest": {
+    "description": "Label for guest row in payment detail"
+  },
+  "detailRoom": "Room",
+  "@detailRoom": {
+    "description": "Label for room row in payment detail"
+  },
+  "detailMethod": "Method",
+  "@detailMethod": {
+    "description": "Label for payment method row in payment detail"
+  },
+  "detailPaidOn": "Paid on",
+  "@detailPaidOn": {
+    "description": "Label for paid on row in payment detail"
+  },
+  "detailReceivedIn": "Received in",
+  "@detailReceivedIn": {
+    "description": "Label for received in account row in payment detail"
+  },
+  "detailPaidUsing": "Paid using",
+  "@detailPaidUsing": {
+    "description": "Label for paid using app row in payment detail"
+  },
+  "detailUtr": "UTR",
+  "@detailUtr": {
+    "description": "Label for UTR reference row in payment detail"
+  },
+  "detailFromNumber": "From number",
+  "@detailFromNumber": {
+    "description": "Label for from number row in payment detail"
+  },
+  "detailReported": "Reported",
+  "@detailReported": {
+    "description": "Label for reported on row in payment detail"
+  },
+  "reportedByGuest": "by the guest",
+  "@reportedByGuest": {
+    "description": "Suffix when payment was reported by guest"
+  },
+  "detailConfirmed": "Confirmed",
+  "@detailConfirmed": {
+    "description": "Label for confirmed on row in payment detail"
+  },
+  "detailNote": "Note",
+  "@detailNote": {
+    "description": "Label for note row in payment detail"
+  },
+  "detailReason": "Reason",
+  "@detailReason": {
+    "description": "Label for reason row in payment detail"
+  },
+  "detailScreenshot": "Screenshot",
+  "@detailScreenshot": {
+    "description": "Label for screenshot row in payment detail"
+  },
+  "screenshotFailed": "The screenshot could not be loaded.",
+  "@screenshotFailed": {
+    "description": "Error message when payment screenshot fails to load"
+  },
+  "actionViewReceipt": "View receipt",
+  "@actionViewReceipt": {
+    "description": "Button to view receipt"
+  },
+  "actionMarkReceived": "Mark as received",
+  "@actionMarkReceived": {
+    "description": "Button to mark payment as received"
+  },
+  "actionReject": "Reject",
+  "@actionReject": {
+    "description": "Button to reject"
+  },
+  "actionRejectPayment": "Reject payment",
+  "@actionRejectPayment": {
+    "description": "Button to reject payment"
+  },
+  "actionReversePayment": "Reverse payment",
+  "@actionReversePayment": {
+    "description": "Button to reverse payment"
+  },
+  "confirmTitle": "Mark as received",
+  "@confirmTitle": {
+    "description": "Title for mark as received sheet"
+  },
+  "confirmBody": "{amount} from {name}",
+  "@confirmBody": {
+    "description": "Summary in mark as received sheet",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "rejectTitle": "Reject this payment?",
+  "@rejectTitle": {
+    "description": "Title for reject payment sheet"
+  },
+  "rejectReason": "Reason",
+  "@rejectReason": {
+    "description": "Label for reject reason field"
+  },
+  "rejectReasonHint": "Reason, shown to the guest",
+  "@rejectReasonHint": {
+    "description": "Hint for reject reason field"
+  },
+  "rejectHelper": "Tell the guest what to fix, such as the amount or the reference.",
+  "@rejectHelper": {
+    "description": "Helper text for reject reason field"
+  },
+  "paymentRejected": "Payment rejected.",
+  "@paymentRejected": {
+    "description": "Snackbar message when payment is rejected"
+  },
+  "reverseTitle": "Reverse this payment?",
+  "@reverseTitle": {
+    "description": "Title for reverse payment sheet"
+  },
+  "reverseBody": "The charges it paid become unpaid again. Use this only for a payment recorded by mistake.",
+  "@reverseBody": {
+    "description": "Warning message in reverse payment sheet"
+  },
+  "reverseReason": "Reason",
+  "@reverseReason": {
+    "description": "Label for reverse reason field"
+  },
+  "paymentReversed": "Payment reversed.",
+  "@paymentReversed": {
+    "description": "Snackbar message when payment is reversed"
+  },
+  "errReasonRequired": "Enter a reason.",
+  "@errReasonRequired": {
+    "description": "Validation error when reason is empty"
   }
 }

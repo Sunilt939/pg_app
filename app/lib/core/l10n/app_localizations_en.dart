@@ -1522,4 +1522,107 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get switchToGuest => 'Switch to guest view';
+
+  @override
+  String get statusConfirmed => 'Confirmed';
+
+  @override
+  String get detailGuest => 'Guest';
+
+  @override
+  String get detailRoom => 'Room';
+
+  @override
+  String get detailMethod => 'Method';
+
+  @override
+  String get detailPaidOn => 'Paid on';
+
+  @override
+  String get detailReceivedIn => 'Received in';
+
+  @override
+  String get detailPaidUsing => 'Paid using';
+
+  @override
+  String get detailUtr => 'UTR';
+
+  @override
+  String get detailFromNumber => 'From number';
+
+  @override
+  String get detailReported => 'Reported';
+
+  @override
+  String get reportedByGuest => 'by the guest';
+
+  @override
+  String get detailConfirmed => 'Confirmed';
+
+  @override
+  String get detailNote => 'Note';
+
+  @override
+  String get detailReason => 'Reason';
+
+  @override
+  String get detailScreenshot => 'Screenshot';
+
+  @override
+  String get screenshotFailed => 'The screenshot could not be loaded.';
+
+  @override
+  String get actionViewReceipt => 'View receipt';
+
+  @override
+  String get actionMarkReceived => 'Mark as received';
+
+  @override
+  String get actionReject => 'Reject';
+
+  @override
+  String get actionRejectPayment => 'Reject payment';
+
+  @override
+  String get actionReversePayment => 'Reverse payment';
+
+  @override
+  String get confirmTitle => 'Mark as received';
+
+  @override
+  String confirmBody(String amount, String name) {
+    return '$amount from $name';
+  }
+
+  @override
+  String get rejectTitle => 'Reject this payment?';
+
+  @override
+  String get rejectReason => 'Reason';
+
+  @override
+  String get rejectReasonHint => 'Reason, shown to the guest';
+
+  @override
+  String get rejectHelper =>
+      'Tell the guest what to fix, such as the amount or the reference.';
+
+  @override
+  String get paymentRejected => 'Payment rejected.';
+
+  @override
+  String get reverseTitle => 'Reverse this payment?';
+
+  @override
+  String get reverseBody =>
+      'The charges it paid become unpaid again. Use this only for a payment recorded by mistake.';
+
+  @override
+  String get reverseReason => 'Reason';
+
+  @override
+  String get paymentReversed => 'Payment reversed.';
+
+  @override
+  String get errReasonRequired => 'Enter a reason.';
 }

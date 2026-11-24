@@ -20,6 +20,9 @@ import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/owner_home_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<PgSwitcherItem> pgs = const [
     PgSwitcherItem(
       pgId: 'pg-1',

@@ -24,6 +24,9 @@ import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/owner_guests_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<GuestListItem> guests = [];
   PgOverview? overview;
 

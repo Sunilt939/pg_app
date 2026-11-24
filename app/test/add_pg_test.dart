@@ -19,6 +19,9 @@ import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/add_pg_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<City> cities = const [
     City(id: 1, name: 'Bengaluru', stateName: 'Karnataka'),
     City(id: 2, name: 'Chennai', stateName: 'Tamil Nadu'),

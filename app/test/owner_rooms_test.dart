@@ -22,6 +22,9 @@ import 'package:app/features/owner/presentation/screens/owner_room_detail_screen
 import 'package:app/features/owner/presentation/screens/owner_rooms_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<BedOccupancy> beds = [];
 
   @override

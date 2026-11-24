@@ -4,6 +4,7 @@ import 'city.dart';
 import 'guest_detail_bundle.dart';
 import 'guest_list_item.dart';
 import 'payment_account.dart';
+import 'payment_feed_item.dart';
 import 'payment_method.dart';
 import 'pg_overview.dart';
 import 'pg_switcher_item.dart';
@@ -148,5 +149,19 @@ abstract class OwnerRepository {
     String? payerAppCode,
     String? utr,
   });
+  Future<PaymentFeedItem?> getPaymentDetail(String paymentId);
+  Future<void> confirmPayment({
+    required String paymentId,
+    String? accountId,
+  });
+  Future<void> rejectPayment({
+    required String paymentId,
+    required String reason,
+  });
+  Future<void> reversePayment({
+    required String paymentId,
+    required String reason,
+  });
+  Future<String?> getSignedFileUrl(String fileId);
 }
 

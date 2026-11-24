@@ -18,9 +18,15 @@ class PaymentFeedItem {
   final String methodCode; // 'cash' | 'upi' | 'bank' | 'cheque'
   final String methodLabel;
   final String? accountNickname;
+  final String? receivedAccountId;
   final String? payerAppCode;
   final String? payerAppLabel;
+  final String? payerPhone;
+  final String? utr;
+  final String? screenshotFileId;
+  final bool reportedByGuest;
   final String? createdAt;
+  final String? confirmedAt;
   final String? receiptId;
   final int? receiptNo;
 
@@ -41,9 +47,15 @@ class PaymentFeedItem {
     this.methodCode = 'cash',
     this.methodLabel = 'Cash',
     this.accountNickname,
+    this.receivedAccountId,
     this.payerAppCode,
     this.payerAppLabel,
+    this.payerPhone,
+    this.utr,
+    this.screenshotFileId,
+    this.reportedByGuest = false,
     this.createdAt,
+    this.confirmedAt,
     this.receiptId,
     this.receiptNo,
   });
@@ -66,9 +78,15 @@ class PaymentFeedItem {
       methodCode: json['method_code'] as String? ?? 'cash',
       methodLabel: json['method_label'] as String? ?? 'Cash',
       accountNickname: json['account_nickname'] as String?,
+      receivedAccountId: json['received_account_id'] as String?,
       payerAppCode: json['payer_app_code'] as String?,
       payerAppLabel: json['payer_app_label'] as String?,
+      payerPhone: json['payer_phone'] as String?,
+      utr: json['utr'] as String?,
+      screenshotFileId: json['screenshot_file_id'] as String?,
+      reportedByGuest: json['reported_by_guest'] as bool? ?? false,
       createdAt: json['created_at'] as String?,
+      confirmedAt: json['confirmed_at'] as String?,
       receiptId: json['receipt_id'] as String?,
       receiptNo: (json['receipt_no'] as num?)?.toInt(),
     );

@@ -149,5 +149,18 @@ final upiAppsProvider =
   return repo.getUpiApps();
 });
 
+final paymentDetailProvider =
+    FutureProvider.autoDispose.family<PaymentFeedItem?, String>((ref, paymentId) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getPaymentDetail(paymentId);
+});
+
+final signedFileUrlProvider =
+    FutureProvider.autoDispose.family<String?, String>((ref, fileId) async {
+  final repo = ref.watch(ownerRepositoryProvider);
+  return repo.getSignedFileUrl(fileId);
+});
+
+
 
 

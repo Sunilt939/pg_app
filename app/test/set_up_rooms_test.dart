@@ -22,6 +22,9 @@ import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/set_up_rooms_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<Map<String, dynamic>>? savedRooms;
   String? savedPgId;
   bool shouldThrowClash = false;

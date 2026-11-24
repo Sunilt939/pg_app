@@ -21,6 +21,9 @@ import 'package:app/features/owner/presentation/screens/owner_more_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
   @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
+  @override
   Future<List<City>> getCities() async => const [];
 
   @override

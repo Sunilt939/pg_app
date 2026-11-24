@@ -788,5 +788,96 @@ class SupabaseOwnerRepository implements OwnerRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<PaymentFeedItem?> getPaymentDetail(String paymentId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    final response = await client
+        .from('v_payment_feed')
+        .select()
+        .eq('payment_id', paymentId)
+        .maybeSingle();
+
+    if (response == null) return null;
+    return PaymentFeedItem.fromJson(response);
+  }
+
+  @override
+  Future<void> confirmPayment({
+    required String paymentId,
+    String? accountId,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.rpc(
+      'rpc_confirm_payment',
+      params: {
+        'p_payment_id': paymentId,
+        if (accountId != null) 'p_account_id': accountId,
+      },
+    );
+  }
+
+  @override
+  Future<void> rejectPayment({
+    required String paymentId,
+    required String reason,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.rpc(
+      'rpc_reject_payment',
+      params: {
+        'p_payment_id': paymentId,
+        'p_reason': reason.trim(),
+      },
+    );
+  }
+
+  @override
+  Future<void> reversePayment({
+    required String paymentId,
+    required String reason,
+  }) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    await client.rpc(
+      'rpc_reverse_payment',
+      params: {
+        'p_payment_id': paymentId,
+        'p_reason': reason.trim(),
+      },
+    );
+  }
+
+  @override
+  Future<String?> getSignedFileUrl(String fileId) async {
+    final client = _client;
+    if (client == null) throw const AuthNetworkException();
+
+    try {
+      final fileRow = await client
+          .from('files')
+          .select('bucket, object_path')
+          .eq('id', fileId)
+          .maybeSingle();
+
+      if (fileRow == null) return null;
+      final bucket = fileRow['bucket'] as String;
+      final objectPath = fileRow['object_path'] as String;
+
+      final signedUrl = await client.storage
+          .from(bucket)
+          .createSignedUrl(objectPath, 300);
+      return signedUrl;
+    } catch (_) {
+      return null;
+    }
+  }
 }
 

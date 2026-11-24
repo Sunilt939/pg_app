@@ -2710,6 +2710,204 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch to guest view'**
   String get switchToGuest;
+
+  /// Status label for confirmed payment
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get statusConfirmed;
+
+  /// Label for guest row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get detailGuest;
+
+  /// Label for room row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Room'**
+  String get detailRoom;
+
+  /// Label for payment method row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Method'**
+  String get detailMethod;
+
+  /// Label for paid on row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Paid on'**
+  String get detailPaidOn;
+
+  /// Label for received in account row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Received in'**
+  String get detailReceivedIn;
+
+  /// Label for paid using app row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Paid using'**
+  String get detailPaidUsing;
+
+  /// Label for UTR reference row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'UTR'**
+  String get detailUtr;
+
+  /// Label for from number row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'From number'**
+  String get detailFromNumber;
+
+  /// Label for reported on row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Reported'**
+  String get detailReported;
+
+  /// Suffix when payment was reported by guest
+  ///
+  /// In en, this message translates to:
+  /// **'by the guest'**
+  String get reportedByGuest;
+
+  /// Label for confirmed on row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Confirmed'**
+  String get detailConfirmed;
+
+  /// Label for note row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get detailNote;
+
+  /// Label for reason row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get detailReason;
+
+  /// Label for screenshot row in payment detail
+  ///
+  /// In en, this message translates to:
+  /// **'Screenshot'**
+  String get detailScreenshot;
+
+  /// Error message when payment screenshot fails to load
+  ///
+  /// In en, this message translates to:
+  /// **'The screenshot could not be loaded.'**
+  String get screenshotFailed;
+
+  /// Button to view receipt
+  ///
+  /// In en, this message translates to:
+  /// **'View receipt'**
+  String get actionViewReceipt;
+
+  /// Button to mark payment as received
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as received'**
+  String get actionMarkReceived;
+
+  /// Button to reject
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get actionReject;
+
+  /// Button to reject payment
+  ///
+  /// In en, this message translates to:
+  /// **'Reject payment'**
+  String get actionRejectPayment;
+
+  /// Button to reverse payment
+  ///
+  /// In en, this message translates to:
+  /// **'Reverse payment'**
+  String get actionReversePayment;
+
+  /// Title for mark as received sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Mark as received'**
+  String get confirmTitle;
+
+  /// Summary in mark as received sheet
+  ///
+  /// In en, this message translates to:
+  /// **'{amount} from {name}'**
+  String confirmBody(String amount, String name);
+
+  /// Title for reject payment sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Reject this payment?'**
+  String get rejectTitle;
+
+  /// Label for reject reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get rejectReason;
+
+  /// Hint for reject reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Reason, shown to the guest'**
+  String get rejectReasonHint;
+
+  /// Helper text for reject reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Tell the guest what to fix, such as the amount or the reference.'**
+  String get rejectHelper;
+
+  /// Snackbar message when payment is rejected
+  ///
+  /// In en, this message translates to:
+  /// **'Payment rejected.'**
+  String get paymentRejected;
+
+  /// Title for reverse payment sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Reverse this payment?'**
+  String get reverseTitle;
+
+  /// Warning message in reverse payment sheet
+  ///
+  /// In en, this message translates to:
+  /// **'The charges it paid become unpaid again. Use this only for a payment recorded by mistake.'**
+  String get reverseBody;
+
+  /// Label for reverse reason field
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reverseReason;
+
+  /// Snackbar message when payment is reversed
+  ///
+  /// In en, this message translates to:
+  /// **'Payment reversed.'**
+  String get paymentReversed;
+
+  /// Validation error when reason is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a reason.'**
+  String get errReasonRequired;
 }
 
 class _AppLocalizationsDelegate

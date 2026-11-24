@@ -20,6 +20,9 @@ import 'package:app/features/owner/presentation/providers/owner_provider.dart';
 import 'package:app/features/owner/presentation/screens/add_rooms_screen.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<RoomType> roomTypes = const [
     RoomType(id: 1, code: 'single', label: 'Single'),
     RoomType(id: 2, code: 'double', label: '2 sharing'),

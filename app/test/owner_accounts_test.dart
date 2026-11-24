@@ -20,6 +20,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 class MockOwnerRepo implements OwnerRepository {
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+
   List<PaymentAccount> accounts = [];
   bool throwDuplicate = false;
   PaymentAccount? lastCreated;

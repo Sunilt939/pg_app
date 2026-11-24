@@ -29,11 +29,13 @@ import '../providers/receipt_provider.dart';
 class ReceiptScreen extends ConsumerStatefulWidget {
   final String? paymentId;
   final bool isNew;
+  final String? title;
 
   const ReceiptScreen({
     super.key,
     this.paymentId,
     this.isNew = false,
+    this.title,
   });
 
   @override
@@ -378,7 +380,7 @@ class _ReceiptScreenState extends ConsumerState<ReceiptScreen>
                   const SizedBox(height: AppSpace.x16),
                   Center(
                     child: Text(
-                      l10n.receiptRecorded,
+                      widget.title ?? l10n.receiptRecorded,
                       style: AppText.title,
                       textAlign: TextAlign.center,
                     ),
